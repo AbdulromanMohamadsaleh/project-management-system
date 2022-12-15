@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\UserController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',[CustomLoginController::class,'login']);
+Route::get('/login',[CustomLoginController::class,'login'])->name('login');
+
+Route::get('/admin', [AdminController::class, 'Index']);
 
 
