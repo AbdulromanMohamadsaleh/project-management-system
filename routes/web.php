@@ -22,5 +22,6 @@ Route::get('/', function () {
 Route::get('/login',[CustomLoginController::class,'login'])->name('login');
 
 Route::get('/admin', [AdminController::class, 'Index']);
+Route::get('/table', [AdminController::class,'Table'])->name('table');
 
 
