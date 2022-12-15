@@ -19,6 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/login',[CustomLoginController::class,'login']);
-Route::get('user/dashbord',[UserController::class,'dashbord']);
 
 
