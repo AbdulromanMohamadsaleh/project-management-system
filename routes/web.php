@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\CustomLoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',[CustomLoginController::class,'login']); 
+Route::get('/login',[CustomLoginController::class,'login']);
+Route::get('user/dashbord',[UserController::class,'dashbord']);
 
 
