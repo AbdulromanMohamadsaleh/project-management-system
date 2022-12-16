@@ -145,7 +145,7 @@
                                     </div>
                                     <center><p>50%</p></td></center>
                                     <td>
-                                        <span>success</span>
+                                        <button  class="btn btn-success">Done</button>
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project" href="">
