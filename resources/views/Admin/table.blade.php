@@ -1,6 +1,4 @@
 @include('include.header')
-{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"> --}}
 
 <body>
     {{-- <div class="container-xxl position-relative bg-white d-flex p-0">

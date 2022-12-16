@@ -129,7 +129,8 @@
                                 <li id="confirm"><strong>Finish</strong></li>
                             </ul>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                             </div> <br> <!-- fieldsets -->
                             <fieldset>
                                 <div class="form-card">
@@ -140,8 +141,15 @@
                                         <div class="col-5">
                                             <h2 class="steps">Step 1 - 4</h2>
                                         </div>
-                                    </div> <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" /> <label class="fieldlabels">Username: *</label> <input type="text" name="uname" placeholder="UserName" /> <label class="fieldlabels">Password: *</label> <input type="password" name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm Password: *</label> <input type="password" name="cpwd" placeholder="Confirm Password" />
-                                </div> <input type="button" name="next" class="next action-button" value="Next" />
+                                    </div> <label class="fieldlabels">Email: *</label> <input type="email"
+                                        name="email" placeholder="Email Id" /> <label class="fieldlabels">Username:
+                                        *</label> <input type="text" name="uname" placeholder="UserName" />
+                                    <label class="fieldlabels">Password: *</label> <input type="password"
+                                        name="pwd" placeholder="Password" /> <label class="fieldlabels">Confirm
+                                        Password: *</label> <input type="password" name="cpwd"
+                                        placeholder="Confirm Password" />
+                                </div> <input type="button" name="next" class="next action-button"
+                                    value="Next" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
@@ -152,8 +160,16 @@
                                         <div class="col-5">
                                             <h2 class="steps">Step 2 - 4</h2>
                                         </div>
-                                    </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
-                                </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                    </div> <label class="fieldlabels">First Name: *</label> <input type="text"
+                                        name="fname" placeholder="First Name" /> <label class="fieldlabels">Last
+                                        Name: *</label> <input type="text" name="lname"
+                                        placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label>
+                                    <input type="text" name="phno" placeholder="Contact No." /> <label
+                                        class="fieldlabels">Alternate Contact No.: *</label> <input type="text"
+                                        name="phno_2" placeholder="Alternate Contact No." />
+                                </div> <input type="button" name="next" class="next action-button"
+                                    value="Next" /> <input type="button" name="previous"
+                                    class="previous action-button-previous" value="Previous" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
@@ -164,8 +180,12 @@
                                         <div class="col-5">
                                             <h2 class="steps">Step 3 - 4</h2>
                                         </div>
-                                    </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*"> <label class="fieldlabels">Upload Signature Photo:</label> <input type="file" name="pic" accept="image/*">
-                                </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                    </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file"
+                                        name="pic" accept="image/*"> <label class="fieldlabels">Upload Signature
+                                        Photo:</label> <input type="file" name="pic" accept="image/*">
+                                </div> <input type="button" name="next" class="next action-button"
+                                    value="Submit" /> <input type="button" name="previous"
+                                    class="previous action-button-previous" value="Previous" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
@@ -179,7 +199,8 @@
                                     </div> <br><br>
                                     <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
                                     <div class="row justify-content-center">
-                                        <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                                        <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png"
+                                                class="fit-image"> </div>
                                     </div> <br><br>
                                     <div class="row justify-content-center">
                                         <div class="col-7 text-center">
@@ -192,29 +213,25 @@
                     </div>
                 </div>
             </div>
-        <!-- Recent Sales End -->
+            <!-- Recent Sales End -->
 
 
-    </body>
-
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-
-        <script src="{{ asset('lib/chart/chart.min.js') }}"></script>
-        <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-        <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
-        <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-        <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
-
-        <!-- Template Javascript -->
-        <script src="{{ asset('js/create.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable();
-            });
-        </script>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
+    crossorigin="anonymous"></script>
+
+<script src="{{ asset('lib/chart/chart.min.js') }}"></script>
+<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
+<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+<script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+
+<!-- Template Javascript -->
+<script src="{{ asset('js/create.js') }}"></script>
+
+</body>
+
 </html>
