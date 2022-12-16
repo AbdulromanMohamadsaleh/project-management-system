@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProjectDetial;
 
 class AdminController extends Controller
 {
@@ -11,7 +12,12 @@ class AdminController extends Controller
         return view('Admin.index');
     }
     public function Table(){
-        return view('Admin.table');
+
+        $project_details = ProjectDetial::all();
+
+
+
+        return view('Admin.table',['project_details' => $project_details]);
     }
     public function Create(){
         return view('Admin.create');

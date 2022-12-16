@@ -130,12 +130,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
+                            @foreach ($project_details as $project_detail)
+                                <tr>
+                                    <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
+                                    <td>{{ $project_detail->NAME_PROJECT }}</td>
+                                    <td>{{ $project_detail->RECORD_CREATOR }}</td>
+                                    <td>{{ $project_detail->DATE_SAVE }}</td>
+
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
