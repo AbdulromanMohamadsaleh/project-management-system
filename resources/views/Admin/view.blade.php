@@ -113,66 +113,114 @@
         </nav>
 
         <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Recent Salse</h6>
-                    <a href="">Show All</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table" id="example">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center;" scope="col">ID Project</th>
-                                <th style="text-align: center;" scope="col">Name Porject</th>
-                                <th style="text-align: center;" scope="col">Record Caretor</th>
-                                <th style="text-align: center;" scope="col">Date Record</th>
-                                <th>Progress</th>
-                                <th>Status</th>
-                                <th style="text-align: center;" >Action</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($project_details as $project_detail)
-                                <tr style="text-align:left">
-                                    <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
-                                    <td>{{ $project_detail->NAME_PROJECT }}</td>
-                                    <td>{{ $project_detail->RECORD_CREATOR }}</td>
-                                    <td>{{ $project_detail->DATE_SAVE }}</td>
-                                    <td><div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        <section class="content">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="callout callout-info">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <dl>
+                                            <dt><b class="border-bottom border-primary">Project Code</b></dt>
+                                            <dd></dd>
+                                            <dt><b class="border-bottom border-primary">Project Name</b></dt>
+                                            <dd></dd>
+                                            <dt><b class="border-bottom text-break border-primary">Principles And Resons</b></dt>
+                                            <dd></dd>
+                                            <dt><b class="border-bottom border-primary">Objective</b></dt>
+                                            <dd><dd>
+                                            <dt><b class="border-bottom border-primary">Target</b></dt>
+                                            <dd></dd>
+                                            <dt><b class="border-bottom border-primary">Location</b></dt>
+                                            <dd></dd>
+                                        </dl>
                                     </div>
-                                    <center><p>50%</p></td></center>
-                                    <td>
-                                        <span>success</span>
-                                    </td>
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project" href="">
-                                          <i class="bi bi-eye" style="font-size: 25;"></i>
-                                        </a>
-                                        <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project" href="">
-                                          <i class="fas fa-pencil-alt" style="font-size: 25;">
-                                          </i>
-                                        </a>
-                                        <!-- <a class="btn btn-success btn-sm3" href="#">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
-                                            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z" />
-                                          </svg>
-                                        </a> -->
-                                        <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="delete project" href="">
-                                          <i class="fas fa-trash" style="font-size: 25;">
-                                          </i>
-                                        </a>
-                                      </td>
-
+                                    <div class="col-sm-6">
+                                        <dl>
+                                            <dt><b class="border-bottom border-primary">Expected Results</b></dt>
+                                            <dd></dd>
+                                            <dl>
+                                                <dt><b class="border-bottom border-primary">Start Date</b></dt>
+                                                <dd></dd>
+                                            </dl>
+                                            <dl>
+                                                <dt><b class="border-bottom border-primary">End Date</b></dt>
+                                                <dd></dd>
+                                            </dl>
+                                            <dt><b class="border-bottom border-primary">Budget</b></dt>
+                                            <dd></dd>
+                                            <dt><b class="border-bottom border-primary">manager</b></dt>
+                                            <dd></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-outline card-lime">
+                            <div class="card-header">
+                                <span><b>Team Member/s:</b></span>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="users-list clearfix">
+                                        <li>
+                                            <img src="../img/1.png" alt="User Image">
+                                            <a class="users-list-name" href="javascript:void(0)"></a>
+                                            <!-- <span class="users-list-date">Today</span> -->
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-outline card-primary">
+                            <div class="card-header">
+                                <span><b>Topic List:</b></span>
+                                <div class="card-tools">
+                                    <div style="width:100%;text-align:right;"><a href="index.php"><button type="button" class="btn btn-success" data-toggle="tooltip" title="add new topic"><i class='fas fa-plus'></i></button></a></div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Topic</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                    <td class="">
+                                                        <center>
+                                                            <div class="ui icon button mt-2" data-tooltip="Add Clause">
+                                                                <a href=""><i class="add icon"></i></a>
+                                                        </center>
+                                </div>
+                                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Add</button> -->
+                                </td>
+                                <td>
+                                    <div class="p-0">
+                                        <table class="table table-hover">
+                                        </table>
+                                    </div>
+                                </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+    </div>
+    </section>
         <!-- Recent Sales End -->
 
 
