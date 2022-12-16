@@ -24,7 +24,7 @@
                     class="fa fa-tachometer-alt me-2"></i>Dashboard
             </a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                <a href="{{route('create')}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Save Project</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ route('login') }}" class="dropdown-item">login</a>

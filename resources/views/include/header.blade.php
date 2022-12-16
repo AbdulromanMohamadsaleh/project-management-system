@@ -31,6 +31,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/css.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/create.css') }}" rel="stylesheet">
 
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
