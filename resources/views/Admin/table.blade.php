@@ -148,7 +148,7 @@
                                         <button  class="btn btn-success">Done</button>
                                     </td>
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project" href="">
+                                        <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project" href="{{route('show',$project_detail->DETAIL_ID)}}">
                                           <i class="bi bi-eye" style="font-size: 25;"></i>
                                         </a>
                                         <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project" href="">
