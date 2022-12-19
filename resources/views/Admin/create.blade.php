@@ -119,7 +119,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 {{-- <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-10 text-center p-0 mt-3 mb-2"> --}}
-                <div class="col-10 text-center p-0 mt-3 mb-2">
+                <div class="col-11 text-center p-0 mt-3 mb-2">
 
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
@@ -137,50 +137,118 @@
                             <div class="step ">
                                 <p class="text-center mb-4">Project Information</p>
 
-                                <div class="row mb-3">
+                                {{-- Project Name / Target --}}
+                                <div class="row mb-5">
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Project Name</label>
+                                        <label class="label-left fw-bold mb-1" for="name">Project Name</label>
                                         <input type="text" name="name" class="form-control" id="inputEmail4">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Target</label>
+                                        <label class="label-left fw-bold mb-1" for="target">Target</label>
                                         <input type="text" name="target" class="form-control"
                                             id="inputPassword4">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+
+                                {{-- Start Project Date / End Project Date --}}
+                                <div class="row mb-5">
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Start Date</label>
-                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
-                                            min="2018-01-01" max="2018-12-31">
+                                        <label class="label-left fw-bold mb-1" for="start">Start Project
+                                            Date</label>
+                                        <input type="date" id="start" name="trip-start">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">End Date</label>
-                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
-                                            min="2018-01-01" max="2018-12-31">
+                                        <label class="label-left fw-bold mb-1" for="start">End Project Date</label>
+                                        <input type="date" id="start" name="trip-start">
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                {{-- Location / Budget --}}
+                                <div class="row mb-5">
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Reasons</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <label class="label-left fw-bold mb-1" for="location">Location</label>
+                                        <input type="text" name="location" class="form-control" id="inputEmail4">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Objectve</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <label class="label-left fw-bold mb-1" for="budget">Budget</label>
+                                        <input type="text" name="budget" class="form-control"
+                                            id="inputPassword4">
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <input type="password" placeholder="Password" oninput="this.className = ''"
-                                        name="password">
+                                {{-- Reasons / Objectve --}}
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="reason">Reasons</label>
+                                        <textarea class="form-control" rows="5" name="reason"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="objectve">Objectve</label>
+                                        <textarea class="form-control" rows="5" name="objectve"></textarea>
+                                    </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <input type="password" placeholder="Confirm Password"
-                                        oninput="this.className = ''" name="password">
+                                {{-- Expected Results / Project Manager --}}
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="expectedRresults">Expected
+                                            Results</label>
+                                        <input type="text" name="expectedRresults" class="form-control"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputState" class="label-left fw-bold mb-1">Project
+                                            Manager</label>
+                                        <select name="ProjectManager" id="inputState" class="form-select">
+                                            <option selected>Choose...</option>
+                                            @if (count($projectManagers) > 0)
+                                                @foreach ($projectManagers as $projectManager)
+                                                    <option value="{{ $projectManager->LOGIN_ID }}">
+                                                        {{ $projectManager->NAME }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">NO Project Manager</option>
+                                            @endif
+                                        </select>
+                                    </div>
                                 </div>
+
+                                {{-- Team / Budget --}}
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <select class="form-select js-example-basic-multiple" name="states[]"
+                                            multiple="multiple">
+                                            @if (count($team) > 0)
+                                                @foreach ($team as $staff)
+                                                    <option value="{{ $staff->LOGIN_ID }}">
+                                                        {{ $staff->NAME }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">NO Team</option>
+                                            @endif
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="day">
+                                            <label class="form-check-label" for="inlineRadio1">Day</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio2" value="week">
+                                            <label class="form-check-label" for="inlineRadio2">Week</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio3" value="month">
+                                            <label class="form-check-label" for="inlineRadio3">Month</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
 
                             <!-- step two -->
@@ -218,9 +286,11 @@
                             </div> --}}
 
                             <!-- start previous / next buttons -->
-                            <div class="form-footer d-flex">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                            <div class=" d-flex justify-content-center">
+                                <div class="col-6 row form-footer">
+                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                </div>
                             </div>
                             <!-- end previous / next buttons -->
                         </form>
@@ -247,6 +317,15 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/create.js') }}"></script>
+
+<!-- Multi-select boxes (pillbox) Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 
 </body>
 

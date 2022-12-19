@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Login extends Model
 {
     use HasFactory;
-    protected $table = 'prj_login';
+    protected $table = 'prj_project_login';
     protected $fillable = [
         'ID_LOGIN',
         'NAME',
@@ -17,5 +17,6 @@ class Login extends Model
         'CARD_ID',
         'TELEPHONE',
         'AGENCY',
+        'POSITION',
     ];
 }
