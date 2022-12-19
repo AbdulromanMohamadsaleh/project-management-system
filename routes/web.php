@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\CustomLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,8 @@ Route::get('/', function () {
 });
 Route::get('/login',[CustomLoginController::class,'login'])->name('login');
 
-Route::get('/admin', [AdminController::class, 'Index']);
-Route::get('/table', [AdminController::class,'Table'])->name('table');
-Route::get('/create', [AdminController::class,'Create'])->name('create');
+Route::get('/admin', [ProjectController::class, 'Index']);
+Route::get('/table', [ProjectController::class,'Table'])->name('table');
+Route::get('/create', [ProjectController::class,'Create'])->name('create');
 
 
