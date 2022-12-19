@@ -20,6 +20,9 @@
     text-align: left;
 }
 
+.invalid-border-input{
+    border-color: #ffaba5;
+}
 
 /*** Spinner ***/
 #spinner {

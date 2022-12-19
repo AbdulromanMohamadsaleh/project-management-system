@@ -46,18 +46,46 @@ function validateForm() {
     y = x[currentTab].getElementsByTagName("input");
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
-    // If a field is empty...
-    if (y[i].value == "") {
-        // add an "invalid" class to the field:
-        y[i].className += " invalid";
-        // and set the current valid status to false
-        valid = false;
+        // If a field is empty...
+        if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+        }else{
+            y[i].classList.remove("invalid")
+        }
     }
+    // textareaInput = x[currentTab].getElementsByTagName("textarea");
+    // for (i = 0; i < textareaInput.length; i++) {
+    //     // If a field is empty...
+    //     if (textareaInput[i].value.length == 0) {
+    //         console.log(textareaInput[i].value)
+    //         // add an "invalid" class to the field:
+    //         textareaInput[i].classList.add('invalid-border-input');
+    //         // and set the current valid status to false
+
+    //         valid = false;
+    //     }
+    // }
+    selectinput = x[currentTab].getElementsByTagName("select");
+    for (i = 0; i < selectinput.length; i++) {
+        // If a field is empty...
+        if (selectinput[i].value == "") {
+            // add an "invalid" class to the field:
+            selectinput[i].style.borderColor = "#ffaba5";
+
+            // and set the current valid status to false
+            valid = false;
+        }else{
+           selectinput[i].style.borderColor = "#e3e3e3";
+        }
     }
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
     }
+    console.log(valid)
     return valid; // return the valid status
 }
 
