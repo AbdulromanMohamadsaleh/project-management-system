@@ -134,16 +134,49 @@
                             <!-- end step indicators -->
 
                             <!-- step one -->
-                            <div class="step">
-                                <p class="text-center mb-4">Create your account</p>
-                                <div class="mb-3">
-                                    <input type="email" placeholder="Email Address" oninput="this.className = ''"
-                                        name="email">
+                            <div class="step ">
+                                <p class="text-center mb-4">Project Information</p>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">Project Name</label>
+                                        <input type="text" name="name" class="form-control" id="inputEmail4">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">Target</label>
+                                        <input type="text" name="target" class="form-control"
+                                            id="inputPassword4">
+                                    </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">Start Date</label>
+                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
+                                            min="2018-01-01" max="2018-12-31">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">End Date</label>
+                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
+                                            min="2018-01-01" max="2018-12-31">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">Reasons</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="label-left fw-bold mb-1" for="start">Objectve</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+
                                 <div class="mb-3">
                                     <input type="password" placeholder="Password" oninput="this.className = ''"
                                         name="password">
                                 </div>
+
                                 <div class="mb-3">
                                     <input type="password" placeholder="Confirm Password"
                                         oninput="this.className = ''" name="password">

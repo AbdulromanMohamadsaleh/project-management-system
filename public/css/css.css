@@ -13,6 +13,13 @@
     z-index: 99;
 }
 
+/** Custom ***/
+
+.label-left{
+    width: 100%;
+    text-align: left;
+}
+
 
 /*** Spinner ***/
 #spinner {
