@@ -1,186 +1,156 @@
-<html>
 @include('include.header')
 
 <body>
 
-    {{-- <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div> --}}
-    <!-- Spinner End -->
-
-
     <!-- Sidebar Start -->
     @include('include.sidebar')
-    <!-- Sidebar End -->
 
 
     <!-- Content Start -->
     <div class="content">
 
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-            </a>
-            <a href="#" class="sidebar-toggler flex-shrink-0">
-                <i class="fa fa-bars"></i>
-            </a>
-            <form class="d-none d-md-flex ms-4">
-                <input class="form-control border-0" type="search" placeholder="Search">
-            </form>
-            <div class="navbar-nav align-items-center ms-auto">
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-envelope me-lg-2"></i>
-                        <span class="d-none d-lg-inline-flex">Message</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle" src="img/user.jpg" alt=""
-                                    style="width: 40px; height: 40px;">
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle" src="img/user.jpg" alt=""
-                                    style="width: 40px; height: 40px;">
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle" src="img/user.jpg" alt=""
-                                    style="width: 40px; height: 40px;">
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item text-center">See all message</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-bell me-lg-2"></i>
-                        <span class="d-none d-lg-inline-flex">Notificatin</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">Profile updated</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">New user added</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">Password changed</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="" class="dropdown-item text-center">See all notifications</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <img class="rounded-circle me-lg-2" src="img/user.jpg" alt=""
-                            style="width: 40px; height: 40px;">
-                        <span class="d-none d-lg-inline-flex">John Doe</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">Settings</a>
-                        <a href="#" class="dropdown-item">Log Out</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        @include('include.navbar')
+
 
         <!-- Recent Sales Start -->
         <div class="container-fluid">
             <div class="row justify-content-center">
                 {{-- <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-10 text-center p-0 mt-3 mb-2"> --}}
-                <div class="col-10 text-center p-0 mt-3 mb-2">
+                <div class="col-12 col-lg-12 col-xl-10 text-center p-0 mt-3 mb-2">
 
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
                         <h1 class="text-center fs-4">Create Project</h1>
                         <form id="signUpForm" action="#!">
                             <!-- start step indicators -->
-                            <div class="form-header d-flex mb-4">
-                                <span class="stepIndicator">Detail</span>
-                                <span class="stepIndicator">Activity</span>
+                            <div class=" form-header d-flex mb-5">
+                                <span class="fw-bold stepIndicator">Detail</span>
+                                <span class="fw-bold stepIndicator">Activity</span>
                                 {{-- <span class="stepIndicator">Personal Details</span> --}}
                             </div>
                             <!-- end step indicators -->
 
                             <!-- step one -->
                             <div class="step ">
-                                <p class="text-center mb-4">Project Information</p>
 
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Project Name</label>
-                                        <input type="text" name="name" class="form-control" id="inputEmail4">
+                                {{-- Project Name / Target --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="projectName">Project Name</label>
+                                        <input type="text" name="projectName" class="form-control" id="projectName">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Target</label>
-                                        <input type="text" name="target" class="form-control"
-                                            id="inputPassword4">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Start Date</label>
-                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
-                                            min="2018-01-01" max="2018-12-31">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">End Date</label>
-                                        <input type="date" id="start" name="trip-start" value="2018-07-22"
-                                            min="2018-01-01" max="2018-12-31">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="target">Target</label>
+                                        <input type="text" name="target" class="form-control" id="target">
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Reasons</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                {{-- Start Project Date / End Project Date --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2 " for="projectStart">Start Project
+                                            Date</label>
+                                        <input type="date" class="form-control" id="projectStart"
+                                            name="projectStart">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="label-left fw-bold mb-1" for="start">Objectve</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="projectEnd">End Project Date</label>
+                                        <input type="date" class="form-control" id="projectEnd" name="projectEnd">
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <input type="password" placeholder="Password" oninput="this.className = ''"
-                                        name="password">
+                                {{-- Location / Budget --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="location">Location</label>
+                                        <input type="text" name="location" class="form-control" id="location">
+                                    </div>
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="budget">Budget</label>
+                                        <input type="number" name="budget" class="form-control " id="budget">
+                                    </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <input type="password" placeholder="Confirm Password"
-                                        oninput="this.className = ''" name="password">
+                                {{-- Reasons / Objectve --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="reason">Reasons</label>
+                                        <textarea class="form-control " rows="5" id="reason" name="reason"></textarea>
+                                    </div>
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="objectve">Objectve</label>
+                                        <textarea class="form-control" rows="5" id="objectve" name="objectve"></textarea>
+                                    </div>
                                 </div>
+
+                                {{-- Expected Results / Project Manager --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="expectedRresults">Expected
+                                            Results</label>
+                                        <input type="text" name="expectedRresults" class="form-control"
+                                            id="expectedRresults">
+                                    </div>
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label for="inputState" class="label-left fw-bold mb-2">Duration
+                                            Format</label>
+                                        <div class="row p-2  ">
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDuration" type="radio"
+                                                    id="day" value="0">
+                                                <label class="form-check-label" for="day">Day</label>
+                                            </div>
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDuration" type="radio"
+                                                    id="week" value="0">
+                                                <label class="form-check-label" for="week">Week</label>
+                                            </div>
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDuration" type="radio"
+                                                    id="month" value="0">
+                                                <label class="form-check-label" for="month">Month</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Team / Duration Format --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label for="projectManager" class="label-left fw-bold mb-2">Project
+                                            Manager</label>
+                                        <select name="projectManager" id="projectManager" class="form-select">
+                                            <option selected value="">Choose...</option>
+                                            @if (count($projectManagers) > 0)
+                                                @foreach ($projectManagers as $projectManager)
+                                                    <option value="{{ $projectManager->LOGIN_ID }}">
+                                                        {{ $projectManager->NAME }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">NO Project Manager</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label>
+                                        <select style="width: 100%;padding: 9px 14px;"
+                                            class="form-select js-example-basic-multiple" id="projectTeam"
+                                            name="projectTeam[]" multiple="multiple">
+                                            @if (count($team) > 0)
+                                                @foreach ($team as $staff)
+                                                    <option value="{{ $staff->LOGIN_ID }}">
+                                                        {{ $staff->NAME }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">NO Team</option>
+                                            @endif
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
                             </div>
 
                             <!-- step two -->
@@ -218,9 +188,11 @@
                             </div> --}}
 
                             <!-- start previous / next buttons -->
-                            <div class="form-footer d-flex">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                            <div class=" d-flex justify-content-center">
+                                <div class="col-6 row form-footer">
+                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                </div>
                             </div>
                             <!-- end previous / next buttons -->
                         </form>
@@ -228,11 +200,13 @@
                 </div>
             </div>
             <!-- Recent Sales End -->
+        </div>
 
-
+    </div>
 
 
 </body>
+
 <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
     crossorigin="anonymous"></script>
 
@@ -242,12 +216,29 @@
 <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
+{{-- <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+</script>
 
 <!-- Template Javascript -->
+<script src="{{ asset('js/app.js') }}"></script>
+
+<!-- Tow Step Form Javascript -->
 <script src="{{ asset('js/create.js') }}"></script>
 
-</body>
+<!-- Multi-select boxes (pillbox) Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+
+
+        });
+    });
+</script>
+
+
 
 </html>

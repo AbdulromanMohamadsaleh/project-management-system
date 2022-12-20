@@ -15,20 +15,20 @@ class ProjectController extends Controller
     }
     public function Table()
     {
-
         $project_details = ProjectDetial::all();
-
-
-
         return view('Admin.table', ['project_details' => $project_details]);
     }
     public function Create()
     {
-        return view('Admin.create');
+        $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $team = Login::all();
+        return view('Admin.create', ['projectManagers' => $projectManagers, 'team' => $team]);
     }
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID',$id)->first();
-        return view('Admin.show', ['project_detail' => $project_detail]);
+        $TeamsName = TeamName::where('DETAIL_ID',$id);
+        $Login = Login::all();
+        return view('Admin.show', ['project_detail' => $project_detail],['TeamsName' => $TeamsName]);
     }
 }
