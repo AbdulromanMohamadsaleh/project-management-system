@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div><br>
-        <div class="container mt-3">
+        <div class="container row mt-3">
         <div class="col-md-4">
             <div class="card card-outline card-lime">
                 <div class="card-header">
@@ -104,6 +104,43 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-header">
+                <span><b>Activity List:</b></span>
+                <div class="card-tools">
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mark</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">1.1</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td><button type="button" class="btn btn-primary"><i class="bi bi-journal-plus"></i></button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
         </div>
         <!-- Recent Sales End -->

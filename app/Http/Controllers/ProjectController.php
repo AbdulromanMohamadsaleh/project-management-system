@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
-use App\Models\TeamName;
+use App\Models\ProjectTeam;
 use App\Models\Login;
 
 class ProjectController extends Controller
@@ -15,7 +15,7 @@ class ProjectController extends Controller
     }
     public function Table()
     {
-        $project_details = ProjectDetial::all();
+        $project_details = ProjectDetial::orderBy('DETAIL_ID','DESC')->get();
         return view('Admin.table', ['project_details' => $project_details]);
     }
     public function Create()
@@ -27,8 +27,8 @@ class ProjectController extends Controller
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID',$id)->first();
-        $TeamsName = TeamName::where('DETAIL_ID',$id);
+        $ProjectTeam = ProjectTeam::where('DETAIL_ID',$id);
         $Login = Login::all();
-        return view('Admin.show', ['project_detail' => $project_detail],['TeamsName' => $TeamsName]);
+        return view('Admin.show', ['project_detail' => $project_detail],['TeamsName' => $ProjectTeam]);
     }
 }

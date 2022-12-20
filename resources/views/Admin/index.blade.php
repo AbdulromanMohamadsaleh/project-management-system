@@ -78,19 +78,19 @@
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Project Done/Progress</h6>
+                            <h6 class="mb-0">Project All</h6>
                             <a href="">Show All</a>
                         </div>
-                        <canvas id="worldwide-sales"></canvas>
+                        <canvas id="bar-chart"></canvas>
                     </div>
                 </div>
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Project All</h6>
+                            <h6 class="mb-0">Project Progress</h6>
                             <a href="">Show All</a>
                         </div>
-                        <canvas id="salse-revenue"></canvas>
+                        <div id="piechart_3d" style="width: 500px; height: 500px;"></div>
                     </div>
                 </div>
             </div>
@@ -126,9 +126,11 @@
     <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
     <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Template Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
 
 </body>
 

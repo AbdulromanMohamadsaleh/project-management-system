@@ -53,7 +53,7 @@
                                     <td>{{ $project_detail->DATE_SAVE }}</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar"
+                                            <div class="progress-bar bg-warning" role="progressbar"
                                                 aria-label="Example with label" style="width: 25%;" aria-valuenow="25"
                                                 aria-valuemin="0" aria-valuemax="100">25%</div>
                                         </div>
