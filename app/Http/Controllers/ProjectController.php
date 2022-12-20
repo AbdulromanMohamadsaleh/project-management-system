@@ -29,8 +29,6 @@ class ProjectController extends Controller
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID',$id)->first();
-        $TeamsName = TeamName::where('DETAIL_ID',$id);
-        $Login = Login::all();
-        return view('Admin.show', ['project_detail' => $project_detail],['TeamsName' => $TeamsName]);
+        return view('Admin.show', ['project_detail' => $project_detail]);
     }
 }

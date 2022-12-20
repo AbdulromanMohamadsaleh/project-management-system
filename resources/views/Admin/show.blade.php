@@ -173,7 +173,7 @@
                 </div>
             </div>
         </div><br>
-        <div class="container mt-3">
+        <div class="container mt-3 row">
         <div class="col-md-4">
             <div class="card card-outline card-lime">
                 <div class="card-header">
@@ -184,13 +184,54 @@
                 <div class="card-body">
                     <ul class="users-list clearfix">
                             <li>
-                                @foreach ($TeamsName as $TeamsName)
                                 <img src="../img/1.png" alt="User Image">
-                                <a class="users-list-name" href="javascript:void(0)">{{$TeamsName->NAME}}</a>
-                                @endforeach
+                                <a class="users-list-name" href="javascript:void(0)"></a>
                                 <!-- <span class="users-list-date">Today</span> -->
                             </li>
                     </ul>
+                </div>
+            </div>
+        </div><br>
+        <div class="col-md-8">
+            <div class="card card-outline card-primary">
+                <div class="card-header  d-flex justify-content-between">
+                    <span><b>Activity List:</b></span>
+                        <span><a href="index.php"><button type="button" class="btn btn-success" data-toggle="tooltip" title="add new topic"><i class='fas fa-plus'></i></button></a></span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Activity</th>
+                                <th></th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: right">1.1dasdasdasdasdasdasdasshgdjagdjasgd</td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td> 10 Day</td>
+                                <td>july@example.com</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: right">2.1dasdasdasdasdasdasdasshgdjagdjasgd</td>
+                                <td>10 day</td>
+                                <td>mary@example.com</td>
+                              </tr>
+                            </tbody>
+                          </table>
                 </div>
             </div>
         </div>
