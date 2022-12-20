@@ -98,20 +98,21 @@
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="day" value="0">
+                                                    id="day" value="day">
                                                 <label class="form-check-label" for="day">Day</label>
                                             </div>
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="week" value="0">
+                                                    id="week" value="week">
                                                 <label class="form-check-label" for="week">Week</label>
                                             </div>
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="month" value="0">
+                                                    id="month" value="month">
                                                 <label class="form-check-label" for="month">Month</label>
                                             </div>
                                         </div>
+                                        <div class="row justify-content-center" id="show-duration"></div>
                                     </div>
                                 </div>
 
@@ -154,20 +155,47 @@
                             </div>
 
                             <!-- step two -->
-                            <div class="step">
-                                <p class="text-center mb-4">Your presence on the social network</p>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Linked In" oninput="this.className = ''"
-                                        name="linkedin">
+                            <div class="step " id="activityWrap">
+                                <p class="text-center mb-4">Activity In The Project</p>
+
+                                {{-- 1 activity --}}
+                                <div class="row ">
+                                    <div class="mb-3 col-10">
+                                        <input class="form-control form-control-lg mb-3" name="activity[]"
+                                            type="text" placeholder="Activity"
+                                            aria-label=".form-control-lg example">
+                                        <!-- Tasks -->
+                                        <div class="taskWrap">
+                                            <div class="row d-flex justify-content-end ">
+                                                <div class="mb-3 col-7">
+                                                    <input class="form-control form-control-lg mb-3"
+                                                        name="activity[tasks[]]" type="text" placeholder="Task"
+                                                        aria-label="Task">
+                                                </div>
+                                                <div class="col-2">
+                                                    <input class="form-control form-control-lg mb-3"
+                                                        name="activity[tasks[]]" type="text" placeholder="Day"
+                                                        aria-label="Task">
+                                                </div>
+                                                <div class="col-1"><button type="button" title="Delete Task"
+                                                        class="btn btn-danger btn-delete-task">-</button>
+                                                </div>
+                                                <div class="mb-3 col-1">
+                                                    <div class="col-1"><button type="button" title="New Task"
+                                                            class="btn btn-success btn-add-task">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-1 ">
+                                        <button type="button" id="btnAddNewActivity"
+                                            class="btn btn-success add-task"title="New Task">+</button>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Twitter" oninput="this.className = ''"
-                                        name="twitter">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Facebook" oninput="this.className = ''"
-                                        name="facebook">
-                                </div>
+
+
                             </div>
 
                             <!-- step three -->
@@ -237,6 +265,140 @@
 
         });
     });
+
+    // const addTaskButtons = document.querySelectorAll('.add-task')
+
+    // addTaskButtons.forEach(addTaskButton => {
+    //     addTaskButton.addEventListener('click', function(e) {
+    //         const textnode = document.createTextNode("li");
+    //         textnode.innerHtml = `<li class="row d-flex justify-content-end">
+    //                                         <div class="mb-3 col-1">
+    //                                             <div class="col-1"><button type="button" title="New Activity"
+    //                                                     class="btn btn-success">+</button>
+    //                                             </div>
+    //                                         </div>
+    //                                         <div class="mb-3 col-7">
+    //                                             <input class="form-control form-control-lg mb-3"
+    //                                                 name="activity[tasks[]]" type="text" placeholder="Task"
+    //                                                 aria-label="Task">
+    //                                         </div>
+    //                                         <div class="col-2">
+    //                                             <input class="form-control form-control-lg mb-3"
+    //                                                 name="activity[tasks[]]" type="text" placeholder="Day"
+    //                                                 aria-label="Task">
+    //                                         </div>
+    //                                         <div class="col-1"><button type="button" title="Delete Task"
+    //                                                 class="btn btn-danger">-</button>
+    //                                         </div>
+    //                                     </li>`
+    //         node.appendChild(textnode);
+    //     });
+    // });
+
+    const addActivityButton = document.querySelector('#btnAddNewActivity')
+    const activityWraper = document.querySelector('#activityWrap')
+    let activityCounter = 1;
+    addActivityButton.addEventListener('click', addNewActivityInput)
+
+    function addNewActivityInput() {
+
+        const ii = `<hr>
+                                    <div class="mb-3 col-10 pt-4">
+                                        <input class="form-control form-control-lg mb-3" name="activity[]"
+                                            type="text" placeholder="Activity "
+                                            aria-label=".form-control-lg example">
+                                        <!-- Tasks -->
+                                        <div class="taskWrap">
+                                            <div class="row d-flex justify-content-end">
+
+                                                <div class="mb-3 col-7">
+                                                    <input class="form-control form-control-lg mb-3"
+                                                        name="activity[tasks[]]" type="text" placeholder="Task"
+                                                        aria-label="Task">
+                                                </div>
+                                                <div class="col-2">
+                                                    <input class="form-control form-control-lg mb-3"
+                                                        name="activity[tasks[]]" type="text" placeholder="Day"
+                                                        aria-label="Task">
+                                                </div>
+                                                <div class="mb-3 col-1">
+                                                    <button type="button" title="Delete Task"
+                                                            class="btn btn-danger btn-delete-task">-</button>
+                                                </div>
+                                                <div class="mb-2 col-1">
+                                                    <button type="button" title="New Task"
+                                                            class="btn btn-success btn-add-task">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-1 pt-4">
+                                                    <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity">-</button>
+                                        </div>
+
+                                `
+        const ini = document.createElement('div');
+        ini.classList.add('row');
+        ini.innerHTML = ii;
+        activityWraper.appendChild(ini)
+
+        const btnsAddTask = document.querySelectorAll('.btn-add-task');
+        btnsAddTask.forEach(btnAddTask => {
+            btnAddTask.addEventListener('click', addNewTaskInput)
+        })
+
+        ini.querySelector('.delete-activity').addEventListener('click', function(e) {
+            this.parentElement.parentElement.remove()
+
+        })
+
+    }
+
+    const btnsAddTask = document.querySelectorAll('.btn-add-task');
+    btnsAddTask.forEach(btnAddTask => {
+        btnAddTask.addEventListener('click', addNewTaskInput)
+    })
+
+    function addNewTaskInput() {
+        const ii = `
+
+            <div class="mb-3 col-7">
+                <input class="form-control form-control-lg mb-3"
+                    name="activity[tasks[]]" type="text" placeholder="Task"
+                    aria-label="Task">
+            </div>
+            <div class="col-2">
+                <input class="form-control form-control-lg mb-3"
+                    name="activity[tasks[]]" type="text" placeholder="Day"
+                    aria-label="Task">
+            </div>
+            <div class="col-1"><button type="button" title="Delete Task"
+                    class="btn btn-danger btn-delete-task">-</button>
+            </div>
+            <div class="mb-3 col-1">
+                <div class="col-1"><button type="button" title="New Task"
+                        class="btn btn-success btn-add-task">+</button>
+                </div>
+            </div>
+
+        `
+        const ini = document.createElement('div');
+        ini.classList.add('row');
+        ini.classList.add('d-flex');
+        ini.classList.add('justify-content-end');
+        ini.innerHTML = ii;
+
+        this.closest(".taskWrap").appendChild(ini)
+        const btnsAddTask = document.querySelectorAll('.btn-add-task');
+        btnsAddTask.forEach(btnAddTask => {
+            btnAddTask.addEventListener('click', addNewTaskInput)
+        })
+
+        ini.querySelector('.btn-delete-task').addEventListener('click', function(e) {
+            this.parentElement.parentElement.remove()
+
+        })
+    }
 </script>
 
 

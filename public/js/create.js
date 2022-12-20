@@ -56,18 +56,7 @@ function validateForm() {
             y[i].classList.remove("invalid")
         }
     }
-    // textareaInput = x[currentTab].getElementsByTagName("textarea");
-    // for (i = 0; i < textareaInput.length; i++) {
-    //     // If a field is empty...
-    //     if (textareaInput[i].value.length == 0) {
-    //         console.log(textareaInput[i].value)
-    //         // add an "invalid" class to the field:
-    //         textareaInput[i].classList.add('invalid-border-input');
-    //         // and set the current valid status to false
 
-    //         valid = false;
-    //     }
-    // }
     selectinput = x[currentTab].getElementsByTagName("select");
     for (i = 0; i < selectinput.length; i++) {
         // If a field is empty...
@@ -97,4 +86,65 @@ function fixStepIndicator(n) {
     }
     //... and adds the "active" class on the current step:
     x[n].className += " active";
+}
+
+
+
+
+
+const radioButtons = document.querySelectorAll('input[name="projectDuration"]');
+const showDurationField = document.querySelector('#show-duration');
+const StartDateProject = document.getElementById("projectStart");
+const EndDateProject = document.getElementById("projectEnd");
+
+for(const radioButton of radioButtons){
+    radioButton.addEventListener('change', getProjectDuration);
+}
+
+function getProjectDuration(){
+    differenceDays = daysDifference();
+
+    if(!differenceDays){
+        showDurationField.innerHTML="<p class='pt-2 text-danger'>Please Select Start and End Date</p>"
+        setTimeout(function(){
+            showDurationField.innerHTML=""
+        }, 2000);
+
+        return;
+    }
+
+    if (this.checked) {
+
+        selected = this.id;
+        let duration="";
+        if(selected=='week'){
+            duration = Math.floor(differenceDays/7) + ' week';
+        }
+        else if(selected=='day'){
+            duration = differenceDays + ' Day';
+        }
+        else if(selected=='month'){
+            duration = Math.floor(differenceDays/30) + ' Month';
+        }
+        // showDurationField.innerHTML=""
+        showDurationField.innerHTML=duration;
+    }
+}
+
+function daysDifference() {
+    var dateI1 = document.getElementById("projectStart").value;
+    var dateI2 = document.getElementById("projectEnd").value;
+    //define two variables and fetch the input from HTML form
+
+    //define two date object variables to store the date values
+    var date1 = new Date(dateI1);
+    var date2 = new Date(dateI2);
+
+    //calculate time difference
+    var time_difference = date2.getTime() - date1.getTime();
+
+    //calculate days difference by dividing total milliseconds in a day
+    var result = time_difference / (1000 * 60 * 60 * 24);
+
+    return result;
 }
