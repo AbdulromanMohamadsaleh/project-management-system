@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="navbar-nav w-100">
-            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard
+            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-dashboard"></i></i>Dashboard
             </a>
             {{-- <div class="nav-item dropdown">
                 <a href="{{ route('create') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -31,8 +31,8 @@
                     <a href="element.html" class="dropdown-item">Other Elements</a>
                 </div>
             </div> --}}
-            <a href="{{ route('create') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Create Project</a>
-            <a href="{{ route('table') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Data Project</a>
+            <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create Project</a>
+            <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data Project</a>
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
