@@ -31,4 +31,11 @@ class ProjectController extends Controller
         $Login = Login::all();
         return view('Admin.show', ['project_detail' => $project_detail],['TeamsName' => $ProjectTeam]);
     }
+    public function Approve($id)
+    {
+        $project_detail = ProjectDetial::where('DETAIL_ID',$id)->first();
+        $ProjectTeam = ProjectTeam::where('DETAIL_ID',$id);
+        $Login = Login::all();
+        return view('Admin.approve', ['project_detail' => $project_detail],['TeamsName' => $ProjectTeam]);
+    }
 }

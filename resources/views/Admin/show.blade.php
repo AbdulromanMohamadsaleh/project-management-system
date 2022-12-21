@@ -85,86 +85,108 @@
             </div>
         </div><br>
         <div class="container row mt-3">
-        <div class="col-md-4">
-            <div class="card card-outline card-lime">
-                <div class="card-header">
-                    <span><b>Team Member/s:</b></span>
-                    <div class="card-tools">
+            <div class="col-md-4">
+                <div class="card card-outline card-lime">
+                    <div class="card-header">
+                        <span><b>Team Member/s:</b></span>
+                        <div class="card-tools">
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <ul class="users-list clearfix">
+                    <div class="card-body">
+                        <ul class="users-list clearfix">
                             <li>
                                 @foreach ($TeamsName as $TeamsName)
-                                <img src="../img/1.png" alt="User Image">
-                                <a class="users-list-name" href="javascript:void(0)">{{$TeamsName->NAME}}</a>
+                                    <img src="../img/1.png" alt="User Image">
+                                    <a class="users-list-name" href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
                                 @endforeach
                                 <!-- <span class="users-list-date">Today</span> -->
                             </li>
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-8 p-0">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Activity</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tbody class="tbl-accordion-header">
+                        <tr>
+                            <td>
+                                <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
+                            </td>
+                            <td><strong>1.ข้าวผัด</strong></td>
+                            <td>10 Week</td>
+                            <td></td>
+                            <td>Compete</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="tbl-accordion-body">
+                        <tr>
+                        <tr>
+                            <td></td>
+                            <td>1.1.ไข่</td>
+                            <td>5 Week</td>
+                            <td>
+                                <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" data-target="#modal1">view</a></li>
+                                        <li><a class="dropdown-item" href="#" data-target="#modal2">edit</a></li>
+                                    </ul>
+                                </div>
+                                <!--Modal code -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tr>
+                    </tbody>
+                    <tbody class="tbl-accordion-header">
+                        <tr>
+                            <td>
+                                <a data-toggle="toggle"><strong>97132598</strong></a>
+                            </td>
+                            <td>Table Rockefeller</td>
+                            <td>IDXPTO</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="tbl-accordion-body">
+                        <tr>
+                            <td><strong>Category:</strong></td>
+                            <td>Furniture</td>
+                            <td><strong>Group:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Profit:</strong></td>
+                            <td>$ 350</td>
+                        </tr>
+                    </tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-md-8">
-            <table>
-                <thead>
-                  <tr>
-                    <th>Activity</th>
-                    <th>Date</th>
-                    <th>PromoCode</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tbody class="tbl-accordion-header">
-                  <tr>
-                    <td>
-                      <a data-toggle="toggle"><strong>1</strong></a>
-                    </td>
-                    <td>Ymbo Shirt</td>
-                    <td>WELCOME10</td>
-                  </tr>
-                </tbody>
-                <tbody class="tbl-accordion-body">
-                  <tr>
-                  <tr>
-                    <td><strong>Category:</strong></td>
-                    <td>Clothes</td>
-                    <td><strong>Group:</strong></td>
-                  </tr>
-                  </tr>
-                  <tr>
-                    <td><strong>Profit</strong></td>
-                    <td>$ 20.00</td>
-                  </tr>
-                </tbody>
-                <tbody class="tbl-accordion-header">
-                  <tr>
-                    <td>
-                      <a data-toggle="toggle"><strong>97132598</strong></a>
-                    </td>
-                    <td>Table Rockefeller</td>
-                    <td>IDXPTO</td>
-                  </tr>
-                </tbody>
-                <tbody class="tbl-accordion-body">
-                  <tr>
-                    <td><strong>Category:</strong></td>
-                    <td>Furniture</td>
-                    <td><strong>Group:</strong></td>
-                    <td>Tables</td>
-                    <td><strong>Sub-group:</strong></td>
-                    <td>Dinning Table</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Profit:</strong></td>
-                    <td>$ 350</td>
-                  </tr>
-                </tbody>
-                </tbody>
-              </table>
-        </div>
-        </div>
-        <!-- Recent Sales End -->
+    </div>
+    <!-- Recent Sales End -->
 
 
 
@@ -182,51 +204,56 @@
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+</script>
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-    $(document).ready(function () {
-	$('[data-toggle="toggle"]').click(function () {
-		$(this).parents().next(".tbl-accordion-body").toggle();
-	});
-});
+    $(document).ready(function() {
+        $('[data-toggle="toggle"]').click(function() {
+            $(this).parents().next(".tbl-accordion-body").toggle();
+        });
+    });
 </script>
 
 </html>
 <style>
     table {
-	width: 900px;
-	border-collapse: collapse;
-	margin:50px auto;
-	}
+        width: 800px;
+        border-collapse: collapse;
+    }
 
-th {
-	background: #3498db;
-	color: white;
-	font-weight: bold;
-	}
+    th {
+        background: #3498db;
+        color: white;
+        font-weight: bold;
+    }
 
-td, th {
-	padding: 10px;
-	border-bottom: 1px solid #ccc;
-	text-align: center;
-	font-size: 18px;
-	}
+    td,
+    th {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        font-size: 18px;
+    }
 
-.tbl-accordion-header a {
-	color: #28c76f !important;
-}
+    .tbl-accordion-header a {
+        color: black !important;
+    }
 
-.tbl-accordion-body {
-	display: none;
-}
+    .tbl-accordion-body {
+        display: none;
+    }
 
-.tbl-accordion-body td {
-  border-bottom: 0px;
-}
+    .tbl-accordion-body td {
+        border-bottom: 0px;
+    }
 
-.tbl-accordion-body tr:last-child {
-  border-bottom: 1px solid #ccc;
-}
+    .tbl-accordion-body tr:last-child {
+        border-bottom: 1px solid #ccc;
+    }
 </style>
