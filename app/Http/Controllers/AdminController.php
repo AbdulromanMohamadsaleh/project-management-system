@@ -7,6 +7,4 @@ use App\Models\ProjectDetial;
 
 class AdminController extends Controller
 {
-
-   
 }
