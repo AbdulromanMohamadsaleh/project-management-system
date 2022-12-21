@@ -20,13 +20,11 @@ use App\Http\Controllers\CustomLoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',[CustomLoginController::class,'login'])->name('login');
+Route::get('/login', [CustomLoginController::class, 'login'])->name('login');
 
 Route::get('/admin', [ProjectController::class, 'Index']);
 Route::get('/table', [ProjectController::class,'Table'])->name('table');
 Route::get('/create', [ProjectController::class,'Create'])->name('create');
 Route::get('/show/{id}', [ProjectController::class,'show'])->name('show');
-Route::get('/approve/{id}', [ProjectController::class,'Approve'])->name('approve');
-
 
 

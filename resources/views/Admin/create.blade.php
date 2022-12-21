@@ -22,7 +22,8 @@
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
                         <h1 class="text-center fs-4">Create Project</h1>
-                        <form id="signUpForm" action="#!">
+                        <form id="signUpForm" method="post" action="{{ route('save') }}">
+                            @csrf
                             <!-- start step indicators -->
                             <div class=" form-header d-flex mb-5">
                                 <span class="fw-bold stepIndicator">Detail</span>
@@ -161,20 +162,21 @@
                                 {{-- 1 activity --}}
                                 <div class="row ">
                                     <div class="mb-3 col-10">
-                                        <input class="form-control form-control-lg mb-3" name="activity[]"
+                                        <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity"
                                             aria-label=".form-control-lg example">
+                                        <input type="text"  class="taskCounter" name="taskCounter[]"
+                                            value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
                                             <div class="row d-flex justify-content-end ">
                                                 <div class="mb-3 col-7">
-                                                    <input class="form-control form-control-lg mb-3"
-                                                        name="activity[tasks[]]" type="text" placeholder="Task"
-                                                        aria-label="Task">
+                                                    <input class="form-control form-control-lg mb-3" name="taskName[]"
+                                                        type="text" placeholder="Task" aria-label="Task">
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="activity[tasks[]]" type="text" placeholder="Day"
+                                                        name="dateFormat[]" type="text" placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="col-1"><button type="button" title="Delete Task"
@@ -304,21 +306,22 @@
 
         const ii = `<hr>
                                     <div class="mb-3 col-10 pt-4">
-                                        <input class="form-control form-control-lg mb-3" name="activity[]"
+                                        <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity "
                                             aria-label=".form-control-lg example">
+                                            <input type="text"   class="taskCounter" name="taskCounter[]" value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
                                             <div class="row d-flex justify-content-end">
 
                                                 <div class="mb-3 col-7">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="activity[tasks[]]" type="text" placeholder="Task"
+                                                        name="taskName[]" type="text" placeholder="Task"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="activity[tasks[]]" type="text" placeholder="Day"
+                                                        name="dateFormat[]" type="text" placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="mb-3 col-1">
@@ -360,25 +363,42 @@
     })
 
     function addNewTaskInput() {
+        let elCountTask = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
+            'div .taskWrap')
+        let taskCounterInt = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
+            'div .taskWrap').childElementCount + 1
+
+
+        // let taskCounterStr = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
+        //     'div .taskCounter').value;
+        // taskCounterInt = parseInt(taskCounterStr);
+        // ++taskCounterInt;
+        this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('div .taskCounter')
+            .value = taskCounterInt;
+
+
+            let ActivityCounter = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
+            'div .taskCounter')
+
         const ii = `
 
             <div class="mb-3 col-7">
                 <input class="form-control form-control-lg mb-3"
-                    name="activity[tasks[]]" type="text" placeholder="Task"
+                    name="taskName[]" type="text" placeholder="Task"
                     aria-label="Task">
             </div>
             <div class="col-2">
                 <input class="form-control form-control-lg mb-3"
-                    name="activity[tasks[]]" type="text" placeholder="Day"
+                    name="dateFormat[]" type="text" placeholder="Day"
                     aria-label="Task">
             </div>
             <div class="col-1"><button type="button" title="Delete Task"
                     class="btn btn-danger btn-delete-task">-</button>
             </div>
             <div class="mb-3 col-1">
-                <div class="col-1"><button type="button" title="New Task"
+                <button type="button" title="New Task"
                         class="btn btn-success btn-add-task">+</button>
-                </div>
+
             </div>
 
         `
@@ -392,13 +412,17 @@
         const btnsAddTask = document.querySelectorAll('.btn-add-task');
         btnsAddTask.forEach(btnAddTask => {
             btnAddTask.addEventListener('click', addNewTaskInput)
+
         })
 
         ini.querySelector('.btn-delete-task').addEventListener('click', function(e) {
             this.parentElement.parentElement.remove()
-
+            let c = elCountTask.childElementCount
+            ActivityCounter.value = c
         })
+
     }
+
 </script>
 
 
