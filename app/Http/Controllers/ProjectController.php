@@ -80,11 +80,20 @@ class ProjectController extends Controller
             $ProjectActivity->save();
         }
     }
-    public function Approve($id)
+    public function Approve()
     {
-        $project_detail = ProjectDetial::where('DETAIL_ID',$id)->first();
-        $ProjectTeam = ProjectTeam::where('DETAIL_ID',$id);
+        $project_details = ProjectDetial::all();
+        // $ProjectTeam = ProjectTeam::where('DETAIL_ID',$id);
         $Login = Login::all();
-        return view('Admin.approve', ['project_detail' => $project_detail],['TeamsName' => $ProjectTeam]);
+         return view('Admin.approve', ['project_details' => $project_details]);
     }
+    public function Done($id)
+    {
+        $ProjectDetial = ProjectDetial::where('DETAIL_ID',$id)->update(['IS_APPROVE' => 1,'STATUS'=>"Progress"]);
+        // dd($ProjectDetial);
+
+
+        return redirect()->back();
+    }
+
 }

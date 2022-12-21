@@ -66,28 +66,34 @@
                                     </td>
                                     </center>
                                     <td>
-                                        <span class="badge rounded-pill text-bg-success ">Done</span>
+                                        <span class="badge rounded-pill {{$project_detail->STATUS=="New Release"?'text-bg-secondary' :'text-bg-warning'}}">{{ $project_detail->STATUS }}
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
                                             href="{{ route('show', $project_detail->DETAIL_ID) }}">
                                             <i class="bi bi-eye" style="font-size: 25;"></i>
                                         </a>
+                                        @if ($project_detail->IS_APPROVE == 0)
                                         <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project"
-                                            href="">
-                                            <i class="fas fa-pencil-alt" style="font-size: 25;">
-                                            </i>
-                                        </a>
+                                        href="">
+                                        <i class="fas fa-pencil-alt" style="font-size: 25;">
+                                        </i>
+                                         </a>
+                                        @endif
+
                                         <!-- <a class="btn btn-success btn-sm3" href="#">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z" />
                                           </svg>
                                         </a> -->
+                                        @if ($project_detail->IS_APPROVE == 0)
                                         <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="delete project"
-                                            href="">
-                                            <i class="fas fa-trash" style="font-size: 25;">
-                                            </i>
-                                        </a>
+                                        href="">
+                                        <i class="fas fa-trash" style="font-size: 25;">
+                                        </i>
+                                         </a>
+                                        @endif
+
                                     </td>
 
                                 </tr>
@@ -114,6 +120,7 @@
 <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <!-- Template Javascript -->
@@ -122,6 +129,23 @@
     $(document).ready(function() {
         $('#example').DataTable();
     });
+    $('.btn-sm2').on('click', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href')
+        Swal.fire({
+            title: 'Edit ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK',
+            cancelButtonText: 'CANCEL'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    })
 </script>
 
 </html>

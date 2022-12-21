@@ -21,6 +21,7 @@ class ProjectDetial extends Model
         'DATE_SAVE',
         'RECORD_CREATOR',
         'PROPONEN_NAME',
+        'IS_APPROVE'
     ];
 
     protected $hidden = [
