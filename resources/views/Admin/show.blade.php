@@ -32,7 +32,7 @@
             </div>
         </div>
         <!-- Recent Sales Start -->
-        <div class="container mt-3">
+        <div class="container mt-3 ">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -69,6 +69,8 @@
                                                     <dd>{{ $project_detail->DATE_START }}</dd>
                                                     <dt><b class="border-bottom border-primary">End Date</b></dt>
                                                     <dd>{{ $project_detail->DATE_END }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Total Date</b></dt>
+                                                    <dd>{{ $project_detail->TOTAL_DATE }}</dd>
                                                 </dl>
                                                 <dt><b class="border-bottom border-primary">Budget</b></dt>
                                                 <dd>{{ $project_detail->BUDGET }}</dd>
@@ -83,8 +85,9 @@
                     </div>
                 </div>
             </div>
-        </div><br>
-        <div class="container row mt-3">
+        </div>
+        <br>
+        <div class="container row mt-3 ">
             <div class="col-md-4">
                 <div class="card card-outline card-lime">
                     <div class="card-header">
@@ -93,19 +96,21 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <ul class="users-list clearfix">
-                            <li>
-                                @foreach ($TeamsName as $TeamsName)
-                                    <img src="../img/1.png" alt="User Image">
-                                    <a class="users-list-name" href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
-                                @endforeach
-                                <!-- <span class="users-list-date">Today</span> -->
-                            </li>
+                        <ul class="users-list clearfix list-group list-group-horizontal justify-content-center"
+                            style="flex-wrap: wrap">
+                            @foreach ($TeamsName as $TeamsName)
+                                <li class="nav-link">
+                                    <img class="rounded-circle" src="{{ asset('images/user.jpg') }}" alt="User Image">
+                                    <a style="text-decoration: none; color: black;" class="users-list-name"
+                                        href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
+                                </li>
+                            @endforeach
+                            <!-- <span class="users-list-date">Today</span> -->
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 p-0">
+            <div class="col-md-8 ">
                 <table>
                     <thead>
                         <tr>

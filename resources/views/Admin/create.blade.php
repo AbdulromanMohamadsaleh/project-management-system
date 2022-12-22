@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
 
-                                {{-- Expected Results / Project Manager --}}
+                                {{-- Expected Results / Duration Format --}}
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="expectedRresults">Expected
@@ -114,10 +114,13 @@
                                             </div>
                                         </div>
                                         <div class="row justify-content-center" id="show-duration"></div>
+                                        <input class="form-check-input" hidden name="totalDate" type="text"
+                                            value="">
+
                                     </div>
                                 </div>
 
-                                {{-- Team / Duration Format --}}
+                                {{-- Team /  Project Manager --}}
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectManager" class="label-left fw-bold mb-2">Project
@@ -160,12 +163,12 @@
                                 <p class="text-center mb-4">Activity In The Project</p>
 
                                 {{-- 1 activity --}}
-                                <div class="row ">
+                                <div class="row  ">
                                     <div class="mb-3 col-10">
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity"
                                             aria-label=".form-control-lg example">
-                                        <input type="text"  class="taskCounter" name="taskCounter[]"
+                                        <input type="text" hidden class="taskCounter" name="taskCounter[]"
                                             value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
@@ -176,11 +179,12 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="dateFormat[]" type="text" placeholder="Day"
+                                                        name="taskDuration[]" type="number" placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
-                                                <div class="col-1"><button type="button" title="Delete Task"
-                                                        class="btn btn-danger btn-delete-task">-</button>
+                                                <div class="col-1"><button type="button" disabled
+                                                        title="Delete Task"
+                                                        class="btn btn-danger btn-delete-task ">-</button>
                                                 </div>
                                                 <div class="mb-3 col-1">
                                                     <div class="col-1"><button type="button" title="New Task"
@@ -309,7 +313,7 @@
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity "
                                             aria-label=".form-control-lg example">
-                                            <input type="text"   class="taskCounter" name="taskCounter[]" value="1">
+                                            <input type="text"   class="taskCounter" hidden name="taskCounter[]" value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
                                             <div class="row d-flex justify-content-end">
@@ -321,11 +325,11 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="dateFormat[]" type="text" placeholder="Day"
+                                                        name="taskDuration[]" type="number" placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="mb-3 col-1">
-                                                    <button type="button" title="Delete Task"
+                                                    <button type="button" title="Delete Task" disabled
                                                             class="btn btn-danger btn-delete-task">-</button>
                                                 </div>
                                                 <div class="mb-2 col-1">
@@ -377,7 +381,7 @@
             .value = taskCounterInt;
 
 
-            let ActivityCounter = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
+        let ActivityCounter = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
             'div .taskCounter')
 
         const ii = `
@@ -389,7 +393,7 @@
             </div>
             <div class="col-2">
                 <input class="form-control form-control-lg mb-3"
-                    name="dateFormat[]" type="text" placeholder="Day"
+                    name="taskDuration[]" type="number" placeholder="Day"
                     aria-label="Task">
             </div>
             <div class="col-1"><button type="button" title="Delete Task"
@@ -422,7 +426,6 @@
         })
 
     }
-
 </script>
 
 

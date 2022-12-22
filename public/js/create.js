@@ -47,7 +47,7 @@ function validateForm() {
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
         // If a field is empty...
-        if (y[i].value == "") {
+        if (y[i].value == ""||(IsDate1AfterDate2()&&y[i].type=="date")) {
             // add an "invalid" class to the field:
             y[i].className += " invalid";
             // and set the current valid status to false
@@ -58,6 +58,7 @@ function validateForm() {
     }
 
     selectinput = x[currentTab].getElementsByTagName("select");
+
     for (i = 0; i < selectinput.length; i++) {
         // If a field is empty...
         if (selectinput[i].value == "") {
@@ -96,6 +97,7 @@ const radioButtons = document.querySelectorAll('input[name="projectDuration"]');
 const showDurationField = document.querySelector('#show-duration');
 const StartDateProject = document.getElementById("projectStart");
 const EndDateProject = document.getElementById("projectEnd");
+const totalDate = document.querySelector('input[name="totalDate"]');
 
 for(const radioButton of radioButtons){
     radioButton.addEventListener('change', getProjectDuration);
@@ -108,6 +110,7 @@ function getProjectDuration(){
         showDurationField.innerHTML="<p class='pt-2 text-danger'>Please Select Start and End Date</p>"
         setTimeout(function(){
             showDurationField.innerHTML=""
+
         }, 2000);
 
         return;
@@ -128,6 +131,7 @@ function getProjectDuration(){
         }
         // showDurationField.innerHTML=""
         showDurationField.innerHTML=duration;
+        totalDate.value = duration;
     }
 }
 
@@ -147,4 +151,17 @@ function daysDifference() {
     var result = time_difference / (1000 * 60 * 60 * 24);
 
     return result;
+}
+
+function IsDate1AfterDate2() {
+    var dateI1 = document.getElementById("projectStart").value;
+    var dateI2 = document.getElementById("projectEnd").value;
+    //define two variables and fetch the input from HTML form
+
+    //define two date object variables to store the date values
+    var date1 = new Date(dateI1);
+    var date2 = new Date(dateI2);
+
+    //calculate time difference
+    return date1.getTime() > date2.getTime();
 }

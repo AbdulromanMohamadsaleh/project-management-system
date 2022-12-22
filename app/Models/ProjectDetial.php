@@ -30,4 +30,10 @@ class ProjectDetial extends Model
     ];
 
     public $timestapm = false;
+
+
+    public function projectTeam()
+    {
+        return $this->belongstoMany(LoginUser::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
+    }
 }

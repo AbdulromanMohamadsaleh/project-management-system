@@ -10,4 +10,5 @@ class ProjectActivity extends Model
     use HasFactory;
 
     protected $table = 'prj_project_activity';
+    // protected $primary = 'DETAIL_ID';
 }
