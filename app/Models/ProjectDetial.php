@@ -21,7 +21,8 @@ class ProjectDetial extends Model
         'DATE_SAVE',
         'RECORD_CREATOR',
         'PROPONEN_NAME',
-        'IS_APPROVE'
+        'IS_APPROVE',
+        'PROJECT_MANAGER'
     ];
 
     protected $hidden = [
@@ -35,5 +36,15 @@ class ProjectDetial extends Model
     public function projectTeam()
     {
         return $this->belongstoMany(LoginUser::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
+    }
+
+    public function activity()
+    {
+        return $this->hasMany(ProjectActivity::class, 'DETAIL_ID', 'DETAIL_ID');
+    }
+
+    public function ProjectManager()
+    {
+        return $this->belongsto(LoginUser::class, 'PROJECT_MANAGER', 'LOGIN_ID');
     }
 }

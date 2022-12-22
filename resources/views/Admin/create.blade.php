@@ -61,16 +61,65 @@
                                     </div>
                                 </div>
 
+                                {{-- Project Duration Format / Project Days --}}
+                                <div class="row mb-5 mb-sm-0">
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
+                                        <div class="row p-2  ">
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDurationFormat"
+                                                    type="radio" id="day" value="day">
+                                                <label class="form-check-label" for="day">Day</label>
+                                            </div>
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDurationFormat"
+                                                    type="radio" id="week" value="week">
+                                                <label class="form-check-label" for="week">Week</label>
+                                            </div>
+                                            <div class="label-left col form-check form-check-inline">
+                                                <input class="form-check-input" name="projectDurationFormat"
+                                                    type="radio" id="month" value="month">
+                                                <label class="form-check-label" for="month">Month</label>
+                                            </div>
+                                            <input class="form-check-input" hidden name="totalDate" type="text"
+                                                value="">
+                                            <input type="number" min='0' class="form-control mt-3" id="Duration"
+                                                name="projectDuration">
+                                        </div>
+                                        {{-- <div class="row"> --}}
+                                        {{-- <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
+                                                    id="formatDuration"></span></label> --}}
+                                        {{-- </div> --}}
+                                        {{-- <div class="row justify-content-center" id="show-duration"></div> --}}
+                                    </div>
+                                    {{-- <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
+                                                id="formatDuration"></span></label>
+                                        <input type="number" min='0' class="form-control" id="Duration"
+                                            name="projectDuration">
+                                    </div> --}}
+                                </div>
+
                                 {{-- Location / Budget --}}
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="location">Location</label>
                                         <input type="text" name="location" class="form-control" id="location">
                                     </div>
-                                    <div class="col-md-6 mb-sm-5">
-                                        <label class="label-left fw-bold mb-2" for="budget">Budget</label>
-                                        <input type="number" name="budget" class="form-control " id="budget">
+                                    <div class="col-md-6 mb-sm-5  mb-3">
+                                        <div class="input-group">
+                                            <label class="label-left fw-bold mb-2" for="budget">Budget</label>
+                                            <input name="budget" type="number" class="form-control"
+                                                id="autoSizingInputGroup" placeholder="">
+                                            <div class="input-group-text">฿</div>
+                                        </div>
                                     </div>
+
+                                    {{-- <div class="col-md-6 mb-sm-5">
+                                        <label class="label-left fw-bold mb-2" for="budget">Budget</label>
+                                        <input type="number" min="0" name="budget" class="form-control "
+                                            id="budget">
+                                    </div> --}}
                                 </div>
 
                                 {{-- Reasons / Objectve --}}
@@ -85,38 +134,26 @@
                                     </div>
                                 </div>
 
-                                {{-- Expected Results / Duration Format --}}
+                                {{-- Expected Results / Category Format --}}
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="expectedRresults">Expected
                                             Results</label>
-                                        <input type="text" name="expectedRresults" class="form-control"
-                                            id="expectedRresults">
+                                        <textarea class="form-control " name="expectedRresults" rows="2" id="expectedRresults" name="reason"></textarea>
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
-                                        <label for="inputState" class="label-left fw-bold mb-2">Duration
-                                            Format</label>
-                                        <div class="row p-2  ">
-                                            <div class="label-left col form-check form-check-inline">
-                                                <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="day" value="day">
-                                                <label class="form-check-label" for="day">Day</label>
-                                            </div>
-                                            <div class="label-left col form-check form-check-inline">
-                                                <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="week" value="week">
-                                                <label class="form-check-label" for="week">Week</label>
-                                            </div>
-                                            <div class="label-left col form-check form-check-inline">
-                                                <input class="form-check-input" name="projectDuration" type="radio"
-                                                    id="month" value="month">
-                                                <label class="form-check-label" for="month">Month</label>
-                                            </div>
-                                        </div>
-                                        <div class="row justify-content-center" id="show-duration"></div>
-                                        <input class="form-check-input" hidden name="totalDate" type="text"
-                                            value="">
-
+                                        <label for="projectManager" class="label-left fw-bold mb-2">Category</label>
+                                        <select name="projectManager" id="projectManager" class="form-select">
+                                            <option selected value="">Choose...</option>
+                                            @if (count($projectManagers) > 0)
+                                                @foreach ($projectManagers as $projectManager)
+                                                    <option value="{{ $projectManager->LOGIN_ID }}">
+                                                        {{ $projectManager->NAME }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">NO Project Manager</option>
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
 
@@ -160,7 +197,7 @@
 
                             <!-- step two -->
                             <div class="step " id="activityWrap">
-                                <p class="text-center mb-4">Activity In The Project</p>
+                                <p class="text-center mb-4">Add Activity</p>
 
                                 {{-- 1 activity --}}
                                 <div class="row  ">
@@ -179,12 +216,12 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="taskDuration[]" type="number" placeholder="Day"
-                                                        aria-label="Task">
+                                                        name="taskDuration[]" min='1' type="number"
+                                                        placeholder="Day" aria-label="Task">
                                                 </div>
                                                 <div class="col-1"><button type="button" disabled
-                                                        title="Delete Task"
-                                                        class="btn btn-danger btn-delete-task ">-</button>
+                                                        title="Delete Task" class="btn btn-danger btn-delete-task "><i
+                                                            class="bi bi-trash"></i></button>
                                                 </div>
                                                 <div class="mb-3 col-1">
                                                     <div class="col-1"><button type="button" title="New Task"
@@ -222,7 +259,7 @@
                             </div> --}}
 
                             <!-- start previous / next buttons -->
-                            <div class=" d-flex justify-content-center">
+                            <div class="mt-4 d-flex justify-content-center">
                                 <div class="col-6 row form-footer">
                                     <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                                     <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
@@ -272,34 +309,6 @@
         });
     });
 
-    // const addTaskButtons = document.querySelectorAll('.add-task')
-
-    // addTaskButtons.forEach(addTaskButton => {
-    //     addTaskButton.addEventListener('click', function(e) {
-    //         const textnode = document.createTextNode("li");
-    //         textnode.innerHtml = `<li class="row d-flex justify-content-end">
-    //                                         <div class="mb-3 col-1">
-    //                                             <div class="col-1"><button type="button" title="New Activity"
-    //                                                     class="btn btn-success">+</button>
-    //                                             </div>
-    //                                         </div>
-    //                                         <div class="mb-3 col-7">
-    //                                             <input class="form-control form-control-lg mb-3"
-    //                                                 name="activity[tasks[]]" type="text" placeholder="Task"
-    //                                                 aria-label="Task">
-    //                                         </div>
-    //                                         <div class="col-2">
-    //                                             <input class="form-control form-control-lg mb-3"
-    //                                                 name="activity[tasks[]]" type="text" placeholder="Day"
-    //                                                 aria-label="Task">
-    //                                         </div>
-    //                                         <div class="col-1"><button type="button" title="Delete Task"
-    //                                                 class="btn btn-danger">-</button>
-    //                                         </div>
-    //                                     </li>`
-    //         node.appendChild(textnode);
-    //     });
-    // });
 
     const addActivityButton = document.querySelector('#btnAddNewActivity')
     const activityWraper = document.querySelector('#activityWrap')
@@ -307,12 +316,12 @@
     addActivityButton.addEventListener('click', addNewActivityInput)
 
     function addNewActivityInput() {
-
-        const ii = `<hr>
+        activityCounter++
+        const ii = `<hr >
                                     <div class="mb-3 col-10 pt-4">
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity "
-                                            aria-label=".form-control-lg example">
+                                            aria-label=".form-control-lg example" >
                                             <input type="text"   class="taskCounter" hidden name="taskCounter[]" value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
@@ -325,12 +334,12 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="taskDuration[]" type="number" placeholder="Day"
+                                                        name="taskDuration[]" type="number" min='1' placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="mb-3 col-1">
                                                     <button type="button" title="Delete Task" disabled
-                                                            class="btn btn-danger btn-delete-task">-</button>
+                                                            class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
                                                 </div>
                                                 <div class="mb-2 col-1">
                                                     <button type="button" title="New Task"
@@ -340,7 +349,7 @@
                                         </div>
                                     </div>
                                         <div class="col-1 pt-4">
-                                                    <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity">-</button>
+                                                    <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity"><i class="bi bi-trash"></i></button>
                                         </div>
 
                                 `
@@ -356,6 +365,7 @@
 
         ini.querySelector('.delete-activity').addEventListener('click', function(e) {
             this.parentElement.parentElement.remove()
+            activityCounter--
 
         })
 
@@ -393,11 +403,11 @@
             </div>
             <div class="col-2">
                 <input class="form-control form-control-lg mb-3"
-                    name="taskDuration[]" type="number" placeholder="Day"
+                    name="taskDuration[]" min='1' type="number" placeholder="Day"
                     aria-label="Task">
             </div>
             <div class="col-1"><button type="button" title="Delete Task"
-                    class="btn btn-danger btn-delete-task">-</button>
+                    class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
             </div>
             <div class="mb-3 col-1">
                 <button type="button" title="New Task"
@@ -426,6 +436,17 @@
         })
 
     }
+
+
+
+
+    // const radios = document.querySelectorAll('input[name="projectDurationFormat"]');
+    // const formatDurationText = document.querySelector('#formatDuration');
+    // for (var i = 0, max = radios.length; i < max; i++) {
+    //     radios[i].onclick = function(e) {
+    //         formatDurationText.innerHTML = ' in ' + this.value.charAt(0).toUpperCase() + this.value.slice(1);;
+    //     }
+    // }
 </script>
 
 

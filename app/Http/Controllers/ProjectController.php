@@ -32,7 +32,7 @@ class ProjectController extends Controller
 
     public function Show($id)
     {
-        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->first();
+        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
 
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
@@ -55,7 +55,7 @@ class ProjectController extends Controller
         $ProjectDetial->DATE_START = $request->projectStart;
         $ProjectDetial->DATE_END = $request->projectEnd;
         $ProjectDetial->RECORD_CREATOR = $request->projectManager;
-        $ProjectDetial->PROJECT_MANAGER = rand(2, 5500);
+        $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
         $ProjectDetial->TOTAL_DATE = $request->totalDate;
 
@@ -98,14 +98,13 @@ class ProjectController extends Controller
 
         return redirect()->route('table');
     }
-    public function Approve($id)
+    public function Approve()
     {
-        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->first();
-        $ProjectTeam = ProjectTeam::where('DETAIL_ID', $id);
-        $Login = Login::all();
-        return view('Admin.approve', ['project_detail' => $project_detail], ['TeamsName' => $ProjectTeam]);
+        $project_details = ProjectDetial::all();
+        // $ProjectTeam = ProjectTeam::where('DETAIL_ID', $id);
+        // $Login = Login::all();
+        return view('Admin.approve', ['project_details' => $project_details]);
     }
-
 
     public function Done($id)
     {

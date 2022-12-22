@@ -11,4 +11,9 @@ class ProjectActivity extends Model
 
     protected $table = 'prj_project_activity';
     // protected $primary = 'DETAIL_ID';
+
+    public function tasks()
+    {
+        return $this->hasMany(ProjectTask::class, 'ACTIVITY_ID', 'ACTIVITY_ID');
+    }
 }

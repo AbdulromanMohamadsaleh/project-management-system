@@ -14,4 +14,7 @@ class LoginUser extends Model
     {
         return $this->belongstoMany(ProjectDetial::class, 'prj_project_team', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID');
     }
+
+    
+
 }

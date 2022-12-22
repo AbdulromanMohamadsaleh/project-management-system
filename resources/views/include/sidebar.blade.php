@@ -1,10 +1,10 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <a href="index.html" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary">
+            <b style="text-align: " class="text-primary">
                 {{-- <i class="fa fa-hashtag me-2"></i> --}}
                 Project Managment
-            </h3>
+            </b>
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
@@ -33,14 +33,15 @@
             </div> --}}
             <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create Project</a>
             <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data Project</a>
-            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-            <div class="nav-item dropdown">
+             <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Approve Project</a>
+            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Report</a>
+            {{-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="far fa-file-alt me-2"></i>Pages</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="signin.html" class="dropdown-item">Sign In</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </nav>
 </div>

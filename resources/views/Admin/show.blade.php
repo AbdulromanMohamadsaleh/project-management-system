@@ -75,7 +75,7 @@
                                                 <dt><b class="border-bottom border-primary">Budget</b></dt>
                                                 <dd>{{ $project_detail->BUDGET }}</dd>
                                                 <dt><b class="border-bottom border-primary">Project Manager</b></dt>
-                                                <dd>{{ $project_detail->PROPONEN_NAME }}</dd>
+                                                <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
                                             </dl>
                                         </div>
                                     </div>
@@ -123,18 +123,18 @@
                     </thead>
                     <tbody>
                     <tbody class="tbl-accordion-header">
-                        <tr>
-                            <td>
-                                <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
-                            </td>
-                            <td><strong>1.ข้าวผัด</strong></td>
-                            <td>10 Week</td>
-                            <td></td>
-                            <td>Compete</td>
-                        </tr>
-                    </tbody>
+                        @foreach ($project_detail->activity as $act)
+                            <tr>
+                                <td>
+                                    <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
+                                </td>
+                                <td><strong>{{ $act->ACTIVITY_NAME }}</strong></td>
+                                <td>10 {{ $act->DAY_WEEK }}</td>
+                                <td></td>
+                                <td>Complete</td>
+                            </tr>
+                        @endforeach
                     <tbody class="tbl-accordion-body">
-                        <tr>
                         <tr>
                             <td></td>
                             <td>1.1.ไข่</td>
@@ -164,28 +164,10 @@
                                 </div>
                             </td>
                         </tr>
-                        </tr>
+
                     </tbody>
-                    <tbody class="tbl-accordion-header">
-                        <tr>
-                            <td>
-                                <a data-toggle="toggle"><strong>97132598</strong></a>
-                            </td>
-                            <td>Table Rockefeller</td>
-                            <td>IDXPTO</td>
-                        </tr>
                     </tbody>
-                    <tbody class="tbl-accordion-body">
-                        <tr>
-                            <td><strong>Category:</strong></td>
-                            <td>Furniture</td>
-                            <td><strong>Group:</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Profit:</strong></td>
-                            <td>$ 350</td>
-                        </tr>
-                    </tbody>
+
                     </tbody>
                 </table>
             </div>

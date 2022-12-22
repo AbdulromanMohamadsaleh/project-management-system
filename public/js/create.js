@@ -45,17 +45,20 @@ function validateForm() {
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");
     // A loop that checks every input field in the current tab:
+
     for (i = 0; i < y.length; i++) {
-        // If a field is empty...
-        if (y[i].value == ""||(IsDate1AfterDate2()&&y[i].type=="date")) {
-            // add an "invalid" class to the field:
-            y[i].className += " invalid";
-            // and set the current valid status to false
-            valid = false;
-        }else{
-            y[i].classList.remove("invalid")
+
+            // If a field is empty... taskDuration
+            if ((y[i].value == "" && y[i].name != "taskDuration[]")||(IsDate1AfterDate2()&&y[i].type=="date")) {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }else{
+                y[i].classList.remove("invalid")
+            }
+
         }
-    }
 
     selectinput = x[currentTab].getElementsByTagName("select");
 
@@ -93,15 +96,15 @@ function fixStepIndicator(n) {
 
 
 
-const radioButtons = document.querySelectorAll('input[name="projectDuration"]');
+// const radioButtons = document.querySelectorAll('input[name="projectDuration"]');
 const showDurationField = document.querySelector('#show-duration');
 const StartDateProject = document.getElementById("projectStart");
 const EndDateProject = document.getElementById("projectEnd");
 const totalDate = document.querySelector('input[name="totalDate"]');
 
-for(const radioButton of radioButtons){
-    radioButton.addEventListener('change', getProjectDuration);
-}
+// for(const radioButton of radioButtons){
+//     radioButton.addEventListener('change', getProjectDuration);
+// }
 
 function getProjectDuration(){
     differenceDays = daysDifference();
@@ -130,7 +133,7 @@ function getProjectDuration(){
             duration = Math.floor(differenceDays/30) + ' Month';
         }
         // showDurationField.innerHTML=""
-        showDurationField.innerHTML=duration;
+        // showDurationField.innerHTML=duration;
         totalDate.value = duration;
     }
 }
