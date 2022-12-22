@@ -31,8 +31,35 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid py-5">
+
         <!-- Recent Sales Start -->
         <div class="container mt-3 ">
+            <div class="horizontal-timeline">
+
+                <ul class="list-inline items">
+                  <li class="list-inline-item items-list">
+                    <div class="px-5">
+                      <div class="event-date badge bg-info"> New Release</div>
+                    </div>
+                  </li>
+                  <li class="list-inline-item items-list">
+                    <div class="px-5">
+                      <div class="event-date badge bg-success">Approve</div>
+                    </div>
+                  </li>
+                  <li class="list-inline-item items-list">
+                    <div class="px-5">
+                      <div class="event-date badge bg-danger">Progress</div>
+                    </div>
+                  </li>
+                  <li class="list-inline-item items-list">
+                    <div class="px-5">
+                      <div class="event-date badge bg-warning">Complate</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             <div class="card">
                 <div class="card-body">
                     <div class="row">

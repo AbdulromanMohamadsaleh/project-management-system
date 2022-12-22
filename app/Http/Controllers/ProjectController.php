@@ -36,6 +36,11 @@ class ProjectController extends Controller
 
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
+    public function Timeline()
+    {
+
+        return view('Admin.timeline');
+    }
 
 
     public function Save(request $request)
