@@ -33,6 +33,11 @@ class ProjectDetial extends Model
     public $timestapm = false;
 
 
+
+    // public function tasks()
+    // {
+    //     return $this->hasManyThrough(ProjectTask::class, ProjectActivity::class, 'DETAIL_ID', 'ACTIVITY_ID');
+    // }
     public function projectTeam()
     {
         return $this->belongstoMany(LoginUser::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
