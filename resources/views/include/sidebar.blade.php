@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="navbar-nav w-100">
-            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-dashboard"></i></i>Dashboard
+            <a href="{{ route('dashboard') }}" class="nav-item nav-link active"><i class="fa fa-dashboard"></i></i>Dashboard
             </a>
             {{-- <div class="nav-item dropdown">
                 <a href="{{ route('create') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i

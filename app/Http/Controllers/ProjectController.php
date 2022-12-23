@@ -32,7 +32,9 @@ class ProjectController extends Controller
 
     public function Show($id)
     {
-        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
+        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
+            $q->with('tasks')->get();
+        })->first();
 
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }

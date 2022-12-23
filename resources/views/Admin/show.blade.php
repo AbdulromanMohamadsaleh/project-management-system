@@ -33,77 +33,80 @@
         </div>
         <div class="container-fluid py-5">
 
-        <!-- Recent Sales Start -->
-        <div class="container mt-3 ">
-            <div class="horizontal-timeline">
+            <!-- Recent Sales Start -->
+            <div class="container mt-3 ">
+                <div class="horizontal-timeline">
 
-                <ul class="list-inline items">
-                  <li class="list-inline-item items-list">
-                    <div class="px-5">
-                      <div class="event-date badge bg-info"> New Release</div>
-                    </div>
-                  </li>
-                  <li class="list-inline-item items-list">
-                    <div class="px-5">
-                      <div class="event-date badge bg-success">Approve</div>
-                    </div>
-                  </li>
-                  <li class="list-inline-item items-list">
-                    <div class="px-5">
-                      <div class="event-date badge bg-danger">Progress</div>
-                    </div>
-                  </li>
-                  <li class="list-inline-item items-list">
-                    <div class="px-5">
-                      <div class="event-date badge bg-warning">Complate</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="callout callout-info">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <dl>
-                                                <dt><b class="border-bottom border-primary">Project Code</b></dt>
-                                                <dd>{{ $project_detail->DETAIL_ID }}</dd>
-                                                <dt><b class="border-bottom border-primary">Record Name</b></dt>
-                                                <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                <dt><b class="border-bottom border-primary">Record Date</b></dt>
-                                                <dd>{{ $project_detail->DATE_SAVE }}</dd>
-                                                <dt><b class="border-bottom border-primary">Project Name</b></dt>
-                                                <dd>{{ $project_detail->NAME_PROJECT }}</dd>
-                                                <dt><b class="border-bottom text-break border-primary">Resons</b></dt>
-                                                <dd>{{ $project_detail->REASONS }}</dd>
-                                                <dt><b class="border-bottom border-primary">Objective</b></dt>
-                                                <dd>{{ $project_detail->OBJECTIVE }}</dd>
-                                            </dl>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <dl>
-                                                <dt><b class="border-bottom border-primary">Target</b></dt>
-                                                <dd>{{ $project_detail->TARGET }}</dd>
-                                                <dt><b class="border-bottom border-primary">Location</b></dt>
-                                                <dd>{{ $project_detail->LOCATION }}</dd>
-                                                <dt><b class="border-bottom border-primary">Results</b></dt>
-                                                <dd>{{ $project_detail->RESULT }}</dd>
+                    <ul class="list-inline items">
+                        <li class="list-inline-item items-list">
+                            <div class="px-5">
+                                <div class="event-date badge bg-info"> New Release</div>
+                            </div>
+                        </li>
+                        <li class="list-inline-item items-list">
+                            <div class="px-5">
+                                <div class="event-date badge bg-success">Approve</div>
+                            </div>
+                        </li>
+                        <li class="list-inline-item items-list">
+                            <div class="px-5">
+                                <div class="event-date badge bg-danger">Progress</div>
+                            </div>
+                        </li>
+                        <li class="list-inline-item items-list">
+                            <div class="px-5">
+                                <div class="event-date badge bg-warning">Complate</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="callout callout-info">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-6">
                                                 <dl>
-                                                    <dt><b class="border-bottom border-primary">Start Date</b></dt>
-                                                    <dd>{{ $project_detail->DATE_START }}</dd>
-                                                    <dt><b class="border-bottom border-primary">End Date</b></dt>
-                                                    <dd>{{ $project_detail->DATE_END }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Total Date</b></dt>
-                                                    <dd>{{ $project_detail->TOTAL_DATE }}</dd>
+                                                    <div><dt><b class="border-bottom border-primary">Project Code</b></dt>
+                                                    <dd>{{ $project_detail->DETAIL_ID }}</dd>
+                                                    
+                                                    <dt><b class="border-bottom border-primary">Record Name</b></dt>
+                                                    <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Record Date</b></dt>
+                                                    <dd>{{ $project_detail->DATE_SAVE }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Project Name</b></dt>
+                                                    <dd>{{ $project_detail->NAME_PROJECT }}</dd>
+                                                    <dt><b class="border-bottom text-break border-primary">Resons</b>
+                                                    </dt>
+                                                    <dd>{{ $project_detail->REASONS }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Objective</b></dt>
+                                                    <dd>{{ $project_detail->OBJECTIVE }}</dd>
                                                 </dl>
-                                                <dt><b class="border-bottom border-primary">Budget</b></dt>
-                                                <dd>{{ $project_detail->BUDGET }}</dd>
-                                                <dt><b class="border-bottom border-primary">Project Manager</b></dt>
-                                                <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
-                                            </dl>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <dl>
+                                                    <dt><b class="border-bottom border-primary">Target</b></dt>
+                                                    <dd>{{ $project_detail->TARGET }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Location</b></dt>
+                                                    <dd>{{ $project_detail->LOCATION }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Results</b></dt>
+                                                    <dd>{{ $project_detail->RESULT }}</dd>
+                                                    <dl>
+                                                        <dt><b class="border-bottom border-primary">Start Date</b></dt>
+                                                        <dd>{{ $project_detail->DATE_START }}</dd>
+                                                        <dt><b class="border-bottom border-primary">End Date</b></dt>
+                                                        <dd>{{ $project_detail->DATE_END }}</dd>
+                                                        <dt><b class="border-bottom border-primary">Total Date</b></dt>
+                                                        <dd>{{ $project_detail->TOTAL_DATE }}</dd>
+                                                    </dl>
+                                                    <dt><b class="border-bottom border-primary">Budget</b></dt>
+                                                    <dd>{{ $project_detail->BUDGET }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Project Manager</b></dt>
+                                                    <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
+                                                </dl>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -112,95 +115,99 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="container row mt-3 ">
-            <div class="col-md-4">
-                <div class="card card-outline card-lime">
-                    <div class="card-header">
-                        <span><b>Team Member/s:</b></span>
-                        <div class="card-tools">
+            <br>
+            <div class="container row mt-3 ">
+                <div class="col-md-4">
+                    <div class="card card-outline card-lime">
+                        <div class="card-header">
+                            <span><b>Team Member/s:</b></span>
+                            <div class="card-tools">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="users-list clearfix list-group list-group-horizontal justify-content-center"
+                                style="flex-wrap: wrap">
+                                @foreach ($TeamsName as $TeamsName)
+                                    <li class="nav-link">
+                                        <img class="rounded-circle" src="{{ asset('images/user.jpg') }}"
+                                            alt="User Image">
+                                        <a style="text-decoration: none; color: black;" class="users-list-name"
+                                            href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
+                                    </li>
+                                @endforeach
+                                <!-- <span class="users-list-date">Today</span> -->
+                            </ul>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="users-list clearfix list-group list-group-horizontal justify-content-center"
-                            style="flex-wrap: wrap">
-                            @foreach ($TeamsName as $TeamsName)
-                                <li class="nav-link">
-                                    <img class="rounded-circle" src="{{ asset('images/user.jpg') }}" alt="User Image">
-                                    <a style="text-decoration: none; color: black;" class="users-list-name"
-                                        href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
-                                </li>
-                            @endforeach
-                            <!-- <span class="users-list-date">Today</span> -->
-                        </ul>
-                    </div>
+                </div>
+                <div class="col-md-8 ">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Activity</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tbody class="tbl-accordion-header">
+                            @foreach ($project_detail->activity as $act)
+                                <tr>
+                                    <td>
+                                        <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
+                                    </td>
+                                    <td><strong>{{ $act->ACTIVITY_NAME }}</strong></td>
+                                    <td>10 {{ $act->DAY_WEEK }}</td>
+                                    <td></td>
+                                    <td>Complete</td>
+                                </tr>
+                                @foreach ($act->tasks as $task)
+                        <tbody class="tbl-accordion-body">
+                            <tr>
+                                <td></td>
+                                <td >{{ $task->TASK_NAME }}</td>
+                                <td>{{ $task->DAY }} Week</td>
+                                <td>
+                                    <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" data-target="#modal1">view</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="#" data-target="#modal2">edit</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--Modal code -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        @endforeach
+                        @endforeach
+                        </tbody>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-md-8 ">
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Activity</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tbody class="tbl-accordion-header">
-                        @foreach ($project_detail->activity as $act)
-                            <tr>
-                                <td>
-                                    <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
-                                </td>
-                                <td><strong>{{ $act->ACTIVITY_NAME }}</strong></td>
-                                <td>10 {{ $act->DAY_WEEK }}</td>
-                                <td></td>
-                                <td>Complete</td>
-                            </tr>
-                        @endforeach
-                    <tbody class="tbl-accordion-body">
-                        <tr>
-                            <td></td>
-                            <td>1.1.ไข่</td>
-                            <td>5 Week</td>
-                            <td>
-                                <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" data-target="#modal1">view</a></li>
-                                        <li><a class="dropdown-item" href="#" data-target="#modal2">edit</a></li>
-                                    </ul>
-                                </div>
-                                <!--Modal code -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                    </tbody>
-
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
-    <!-- Recent Sales End -->
+        <!-- Recent Sales End -->
 
 
 

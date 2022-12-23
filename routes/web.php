@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 Route::get('/login', [CustomLoginController::class, 'login'])->name('login');
 
-Route::get('/admin', [ProjectController::class, 'Index']);
+Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 Route::get('/table', [ProjectController::class, 'Table'])->name('table');
 Route::post('/save', [ProjectController::class, 'Save'])->name('save');
 Route::get('/create', [ProjectController::class, 'Create'])->name('create');

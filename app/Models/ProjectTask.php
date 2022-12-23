@@ -24,4 +24,9 @@ class ProjectTask extends Model
     ];
 
     public $timestapm = false;
+
+    public function project()
+    {
+        return $this->belongsTo(ProjectActivity::class, 'ACTIVITY_ID', 'ACTIVITY_ID');
+    }
 }

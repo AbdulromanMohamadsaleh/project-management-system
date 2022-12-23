@@ -57,7 +57,8 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="projectEnd">End Project Date</label>
-                                        <input type="date" class="form-control" id="projectEnd" name="projectEnd">
+                                        <input type="date" readonly class="form-control" id="projectEnd"
+                                            name="projectEnd">
                                     </div>
                                 </div>
 
@@ -67,9 +68,9 @@
                                         <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
-                                                <input class="form-check-input" name="projectDurationFormat"
+                                                <input checked class="form-check-input" name="projectDurationFormat"
                                                     type="radio" id="day" value="day">
-                                                <label class="form-check-label" for="day">Day</label>
+                                                <label checked class="form-check-label" for="day">Day</label>
                                             </div>
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDurationFormat"
@@ -81,10 +82,10 @@
                                                     type="radio" id="month" value="month">
                                                 <label class="form-check-label" for="month">Month</label>
                                             </div>
-                                            <input class="form-check-input" hidden name="totalDate" type="text"
-                                                value="">
-                                            <input type="number" min='0' class="form-control mt-3" id="Duration"
-                                                name="projectDuration">
+                                            {{-- <input class="form-check-input" hidden name="totalDate" type="text"
+                                                value=""> --}}
+                                            <input type="number" min='0' max='10000000'
+                                                class="form-control mt-3" id="Duration" name="projectDuration">
                                         </div>
                                         {{-- <div class="row"> --}}
                                         {{-- <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
@@ -92,12 +93,21 @@
                                         {{-- </div> --}}
                                         {{-- <div class="row justify-content-center" id="show-duration"></div> --}}
                                     </div>
-                                    {{-- <div class="col-md-6 mb-sm-5">
-                                        <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
-                                                id="formatDuration"></span></label>
-                                        <input type="number" min='0' class="form-control" id="Duration"
-                                            name="projectDuration">
-                                    </div> --}}
+                                    <div class="col-md-6 mb-sm-5">
+                                        <label for="inputState" class="label-left fw-bold mb-2">Include Holydays</label>
+                                        <div class="row p-2 px-5 ">
+                                            <div style="text-align: left" class="mb-3 form-check form-check-inline">
+                                                <input checked class="form-check-input" name="isIncludeHolyday"
+                                                    type="radio" id="yes" value="yes">
+                                                <label class="form-check-label ms-2" for="yes">Yes</label>
+                                            </div>
+                                            <div style="text-align: left" class="form-check form-check-inline">
+                                                <input class="form-check-input" name="isIncludeHolyday" type="radio"
+                                                    id="no" value="no">
+                                                <label class="form-check-label ms-2" for="no">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {{-- Location / Budget --}}
@@ -440,13 +450,80 @@
 
 
 
-    // const radios = document.querySelectorAll('input[name="projectDurationFormat"]');
+    const radios = document.querySelectorAll('input[name="projectDurationFormat"]');
+    const projectStart = document.querySelector('input[name="projectStart"]');
+    const projectEnd = document.querySelector('input[name="projectEnd"]');
+    projectStart.valueAsDate = new Date();
+    const DurationP = document.querySelector('#Duration');
+
     // const formatDurationText = document.querySelector('#formatDuration');
-    // for (var i = 0, max = radios.length; i < max; i++) {
-    //     radios[i].onclick = function(e) {
-    //         formatDurationText.innerHTML = ' in ' + this.value.charAt(0).toUpperCase() + this.value.slice(1);;
-    //     }
-    // }
+    var projectDurationFormat = '';
+
+    for (var i = 0, max = radios.length; i < max; i++) {
+        radios[i].onclick = function(e) {
+            projectDurationFormat = this.value;
+
+        }
+    }
+
+    DurationP.addEventListener('input', updateEndDate);
+
+    function updateEndDate(e) {
+        amount = e.target.value;
+
+        if (projectDurationFormat == 'week') {
+            projectEnd.valueAsDate = addWeeks(projectStart.value, parseInt(amount))
+        } else if (projectDurationFormat == 'month') {
+            projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
+        } else {
+            projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
+        }
+    }
+
+
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+
+    function addMonths(date, day) {
+        let result = new Date(date);
+        result.setDate(result.getDate() + 30 * day);
+        return result;
+    }
+
+    function addWeeks(date, weeks) {
+        let result = new Date(date);
+        result.setDate(result.getDate() + 7 * weeks);
+        return result;
+    }
+
+    function pad(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString();
+    }
+
+    function convertToHtmlDateFormat(result) {
+        let months = result.getMonth() + 1;
+        newDate = '';
+        newDate += result.getFullYear() + '-';
+
+        if (result.getMonth() < 10) {
+            newDate += pad(months) + '-'
+
+        } else {
+            newDate += months + '-';
+        }
+
+        if (result.getDate() < 10) {
+            newDate += pad(result.getDate())
+        } else {
+            newDate += result.getDate()
+        }
+
+        return newDate;
+    }
 </script>
 
 
