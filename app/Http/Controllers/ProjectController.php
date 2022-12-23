@@ -47,6 +47,7 @@ class ProjectController extends Controller
     public function Save(request $request)
     {
 
+      
         $ProjectDetial = new ProjectDetial();
 
         $projectCounter = ProjectDetial::count();

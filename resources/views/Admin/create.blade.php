@@ -219,6 +219,7 @@
                                             value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
+
                                             <div class="row d-flex justify-content-end ">
                                                 <div class="mb-3 col-7">
                                                     <input class="form-control form-control-lg mb-3" name="taskName[]"
@@ -233,18 +234,18 @@
                                                         title="Delete Task" class="btn btn-danger btn-delete-task "><i
                                                             class="bi bi-trash"></i></button>
                                                 </div>
-                                                <div class="mb-3 col-1">
-                                                    <div class="col-1"><button type="button" title="New Task"
-                                                            class="btn btn-success btn-add-task">+</button>
-                                                    </div>
+                                                <div class="mb-3 col-1 ttt task-1">
+                                                    <button type="button" title="New Task"
+                                                        class="btn btn-success btn-add-task">+</button>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
                                     <div class="col-1 ">
                                         <button type="button" id="btnAddNewActivity"
-                                            class="btn btn-success add-task"title="New Task">+</button>
+                                            class="btn btn-success add-task"title="New Activity">+</button>
                                     </div>
                                 </div>
 
@@ -357,9 +358,9 @@
                                                     <button type="button" title="Delete Task" disabled
                                                             class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
                                                 </div>
-                                                <div class="mb-2 col-1">
+                                                <div class="mb-2 col-1 ttt task-1" >
                                                     <button type="button" title="New Task"
-                                                            class="btn btn-success btn-add-task">+</button>
+                                                            class="btn btn-success btn-add-task ">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -447,8 +448,11 @@
     }
 
     function addNewTaskInput() {
+
+
         let elCountTask = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
             'div .taskWrap')
+
         let taskCounterInt = this.parentElement.parentElement.parentElement.parentElement.parentElement
             .querySelector(
                 'div .taskWrap').childElementCount + 1
@@ -474,11 +478,12 @@
             <div class="col-1"><button type="button" title="Delete Task"
                     class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
             </div>
-            <div class="mb-3 col-1">
+            <div class="mb-3 col-1 ttt">
                 <button type="button" title="New Task"
                         class="btn btn-success btn-add-task">+</button>
             </div>
         `
+
         const newCreatedDiv = document.createElement('div');
         newCreatedDiv.classList.add('row');
         newCreatedDiv.classList.add('d-flex');
@@ -488,11 +493,35 @@
         this.closest(".taskWrap").appendChild(newCreatedDiv)
         const btnsAddTask = document.querySelectorAll('.btn-add-task');
         btnsAddTask.forEach(btnAddTask => {
+            this.remove()
             btnAddTask.addEventListener('click', addNewTaskInput)
 
         })
 
         newCreatedDiv.querySelector('.btn-delete-task').addEventListener('click', function(e) {
+            this.parentElement.closest(".taskWrap").childElementCount
+
+            if (this.parentElement.closest(".taskWrap").childElementCount == 2) {
+
+                this.parentElement.closest(".taskWrap").querySelector(`.task-1`).innerHTML = `
+                        <button type="button" title="New Task"
+                                class="btn btn-success btn-add-task"  >+</button>
+                   `;
+            } else {
+                if (this.parentElement.parentElement.nextSibling == null) {
+
+                    this.parentElement.parentElement.previousSibling.querySelector('.ttt').innerHTML = `
+                        <button type="button" title="New Task"
+                                class="btn btn-success btn-add-task"  >+</button>
+                   `;
+                }
+            }
+            const btnsAddTask = document.querySelectorAll('.btn-add-task');
+            btnsAddTask.forEach(btnAddTask => {
+
+                btnAddTask.addEventListener('click', addNewTaskInput)
+
+            })
             this.parentElement.parentElement.remove()
             let c = elCountTask.childElementCount
             ActivityCounter.value = c
