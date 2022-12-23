@@ -69,6 +69,7 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <dl>
+<<<<<<< Updated upstream
                                                     <div><dt><b class="border-bottom border-primary">Project Code</b></dt>
                                                     <dd>{{ $project_detail->DETAIL_ID }}</dd>
 
@@ -83,6 +84,26 @@
                                                     <dd>{{ $project_detail->REASONS }}</dd>
                                                     <dt><b class="border-bottom border-primary">Objective</b></dt>
                                                     <dd>{{ $project_detail->OBJECTIVE }}</dd>
+=======
+                                                    <div>
+                                                        <dt><b class="border-bottom border-primary">Project Code</b>
+                                                        </dt>
+                                                        <dd>{{ $project_detail->DETAIL_ID }}</dd>
+
+                                                        <dt><b class="border-bottom border-primary">Record Name</b></dt>
+                                                        <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
+                                                        <dt><b class="border-bottom border-primary">Record Date</b></dt>
+                                                        <dd>{{ $project_detail->DATE_SAVE }}</dd>
+                                                        <dt><b class="border-bottom border-primary">Project Name</b>
+                                                        </dt>
+                                                        <dd>{{ $project_detail->NAME_PROJECT }}</dd>
+                                                        <dt><b
+                                                                class="border-bottom text-break border-primary">Resons</b>
+                                                        </dt>
+                                                        <dd>{{ $project_detail->REASONS }}</dd>
+                                                        <dt><b class="border-bottom border-primary">Objective</b></dt>
+                                                        <dd>{{ $project_detail->OBJECTIVE }}</dd>
+>>>>>>> Stashed changes
                                                 </dl>
                                             </div>
                                             <div class="col-sm-6">
@@ -174,8 +195,13 @@
                         <tbody class="tbl-accordion-body">
                             <tr>
                                 <td></td>
+<<<<<<< Updated upstream
                                 <td style="margin:10px " >{{($i-1).'.'.$o++}} {{ $task->TASK_NAME }}</td>
                                 <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
+=======
+                                <td>{{ $task->TASK_NAME }}</td>
+                                <td>{{ $task->DAY }} Week</td>
+>>>>>>> Stashed changes
                                 <td>
                                     <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
                                     <div class="btn-group">

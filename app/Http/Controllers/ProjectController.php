@@ -44,7 +44,6 @@ class ProjectController extends Controller
         return view('Admin.timeline');
     }
 
-
     public function Save(request $request)
     {
 
@@ -64,7 +63,7 @@ class ProjectController extends Controller
         $ProjectDetial->RECORD_CREATOR = $request->projectManager;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
-        $ProjectDetial->TOTAL_DATE = $request->totalDate;
+        $ProjectDetial->TOTAL_DATE = 0;
 
         //$ProjectDetial->DATE_SAVE = $request->projectDuration;
         $ProjectDetial->save();

@@ -82,8 +82,8 @@
                                                     type="radio" id="month" value="month">
                                                 <label class="form-check-label" for="month">Month</label>
                                             </div>
-                                            {{-- <input class="form-check-input" hidden name="totalDate" type="text"
-                                                value=""> --}}
+                                            <input class="form-check-input" hidden name="totalDate" type="text"
+                                                value="0">
                                             <input type="number" min='0' max='10000000'
                                                 class="form-control mt-3" id="Duration" name="projectDuration">
                                         </div>
@@ -210,7 +210,7 @@
                                 <p class="text-center mb-4">Add Activity</p>
 
                                 {{-- 1 activity --}}
-                                <div class="row  ">
+                                <div class="row " firstActivity id="activity-1">
                                     <div class="mb-3 col-10">
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity"
@@ -313,21 +313,27 @@
 
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2({
-
-
-        });
+        $('.js-example-basic-multiple').select2({});
     });
 
+    // {-- Activity Section --}
 
     const addActivityButton = document.querySelector('#btnAddNewActivity')
     const activityWraper = document.querySelector('#activityWrap')
+    const btnsAddTask = document.querySelectorAll('.btn-add-task');
     let activityCounter = 1;
+
     addActivityButton.addEventListener('click', addNewActivityInput)
+
+    btnsAddTask.forEach(btnAddTask => {
+        btnAddTask.addEventListener('click', addNewTaskInput)
+    })
 
     function addNewActivityInput() {
         activityCounter++
-        const ii = `<hr >
+        let activityID = `activity-${activityCounter}-` + Math.floor(Math.random() * 100) + 1;
+
+        const newActivityElement = `<hr >
                                     <div class="mb-3 col-10 pt-4">
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity "
@@ -361,51 +367,100 @@
                                         <div class="col-1 pt-4">
                                                     <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity"><i class="bi bi-trash"></i></button>
                                         </div>
+                                        <div class="col-1 pt-4">
+                                            <button type="button" id="btnAddNewActivity"
+                                                class="btn btn-success add-task"title="New Task">+</button>
+                                        </div>
 
                                 `
-        const ini = document.createElement('div');
-        ini.classList.add('row');
-        ini.innerHTML = ii;
-        activityWraper.appendChild(ini)
 
+
+        const newCreatedDiv = document.createElement('div');
+        newCreatedDiv.classList.add('row');
+
+        newCreatedDiv.innerHTML = newActivityElement;
+        activityWraper.appendChild(newCreatedDiv)
+        newCreatedDiv.setAttribute('id', activityID);
+
+        // Check is First Activity
+        if (activityCounter - 1 == 1) {
+            this.parentElement.remove()
+
+        } else {
+
+            newCreatedDiv.previousSibling.querySelector('#btnAddNewActivity').parentElement.remove()
+
+        }
+        const addActivityButton = document.querySelector('#btnAddNewActivity')
+        addActivityButton.addEventListener('click', addNewActivityInput)
+        // Add Task
         const btnsAddTask = document.querySelectorAll('.btn-add-task');
         btnsAddTask.forEach(btnAddTask => {
             btnAddTask.addEventListener('click', addNewTaskInput)
+
         })
 
-        ini.querySelector('.delete-activity').addEventListener('click', function(e) {
-            this.parentElement.parentElement.remove()
+        const newCreatedDivAddActivity = document.createElement('div');
+        newCreatedDivAddActivity.classList.add('col-1');
+        newCreatedDivAddActivity.classList.add('pt-4');
+        newCreatedDivAddActivity.innerHTML = `
+                                            <button type="button" id="btnAddNewActivity"
+                                                class="btn btn-success add-task"title="New Task">+</button>
+                                        `
+        // Delete-activity
+        newCreatedDiv.querySelector('.delete-activity').addEventListener('click', function(e) {
             activityCounter--
 
+            // Not Last Sibling
+            if (document.querySelector(`#${activityID}`).nextSibling != null) {
+                // Dont Move Add Button
+                console.log("Not Last Sibling")
+
+            } else {
+                if (activityCounter == 1) {
+                    //  Move Add Button to First Activity
+                    const newCreatedDivAddActivity = document.createElement('div');
+                    newCreatedDivAddActivity.classList.add('col-1');
+                    newCreatedDivAddActivity.innerHTML = `
+                                            <button type="button" id="btnAddNewActivity"
+                                                class="btn btn-success add-task"title="New Task">+</button>
+                                        `
+
+                    document.querySelector(`#activity-1`).appendChild(newCreatedDivAddActivity)
+                    const addActivityButton = document.querySelector('#btnAddNewActivity')
+                    addActivityButton.addEventListener('click', addNewActivityInput)
+
+                } else {
+                    //  Move Add Button
+                    document.querySelector(`#${activityID}`).previousSibling.appendChild(
+                        newCreatedDivAddActivity);
+                    const addActivityButton = document.querySelector('#btnAddNewActivity')
+                    addActivityButton.addEventListener('click', addNewActivityInput)
+
+                }
+            }
+
+            document.querySelector(`#${activityID}`).remove()
+            // this.parentElement.parentElement.remove()
         })
 
     }
 
-    const btnsAddTask = document.querySelectorAll('.btn-add-task');
-    btnsAddTask.forEach(btnAddTask => {
-        btnAddTask.addEventListener('click', addNewTaskInput)
-    })
-
     function addNewTaskInput() {
         let elCountTask = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
             'div .taskWrap')
-        let taskCounterInt = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
-            'div .taskWrap').childElementCount + 1
+        let taskCounterInt = this.parentElement.parentElement.parentElement.parentElement.parentElement
+            .querySelector(
+                'div .taskWrap').childElementCount + 1
 
-
-        // let taskCounterStr = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
-        //     'div .taskCounter').value;
-        // taskCounterInt = parseInt(taskCounterStr);
-        // ++taskCounterInt;
         this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('div .taskCounter')
             .value = taskCounterInt;
 
+        let ActivityCounter = this.parentElement.parentElement.parentElement.parentElement.parentElement
+            .querySelector(
+                'div .taskCounter')
 
-        let ActivityCounter = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(
-            'div .taskCounter')
-
-        const ii = `
-
+        const newTaskElement = `
             <div class="mb-3 col-7">
                 <input class="form-control form-control-lg mb-3"
                     name="taskName[]" type="text" placeholder="Task"
@@ -422,24 +477,22 @@
             <div class="mb-3 col-1">
                 <button type="button" title="New Task"
                         class="btn btn-success btn-add-task">+</button>
-
             </div>
-
         `
-        const ini = document.createElement('div');
-        ini.classList.add('row');
-        ini.classList.add('d-flex');
-        ini.classList.add('justify-content-end');
-        ini.innerHTML = ii;
+        const newCreatedDiv = document.createElement('div');
+        newCreatedDiv.classList.add('row');
+        newCreatedDiv.classList.add('d-flex');
+        newCreatedDiv.classList.add('justify-content-end');
+        newCreatedDiv.innerHTML = newTaskElement;
 
-        this.closest(".taskWrap").appendChild(ini)
+        this.closest(".taskWrap").appendChild(newCreatedDiv)
         const btnsAddTask = document.querySelectorAll('.btn-add-task');
         btnsAddTask.forEach(btnAddTask => {
             btnAddTask.addEventListener('click', addNewTaskInput)
 
         })
 
-        ini.querySelector('.btn-delete-task').addEventListener('click', function(e) {
+        newCreatedDiv.querySelector('.btn-delete-task').addEventListener('click', function(e) {
             this.parentElement.parentElement.remove()
             let c = elCountTask.childElementCount
             ActivityCounter.value = c
@@ -448,29 +501,30 @@
     }
 
 
+    // {-- Date Section --}
 
 
     const radios = document.querySelectorAll('input[name="projectDurationFormat"]');
     const projectStart = document.querySelector('input[name="projectStart"]');
     const projectEnd = document.querySelector('input[name="projectEnd"]');
     projectStart.valueAsDate = new Date();
-    const DurationP = document.querySelector('#Duration');
 
-    // const formatDurationText = document.querySelector('#formatDuration');
+    const DurationP = document.querySelector('#Duration');
+    DurationP.addEventListener('input', updateEndDate);
+
     var projectDurationFormat = '';
 
     for (var i = 0, max = radios.length; i < max; i++) {
         radios[i].onclick = function(e) {
             projectDurationFormat = this.value;
-
+            if (DurationP.value != '') {
+                updateEndDateGeneral(DurationP.value);
+            }
         }
     }
 
-    DurationP.addEventListener('input', updateEndDate);
-
     function updateEndDate(e) {
         amount = e.target.value;
-
         if (projectDurationFormat == 'week') {
             projectEnd.valueAsDate = addWeeks(projectStart.value, parseInt(amount))
         } else if (projectDurationFormat == 'month') {
@@ -480,7 +534,16 @@
         }
     }
 
-
+    function updateEndDateGeneral(a) {
+        amount = a
+        if (projectDurationFormat == 'week') {
+            projectEnd.valueAsDate = addWeeks(projectStart.value, parseInt(amount))
+        } else if (projectDurationFormat == 'month') {
+            projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
+        } else {
+            projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
+        }
+    }
 
     function addDays(date, days) {
         var result = new Date(date);
