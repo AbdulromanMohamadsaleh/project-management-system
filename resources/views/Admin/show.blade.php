@@ -71,7 +71,7 @@
                                                 <dl>
                                                     <div><dt><b class="border-bottom border-primary">Project Code</b></dt>
                                                     <dd>{{ $project_detail->DETAIL_ID }}</dd>
-                                                    
+
                                                     <dt><b class="border-bottom border-primary">Record Name</b></dt>
                                                     <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
                                                     <dt><b class="border-bottom border-primary">Record Date</b></dt>
@@ -153,22 +153,29 @@
                         </thead>
                         <tbody>
                         <tbody class="tbl-accordion-header">
+                            @php
+                                $i=1;
+
+                            @endphp
                             @foreach ($project_detail->activity as $act)
                                 <tr>
                                     <td>
                                         <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
                                     </td>
-                                    <td><strong>{{ $act->ACTIVITY_NAME }}</strong></td>
+                                    <td style="text-align: left"><strong>{{$i++}}.{{ $act->ACTIVITY_NAME }}</strong></td>
                                     <td>10 {{ $act->DAY_WEEK }}</td>
                                     <td></td>
                                     <td>Complete</td>
                                 </tr>
+                                @php
+                                     $o=1;
+                                @endphp
                                 @foreach ($act->tasks as $task)
                         <tbody class="tbl-accordion-body">
                             <tr>
                                 <td></td>
-                                <td >{{ $task->TASK_NAME }}</td>
-                                <td>{{ $task->DAY }} Week</td>
+                                <td style="margin:10px " >{{($i-1).'.'.$o++}} {{ $task->TASK_NAME }}</td>
+                                <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
                                 <td>
                                     <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
                                     <div class="btn-group">
@@ -177,6 +184,8 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" data-target="#modal1">add budget</a>
+                                            </li>
                                             <li><a class="dropdown-item" href="#" data-target="#modal1">view</a>
                                             </li>
                                             <li><a class="dropdown-item" href="#" data-target="#modal2">edit</a>
@@ -190,8 +199,9 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">add note</a></li>
+                                            <li><a class="dropdown-item" href="#">view note</a></li>
+                                            <li><a class="dropdown-item" href="#">edit note</a></li>
                                         </ul>
                                     </div>
                                 </td>

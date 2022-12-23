@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\HolydayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\CustomLoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', [CustomLoginController::class, 'login'])->name('login');
+// Route::get('/login', [CustomLoginController::class, 'login'])->name('login');
 
 Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 Route::get('/table', [ProjectController::class, 'Table'])->name('table');
@@ -30,3 +31,7 @@ Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
 Route::get('/timeline', [ProjectController::class, 'Timeline'])->name('timeline');
 Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');
 Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('done');
+Route::get('/dateholyday', [HolydayController::class, 'Index'])->name('dateholyday.Index');
+Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
+Route::get('/login', [UserController::class, 'Login'])->name('login');
+Route::get('/register', [UserController::class, 'Register'])->name('register');

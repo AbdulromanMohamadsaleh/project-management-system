@@ -32,8 +32,8 @@
                     <div class="icon done"></div>
                     <details class="panel">
                       <summary>New Release</summary>
-                      <p><strong>Patient:</strong> Is it a boy or a girl?<br><br>
-          <strong>Obstetrician:</strong> Now, I think it's a little early to start imposing roles on it, don't you? Now, a word of advice. You may find that you suffer for some time a totally irrational feeling of depression. PND is what we doctors call it. So it's lots of happy pills for you, and you can find out all about the birth when you get home. It's available on Betamax, VHS, and Super 8.</p>
+                      <p><strong>Action:</strong> Is Create New Project<br><br>
+
                     </details>
                   </li>
 
@@ -41,7 +41,7 @@
                     <div class="icon done"></div>
                     <details class="panel">
                       <summary>Approve</summary>
-                      <p>And spotteth twice they the camels before the third hour. And so the Midianites went forth to Ram Gilead in Kadesh Bilgemath by Shor Ethra Regalion, to the house of Gash-Bil-Betheul-Bazda, he who brought the butter dish to Balshazar and the tent peg to the house of Rashomon, and there slew they the goats, yea, and placed they the bits in little pots. Here endeth the lesson.</p>
+                      <p><strong>Action:</strong> Manager is approve project<br><br>
                     </details>
                   </li>
 
@@ -49,7 +49,7 @@
                     <div class="icon working"></div>
                     <details class="panel">
                       <summary>Porgress</summary>
-                      <p>Here is better than home, eh, sir? I mean, at home if you kill someone they arrest you — here they'll give you a gun and show you what to do, sir. I mean, I killed fifteen of those buggers. Now, at home they'd hang me — here they'll give me a fucking medal, sir!</p>
+                      <p><strong>Action:</strong>Project is progress<br><br>
                     </details>
                   </li>
 
@@ -57,7 +57,7 @@
                     <div class="icon layer-plus"></div>
                     <details class="panel">
                       <summary>Compate</summary>
-                      <p>It's real Hawaiian food served in an authentic medieval English dungeon atmosphere.</p>
+                      <p><strong>Action:</strong> Activity compate all<br><br>
                     </details>
                   </li>
 

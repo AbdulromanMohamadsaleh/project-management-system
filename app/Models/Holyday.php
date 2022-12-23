@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Holyday extends Model
 {
     use HasFactory;
+    protected $table = 'prj_holyday_date';
+    protected $fillable = [
+        'HOLYDAY_ID',
+        'HOLYDAY_NAME',
+        'HOLYDAY_DATE',
+    ];
 }
