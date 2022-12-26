@@ -276,7 +276,11 @@
                                     <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
                                 </div>
                             </div>
+
+                            <input id="HolyDays" hidden type="text" value="{{ $Holydays }}"
+                                placeholder="Address" name="address">
                             <!-- end previous / next buttons -->
+
                         </form>
                     </div>
                 </div>
@@ -313,6 +317,10 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
+    var HolyDays = document.querySelector("#HolyDays");
+
+
+
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({});
     });
