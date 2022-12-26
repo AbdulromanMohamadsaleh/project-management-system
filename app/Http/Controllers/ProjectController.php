@@ -141,5 +141,6 @@ class ProjectController extends Controller
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
         return redirect()->back();
+
     }
 }

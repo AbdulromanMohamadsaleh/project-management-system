@@ -14,4 +14,10 @@ class Holyday extends Model
         'HOLYDAY_NAME',
         'HOLYDAY_DATE',
     ];
+
+
+    public $timestapm = false;
+
 }
+
+

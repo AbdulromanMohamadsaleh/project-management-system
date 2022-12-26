@@ -92,10 +92,9 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-outline-danger" data-toggle="tooltip"
-                                                title="delete project" ><i class="fas fa-trash" style="font-size: 25;"></i></button>
+                                                title="delete project" ><i class="fas fa-trash" style="font-size: 25;"><</button>
                                             </form>
                                         @endif
-
                                     </td>
 
                                 </tr>

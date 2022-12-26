@@ -36,3 +36,8 @@ Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
 Route::get('/login', [UserController::class, 'Login'])->name('login');
 Route::get('/register', [UserController::class, 'Register'])->name('register');
 Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
+Route::get('/addholyday', [HolydayController::class, 'Create'])->name('addholyday');
+Route::post('/save', [HolydayController::class, 'Save'])->name('holyday.save');
+
+
+
