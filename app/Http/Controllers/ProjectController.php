@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Login;
+use App\Models\Holyday;
+use App\Models\ProjectTask;
+use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
-use App\Models\ProjectTeam;
-use App\Models\Login;
 use App\Models\ProjectActivity;
-use App\Models\ProjectTask;
 use SebastianBergmann\LinesOfCode\Counter;
 
 class ProjectController extends Controller
@@ -25,17 +26,25 @@ class ProjectController extends Controller
 
     public function Create()
     {
+        $Holydays = Holyday::all()->toJson();
+
+
         $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
         $team = Login::all();
-        return view('Admin.create', ['projectManagers' => $projectManagers, 'team' => $team]);
+        return view('Admin.create', [
+            'projectManagers' => $projectManagers,
+            'team' => $team,
+            'Holydays' => $Holydays
+        ]);
     }
 
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
-            $q->with('tasks')->get();
+            $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
+        // dd($project_detail->activity);
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
     public function Timeline()
@@ -47,7 +56,8 @@ class ProjectController extends Controller
     public function Save(request $request)
     {
 
-      
+
+
         $ProjectDetial = new ProjectDetial();
 
         $projectCounter = ProjectDetial::count();
@@ -59,8 +69,12 @@ class ProjectController extends Controller
         $ProjectDetial->LOCATION = $request->location;
         $ProjectDetial->TARGET = $request->target;
         $ProjectDetial->RESULT = $request->expectedRresults;
+
         $ProjectDetial->DATE_START = $request->projectStart;
         $ProjectDetial->DATE_END = $request->projectEnd;
+
+
+
         $ProjectDetial->RECORD_CREATOR = $request->projectManager;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
@@ -80,16 +94,21 @@ class ProjectController extends Controller
         $counter = 0;
 
         for ($i = 0; $i < count($activityName); $i++) {
-            $ProjectActivity = new ProjectActivity();
+
+            $ActivityCounter = ProjectActivity::count();
+
+            $ActivityId = "ACT" . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $ActivityCounter + 1));
+
+            $ProjectActivity = new ProjectActivity(['ACTIVITY_ID' => $ActivityId]);
             $ProjectActivity->ACTIVITY_NAME = $activityName[$i];
             $ProjectActivity->DETAIL_ID = $ProjectDetial->DETAIL_ID;
-            $ProjectActivity->ACTIVITY_ID  = $i + rand(0, 5000);
             $ProjectActivity->DAY_WEEK = $request->projectDuration;
+            $ProjectActivity->ACTIVITY_ORDER = $i + 1;
 
             for ($j = 0; $j < $taskCounter[$i]; $j++) {
 
                 $TaskCounter = ProjectTask::count();
-                $tskId = "PRJ" . sprintf("%04d", ($TaskCounter == 0 || $TaskCounter == '' ? 1 : $TaskCounter + 1));
+                $tskId = "TASK" . sprintf("%04d", ($TaskCounter == 0 || $TaskCounter == '' ? 1 : $TaskCounter + 1));
 
                 $ProjectTask = new ProjectTask(['TASK_ID' => $tskId]);
 

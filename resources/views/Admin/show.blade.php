@@ -69,22 +69,6 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <dl>
-<<<<<<< Updated upstream
-                                                    <div><dt><b class="border-bottom border-primary">Project Code</b></dt>
-                                                    <dd>{{ $project_detail->DETAIL_ID }}</dd>
-
-                                                    <dt><b class="border-bottom border-primary">Record Name</b></dt>
-                                                    <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Record Date</b></dt>
-                                                    <dd>{{ $project_detail->DATE_SAVE }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Project Name</b></dt>
-                                                    <dd>{{ $project_detail->NAME_PROJECT }}</dd>
-                                                    <dt><b class="border-bottom text-break border-primary">Resons</b>
-                                                    </dt>
-                                                    <dd>{{ $project_detail->REASONS }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Objective</b></dt>
-                                                    <dd>{{ $project_detail->OBJECTIVE }}</dd>
-=======
                                                     <div>
                                                         <dt><b class="border-bottom border-primary">Project Code</b>
                                                         </dt>
@@ -103,7 +87,27 @@
                                                         <dd>{{ $project_detail->REASONS }}</dd>
                                                         <dt><b class="border-bottom border-primary">Objective</b></dt>
                                                         <dd>{{ $project_detail->OBJECTIVE }}</dd>
->>>>>>> Stashed changes
+                                                        <div>
+                                                            <dt><b class="border-bottom border-primary">Project Code</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->DETAIL_ID }}</dd>
+
+                                                            <dt><b class="border-bottom border-primary">Record Name</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
+                                                            <dt><b class="border-bottom border-primary">Record Date</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->DATE_SAVE }}</dd>
+                                                            <dt><b class="border-bottom border-primary">Project Name</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->NAME_PROJECT }}</dd>
+                                                            <dt><b
+                                                                    class="border-bottom text-break border-primary">Resons</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->REASONS }}</dd>
+                                                            <dt><b class="border-bottom border-primary">Objective</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->OBJECTIVE }}</dd>
                                                 </dl>
                                             </div>
                                             <div class="col-sm-6">
@@ -175,7 +179,7 @@
                         <tbody>
                         <tbody class="tbl-accordion-header">
                             @php
-                                $i=1;
+                                $i = 1;
 
                             @endphp
                             @foreach ($project_detail->activity as $act)
@@ -183,58 +187,64 @@
                                     <td>
                                         <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
                                     </td>
-                                    <td style="text-align: left"><strong>{{$i++}}.{{ $act->ACTIVITY_NAME }}</strong></td>
+                                    <td style="text-align: left">
+                                        <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
+                                    </td>
                                     <td>10 {{ $act->DAY_WEEK }}</td>
                                     <td></td>
                                     <td>Complete</td>
                                 </tr>
                                 @php
-                                     $o=1;
+                                    $o = 1;
                                 @endphp
-                                @foreach ($act->tasks as $task)
                         <tbody class="tbl-accordion-body">
-                            <tr>
-                                <td></td>
-<<<<<<< Updated upstream
-                                <td style="margin:10px " >{{($i-1).'.'.$o++}} {{ $task->TASK_NAME }}</td>
-                                <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
-=======
-                                <td>{{ $task->TASK_NAME }}</td>
-                                <td>{{ $task->DAY }} Week</td>
->>>>>>> Stashed changes
-                                <td>
-                                    <a class="btn btn-success" href=""><i class='fas fa-check-circle'></i></a>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#" data-target="#modal1">add budget</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#" data-target="#modal1">view</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#" data-target="#modal2">edit</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!--Modal code -->
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">add note</a></li>
-                                            <li><a class="dropdown-item" href="#">view note</a></li>
-                                            <li><a class="dropdown-item" href="#">edit note</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($act->tasks as $task)
+                                <tr>
+                                    <td></td>
+                                    <td style="margin:10px ">{{ $i - 1 . '.' . $o++ }}
+                                        {{ $task->TASK_NAME }}</td>
+                                    <td>{{ $task->DAY }} {{ $task->DAY }} Week</td>
+
+                                    {{-- <td>{{ $task->TASK_NAME }}</td> --}}
+
+
+                                    <td>
+                                        <a class="btn btn-success" href=""><i
+                                                class='fas fa-check-circle'></i></a>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-target="#modal1">add
+                                                        budget</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#"
+                                                        data-target="#modal1">view</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#"
+                                                        data-target="#modal2">edit</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--Modal code -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">add note</a></li>
+                                                <li><a class="dropdown-item" href="#">view note</a></li>
+                                                <li><a class="dropdown-item" href="#">edit note</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
-                        @endforeach
                         @endforeach
                         </tbody>
 
@@ -244,7 +254,6 @@
             </div>
         </div>
         <!-- Recent Sales End -->
-
 
 
 </body>

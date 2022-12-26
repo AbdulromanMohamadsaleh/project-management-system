@@ -9,6 +9,12 @@ class ProjectActivity extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'ACTIVITY_ID',
+
+    ];
+
+
     protected $table = 'prj_project_activity';
     // protected $primary = 'DETAIL_ID';
 
