@@ -547,7 +547,7 @@
     projectStart.valueAsDate = new Date();
 
     const DurationP = document.querySelector('#Duration');
-    DurationP.addEventListener('input', updateEndDate);
+    DurationP.addEventListener('change', updateEndDate);
 
     var projectDurationFormat = '';
 
@@ -562,6 +562,7 @@
 
     function updateEndDate(e) {
         amount = e.target.value;
+
         if (projectDurationFormat == 'week') {
             projectEnd.valueAsDate = addWeeks(projectStart.value, parseInt(amount))
         } else if (projectDurationFormat == 'month') {
@@ -573,6 +574,7 @@
 
     function updateEndDateGeneral(a) {
         amount = a
+
         if (projectDurationFormat == 'week') {
             projectEnd.valueAsDate = addWeeks(projectStart.value, parseInt(amount))
         } else if (projectDurationFormat == 'month') {
@@ -583,20 +585,77 @@
     }
 
     function addDays(date, days) {
+        if (days > 10000)
+            return new Date();
+
         var result = new Date(date);
         result.setDate(result.getDate() + days);
+
+        rWorkingDays = 0;
+        
+        rWorkingDays = workingDays(date, result);
+        // if number of working days != Number User enter days
+        while (rWorkingDays != days) {
+
+            result.setDate(result.getDate() + (days - rWorkingDays));
+            rWorkingDays = workingDays(date, result);
+            if (rWorkingDays > days) {
+                break;
+            }
+
+        }
+        console.log(rWorkingDays)
+
+
         return result;
     }
 
-    function addMonths(date, day) {
+
+    function addMonths(date, month) {
+        day = 30 * month;
+        if (day > 10000)
+            return new Date();
+
         let result = new Date(date);
-        result.setDate(result.getDate() + 30 * day);
+        result.setDate(result.getDate() + day);
+
+        rWorkingDays = 0;
+        rWorkingDays = workingDays(date, result);
+        // if number of working days != Number User enter days
+        while (rWorkingDays != day) {
+
+            result.setDate(result.getDate() + (day - rWorkingDays));
+            rWorkingDays = workingDays(date, result);
+            if (rWorkingDays > day) {
+                break;
+            }
+
+        }
+        console.log(workingDays(date, result))
         return result;
     }
 
     function addWeeks(date, weeks) {
+        day = 7 * weeks;
+        if (day > 10000)
+            return new Date();
+
         let result = new Date(date);
-        result.setDate(result.getDate() + 7 * weeks);
+        result.setDate(result.getDate() + day);
+
+        rWorkingDays = 0;
+        rWorkingDays = workingDays(date, result);
+        // if number of working days != Number User enter days
+        while (rWorkingDays != day) {
+
+            result.setDate(result.getDate() + (day - rWorkingDays));
+            rWorkingDays = workingDays(date, result);
+            if (rWorkingDays > day) {
+                break;
+            }
+
+        }
+        console.log(workingDays(date, result))
         return result;
     }
 
@@ -624,6 +683,34 @@
 
         return newDate;
     }
+
+    function workingDays(fromDate, toDate) {
+        fromDate = new Date(fromDate);
+        toDate = new Date(toDate);
+
+        // ensure that the argument is a valid and past date
+        if (!fromDate || isNaN(fromDate) || toDate < fromDate) {
+            return -1;
+        }
+
+        // clone date to avoid messing up original date and time
+        var frD = new Date(fromDate.getTime()),
+            toD = new Date(toDate.getTime()),
+            numOfWorkingDays = 1;
+
+        // reset time portion
+        frD.setHours(0, 0, 0, 0);
+        toD.setHours(0, 0, 0, 0);
+
+        while (frD < toD) {
+            frD.setDate(frD.getDate() + 1);
+            var day = frD.getDay();
+            if (day != 0 && day != 6) {
+                numOfWorkingDays++;
+            }
+        }
+        return numOfWorkingDays - 1;
+    };
 </script>
 
 
