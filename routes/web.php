@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\HolydayController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,10 @@ Route::get('/login', [UserController::class, 'Login'])->name('login');
 Route::get('/register', [UserController::class, 'Register'])->name('register');
 Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
 Route::get('/addholyday', [HolydayController::class, 'Create'])->name('addholyday');
-Route::post('/save', [HolydayController::class, 'Save'])->name('holyday.save');
+Route::post('/holyday/save', [HolydayController::class, 'Save'])->name('holyday.save');
+Route::get('/category', [CategoryController::class, 'Index'])->name('category');
+Route::post('/category/save', [CategoryController::class, 'Save'])->name('category.save');
+Route::get('/createcategory', [CategoryController::class, 'Create'])->name('createcategory');
 
 
 

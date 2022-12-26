@@ -40,6 +40,7 @@
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ route('dateholyday.Index') }}" class="dropdown-item ms-4"><i class="fa fa-calendar me-2"></i>Date Holyday</a>
                     <a href="{{ route('profile') }}" class="dropdown-item ms-4"><i class="fa fa-user me-2" aria-hidden="true"></i>Profile</a>
+                    <a href="{{ route('category') }}" class="dropdown-item ms-4"><i class="fa fa-list-alt me-2" aria-hidden="true"></i>Category</a>
                 </div>
             </div>
             {{-- <div class="nav-item dropdown">
