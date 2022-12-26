@@ -137,4 +137,9 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'Progress']);
         return redirect()->back();
     }
+    public function Delete($id)
+    {
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
+        return redirect()->back();
+    }
 }

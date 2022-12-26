@@ -66,7 +66,8 @@
                                     </td>
                                     </center>
                                     <td>
-                                        <span class="badge rounded-pill {{$project_detail->STATUS=="New Release"?'text-bg-secondary' :'text-bg-warning'}}">{{ $project_detail->STATUS }}
+                                        <span
+                                            class="badge rounded-pill {{ $project_detail->STATUS == 'New Release' ? 'text-bg-secondary' : 'text-bg-warning' }}">{{ $project_detail->STATUS }}
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
@@ -74,23 +75,25 @@
                                             <i class="bi bi-eye" style="font-size: 25;"></i>
                                         </a>
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
-                                        href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
-                                        <i class="bi bi-calendar2-range" style="font-size: 25;"></i>
+                                            href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
+                                            <i class="bi bi-calendar2-range" style="font-size: 25;"></i>
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
-                                        <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project"
-                                        href="">
-                                        <i class="fas fa-pencil-alt" style="font-size: 25;">
-                                        </i>
-                                         </a>
+                                            <a class="btn btn-warning btn-sm2" data-toggle="tooltip"
+                                                title="edit project" href="">
+                                                <i class="fas fa-pencil-alt" style="font-size: 25;">
+                                                </i>
+                                            </a>
                                         @endif
 
                                         @if ($project_detail->IS_APPROVE == 0)
-                                        <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="delete project"
-                                        href="">
-                                        <i class="fas fa-trash" style="font-size: 25;">
-                                        </i>
-                                         </a>
+                                            <form action="{{ route('project.delete', $project_detail->DETAIL_ID) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-outline-danger" data-toggle="tooltip"
+                                                title="delete project" ><i class="fas fa-trash" style="font-size: 25;"></i></button>
+                                            </form>
                                         @endif
 
                                     </td>
@@ -145,7 +148,6 @@
             }
         })
     })
-
 </script>
 
 </html>

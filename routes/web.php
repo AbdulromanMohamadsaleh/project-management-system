@@ -35,3 +35,4 @@ Route::get('/dateholyday', [HolydayController::class, 'Index'])->name('dateholyd
 Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
 Route::get('/login', [UserController::class, 'Login'])->name('login');
 Route::get('/register', [UserController::class, 'Register'])->name('register');
+Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
