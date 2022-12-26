@@ -87,13 +87,11 @@
                                         @endif
 
                                         @if ($project_detail->IS_APPROVE == 0)
-                                            <form action="{{ route('project.delete', $project_detail->DETAIL_ID) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-outline-danger" data-toggle="tooltip"
-                                                title="delete project" ><i class="fas fa-trash" style="font-size: 25;"><</button>
-                                            </form>
+                                        <form method="POST" action="{{ route('project.delete',$project_detail->DETAIL_ID)}}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm" data-toggle="tooltip" title='Delete'>Delete</button>
+                                        </form>
                                         @endif
                                     </td>
 
@@ -126,27 +124,29 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-    $('.btn-sm2').on('click', function(e) {
-        e.preventDefault();
-        const href = $(this).attr('href')
-        Swal.fire({
-            title: 'Edit ?',
-            icon: 'warning',
-            showCancelButton: true,
+<script type="text/javascript">
+    $('.show-alert-delete-box').click(function(event){
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to delete this record?",
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Cancel","Yes!"],
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'OK',
-            cancelButtonText: 'CANCEL'
-        }).then((result) => {
-            if (result.value) {
-                document.location.href = href;
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
             }
-        })
-    })
+        });
+    });
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
 </script>
 
 </html>
