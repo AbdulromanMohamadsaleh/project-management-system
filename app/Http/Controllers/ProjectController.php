@@ -51,9 +51,9 @@ class ProjectController extends Controller
     }
     public function Timeline($id)
     {
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
         $status = explode(',', $ProjectDetail->STATUS);
-
+      
         return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);
     }
 

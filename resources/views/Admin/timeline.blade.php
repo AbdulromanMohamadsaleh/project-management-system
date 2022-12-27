@@ -25,13 +25,13 @@
 
         <!-- Recent Sales Start -->
         <div class="container">
-            <h1>A Detailed Timeline Porject</h1>
-            <h3>{{ $project_detail->NAME_PROJECT }}</h3>
+            <h1>Project Timeline</h1>
+            <h1>{{ $project_detail->NAME_PROJECT }}</h1>
             @php
                 $end = end($status);
                 $countStatus = count($status);
             @endphp
-            <ul class="timeline">
+            <ul class="timeline mt-5">
 
                 <li class="timeline">
                     @if (in_array('New Release', $status))
@@ -45,8 +45,12 @@
                     @endif
                     <details class="panel">
                         <summary>New Release</summary>
-                        <p><strong>Action:</strong> Is Create New Project<br><br>
 
+                        <p>CREATED AT: </strong>{{ $project_detail->created_at->format('m/d/Y') }}
+                            {{-- <p><strong>Created at:</i></strong> {{ $project_detail->created_at->format('m/d/Y') }} --}}
+                        <p><strong>NAME: </strong> {{ $project_detail->NAME_PROJECT }}
+                        <p><strong>TARGET: </strong> {{ $project_detail->TARGET }}
+                        <p><strong>BUDGET: </strong> {{ $project_detail->BUDGET }}
                     </details>
                 </li>
 
@@ -63,7 +67,7 @@
                     @endif
                     <details class="panel">
                         <summary>Approve</summary>
-                        <p><strong>Action:</strong> Manager is approve project<br><br>
+                        <p><strong>Approved By: </strong> Manager <br><br>
                     </details>
                 </li>
 
@@ -83,7 +87,24 @@
                     @endif
                     <details class="panel">
                         <summary>In Porgress</summary>
-                        <p><strong>Action:</strong>Project is progress<br><br>
+                        <p><strong>Total Activity: </strong>{{ count($project_detail->activity) }}
+                            @php
+                                $countAct = 0;
+                            @endphp
+                            @foreach ($project_detail->activity as $act)
+                                <div class="row ">
+                                    <div class="col-6 ps-3">
+                                        <p>{{ ++$countAct . '. ' . $act->ACTIVITY_NAME }}</p>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end  pe-5">
+                                        @if ($act->STATUS == 0)
+                                            <i class="bi bi-record-circle"></i>
+                                        @else
+                                            <i class="bi bi-check-circle"></i>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
                     </details>
                 </li>
 
