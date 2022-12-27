@@ -155,13 +155,13 @@
                                         <label for="projectManager" class="label-left fw-bold mb-2">Category</label>
                                         <select name="projectManager" id="projectManager" class="form-select">
                                             <option selected value="">Choose...</option>
-                                            @if (count($projectManagers) > 0)
-                                                @foreach ($projectManagers as $projectManager)
-                                                    <option value="{{ $projectManager->LOGIN_ID }}">
-                                                        {{ $projectManager->NAME }}</option>
+                                            @if (count($Categories) > 0)
+                                                @foreach ($Categories as $Category)
+                                                    <option value="{{ $Category->CATEGORY_ID }}">
+                                                        {{ $Category->NAME_CATEGORY }}</option>
                                                 @endforeach
                                             @else
-                                                <option value="0">NO Project Manager</option>
+                                                <option value="0">NO Category</option>
                                             @endif
                                         </select>
                                     </div>
@@ -317,8 +317,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    
-
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({});
     });

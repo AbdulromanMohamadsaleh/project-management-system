@@ -66,8 +66,7 @@
                                     </td>
                                     </center>
                                     <td>
-                                        <span
-                                            class="badge rounded-pill {{ $project_detail->STATUS == 'New Release' ? 'text-bg-secondary' : 'text-bg-warning' }}">{{ $project_detail->STATUS }}
+                                        @include('Admin.include.show_project_status')
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
@@ -87,11 +86,14 @@
                                         @endif
 
                                         @if ($project_detail->IS_APPROVE == 0)
-                                        <form method="POST" action="{{ route('project.delete',$project_detail->DETAIL_ID)}}">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm" data-toggle="tooltip" title='Delete'>Delete</button>
-                                        </form>
+                                            <form method="POST"
+                                                action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit"
+                                                    class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm"
+                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                            </form>
                                         @endif
                                     </td>
 
@@ -124,8 +126,8 @@
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
-    $('.show-alert-delete-box').click(function(event){
-        var form =  $(this).closest("form");
+    $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();
         swal({
@@ -133,7 +135,7 @@
             text: "If you delete this, it will be gone forever.",
             icon: "warning",
             type: "warning",
-            buttons: ["Cancel","Yes!"],
+            buttons: ["Cancel", "Yes!"],
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
@@ -143,9 +145,9 @@
             }
         });
     });
-    $(document).ready(function () {
-    $('#example').DataTable();
-});
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
 </script>
 
 </html>
