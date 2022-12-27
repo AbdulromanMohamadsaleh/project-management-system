@@ -53,7 +53,7 @@ class ProjectController extends Controller
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
         $status = explode(',', $ProjectDetail->STATUS);
-      
+
         return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);
     }
 
@@ -66,6 +66,12 @@ class ProjectController extends Controller
 
         $projectCounter = ProjectDetial::count();
         $detail_id = date('y') . sprintf("%04d", ($projectCounter == 0 || $projectCounter == '' ? 1 : $projectCounter + 1));
+
+        $counterId = 1;
+        while (ProjectDetial::where('DETAIL_ID', $detail_id)->first()) {
+            $detail_id = date('y') . sprintf("%04d", ($projectCounter == 0 || $projectCounter == '' ? 1 : $projectCounter + ++$counterId));
+        }
+
         $ProjectDetial->DETAIL_ID = $detail_id;
         $ProjectDetial->NAME_PROJECT = $request->projectName;
         $ProjectDetial->REASONS = $request->reason;
@@ -77,7 +83,7 @@ class ProjectController extends Controller
         $ProjectDetial->DATE_START = $request->projectStart;
         $ProjectDetial->DATE_END = $request->projectEnd;
         $ProjectDetial->STATUS = "New Release,workingOn";
-
+        $ProjectDetial->CATEGORY_ID = $request->category;
 
         $ProjectDetial->RECORD_CREATOR = $request->projectManager;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;

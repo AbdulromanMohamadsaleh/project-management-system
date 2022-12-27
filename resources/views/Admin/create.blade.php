@@ -152,8 +152,8 @@
                                         <textarea class="form-control " name="expectedRresults" rows="2" id="expectedRresults" name="reason"></textarea>
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
-                                        <label for="projectManager" class="label-left fw-bold mb-2">Category</label>
-                                        <select name="projectManager" id="projectManager" class="form-select">
+                                        <label for="Category" class="label-left fw-bold mb-2">Category</label>
+                                        <select name="category" id="Category" class="form-select">
                                             <option selected value="">Choose...</option>
                                             @if (count($Categories) > 0)
                                                 @foreach ($Categories as $Category)

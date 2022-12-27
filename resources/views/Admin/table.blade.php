@@ -40,6 +40,7 @@
                                 <th style="text-align: center;" scope="col">Date Record</th>
                                 <th>Progress</th>
                                 <th>Status</th>
+                                <th style="text-align: center;" scope="col">Created at</th>
                                 <th style="text-align: center;">Action</th>
 
                             </tr>
@@ -67,6 +68,9 @@
                                     </center>
                                     <td>
                                         @include('Admin.include.show_project_status')
+                                    </td>
+                                    <td>
+                                        {{ $project_detail->created_at->diffForHumans() }}
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
