@@ -97,8 +97,8 @@
                                         <label for="inputState" class="label-left fw-bold mb-2">Include Holydays</label>
                                         <div class="row p-2 px-5 ">
                                             <div style="text-align: left" class="mb-3 form-check form-check-inline">
-                                                <input  class="form-check-input" name="isIncludeHolyday"
-                                                    type="radio" id="yes" value="yes">
+                                                <input class="form-check-input" name="isIncludeHolyday" type="radio"
+                                                    id="yes" value="yes">
                                                 <label class="form-check-label ms-2" for="yes">Yes</label>
                                             </div>
                                             <div style="text-align: left" class="form-check form-check-inline">
@@ -317,9 +317,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
-
-    HolyDaysDate = HolyDays.map(h => h.HOLYDAY_DATE);
+    
 
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({});

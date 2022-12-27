@@ -1,3 +1,8 @@
+
+var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
+
+    HolyDaysDate = HolyDays.map(h => h.HOLYDAY_DATE);
+
 const radios = document.querySelectorAll('input[name="projectDurationFormat"]');
     const projectStart = document.querySelector('input[name="projectStart"]');
     const projectEnd = document.querySelector('input[name="projectEnd"]');
