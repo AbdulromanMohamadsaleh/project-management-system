@@ -178,11 +178,14 @@
                         </thead>
                         <tbody>
                         <tbody class="tbl-accordion-header">
-                            @php
-                                $i = 1;
-
-                            @endphp
                             @foreach ($project_detail->activity as $act)
+                                @php
+                                    $sum=0;
+                                    $i = 1;
+                                    foreach ($act->tasks as $task) {
+                                        $sum += intval($task->DAY);
+                                    }
+                                @endphp
                                 <tr>
                                     <td>
                                         <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
@@ -190,7 +193,7 @@
                                     <td style="text-align: left">
                                         <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
                                     </td>
-                                    <td>10 {{ $act->DAY_WEEK }}</td>
+                                    <td>{{$sum}} {{ $act->DAY_WEEK }}</td>
                                     <td></td>
                                     <td>Complete</td>
                                 </tr>
@@ -203,14 +206,13 @@
                                     <td></td>
                                     <td style="margin:10px ">{{ $i - 1 . '.' . $o++ }}
                                         {{ $task->TASK_NAME }}</td>
-                                    <td>{{ $task->DAY }} {{ $task->DAY }} Week</td>
+                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
 
                                     {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
 
                                     <td>
-                                        <a class="btn btn-success" href=""><i
-                                                class='fas fa-check-circle'></i></a>
+                                        <a class="btn btn-success"  data-toggle="tooltip" title="approve" href="{{route('done',$project_detail->DETAIL_ID)}}"><i class="bi bi-check-circle"></i></a>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false">

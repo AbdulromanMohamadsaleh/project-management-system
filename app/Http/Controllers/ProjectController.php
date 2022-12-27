@@ -44,6 +44,17 @@ class ProjectController extends Controller
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
+        $sum=0;
+        foreach($project_detail->activity as $act){
+
+            dd($act->tasks );
+            foreach($act->tasks as $task){
+                $sum += intval($task->DAY);
+            }
+            $project_detail->activity->d= $sum;
+            $sum=0;
+        }
+
         // dd($project_detail->activity);
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
