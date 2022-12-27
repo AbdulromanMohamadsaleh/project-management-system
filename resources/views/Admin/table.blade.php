@@ -119,8 +119,7 @@
 <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
