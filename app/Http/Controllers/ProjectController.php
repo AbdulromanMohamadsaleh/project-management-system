@@ -47,7 +47,6 @@ class ProjectController extends Controller
         $sum=0;
         foreach($project_detail->activity as $act){
 
-            dd($act->tasks );
             foreach($act->tasks as $task){
                 $sum += intval($task->DAY);
             }

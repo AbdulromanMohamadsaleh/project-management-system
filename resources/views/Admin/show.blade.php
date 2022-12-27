@@ -40,7 +40,9 @@
                     <ul class="list-inline items">
                         <li class="list-inline-item items-list">
                             <div class="px-5">
+                                @if ($project_detail->STATUS == 'New Release')
                                 <div class="event-date badge bg-info"> New Release</div>
+                                @endif
                             </div>
                         </li>
                         <li class="list-inline-item items-list">
