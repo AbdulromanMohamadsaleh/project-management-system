@@ -16,16 +16,16 @@ class TaskController extends Controller
         $Task->COPLATE_TIME = date("Y/m/d");
         $Task->save();
 
-        $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get();
+        $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
         $totalTasks = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
-
-        if ($completeTasksCounter->count() - 1 == 0) {
+        
+        if (($completeTasksCounter - 1) >= 0) {
             $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
             $Project->STATUS = "New Release,Approved,Progress,workingOn";
             $Project->save();
         }
 
-        if ($completeTasksCounter->count() == $totalTasks) {
+        if ($completeTasksCounter == $totalTasks) {
             $Task->activity->STATUS = 1;
             $Task->activity->save();
         } else {

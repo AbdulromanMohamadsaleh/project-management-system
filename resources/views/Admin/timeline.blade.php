@@ -91,33 +91,56 @@
                             @php
                                 $countAct = 0;
                             @endphp
-                            @foreach ($project_detail->activity as $act)
-                                <div class="row ">
-                                    <div class="col-6 ps-3">
-                                        <p>{{ ++$countAct . '. ' . $act->ACTIVITY_NAME }}</p>
-                                    </div>
-                                    <div class="col-6 d-flex justify-content-end  pe-5">
-                                        @if ($act->STATUS == 0)
 
-                                            <i class="bi bi-circle icon-1-5rem "></i>
-                                        @else
-                                            <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
-                                        @endif
-                                    </div>
-                                    @foreach ($act->tasks as $task)
-                                        <div class="row ">
-                                            <div class="col-6 ps-3">
-                                                <p>{{ '. ' . $task->TASK_NAME }}</p>
-                                            </div>
-                                            <div class="col-6 d-flex justify-content-end  pe-4">
-                                                @if ($task->STATUS == 0)
-                                                    <i class="bi bi-x-circle-fill icon-red"></i>
-                                                @else
-                                                    <i class="bi bi-check-circle-fill icon-green "></i>
-                                                @endif
+                            @foreach ($project_detail->activity as $act)
+                                <div class="accordion " id="accordionPanelsStayOpenExample">
+                                    {{-- background: rgba(0, 0, 0, 0.1); --}}
+                                    <div class="accordion-item ">
+                                        <h2 class="accordion-header " id="panelsStayOpen-heading{{ ++$countAct }}">
+                                            <button
+                                                class="bg-white text-dark  btn-outline-dark accordion-button collapsed"
+                                                type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapse{{ $countAct }}"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapse{{ $countAct }}">
+                                                <div class="col d-flex justify-content-between  pe-5">
+                                                    <div>
+                                                        {{ $countAct . '. ' . $act->ACTIVITY_NAME }}
+                                                    </div>
+                                                    <div>
+                                                        @if ($act->STATUS == 0)
+                                                            {{-- <i class="bi bi-circle icon-1-5rem "></i> --}}
+                                                        @else
+                                                            <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapse{{ $countAct }}"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-heading{{ $countAct }}">
+                                            <div class="accordion-body">
+                                                @php
+                                                    $countTask = 0;
+                                                @endphp
+                                                @foreach ($act->tasks as $task)
+                                                    <div class="row ">
+                                                        <div class="col-6 ps-3">
+                                                            <p>{{ ++$countTask . '. ' . $task->TASK_NAME }}</p>
+                                                        </div>
+                                                        <div class="col-6 d-flex justify-content-end  pe-4">
+                                                            @if ($task->STATUS == 0)
+                                                                <i class="bi bi-x-circle-fill icon-red"></i>
+                                                            @else
+                                                                <i class="bi bi-check-circle-fill icon-green "></i>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
-                                    @endforeach
+                                    </div>
                                 </div>
                             @endforeach
                     </details>
@@ -165,7 +188,11 @@
 <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+</script>
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>

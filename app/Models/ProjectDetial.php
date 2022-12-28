@@ -54,4 +54,9 @@ class ProjectDetial extends Model
     {
         return $this->belongsto(LoginUser::class, 'PROJECT_MANAGER', 'LOGIN_ID');
     }
+
+    public function track()
+    {
+        return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
+    }
 }

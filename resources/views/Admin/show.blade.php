@@ -203,7 +203,7 @@
                                     <td>
 
                                         @if ($act->STATUS == 1)
-                                            <b class="text-success"> Complete</b>
+                                            <b class="text-success"> Completed</b>
                                         @else
                                             <b>-</b>
                                         @endif

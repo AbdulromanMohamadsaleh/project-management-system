@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 {{-- <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-10 text-center p-0 mt-3 mb-2"> --}}
-                <div class="col-12 col-lg-12 col-xl-10 text-center p-0 mt-3 mb-2">
+                <div class="col-12 col-lg-12 col-xl-9   text-center p-0 mt-3 mb-2">
 
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
@@ -63,7 +63,7 @@
                                             Date</label>
                                         <input type="date"
                                             class="form-control @error('projectStart') is-invalid @enderror"
-                                            id="projectStart" name="projectStart"  >
+                                            id="projectStart" name="projectStart">
                                         @error('projectStart')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -102,7 +102,8 @@
                                             <input class="form-check-input" hidden name="totalDate" type="text"
                                                 value="0">
                                             <input type="number" min='0' max='10000000'
-                                                class="form-control mt-3" id="Duration" name="projectDuration" value="{{ old('projectDuration') }}">
+                                                class="form-control mt-3" id="Duration" name="projectDuration"
+                                                value="{{ old('projectDuration') }}">
                                         </div>
                                         {{-- <div class="row"> --}}
                                         {{-- <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
@@ -141,8 +142,8 @@
                                     <div class="col-md-6 mb-sm-5  mb-3">
                                         <div class="input-group">
                                             <label class="label-left fw-bold mb-2" for="budget">Budget</label>
-                                            <input name="budget"  value="{{ old('budget') }}" type="number" class="form-control "
-                                                id="autoSizingInputGroup" placeholder="">
+                                            <input name="budget" value="{{ old('budget') }}" type="number"
+                                                class="form-control " id="autoSizingInputGroup" placeholder="">
                                             <div class="input-group-text">฿</div>
                                         </div>
                                     </div>
@@ -158,15 +159,16 @@
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="reason">Reasons</label>
-                                        <textarea class="form-control @error('reason') is-invalid @enderror " rows="5" id="reason" name="reason" value="{{ old('reason') }}"></textarea>
+                                        <textarea class="form-control @error('reason') is-invalid @enderror " rows="5" id="reason" name="reason"
+                                            value="{{ old('reason') }}"></textarea>
                                         @error('reason')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="objectve">Objective</label>
-                                        <textarea class="form-control @error('objectve') is-invalid @enderror" rows="5" id="objectve"
-                                            name="objectve" value="{{ old('objectve') }}"></textarea>
+                                        <textarea class="form-control @error('objectve') is-invalid @enderror" rows="5" id="objectve" name="objectve"
+                                            value="{{ old('objectve') }}"></textarea>
                                         @error('objectve')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -178,8 +180,8 @@
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="expectedRresults">Expected
                                             Results</label>
-                                        <textarea class="form-control " name="expectedRresults" value="{{ old('expectedRresults') }}" rows="2" id="expectedRresults"
-                                            name="expectedRresults"></textarea>
+                                        <textarea class="form-control " name="expectedRresults" value="{{ old('expectedRresults') }}" rows="2"
+                                            id="expectedRresults" name="expectedRresults"></textarea>
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="Category" class="label-left fw-bold mb-2">Category</label>
@@ -281,7 +283,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-1 ">
+                                    <div class="col-1  ">
                                         <button type="button" id="btnAddNewActivity"
                                             class="btn btn-success add-task"title="New Activity">+</button>
                                     </div>

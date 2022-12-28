@@ -7,6 +7,7 @@ use App\Models\Holyday;
 use App\Models\Category;
 use App\Models\ProjectTask;
 use App\Models\ProjectTeam;
+use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
@@ -98,8 +99,26 @@ class ProjectController extends Controller
 
         //$ProjectDetial->DATE_SAVE = $request->projectDuration;
         $ProjectDetial->save();
+        $ProjectDetial = ProjectDetial::where('DETAIL_ID', $detail_id)->first();
 
         $ProjectDetial->projectTeam()->attach($request->projectTeam);
+
+        // Create Project Tracker Table
+        $ProjectTrack = new ProjectTrack();
+        $trackCounter = ProjectTrack::count();
+        $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + 1));
+
+        $counterId4 = 1;
+        while (ProjectTrack::where('PROJECT_TRACK_ID', $track_id)->first()) {
+            $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + ++$counterId4));
+        }
+        $ProjectTrack->PROJECT_TRACK_ID = $track_id;
+        $ProjectTrack->PROJECT_ID = $detail_id;
+        $ProjectTrack->STATUS = 0;
+        $ProjectTrack->timestamps = false;
+        $ProjectTrack->save();
+
+
 
         // Save Activity & Tasks
         $activityName = $request->activityName;
@@ -131,6 +150,11 @@ class ProjectController extends Controller
 
                 $TaskCounter = ProjectTask::count();
                 $tskId = "TASK" . sprintf("%04d", ($TaskCounter == 0 || $TaskCounter == '' ? 1 : $TaskCounter + 1));
+
+                $counterId3 = 1;
+                while (ProjectTask::where('TASK_ID', $tskId)->first()) {
+                    $tskId = "TASK"  . sprintf("%04d", ($TaskCounter == 0 || $TaskCounter == '' ? 1 : $TaskCounter + ++$counterId3));
+                }
 
                 $ProjectTask = new ProjectTask(['TASK_ID' => $tskId]);
 
