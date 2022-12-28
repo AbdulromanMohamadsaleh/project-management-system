@@ -190,4 +190,29 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
         return redirect()->back();
     }
+
+    public function Update(ProjectDetial $ProjectDetial)
+    {
+        $Categories = Category::all();
+        $Holydays = Holyday::all()->toJson();
+        $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $team = Login::all();
+
+        // $subset = $ProjectDetial->projectTeam->map(function ($projectTeam) {
+        //     return $projectTeam->only(['LOGIN_ID']);
+        // });
+        $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
+
+
+
+
+        return view('Admin.update', [
+            'projectManagers' => $projectManagers,
+            'project_detail' => $ProjectDetial,
+            'team' => $team,
+            'Holydays' => $Holydays,
+            'Categories' => $Categories,
+            'projectTeams' => $projectTeams
+        ]);
+    }
 }

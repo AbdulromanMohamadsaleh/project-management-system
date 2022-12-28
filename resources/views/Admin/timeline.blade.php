@@ -24,7 +24,7 @@
         @include('include.navbar')
 
         <!-- Recent Sales Start -->
-        <div class="container">
+        <div class="container col-md-11">
             <h1>Project Timeline</h1>
             <h1>{{ $project_detail->NAME_PROJECT }}</h1>
             @php
@@ -122,7 +122,7 @@
                                         <div id="panelsStayOpen-collapse{{ $countAct }}"
                                             class="accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-heading{{ $countAct }}">
-                                            <div class="accordion-body ">
+                                            <div class="accordion-body " style="color: dimgray;">
                                                 @php
                                                     $countTask = 0;
                                                 @endphp
