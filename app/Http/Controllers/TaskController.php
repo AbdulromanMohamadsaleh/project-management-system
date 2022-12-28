@@ -15,11 +15,14 @@ class TaskController extends Controller
         $Task->COPLATE_TIME = date("Y/m/d");
         $Task->save();
 
-        $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->count();
-        $totalTasks = ProjectActivity::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
+        $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get();
+        $totalTasks = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
 
-        if ($completeTasksCounter == $totalTasks) {
+        if ($completeTasksCounter->count() == $totalTasks) {
             $Task->activity->STATUS = 1;
+            $Task->activity->save();
+        } else {
+            $Task->activity->STATUS = 0;
             $Task->activity->save();
         }
 

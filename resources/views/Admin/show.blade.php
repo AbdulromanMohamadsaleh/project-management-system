@@ -180,10 +180,13 @@
                         </thead>
                         <tbody>
                         <tbody class="tbl-accordion-header">
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($project_detail->activity as $act)
                                 @php
                                     $sum = 0;
-                                    $i = 1;
+
                                     foreach ($act->tasks as $task) {
                                         $sum += intval($task->DAY);
                                     }
@@ -199,8 +202,10 @@
                                     <td></td>
                                     <td>
 
-                                        @if ($act->STATUS==1)
-                                            Complete
+                                        @if ($act->STATUS == 1)
+                                            <b class="text-success"> Complete</b>
+                                        @else
+                                            <b>-</b>
                                         @endif
                                     </td>
                                 </tr>

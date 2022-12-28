@@ -57,7 +57,7 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
-        
+
         $status = explode(',', $ProjectDetail->STATUS);
 
         return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);
@@ -107,7 +107,7 @@ class ProjectController extends Controller
         $taskCounter = $request->taskCounter;
         $taskDuration = $request->taskDuration;
 
-        $counter = 0;
+        $counterForTask = 0;
 
         for ($i = 0; $i < count($activityName); $i++) {
 
@@ -115,11 +115,17 @@ class ProjectController extends Controller
 
             $ActivityId = "ACT" . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $ActivityCounter + 1));
 
+            $counterId2 = 1;
+            while (ProjectActivity::where('ACTIVITY_ID', $ActivityId)->first()) {
+                $ActivityId = "ACT"  . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $projectCounter + ++$counterId2));
+            }
+
             $ProjectActivity = new ProjectActivity(['ACTIVITY_ID' => $ActivityId]);
             $ProjectActivity->ACTIVITY_NAME = $activityName[$i];
             $ProjectActivity->DETAIL_ID = $ProjectDetial->DETAIL_ID;
             $ProjectActivity->DAY_WEEK = $request->projectDurationFormat;
             $ProjectActivity->ACTIVITY_ORDER = $i + 1;
+            $ProjectActivity->save();
 
             for ($j = 0; $j < $taskCounter[$i]; $j++) {
 
@@ -128,14 +134,14 @@ class ProjectController extends Controller
 
                 $ProjectTask = new ProjectTask(['TASK_ID' => $tskId]);
 
-                $ProjectTask->TASK_NAME = $taskName[$counter];
-                $ProjectTask->DAY = $taskDuration[$counter];
-                $ProjectTask->ACTIVITY_ID = $ProjectActivity->ACTIVITY_ID;
+                $ProjectTask->TASK_NAME = $taskName[$counterForTask];
+                $ProjectTask->DAY = $taskDuration[$counterForTask];
+                $ProjectTask->ACTIVITY_ID = $ActivityId;
                 $ProjectTask->save();
-                $counter++;
+                $counterForTask++;
             }
 
-            $ProjectActivity->save();
+            // $ProjectActivity->save();
         }
 
         return redirect()->route('table');
