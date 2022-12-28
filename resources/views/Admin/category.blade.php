@@ -28,7 +28,43 @@
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Category</h6>
-                    <a href="{{route('createcategory')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add category"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Open modal
+                      </button>
+
+                      <!-- The Modal -->
+                      <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Create Category</h4>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                    @csrf
+                                        {{-- Project Name / Target --}}
+                                        <div class="row mb-5 mb-sm-0" style="color: black">
+                                            <div class=" mb-sm-5">
+                                                <label class="label-left fw-bold mb-2" for="projectName">Category Name</label>
+                                                <input type="text" name="category_name" class="form-control" id="projectName">
+                                            </div>
+                                            <button type="submit" name="submit"  class="btn btn-success">SAVE</button>
+                                        </div>
+                                    </div>
+                                    <!-- end previous / next buttons -->
+                                </form>
+                            </div>
+
+                            <!-- Modal footer -->
+
+                          </div>
+                        </div>
+                      </div>
+                    {{-- <a href="{{route('createcategory')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add category"><i class="fa fa-plus" aria-hidden="true"></i></button></a> --}}
                 </div>
                 <div class="table-responsive">
                     <table class="table" id="example">
@@ -82,6 +118,8 @@
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
 <!-- Template Javascript -->
