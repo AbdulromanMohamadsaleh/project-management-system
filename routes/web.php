@@ -50,5 +50,7 @@ Route::post('/dateholyday/update{id}', [HolydayController::class, 'Update'])->na
 Route::delete('/category/delete{id}', [CategoryController::class, 'Delete'])->name('category.delete');
 Route::post('/category/update/{HOLYDAY_ID}', [CategoryController::class, 'Update'])->name('category.update');
 
+Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser');
+
 //     TASK
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');

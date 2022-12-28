@@ -40,9 +40,8 @@ class CategoryController extends Controller
             'category_name' => 'required',
         ]);
         $Category = Category::where('CATEGORY_ID', $id)->first();
-        // Getting values from the blade template form
         $Category->NAME_CATEGORY = $request->input('category_name');
-        $Category->CATEGORY_ID = $id;
+        // $Category->CATEGORY_ID = $id;
         $Category->timestamps = false;
         $Category->update();
         return redirect()->back();
