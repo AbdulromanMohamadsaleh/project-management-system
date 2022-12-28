@@ -37,14 +37,14 @@ class HolydayController extends Controller
         return redirect()->back();
     }
 
-    public function Update(Request $request, $HOLYDAY_ID)
+    public function Update(Request $request, $id)
     {
         $request->validate([
             'holyday_name' => 'required',
             'date_holyday' => 'required',
         ]);
 
-        $Holyday = Holyday::where('HOLYDAY_ID', $HOLYDAY_ID)->first();
+        $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
         // Getting values from the blade template form
         $Holyday->HOLYDAY_NAME = $request->holyday_name;
         $Holyday->HOLYDAY_DATE = $request->date_holyday;

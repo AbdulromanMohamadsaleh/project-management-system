@@ -48,7 +48,7 @@ Route::delete('/dateholyday/delete{id}', [HolydayController::class, 'Delete'])->
 Route::post('/dateholyday/update{id}', [HolydayController::class, 'Update'])->name('holyday.update');
 
 Route::delete('/category/delete{id}', [CategoryController::class, 'Delete'])->name('category.delete');
-Route::post('/category/update/{HOLYDAY_ID}', [CategoryController::class, 'Update'])->name('category.update');
+Route::post('/category/update/{id}', [CategoryController::class, 'Update'])->name('category.update');
 
 //     TASK
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
