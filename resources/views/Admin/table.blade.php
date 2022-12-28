@@ -96,7 +96,7 @@
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit"
                                                     class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                                    data-toggle="tooltip" title='Delete'><i class="bi bi-trash"></i></button>
                                             </form>
                                         @endif
                                     </td>

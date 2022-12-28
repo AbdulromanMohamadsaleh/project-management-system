@@ -28,4 +28,9 @@ class HolydayController extends Controller
         $Holydays->save();
         return redirect()->back();
     }
+    public function Delete($id)
+    {
+        $Holydays = Holyday::where('HOLYDAY_ID', $id)->delete();
+        return redirect()->back();
+    }
 }

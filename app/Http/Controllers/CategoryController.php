@@ -27,5 +27,24 @@ class CategoryController extends Controller
          $Category->save();
         return redirect()->back();
     }
+    public function Delete($id)
+    {
+        $Category = Category::where('CATEGORY_ID', $id)->delete();
+        return redirect()->back();
+    }
+    public function Update(Request $request, $id)
+    {
+        // Validation for required fields (and using some regex to validate our numeric value)
+        $request->validate([
+            'category_name'=>'required',
+        ]);
+        $Category = Category::where('CATEGORY_ID', $id)->first();
+        // Getting values from the blade template form
+        $Category->NAME_CATEGORY = $request->input('category_name');
+        $Category->CATEGORY_ID =$id;
+        $Category->timestamps = false;
+        $Category->update();
+        return redirect()->back();
+    }
 
 }
