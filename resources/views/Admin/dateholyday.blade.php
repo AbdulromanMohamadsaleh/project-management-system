@@ -30,120 +30,134 @@
                     <h6 class="mb-0">Holyday</h6>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                         <i class="fa fa-plus" aria-hidden="true"></i></button>
-                      </button>
-                      <div class="modal" id="myModal">
+                    </button>
+                    <div class="modal" id="myModal">
                         <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
+                            <div class="modal-content">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Create Holyday</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form id="signUpForm" method="post" action="{{ route('holyday.save') }}">
-                                    @csrf
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Create Holyday</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form id="signUpForm" method="post" action="{{ route('holyday.save') }}">
+                                        @csrf
                                         {{-- Project Name / Target --}}
                                         <div class="row mb-5 mb-sm-0">
                                             <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Holyday Name</label>
-                                                <input type="text" name="holyday_name" class="form-control" id="projectName">
+                                                <label class="label-left fw-bold mb-2" for="projectName">Holyday
+                                                    Name</label>
+                                                <input type="text" name="holyday_name" class="form-control"
+                                                    id="projectName">
                                             </div>
                                             <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="target">Date Holyday</label>
-                                                <input type="date" name="date_holyday" class="form-control" id="target">
+                                                <label class="label-left fw-bold mb-2" for="target">Date
+                                                    Holyday</label>
+                                                <input type="date" name="date_holyday" class="form-control"
+                                                    id="target">
                                             </div>
-                                            <button type="submit" name="submit"  class="btn btn-success">SAVE</button>
+                                            <button type="submit" name="submit" class="btn btn-success">SAVE</button>
                                         </div>
-                                    </div>
-                                    <!-- end previous / next buttons -->
+                                </div>
+                                <!-- end previous / next buttons -->
                                 </form>
                             </div>
 
                             <!-- Modal footer -->
 
-                          </div>
                         </div>
-                      </div>
-                    {{-- <a href="{{route('addholyday')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add holyday"><i class="fa fa-plus" aria-hidden="true"></i></button></a> --}}
+                    </div>
                 </div>
-                
-                <div class="table-responsive">
-                    <table class="table" id="example">
-                        <thead>
+                {{-- <a href="{{route('addholyday')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add holyday"><i class="fa fa-plus" aria-hidden="true"></i></button></a> --}}
+            </div>
+
+            <div class="table-responsive">
+                <table class="table" id="example">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;" scope="col">Holyday Name</th>
+                            <th style="text-align: center;" scope="col">Date Holyday</th>
+                            <th style="text-align: center;">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($holydays as $Holyday)
+
                             <tr>
-                                <th style="text-align: center;" scope="col">Holyday Name</th>
-                                <th style="text-align: center;" scope="col">Date Holyday</th>
-                                <th style="text-align: center;">Action</th>
+                                <td style="text-align:left">{{ $Holyday->HOLYDAY_NAME }}</td>
+                                <td style="text-align:center">{{ $Holyday->HOLYDAY_DATE }}</td>
+                                </center>
+                                <td class="project-actions text-right">
+                                    <button type="button" class="btn btn-warning btn-sm2" data-bs-toggle="modal"
+                                        data-bs-target="#Modal{{ $Holyday->HOLYDAY_ID }}">
+                                        <i class="fas fa-pencil-alt" style="font-size: 15px;">
+                                        </i></button>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                                @foreach ( $holydays as $Holyday )
-                                <tr>
-                                    <td style="text-align:left">{{$Holyday->HOLYDAY_NAME}}</td>
-                                    <td style="text-align:center">{{$Holyday->HOLYDAY_DATE}}</td>
-                                    </center>
-                                    <td class="project-actions text-right">
-                                        <button type="button" class="btn btn-warning btn-sm2" data-bs-toggle="modal" data-bs-target="#Modal{{$Holyday->HOLYDAY_ID}}">
-                                            <i class="fas fa-pencil-alt" style="font-size: 15px;">
-                                            </i></button>
-
-                                          <!-- The Modal -->
-                                          <div class="modal" id="Modal{{$Holyday->HOLYDAY_ID}}">
-                                            <div class="modal-dialog modal-lg">
-                                              <div class="modal-content">
+                                    <!-- The Modal -->
+                                    <div class="modal" id="Modal{{ $Holyday->HOLYDAY_ID }}">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
 
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
-                                                  <h4 class="modal-title">Edit Category</h4>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    <h4 class="modal-title">Edit Category</h4>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
                                                 </div>
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    <form id="signUpForm" method="post" action="{{ route('holyday.save') }}">
+                                                    <form id="signUpForm" method="post"
+                                                        action="{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}">
                                                         @csrf
-                                                            {{-- Project Name / Target --}}
-                                                            <div class="row mb-5 mb-sm-0">
-                                                                <div class="col-md-6 mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2" for="projectName">Holyday Name</label>
-                                                                    <input type="text" name="holyday_name" class="form-control" id="projectName">
-                                                                </div>
-                                                                <div class="col-md-6 mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2" for="target">Date Holyday</label>
-                                                                    <input type="date" name="date_holyday" class="form-control" id="target">
-                                                                </div>
-                                                                <button type="submit" name="submit"  class="btn btn-success">SAVE</button>
+                                                        {{-- Project Name / Target --}}
+                                                        <div class="row mb-5 mb-sm-0">
+                                                            <div class="col-md-6 mb-sm-5">
+                                                                <label class="label-left fw-bold mb-2"
+                                                                    for="holyday_name">Holyday Name</label>
+                                                                <input type="text" name="holyday_name"
+                                                                    class="form-control" id="holyday_name"
+                                                                    value="{{ $Holyday->HOLYDAY_NAME }}">
                                                             </div>
+                                                            <div class="col-md-6 mb-sm-5">
+                                                                <label class="label-left fw-bold mb-2"
+                                                                    for="target">Date Holyday</label>
+                                                                <input type="date" name="date_holyday"
+                                                                    value="{{ $Holyday->HOLYDAY_DATE }}"
+                                                                    class="form-control" id="target">
+                                                            </div>
+                                                            <button type="submit" name="submit"
+                                                                class="btn btn-success">SAVE</button>
                                                         </div>
-                                                        <!-- end previous / next buttons -->
-                                                    </form>
                                                 </div>
-
-                                                <!-- Modal footer -->
-
-                                              </div>
+                                                <!-- end previous / next buttons -->
+                                                </form>
                                             </div>
-                                          </div>
-                                         </a>
-                                        <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="delete project"
-                                        href="">
-                                        <i class="fas fa-trash" style="font-size: 20;">
-                                        </i>
-                                         </a>
 
-                                    </td>
-                                </tr>
-                                @endforeach
+                                            <!-- Modal footer -->
 
-
-                        </tbody>
-                    </table>
-                </div>
+                                        </div>
+                                    </div>
             </div>
+            </a>
+            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="delete project" href="">
+                <i class="fas fa-trash" style="font-size: 20;">
+                </i>
+            </a>
+
+            </td>
+            </tr>
+            @endforeach
+
+
+            </tbody>
+            </table>
         </div>
-        <!-- Recent Sales End -->
+    </div>
+    </div>
+    <!-- Recent Sales End -->
 
 
 
@@ -161,8 +175,11 @@
 <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+</script>
 
 
 <!-- Template Javascript -->
@@ -188,7 +205,6 @@
     //         }
     //     })
     // })
-
 </script>
 
 </html>
