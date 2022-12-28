@@ -27,6 +27,7 @@ class CategoryController extends Controller
         $Category->save();
         return redirect()->back();
     }
+    
     public function Delete($id)
     {
         $Category = Category::where('CATEGORY_ID', $id)->delete();

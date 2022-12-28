@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectActivity extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'ACTIVITY_ID';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'ACTIVITY_ID',

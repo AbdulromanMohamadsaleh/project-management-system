@@ -9,6 +9,8 @@ class ProjectDetial extends Model
 {
     use HasFactory;
     protected $table = 'prj_detail';
+    protected $primaryKey = 'DETAIL_ID';
+    protected $keyType = 'string';
     protected $fillable = [
         'DETAIL_ID',
         'NAME_PROJECT',
