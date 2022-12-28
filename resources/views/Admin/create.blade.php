@@ -159,7 +159,7 @@
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="reason">Reasons</label>
-                                        <textarea class="form-control @error('reason') is-invalid @enderror " rows="5" id="reason" name="reason"
+                                        <textarea style="border-color: rgb(33, 37, 41);" class="form-control @error('reason') is-invalid @enderror " rows="5" id="reason" name="reason"
                                             value="{{ old('reason') }}"></textarea>
                                         @error('reason')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -226,7 +226,7 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label>
-                                        <select style="width: 100%;padding: 9px 14px;"
+                                        <select style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
                                             class="form-select js-example-basic-multiple" id="projectTeam"
                                             name="projectTeam[]" multiple="multiple">
                                             @if (count($team) > 0)

@@ -114,15 +114,6 @@
     color: #009688;
 }
 
-.select2-container--default .select2-selection--multiple{
-    padding: 9px 14px !important;
-    width: 100% !important;
-    font-size: 1em !important;
-    border: 1px solid #e3e3e3 !important;
-    border-radius: 5px !important;
-    text-align: left !important;
-    font-weight: 400 !important;
-    line-height: 1.5 !important;
-}
+select2-dropdown
 
 
