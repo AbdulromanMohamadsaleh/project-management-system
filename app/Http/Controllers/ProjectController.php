@@ -48,15 +48,16 @@ class ProjectController extends Controller
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        
-
 
         // dd($project_detail->activity);
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
     public function Timeline($id)
     {
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
+            $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
+        })->first();
+        
         $status = explode(',', $ProjectDetail->STATUS);
 
         return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);

@@ -10,6 +10,9 @@ class ProjectTask extends Model
     use HasFactory;
 
     protected $table = 'prj_activity_task';
+    protected $primaryKey = 'TASK_ID';
+    protected $keyType = 'string';
+
     protected $fillable = [
         'TASK_ID',
         'TASK_NAME',
@@ -25,7 +28,7 @@ class ProjectTask extends Model
 
     public $timestapm = false;
 
-    public function project()
+    public function activity()
     {
         return $this->belongsTo(ProjectActivity::class, 'ACTIVITY_ID', 'ACTIVITY_ID');
     }

@@ -41,7 +41,7 @@
                         <li class="list-inline-item items-list">
                             <div class="px-5">
                                 @if ($project_detail->STATUS == 'New Release')
-                                <div class="event-date badge bg-info"> New Release</div>
+                                    <div class="event-date badge bg-info"> New Release</div>
                                 @endif
                             </div>
                         </li>
@@ -197,7 +197,12 @@
                                     </td>
                                     <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
                                     <td></td>
-                                    <td>Complete</td>
+                                    <td>
+
+                                        @if ($act->STATUS==1)
+                                            Complete
+                                        @endif
+                                    </td>
                                 </tr>
                                 @php
                                     $o = 1;
@@ -206,7 +211,7 @@
                             @foreach ($act->tasks as $task)
                                 <tr>
                                     <td></td>
-                                    <td style="margin:10px ">{{ $i - 1 . '.' . $o++ }}
+                                    <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
                                         {{ $task->TASK_NAME }}</td>
                                     <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
 
@@ -215,12 +220,11 @@
 
                                     <td>
                                         @if ($task->STATUS == 0)
-                                            <a class="btn btn-warning" data-toggle="tooltip" title="approve"
+                                            <a class="btn btn-warning" data-toggle="tooltip" title="Complete"
                                                 href="{{ route('task.done', $task->TASK_ID) }}"><i
                                                     class="bi bi-check-circle"></i></a>
                                         @else
-                                            <a class="btn btn-success" data-toggle="tooltip" title="approve"
-                                                href="{{ route('task.done', $task->TASK_ID) }}"><i
+                                            <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
                                                     class="bi bi-check-circle"></i></a>
                                         @endif
 

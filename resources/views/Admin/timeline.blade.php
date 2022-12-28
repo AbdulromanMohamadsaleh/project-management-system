@@ -98,11 +98,26 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end  pe-5">
                                         @if ($act->STATUS == 0)
-                                            <i class="bi bi-record-circle"></i>
+
+                                            <i class="bi bi-circle icon-1-5rem "></i>
                                         @else
-                                            <i class="bi bi-check-circle"></i>
+                                            <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
                                         @endif
                                     </div>
+                                    @foreach ($act->tasks as $task)
+                                        <div class="row ">
+                                            <div class="col-6 ps-3">
+                                                <p>{{ '. ' . $task->TASK_NAME }}</p>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end  pe-4">
+                                                @if ($task->STATUS == 0)
+                                                    <i class="bi bi-x-circle-fill icon-red"></i>
+                                                @else
+                                                    <i class="bi bi-check-circle-fill icon-green "></i>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             @endforeach
                     </details>
