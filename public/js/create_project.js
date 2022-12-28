@@ -20,19 +20,19 @@
                                         <input class="form-control form-control-lg mb-3" name="activityName[]"
                                             type="text" placeholder="Activity "
                                             aria-label=".form-control-lg example" >
-                                            <input type="text"   class="taskCounter" hidden name="taskCounter[]" value="1">
+                                            <input type="text"   class="taskCounter" hidden name="taskCounter[]"  value="1">
                                         <!-- Tasks -->
                                         <div class="taskWrap">
                                             <div class="row d-flex justify-content-end">
 
                                                 <div class="mb-3 col-7">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="taskName[]" type="text" placeholder="Task"
+                                                        name="taskName[]"  type="text" placeholder="Task"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
-                                                        name="taskDuration[]" type="number" min='1' placeholder="Day"
+                                                        name="taskDuration[]"   type="number" min='1' placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
                                                 <div class="mb-3 col-1">
@@ -148,7 +148,7 @@
         const newTaskElement = `
             <div class="mb-3 col-7">
                 <input class="form-control form-control-lg mb-3"
-                    name="taskName[]" type="text" placeholder="Task"
+                    name="taskName[]"  type="text" placeholder="Task"
                     aria-label="Task">
             </div>
             <div class="col-2">

@@ -68,6 +68,7 @@
                       </div>
                     {{-- <a href="{{route('addholyday')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add holyday"><i class="fa fa-plus" aria-hidden="true"></i></button></a> --}}
                 </div>
+                
                 <div class="table-responsive">
                     <table class="table" id="example">
                         <thead>
