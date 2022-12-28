@@ -47,7 +47,7 @@
                         </li>
                         <li class="list-inline-item items-list">
                             <div class="px-5">
-                                <div class="event-date badge bg-success">Approve</div>
+                                <div class="event-date badge bg-success">Approved</div>
                             </div>
                         </li>
                         <li class="list-inline-item items-list">
@@ -57,7 +57,7 @@
                         </li>
                         <li class="list-inline-item items-list">
                             <div class="px-5">
-                                <div class="event-date badge bg-warning">Complate</div>
+                                <div class="event-date badge bg-warning">Complete</div>
                             </div>
                         </li>
                     </ul>
@@ -182,7 +182,7 @@
                         <tbody class="tbl-accordion-header">
                             @foreach ($project_detail->activity as $act)
                                 @php
-                                    $sum=0;
+                                    $sum = 0;
                                     $i = 1;
                                     foreach ($act->tasks as $task) {
                                         $sum += intval($task->DAY);
@@ -195,7 +195,7 @@
                                     <td style="text-align: left">
                                         <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
                                     </td>
-                                    <td>{{$sum}} {{ $act->DAY_WEEK }}</td>
+                                    <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
                                     <td></td>
                                     <td>Complete</td>
                                 </tr>
@@ -214,7 +214,16 @@
 
 
                                     <td>
-                                        <a class="btn btn-success"  data-toggle="tooltip" title="approve" href="{{route('done',$project_detail->DETAIL_ID)}}"><i class="bi bi-check-circle"></i></a>
+                                        @if ($task->STATUS == 0)
+                                            <a class="btn btn-warning" data-toggle="tooltip" title="approve"
+                                                href="{{ route('task.done', $task->TASK_ID) }}"><i
+                                                    class="bi bi-check-circle"></i></a>
+                                        @else
+                                            <a class="btn btn-success" data-toggle="tooltip" title="approve"
+                                                href="{{ route('task.done', $task->TASK_ID) }}"><i
+                                                    class="bi bi-check-circle"></i></a>
+                                        @endif
+
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -244,6 +253,11 @@
                                                 <li><a class="dropdown-item" href="#">edit note</a></li>
                                             </ul>
                                         </div>
+                                    </td>
+                                    <td>
+                                        @if ($task->STATUS == 1)
+                                            {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

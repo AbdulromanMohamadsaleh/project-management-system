@@ -27,6 +27,10 @@
     border-color: #ffaba5;
 }
 
+.timeline p i{
+    font-weight: bold !important;
+}
+
 hr {
   border: 0;
   border-top: 4px double #8c8c8c;

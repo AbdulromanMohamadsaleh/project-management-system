@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Login;
 use App\Models\Holyday;
+use App\Models\Category;
 use App\Models\ProjectTask;
 use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
@@ -28,13 +29,15 @@ class ProjectController extends Controller
     {
         $Holydays = Holyday::all()->toJson();
 
+        $Categories = Category::all();
 
         $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
         $team = Login::all();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
             'team' => $team,
-            'Holydays' => $Holydays
+            'Holydays' => $Holydays,
+            'Categories' => $Categories
         ]);
     }
 
@@ -47,6 +50,7 @@ class ProjectController extends Controller
         $sum=0;
         foreach($project_detail->activity as $act){
 
+            dd($act->tasks );
             foreach($act->tasks as $task){
                 $sum += intval($task->DAY);
             }
@@ -57,10 +61,12 @@ class ProjectController extends Controller
         // dd($project_detail->activity);
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
-    public function Timeline()
+    public function Timeline($id)
     {
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity')->first();
+        $status = explode(',', $ProjectDetail->STATUS);
 
-        return view('Admin.timeline');
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);
     }
 
     public function Save(request $request)
@@ -72,6 +78,12 @@ class ProjectController extends Controller
 
         $projectCounter = ProjectDetial::count();
         $detail_id = date('y') . sprintf("%04d", ($projectCounter == 0 || $projectCounter == '' ? 1 : $projectCounter + 1));
+
+        $counterId = 1;
+        while (ProjectDetial::where('DETAIL_ID', $detail_id)->first()) {
+            $detail_id = date('y') . sprintf("%04d", ($projectCounter == 0 || $projectCounter == '' ? 1 : $projectCounter + ++$counterId));
+        }
+
         $ProjectDetial->DETAIL_ID = $detail_id;
         $ProjectDetial->NAME_PROJECT = $request->projectName;
         $ProjectDetial->REASONS = $request->reason;
@@ -82,13 +94,13 @@ class ProjectController extends Controller
 
         $ProjectDetial->DATE_START = $request->projectStart;
         $ProjectDetial->DATE_END = $request->projectEnd;
-
-
+        $ProjectDetial->STATUS = "New Release,workingOn";
+        $ProjectDetial->CATEGORY_ID = $request->category;
 
         $ProjectDetial->RECORD_CREATOR = $request->projectManager;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
-        $ProjectDetial->TOTAL_DATE = 0;
+        $ProjectDetial->TOTAL_DATE = $request->projectDuration . " " . $request->projectDurationFormat;
 
         //$ProjectDetial->DATE_SAVE = $request->projectDuration;
         $ProjectDetial->save();
@@ -112,7 +124,7 @@ class ProjectController extends Controller
             $ProjectActivity = new ProjectActivity(['ACTIVITY_ID' => $ActivityId]);
             $ProjectActivity->ACTIVITY_NAME = $activityName[$i];
             $ProjectActivity->DETAIL_ID = $ProjectDetial->DETAIL_ID;
-            $ProjectActivity->DAY_WEEK = $request->projectDuration;
+            $ProjectActivity->DAY_WEEK = $request->projectDurationFormat;
             $ProjectActivity->ACTIVITY_ORDER = $i + 1;
 
             for ($j = 0; $j < $taskCounter[$i]; $j++) {
@@ -134,6 +146,7 @@ class ProjectController extends Controller
 
         return redirect()->route('table');
     }
+
     public function Approve()
     {
         $project_details = ProjectDetial::all();
@@ -144,13 +157,13 @@ class ProjectController extends Controller
 
     public function Done($id)
     {
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'Progress']);
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
         return redirect()->back();
     }
+
     public function Delete($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
         return redirect()->back();
-
     }
 }

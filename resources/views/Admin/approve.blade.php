@@ -70,10 +70,7 @@
                                     </td>
                                     </center>
                                     <td>
-
-                                        <span class="badge rounded-pill {{$project_detail->STATUS=="New Release"?'text-bg-secondary' :'text-bg-warning'}}">{{ $project_detail->STATUS }}
-
-                                        </span>
+                                        @include('Admin.include.show_project_status')
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
@@ -81,8 +78,9 @@
                                             <i class="bi bi-eye" style="font-size: 25;"></i>
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
-                                        <a class="btn btn-success"  data-toggle="tooltip" title="approve" href="{{route('done',$project_detail->DETAIL_ID)}}">
-                                        <i class='fas fa-check-circle'></i></a>
+                                            <a class="btn btn-success" data-toggle="tooltip" title="approve"
+                                                href="{{ route('project.aprove', $project_detail->DETAIL_ID) }}">
+                                                <i class='fas fa-check-circle'></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -117,7 +115,6 @@
     $(document).ready(function() {
         $('#example').DataTable();
     });
-
 </script>
 
 </html>
