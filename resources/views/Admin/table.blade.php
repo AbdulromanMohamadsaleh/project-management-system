@@ -113,19 +113,8 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
-    crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+@include('include.scrip');
 
-<script src="{{ asset('lib/chart/chart.min.js') }}"></script>
-<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>

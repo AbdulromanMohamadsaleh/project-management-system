@@ -62,11 +62,10 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="callout callout-info">
+                                <div class="bd-callout bd-callout-primary">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -140,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
             </div>
             <br>
             <div class="container row mt-3 ">
@@ -241,18 +240,21 @@
                                                 Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#" data-target="#modal1">add
+                                                <li><a class="dropdown-item" href="#">add
                                                         budget</a>
                                                 </li>
                                                 <li><a class="dropdown-item" href="#"
-                                                        data-target="#modal1">view</a>
+                                                        >view</a>
                                                 </li>
                                                 <li><a class="dropdown-item" href="#"
-                                                        data-target="#modal2">edit</a>
+                                                      >edit</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <!--Modal code -->
+
+                                        <!--Modal code -->
+
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -282,29 +284,10 @@
                 </div>
             </div>
         </div>
-        <!-- Recent Sales End -->
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
-    crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-
-<script src="{{ asset('lib/chart/chart.min.js') }}"></script>
-<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-</script>
+@include('include.scrip');
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
@@ -351,4 +334,20 @@
     .tbl-accordion-body tr:last-child {
         border-bottom: 1px solid #ccc;
     }
+    .bd-callout {
+padding: 1.25rem;
+margin-top: 1.25rem;
+margin-bottom: 1.25rem;
+border: 1px solid #eee;
+border-left-width: .25rem;
+border-radius: .25rem
+}
+.bd-callout-primary{
+border-left-color: #007bff
+}
+dd
+{
+    margin-bottom: 2rem;
+
+}
 </style>
