@@ -3,6 +3,8 @@
     --primary: #009CFF;
     --light: #F3F6F9;
     --dark: #191C24;
+
+
 }
 
 .back-to-top {
@@ -16,6 +18,7 @@
 /** Custom ***/
 
 body {
+    font-family: 'Inter', sans-serif !important;
   color: #6a6c6f;
   background-color: #f1f3f6;
   margin-top:30px;
@@ -49,7 +52,7 @@ body {
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
+  /* font-family: 'Glyphicons Halflings'; */
   font-style: normal;
   font-weight: 400;
   line-height: 1;
@@ -76,7 +79,9 @@ body {
   transform: rotate(90deg);
 }
 
-
+.form-control textarea{
+    border-color: rgb(33, 37, 41) !important;
+}
 
 .icon-green{
     color: #54b754 !important;
@@ -120,14 +125,35 @@ hr {
 }
 
 .form-control {
-    border: #212529;
+    /* border: #212529; */
+     border-color: rgb(33, 37, 41) !important;
+}
+.form-select{
+border-color: rgb(33, 37, 41) !important;
 }
 
-
+span.selection{
+    border-color: rgb(33, 37, 41) !important;
+}
 button:hover {
   color: rgb(0, 0, 0) !important;
   background-color: var(--lgt-blue) !important;
   border-color: var(--lgt-blue) !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    padding: 9px 14px !important;
+    width: 100% !important;
+    font-size: 1em !important;
+    border: 1px solid rgb(33, 37, 41) !important;
+    border-radius: 5px !important;
+    text-align: left !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+}
+
+.select2-dropdown{
+    border: 1px solid rgb(33, 37, 41) !important;
 }
 
 button:active {
@@ -411,7 +437,7 @@ th {
   white-space: nowrap;
 }
 body {
-    font-family: 'Sarabun', sans-serif;
+    /* font-family: 'Sarabun', sans-serif; */
     font-size: 18px;
 }
 .wrimagecard{
@@ -453,7 +479,7 @@ a.wrimagecard:hover, .wrimagecard-topimage:hover {
 }
 
 body {
-	 font-family: 'Raleway', sans-serif;
+	 /* font-family: 'Raleway', sans-serif; */
 	 background: #fafafa;
 }
  h1 {

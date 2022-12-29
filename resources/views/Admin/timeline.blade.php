@@ -103,15 +103,17 @@
                                                 data-bs-target="#panelsStayOpen-collapse{{ $countAct }}"
                                                 aria-expanded="false"
                                                 aria-controls="panelsStayOpen-collapse{{ $countAct }}">
-                                                <div class="col d-flex justify-content-between  pe-5">
+                                                <div style="align-items: center;"
+                                                    class="col d-flex justify-content-between  pe-5">
                                                     <div>
                                                         {{ $countAct . '. ' . $act->ACTIVITY_NAME }}
                                                     </div>
-                                                    <div>
+                                                    <div >
                                                         @if ($act->STATUS == 0)
                                                             {{-- <i class="bi bi-circle icon-1-5rem "></i> --}}
                                                         @else
-                                                            <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
+                                                            <i
+                                                                class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -120,16 +122,17 @@
                                         <div id="panelsStayOpen-collapse{{ $countAct }}"
                                             class="accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-heading{{ $countAct }}">
-                                            <div class="accordion-body">
+                                            <div class="accordion-body ">
                                                 @php
                                                     $countTask = 0;
                                                 @endphp
                                                 @foreach ($act->tasks as $task)
-                                                    <div class="row ">
-                                                        <div class="col-6 ps-3">
-                                                            <p>{{ ++$countTask . '. ' . $task->TASK_NAME }}</p>
+                                                    <div class="row mb-0 pb-0">
+                                                        <div class="col-6 ps-3 ">
+                                                            <p class="my-1 py-1">
+                                                                {{ ++$countTask . '. ' . $task->TASK_NAME }}</p>
                                                         </div>
-                                                        <div class="col-6 d-flex justify-content-end  pe-4">
+                                                        <div style="align-items: center;" class="col-6 d-flex  justify-content-end  pe-4">
                                                             @if ($task->STATUS == 0)
                                                                 <i class="bi bi-x-circle-fill icon-red"></i>
                                                             @else
