@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ProjectController;
@@ -35,7 +35,6 @@ Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');
 Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
 Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
 Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
-Route::get('login', [LoginController::class, 'Home'])->name('login');
 Route::get('/register', [UserController::class, 'Register'])->name('register');
 Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
 Route::get('/addholyday', [HolydayController::class, 'Create'])->name('addholyday');
@@ -54,3 +53,5 @@ Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser')
 
 //     TASK
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+Route::get('login', [LoginController::class, 'Login'])->name('login');
+Route::post('/login/custom-login', [LoginController::class, 'CustomLogin'])->name('login.custom');

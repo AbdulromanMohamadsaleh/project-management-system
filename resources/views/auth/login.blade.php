@@ -1,40 +1,41 @@
-@extends('main')
 
-@section('content')
 
-@if($message = Session::get('success'))
-
-<div class="alert alert-info">
-{{ $message }}
-</div>
-
-@endif
-
-<div class="row justify-content-center">
-	<div class="col-md-4">
-		<div class="card">
-			<div class="card-header">Login</div>
-			<div class="card-body">
-				<form action="{{ route('.validate_login') }}" method="post">
-					@csrf
-					<div class="form-group mb-3">
-						<input type="text" name="email" class="form-control" placeholder="Email" />
-						@if($errors->has('email'))
-							<span class="text-danger">{{ $errors->first('email') }}</span>
-						@endif
-					</div>
-					<div class="form-group mb-3">
-						<input type="password" name="password" class="form-control" placeholder="Password" />
-						@if($errors->has('password'))
-							<span class="text-danger">{{ $errors->first('password') }}</span>
-						@endif
-					</div>
-					<div class="d-grid mx-auto">
-						<button type="subit" class="btn btn-dark btn-block">Login</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-@endsection('content')
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <h3 class="card-header text-center">Login</h3>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login.custom') }}">
+                            @csrf
+                            <div class="form-group mb-3">
+                                <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
+                                    autofocus>
+                                @if ($errors->has('EMAIL'))
+                                <span class="text-danger">{{ $errors->first('EMAIL') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
+                                @if ($errors->has('PASSWORD'))
+                                <span class="text-danger">{{ $errors->first('PASSWORD') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-grid mx-auto">
+                                <button type="submit" class="btn btn-dark btn-block">Signin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
