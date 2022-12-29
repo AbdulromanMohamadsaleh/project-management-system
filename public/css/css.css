@@ -135,11 +135,11 @@ border-color: rgb(33, 37, 41) !important;
 span.selection{
     border-color: rgb(33, 37, 41) !important;
 }
-button:hover {
+/* button:hover {
   color: rgb(0, 0, 0) !important;
   background-color: var(--lgt-blue) !important;
   border-color: var(--lgt-blue) !important;
-}
+} */
 
 .select2-container--default .select2-selection--multiple {
     padding: 9px 14px !important;

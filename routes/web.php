@@ -33,6 +33,7 @@ Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 Route::get('/table', [ProjectController::class, 'Table'])->name('table');
 Route::post('/save', [ProjectController::class, 'Save'])->name('save');
 Route::get('/create', [ProjectController::class, 'Create'])->name('create');
+Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
 Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
 Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
 Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');

@@ -83,7 +83,7 @@
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
                                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip"
-                                                title="edit project" href="">
+                                                title="edit project" href="{{ route('update.project',$project_detail->DETAIL_ID) }}">
                                                 <i class="fas fa-pencil-alt" style="font-size: 25;">
                                                 </i>
                                             </a>
