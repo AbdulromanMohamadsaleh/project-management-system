@@ -203,7 +203,7 @@
                                     <td>
 
                                         @if ($act->STATUS == 1)
-                                            <b class="text-success"> Complete</b>
+                                            <b class="text-success"> Completed</b>
                                         @else
                                             <b>-</b>
                                         @endif
@@ -224,15 +224,17 @@
 
 
                                     <td>
-                                        @if ($task->STATUS == 0)
-                                            <a class="btn btn-warning" data-toggle="tooltip" title="Complete"
-                                                href="{{ route('task.done', $task->TASK_ID) }}"><i
-                                                    class="bi bi-check-circle"></i></a>
+                                        @if ($project_detail->IS_APPROVE == 1)
+                                            @if ($task->STATUS == 0)
+                                                <a class="btn btn-warning" data-toggle="tooltip" title="Complete"
+                                                    href="{{ route('task.done', $task->TASK_ID) }}"><i
+                                                        class="bi bi-check-circle"></i></a>
+                                            @else
+                                                <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
+                                                        class="bi bi-check-circle"></i></a>
+                                            @endif
                                         @else
-                                            <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                                                    class="bi bi-check-circle"></i></a>
                                         @endif
-
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
