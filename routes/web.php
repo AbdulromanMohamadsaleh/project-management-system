@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,23 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// // Route::get('/login', [CustomLoginController::class, 'login'])->name('login');
+Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
+    Auth::routes();
+});
+
+###########################  Admin  ###########################
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventBackHistory']], function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
+});
+
+###########################  User  ###########################
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'IsProjectManager', 'PreventBackHistory']], function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
+});
 
 ###########################  Dashboard  ###########################
 Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
@@ -75,3 +90,6 @@ Route::get('/register', [UserController::class, 'Register'])->name('register');
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
 Route::get('login', [LoginController::class, 'Login'])->name('login');
 Route::post('/login/custom-login', [LoginController::class, 'CustomLogin'])->name('login.custom');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

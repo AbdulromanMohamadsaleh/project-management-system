@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'prj_project_login',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'prj_project_login',
         ],
     ],
 
@@ -60,15 +60,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'prj_project_login' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Login::class,
         ],
 
-        'users' => [
-            'driver' => 'database',
-            'table' => 'prj_project_login',
-        ],
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'prj_project_login',
+        // ],
     ],
 
     /*
@@ -87,12 +87,19 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'prj_project_login' => [
+            'provider' => 'prj_project_login',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        // 'users' => [
+        //     'provider' => 'users',
+        //     'table' => 'password_resets',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
     ],
 
     /*

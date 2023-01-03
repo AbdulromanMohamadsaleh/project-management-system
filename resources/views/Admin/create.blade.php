@@ -21,7 +21,7 @@
 
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
-                        <h1 class="text-center fs-4">Create Project</h1>
+                        <h1  class="fw-bold text-center fs-4">Create Project</h1>
                         <form class="needs-validation" novalidate id="signUpForm" method="post"
                             action="{{ route('save') }}">
                             @csrf
