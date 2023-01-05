@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Login;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -65,20 +66,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $userCounter = Login::count();
+    }
+
+    function register(Request $request)
+    {
+
+        $userCounter = User::count();
         $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + 1));
 
         $counterId4 = 1;
-        while (Login::where('LOGIN_ID', $user_id)->first()) {
+        while (User::where('LOGIN_ID', $user_id)->first()) {
             $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
         }
 
-        return Login::create([
-            'LOGIN_ID' => $user_id,
-            'NAME' => $data['name'],
-            'EMAIL' => $data['email'],
-            'PASSWORD' => Hash::make($data['password']),
-            'ROLE' => 0,
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:prj_project_login'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
+
+
+        $user = new User();
+        $user->LOGIN_ID = $user_id;
+        $user->NAME = $request->name;
+        $user->EMAIL = $request->email;
+        $user->ROLE = 0;
+        $user->password = Hash::make($request->password);
+        // $user->password = $request->password;
+
+
+        if ($user->save()) {
+
+            return redirect('login');
+        } else {
+            return redirect()->back()->with('error', 'Failed to register');
+        }
     }
 }

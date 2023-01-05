@@ -18,6 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $table = 'prj_project_login';
+    protected $primaryKey = 'LOGIN_ID';
+    protected $keyType = 'string';
     protected $fillable = [
         'LOGIN_ID',
         'NAME',
@@ -27,7 +29,7 @@ class User extends Authenticatable
         'TELEPHONE',
         'AGENCY',
         'POSITION',
-        'PASSWORD'
+        'password'
     ];
     // protected $fillable = [
     //     'name',
@@ -40,10 +42,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // protected $hidden = [
+    //     // 'password',
+    //     'remember_token',
+    // ];
 
     /**
      * The attributes that should be cast.
@@ -54,5 +56,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // public function getAuthPassword()
+    // {
+    //     return $this->PASSWORD;
+    // }
 
+    // public function email()
+    // {
+    //     return 'EMAIL';
+    // }
 }

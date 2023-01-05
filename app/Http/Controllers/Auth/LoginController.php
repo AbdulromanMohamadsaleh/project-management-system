@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -28,15 +28,15 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-
     protected function redirectTo()
     {
-        if (Auth()->user()->ROLE == 1) {
+        if (Auth()->user()->role == 1) {
             return route('admin.dashboard');
         } elseif (Auth()->user() == 0) {
             return route('user.dashboard');
         }
     }
+
 
     /**
      * Create a new controller instance.
@@ -52,15 +52,15 @@ class LoginController extends Controller
     {
         $input = $request->all();
         $this->validate($request, [
-            'EMAIL' => 'required|email',
-            'PASSWORD' => 'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if (auth()->attempt(array('EMAIL' => $input['email'], 'PASSWORD' => $input['password']))) {
+        if (auth()->attempt(array('EMAIL' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->ROLE == 1) {
+            if (auth()->user()->role == 1) {
                 return redirect()->route('admin.dashboard');
-            } elseif (auth()->user()->ROLE == 0) {
+            } elseif (auth()->user()->role == 0) {
                 return redirect()->route('user.dashboard');
             }
         } else {

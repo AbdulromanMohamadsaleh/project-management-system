@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Login;
+use App\Models\User;
+// use App\Models\Login;
 use App\Models\Holyday;
 use App\Models\Category;
 use App\Models\ProjectTask;
@@ -33,8 +34,8 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
-        $team = Login::all();
+        $projectManagers = User::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $team = User::all();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
             'team' => $team,
@@ -195,8 +196,8 @@ class ProjectController extends Controller
     {
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
-        $projectManagers = Login::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
-        $team = Login::all();
+        $projectManagers = User::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $team = User::all();
 
         // $subset = $ProjectDetial->projectTeam->map(function ($projectTeam) {
         //     return $projectTeam->only(['LOGIN_ID']);

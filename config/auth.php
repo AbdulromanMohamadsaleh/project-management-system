@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'prj_project_login',
+        'password' => 'prj_project_login',
     ],
 
     /*
@@ -62,7 +62,7 @@ return [
     'providers' => [
         'prj_project_login' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Login::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
