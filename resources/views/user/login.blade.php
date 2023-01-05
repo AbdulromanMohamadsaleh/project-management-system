@@ -4,7 +4,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <p class="login100-form-title p-b-26">
-                    Welcome
+                    Welcome jbohh
                 </p>
                <center> <img class="rounded-circle" src="{{ asset('images/1.png') }}" alt="" style="width: 40%;"></center>
                 <form class="login100-form validate-form">

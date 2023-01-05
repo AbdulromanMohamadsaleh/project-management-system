@@ -75,21 +75,22 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <form method="POST" action="{{ route('login') }}">
+                @csrf
                 <span class="login100-form-title p-b-26">
-                    Welcome
+                    Welcome k
                 </span>
                 <span class="login100-form-title p-b-48">
                     <i class="zmdi zmdi-font"></i>
                 </span>
 
-                <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
                     <input class="input100" type="text" name="email">
                     <span class="focus-input100" data-placeholder="Email"></span>
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -99,16 +100,16 @@
                     <input class="input100" type="password" name="password">
                     <span class="focus-input100" data-placeholder="Password"></span>
                     @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
                             Login
                         </button>
                     </div>

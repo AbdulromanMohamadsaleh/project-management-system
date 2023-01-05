@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomAuthController;
-use App\Http\Controllers\LoginController;
+// use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CategoryController;
@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
 });
 
 ###########################  User  ###########################
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'IsProjectManager', 'PreventBackHistory']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
@@ -55,8 +55,7 @@ Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');
 Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
 Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
 Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
-Route::get('login', [LoginController::class, 'Home'])->name('login');
-Route::get('/register', [UserController::class, 'Register'])->name('register');
+
 Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
 
 
@@ -78,18 +77,21 @@ Route::post('/category/update/{id}', [CategoryController::class, 'Update'])->nam
 
 ###########################  Login  ###########################
 Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser');
-Route::get('login', [LoginController::class, 'Home'])->name('login');
+
 
 
 ###########################  User  ###########################
-Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
-Route::get('/register', [UserController::class, 'Register'])->name('register');
+// Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
+// Route::get('/register', [UserController::class, 'Register'])->name('register');
 
 
 ###########################  TASK  ###########################
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
-Route::get('login', [LoginController::class, 'Login'])->name('login');
-Route::post('/login/custom-login', [LoginController::class, 'CustomLogin'])->name('login.custom');
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
