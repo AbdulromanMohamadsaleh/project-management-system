@@ -42,7 +42,7 @@ class ProjectDetial extends Model
     // }
     public function projectTeam()
     {
-        return $this->belongstoMany(LoginUser::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
+        return $this->belongstoMany(User::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
     }
 
     public function activity()
