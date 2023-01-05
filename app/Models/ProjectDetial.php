@@ -52,7 +52,7 @@ class ProjectDetial extends Model
 
     public function ProjectManager()
     {
-        return $this->belongsto(LoginUser::class, 'PROJECT_MANAGER', 'LOGIN_ID');
+        return $this->belongsto(User::class, 'PROJECT_MANAGER', 'LOGIN_ID');
     }
 
     public function track()
