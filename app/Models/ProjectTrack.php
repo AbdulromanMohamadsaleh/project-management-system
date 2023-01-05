@@ -10,7 +10,7 @@ class ProjectTrack extends Model
     use HasFactory;
 
     protected $table = 'prj_project_track';
-    protected $primaryKey = 'PROJECT_TRACK_ID ';
+    protected $primaryKey = 'PROJECT_TRACK_ID';
     protected $keyType = 'string';
 
     protected $fillable = [
