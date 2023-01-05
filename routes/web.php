@@ -26,6 +26,11 @@ Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
     Auth::routes();
 });
 
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/logout', [CustomAuthController::class, 'Logout'])->name('logout');
+});
+
 ###########################  Admin  ###########################
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
