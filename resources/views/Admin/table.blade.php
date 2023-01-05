@@ -90,7 +90,7 @@
                                         @endif
 
                                         @if ($project_detail->IS_APPROVE == 0)
-                                            <form method="POST"
+                                            <form style="display: inline-block" method="POST"
                                                 action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">

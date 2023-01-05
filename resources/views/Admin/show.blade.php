@@ -96,23 +96,23 @@
                                                             <dt><b class="border-bottom border-primary">Record Name</b>
                                                             </dt>
                                                             <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                            <dt><b class="border-bottom border-primary">Record Date</b>
+                                                            {{-- <dt><b class="border-bottom border-primary">Record Date</b>
                                                             </dt>
                                                             <dd>{{ $project_detail->DATE_SAVE }}</dd>
                                                             <dt><b class="border-bottom border-primary">Project Name</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->NAME_PROJECT }}</dd>
-                                                            <dt><b
-                                                                    class="border-bottom text-break border-primary">Resons</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->REASONS }}</dd>
-                                                            <dt><b class="border-bottom border-primary">Objective</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->OBJECTIVE }}</dd>
+                                                            </dt> --}}
+                                                            <b class="border-bottom text-break border-primary">Resons</b>
+                                                        </dt>
+                                                        <dd>{{ $project_detail->REASONS }}</dd>
+                                                            <dt>
                                                 </dl>
                                             </div>
                                             <div class="col-sm-6">
                                                 <dl>
+
+                                                            <dt><b class="border-bottom border-primary">Objective</b>
+                                                            </dt>
+                                                            <dd>{{ $project_detail->OBJECTIVE }}</dd>
                                                     <dt><b class="border-bottom border-primary">Target</b></dt>
                                                     <dd>{{ $project_detail->TARGET }}</dd>
                                                     <dt><b class="border-bottom border-primary">Location</b></dt>
@@ -131,6 +131,7 @@
                                                     <dd>{{ $project_detail->BUDGET }}</dd>
                                                     <dt><b class="border-bottom border-primary">Project Manager</b></dt>
                                                     <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
+
                                                 </dl>
                                             </div>
                                         </div>
