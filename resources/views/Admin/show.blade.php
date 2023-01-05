@@ -62,84 +62,83 @@
                         </li>
                     </ul>
                 </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="bd-callout bd-callout-primary">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <dl>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bd-callout bd-callout-primary">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <dl>
+                                                <div>
+                                                    <dt><b class="border-bottom border-primary">Project Code</b>
+                                                    </dt>
+                                                    <dd>{{ $project_detail->DETAIL_ID }}</dd>
+
+                                                    <dt><b class="border-bottom border-primary">Record Name</b></dt>
+                                                    <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Record Date</b></dt>
+                                                    <dd>{{ $project_detail->DATE_SAVE }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Project Name</b>
+                                                    </dt>
+                                                    <dd>{{ $project_detail->NAME_PROJECT }}</dd>
+                                                    <dt><b class="border-bottom text-break border-primary">Resons</b>
+                                                    </dt>
+                                                    <dd>{{ $project_detail->REASONS }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Objective</b></dt>
+                                                    <dd>{{ $project_detail->OBJECTIVE }}</dd>
                                                     <div>
                                                         <dt><b class="border-bottom border-primary">Project Code</b>
                                                         </dt>
                                                         <dd>{{ $project_detail->DETAIL_ID }}</dd>
 
-                                                        <dt><b class="border-bottom border-primary">Record Name</b></dt>
+                                                        <dt><b class="border-bottom border-primary">Record Name</b>
+                                                        </dt>
                                                         <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                        <dt><b class="border-bottom border-primary">Record Date</b></dt>
-                                                        <dd>{{ $project_detail->DATE_SAVE }}</dd>
-                                                        <dt><b class="border-bottom border-primary">Project Name</b>
-                                                        </dt>
-                                                        <dd>{{ $project_detail->NAME_PROJECT }}</dd>
-                                                        <dt><b
-                                                                class="border-bottom text-break border-primary">Resons</b>
-                                                        </dt>
-                                                        <dd>{{ $project_detail->REASONS }}</dd>
-                                                        <dt><b class="border-bottom border-primary">Objective</b></dt>
-                                                        <dd>{{ $project_detail->OBJECTIVE }}</dd>
-                                                        <div>
-                                                            <dt><b class="border-bottom border-primary">Project Code</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->DETAIL_ID }}</dd>
-
-                                                            <dt><b class="border-bottom border-primary">Record Name</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                            {{-- <dt><b class="border-bottom border-primary">Record Date</b>
+                                                        {{-- <dt><b class="border-bottom border-primary">Record Date</b>
                                                             </dt>
                                                             <dd>{{ $project_detail->DATE_SAVE }}</dd>
                                                             <dt><b class="border-bottom border-primary">Project Name</b>
                                                             </dt> --}}
-                                                            <b class="border-bottom text-break border-primary">Resons</b>
+                                                        <b class="border-bottom text-break border-primary">Resons</b>
                                                         </dt>
                                                         <dd>{{ $project_detail->REASONS }}</dd>
-                                                            <dt>
-                                                </dl>
-                                            </div>
-                                            <div class="col-sm-6">
+                                                        <dt>
+                                            </dl>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <dl>
+
+                                                <dt><b class="border-bottom border-primary">Objective</b>
+                                                </dt>
+                                                <dd>{{ $project_detail->OBJECTIVE }}</dd>
+                                                <dt><b class="border-bottom border-primary">Target</b></dt>
+                                                <dd>{{ $project_detail->TARGET }}</dd>
+                                                <dt><b class="border-bottom border-primary">Location</b></dt>
+                                                <dd>{{ $project_detail->LOCATION }}</dd>
+                                                <dt><b class="border-bottom border-primary">Results</b></dt>
+                                                <dd>{{ $project_detail->RESULT }}</dd>
                                                 <dl>
-
-                                                            <dt><b class="border-bottom border-primary">Objective</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->OBJECTIVE }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Target</b></dt>
-                                                    <dd>{{ $project_detail->TARGET }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Location</b></dt>
-                                                    <dd>{{ $project_detail->LOCATION }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Results</b></dt>
-                                                    <dd>{{ $project_detail->RESULT }}</dd>
-                                                    <dl>
-                                                        <dt><b class="border-bottom border-primary">Start Date</b></dt>
-                                                        <dd>{{ $project_detail->DATE_START }}</dd>
-                                                        <dt><b class="border-bottom border-primary">End Date</b></dt>
-                                                        <dd>{{ $project_detail->DATE_END }}</dd>
-                                                        <dt><b class="border-bottom border-primary">Total Date</b></dt>
-                                                        <dd>{{ $project_detail->TOTAL_DATE }}</dd>
-                                                    </dl>
-                                                    <dt><b class="border-bottom border-primary">Budget</b></dt>
-                                                    <dd>{{ $project_detail->BUDGET }}</dd>
-                                                    <dt><b class="border-bottom border-primary">Project Manager</b></dt>
-                                                    <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
-
+                                                    <dt><b class="border-bottom border-primary">Start Date</b></dt>
+                                                    <dd>{{ $project_detail->DATE_START }}</dd>
+                                                    <dt><b class="border-bottom border-primary">End Date</b></dt>
+                                                    <dd>{{ $project_detail->DATE_END }}</dd>
+                                                    <dt><b class="border-bottom border-primary">Total Date</b></dt>
+                                                    <dd>{{ $project_detail->TOTAL_DATE }}</dd>
                                                 </dl>
-                                            </div>
+                                                <dt><b class="border-bottom border-primary">Budget</b></dt>
+                                                <dd>{{ $project_detail->BUDGET }}</dd>
+                                                <dt><b class="border-bottom border-primary">Project Manager</b></dt>
+                                                <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
+
+                                            </dl>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
             <br>
@@ -226,8 +225,8 @@
                                     <td>
                                         @if ($project_detail->IS_APPROVE == 1)
                                             @if ($task->STATUS == 0)
-                                                <a class="btn btn-warning" data-toggle="tooltip" title="Complete"
-                                                    href="{{ route('task.done', $task->TASK_ID) }}"><i
+                                                <a class="btn btn-warning task" data-toggle="tooltip" title="Complete"
+                                                    href="{{ route('task.done', $task->TASK_ID) }}" onclick="submitResult(event)"><i
                                                         class="bi bi-check-circle"></i></a>
                                             @else
                                                 <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
@@ -235,56 +234,110 @@
                                             @endif
                                         @else
                                         @endif
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-danger dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">add
-                                                        budget</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="#"
-                                                        >view</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="#"
-                                                      >edit</a>
-                                                </li>
-                                            </ul>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#myModal">
+                                            <i class='fas fa-money-check-alt'></i>
+                                        </button>
+
+                                        <!-- The Modal -->
+                                        <div class="modal" id="myModal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">add budget</h4>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <form id="signUpForm" method="post"
+                                                            action="{{ route('category.save') }}">
+                                                            @csrf
+                                                            {{-- Project Name / Target --}}
+                                                            <div class="row mb-5 mb-sm-0">
+                                                                <div class=" mb-sm-5">
+                                                                    <label class="label-left fw-bold mb-2"
+                                                                        for="projectName">budget</label>
+                                                                    <input type="text" name="category_name"
+                                                                        class="form-control" id="projectName">
+                                                                </div>
+                                                                <button type="submit" name="submit"
+                                                                    onclick="success()"
+                                                                    class="btn btn-success">SAVE</button>
+                                                            </div>
+                                                    </div>
+                                                    <!-- end previous / next buttons -->
+                                                    </form>
+                                                </div>
+
+
+                                                <!-- Modal footer -->
+
+                                            </div>
                                         </div>
-                                        <!--Modal code -->
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            <i class='fas fa-book'></i>
+                                        </button>
 
-                                        <!--Modal code -->
-
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-danger dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">add note</a></li>
-                                                <li><a class="dropdown-item" href="#">view note</a></li>
-                                                <li><a class="dropdown-item" href="#">edit note</a></li>
-                                            </ul>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                        </h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="signUpForm" method="post"
+                                                            action="{{ route('category.save') }}">
+                                                            @csrf
+                                                            {{-- Project Name / Target --}}
+                                                            <div class="row mb-5 mb-sm-0">
+                                                                <div class=" mb-sm-5">
+                                                                    <label class="label-left fw-bold mb-2"
+                                                                        for="projectName">budget</label>
+                                                                    <input type="text" name="category_name"
+                                                                        class="form-control" id="projectName">
+                                                                </div>
+                                                                <button type="submit" name="submit"
+                                                                    onclick="success()"
+                                                                    class="btn btn-success">SAVE</button>
+                                                            </div>
+                                                    </div>
+                                                    <!-- end previous / next buttons -->
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        @if ($task->STATUS == 1)
-                                            {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                        @endforeach
-                        </tbody>
-
-                        </tbody>
-                    </table>
                 </div>
+
+
+
+                </td>
+                <td>
+                    @if ($task->STATUS == 1)
+                        {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                    @endif
+                </td>
+                </tr>
+                @endforeach
+
+                </tbody>
+                @endforeach
+                </tbody>
+
+                </tbody>
+                </table>
             </div>
         </div>
+    </div>
 
 
 </body>
@@ -335,20 +388,22 @@
     .tbl-accordion-body tr:last-child {
         border-bottom: 1px solid #ccc;
     }
-    .bd-callout {
-padding: 1.25rem;
-margin-top: 1.25rem;
-margin-bottom: 1.25rem;
-border: 1px solid #eee;
-border-left-width: .25rem;
-border-radius: .25rem
-}
-.bd-callout-primary{
-border-left-color: #007bff
-}
-dd
-{
-    margin-bottom: 2rem;
 
-}
+    .bd-callout {
+        padding: 1.25rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        border: 1px solid #eee;
+        border-left-width: .25rem;
+        border-radius: .25rem
+    }
+
+    .bd-callout-primary {
+        border-left-color: #007bff
+    }
+
+    dd {
+        margin-bottom: 2rem;
+
+    }
 </style>
