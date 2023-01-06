@@ -166,15 +166,19 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-8 ">
+                    <b>totol activity = {{($project_detail->activity->sum("day"))}} </b>
                     <table>
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>Activity</th>
                                 <th>Date</th>
+                                <th>Date Start Task</th>
                                 <th>Action</th>
                                 <th>Status</th>
+                                <th>Quality Work</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -196,8 +200,10 @@
                                     </td>
                                     <td style="text-align: left">
                                         <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
+                                        <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt" style="font-size: 25;"></i></button>
                                     </td>
                                     <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
+                                    <td></td>
                                     <td></td>
                                     <td>
 
@@ -216,8 +222,58 @@
                                 <tr>
                                     <td></td>
                                     <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
-                                        {{ $task->TASK_NAME }}</td>
-                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}</td>
+                                        {{ $task->TASK_NAME }}   </td>
+                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}   <button type="button" class="btn btn-warning btn-sm2" data-bs-toggle="modal"
+                                        data-bs-target="#Modal{{ $task->TASK_ID }}">
+                                        <i class="fas fa-pencil-alt" style="font-size: 15px;">
+                                        </i></button>
+
+                                    <!-- The Modal -->
+                                    <div class="modal" id="Modal{{ $task->TASK_ID }}">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Edit Category</h4>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <form id="signUpForm" method="post"
+                                                        action="{{ route('task.update', $task->TASK_ID) }}">
+                                                        @csrf
+                                                        {{-- Project Name / Target --}}
+                                                        <div class="row mb-5 mb-sm-0">
+                                                            <div class="col-md-6 mb-sm-5">
+                                                                <label class="label-left fw-bold mb-2"
+                                                                    for="holyday_name">Holyday Name</label>
+                                                                <input type="text" name="holyday_name"
+                                                                    class="form-control" id="holyday_name"
+                                                                    value="{{ $task->DAY }}">
+                                                            </div>
+                                                            <div class="col-md-6 mb-sm-5">
+                                                                <label class="label-left fw-bold mb-2"
+                                                                    for="target">Date Holyday</label>
+                                                                <input type="date" name="date_holyday"
+                                                                    value="{{ $task->DAY }}"
+                                                                    class="form-control" id="target">
+                                                            </div>
+                                                            <button type="submit" name="submit"
+                                                                class="btn btn-success">SAVE</button>
+                                                        </div>
+                                                </div>
+                                                <!-- end previous / next buttons -->
+                                                </form>
+                                            </div>
+
+                                            <!-- Modal footer -->
+
+                                        </div>
+                                    </div>
+            </div></td>
+                                    <td>1-1-2566</td>
 
                                     {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
@@ -326,6 +382,7 @@
                         {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
                     @endif
                 </td>
+                <td></td>
                 </tr>
                 @endforeach
 

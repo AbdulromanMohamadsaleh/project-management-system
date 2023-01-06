@@ -92,6 +92,8 @@ Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser')
 
 ###########################  TASK  ###########################
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+Route::post('/updateday-task/{id}', [TaskController::class, 'Updatedaytask'])->name('task.update');
+
 
 
 

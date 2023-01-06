@@ -79,7 +79,7 @@
                                         </a>
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
                                             href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
-                                            <i class="bi bi-calendar2-range" style="font-size: 25;"></i>
+                                            <i class="bi bi-alarm" style="font-size: 25;"></i>
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
                                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip"
