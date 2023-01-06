@@ -12,6 +12,7 @@ use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProjectStoreRequest;
 use SebastianBergmann\LinesOfCode\Counter;
 
@@ -52,6 +53,17 @@ class ProjectController extends Controller
 
 
         // dd($project_detail->activity);
+        $sum = 0;
+        foreach ($project_detail->activity as $act) {
+
+
+            foreach ($act->tasks as $task) {
+                $sum += intval($task->DAY);
+            }
+        }
+
+
+        $project_detail->TotalDays = $sum;
         return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
     }
     public function Timeline($id)
@@ -93,7 +105,7 @@ class ProjectController extends Controller
         $ProjectDetial->STATUS = "New Release,workingOn";
         $ProjectDetial->CATEGORY_ID = $request->category;
 
-        $ProjectDetial->RECORD_CREATOR = $request->projectManager;
+        $ProjectDetial->RECORD_CREATOR = Auth::user()->LOGIN_ID;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
         $ProjectDetial->TOTAL_DATE = $request->projectDuration . " " . $request->projectDurationFormat;

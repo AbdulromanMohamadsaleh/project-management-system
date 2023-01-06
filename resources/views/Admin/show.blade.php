@@ -76,9 +76,9 @@
                                                     <dd>{{ $project_detail->DETAIL_ID }}</dd>
 
                                                     <dt><b class="border-bottom border-primary">Record Name</b></dt>
-                                                    <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
+                                                    <dd>{{ $project_detail->ProjectCreator->NAME }}</dd>
                                                     <dt><b class="border-bottom border-primary">Record Date</b></dt>
-                                                    <dd>{{ $project_detail->DATE_SAVE }}</dd>
+                                                    <dd>{{ $project_detail->created_at->format('d/m/Y') }}</dd>
                                                     <dt><b class="border-bottom border-primary">Project Name</b>
                                                     </dt>
                                                     <dd>{{ $project_detail->NAME_PROJECT }}</dd>
@@ -87,23 +87,19 @@
                                                     <dd>{{ $project_detail->REASONS }}</dd>
                                                     <dt><b class="border-bottom border-primary">Objective</b></dt>
                                                     <dd>{{ $project_detail->OBJECTIVE }}</dd>
-                                                    <div>
-                                                        <dt><b class="border-bottom border-primary">Project Code</b>
-                                                        </dt>
-                                                        <dd>{{ $project_detail->DETAIL_ID }}</dd>
 
-                                                        <dt><b class="border-bottom border-primary">Record Name</b>
-                                                        </dt>
-                                                        <dd>{{ $project_detail->RECORD_CREATOR }}</dd>
-                                                        {{-- <dt><b class="border-bottom border-primary">Record Date</b>
+
+
+                                                    {{-- <dt><b class="border-bottom border-primary">Record Date</b>
                                                             </dt>
                                                             <dd>{{ $project_detail->DATE_SAVE }}</dd>
                                                             <dt><b class="border-bottom border-primary">Project Name</b>
                                                             </dt> --}}
-                                                        <b class="border-bottom text-break border-primary">Resons</b>
-                                                        </dt>
-                                                        <dd>{{ $project_detail->REASONS }}</dd>
-                                                        <dt>
+                                                    <b class="border-bottom text-break border-primary">Resons</b>
+                                                    </dt>
+                                                    <dd>{{ $project_detail->REASONS }}</dd>
+                                                    <dt>
+                                                </div>
                                             </dl>
                                         </div>
                                         <div class="col-sm-6">
@@ -168,7 +164,8 @@
                 </div>
 
                 <div class="col-md-8 ">
-                    <b>totol activity = {{($project_detail->activity->sum("day"))}} </b>
+                    <b>Total Date = {{ $project_detail->TotalDays . ' ' . $project_detail->activity[0]->DAY_WEEK }}
+                    </b>
                     <table>
                         <thead>
                             <tr>
@@ -200,7 +197,8 @@
                                     </td>
                                     <td style="text-align: left">
                                         <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
-                                        <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt" style="font-size: 25;"></i></button>
+                                        <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt"
+                                                style="font-size: 25;"></i></button>
                                     </td>
                                     <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
                                     <td></td>
@@ -222,178 +220,173 @@
                                 <tr>
                                     <td></td>
                                     <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
-                                        {{ $task->TASK_NAME }}   </td>
-                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}   <button type="button" class="btn btn-warning btn-sm2" data-bs-toggle="modal"
-                                        data-bs-target="#Modal{{ $task->TASK_ID }}">
-                                        <i class="fas fa-pencil-alt" style="font-size: 15px;">
-                                        </i></button>
-
-                                    <!-- The Modal -->
-                                    <div class="modal" id="Modal{{ $task->TASK_ID }}">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Edit Category</h4>
-                                                    <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <!-- Modal body -->
-                                                <div class="modal-body">
-                                                    <form id="signUpForm" method="post"
-                                                        action="{{ route('task.update', $task->TASK_ID) }}">
-                                                        @csrf
-                                                        {{-- Project Name / Target --}}
-                                                        <div class="row mb-5 mb-sm-0">
-                                                            <div class="col-md-6 mb-sm-5">
-                                                                <label class="label-left fw-bold mb-2"
-                                                                    for="holyday_name">Holyday Name</label>
-                                                                <input type="text" name="holyday_name"
-                                                                    class="form-control" id="holyday_name"
-                                                                    value="{{ $task->DAY }}">
-                                                            </div>
-                                                            <div class="col-md-6 mb-sm-5">
-                                                                <label class="label-left fw-bold mb-2"
-                                                                    for="target">Date Holyday</label>
-                                                                <input type="date" name="date_holyday"
-                                                                    value="{{ $task->DAY }}"
-                                                                    class="form-control" id="target">
-                                                            </div>
-                                                            <button type="submit" name="submit"
-                                                                class="btn btn-success">SAVE</button>
-                                                        </div>
-                                                </div>
-                                                <!-- end previous / next buttons -->
-                                                </form>
-                                            </div>
-
-                                            <!-- Modal footer -->
-
-                                        </div>
-                                    </div>
-            </div></td>
-                                    <td>1-1-2566</td>
-
-                                    {{-- <td>{{ $task->TASK_NAME }}</td> --}}
-
-
-                                    <td>
-                                        @if ($project_detail->IS_APPROVE == 1)
-                                            @if ($task->STATUS == 0)
-                                                <a class="btn btn-warning task" data-toggle="tooltip" title="Complete"
-                                                    href="{{ route('task.done', $task->TASK_ID) }}" onclick="submitResult(event)"><i
-                                                        class="bi bi-check-circle"></i></a>
-                                            @else
-                                                <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                                                        class="bi bi-check-circle"></i></a>
-                                            @endif
-                                        @else
-                                        @endif
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#myModal">
-                                            <i class='fas fa-money-check-alt'></i>
-                                        </button>
+                                        {{ $task->TASK_NAME }} </td>
+                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }} <button type="button"
+                                            class="btn btn-warning btn-sm2" data-bs-toggle="modal"
+                                            data-bs-target="#Modal{{ $task->TASK_ID }}">
+                                            <i class="fas fa-pencil-alt" style="font-size: 15px;">
+                                            </i></button>
 
                                         <!-- The Modal -->
-                                        <div class="modal" id="myModal">
+                                        <div class="modal" id="Modal{{ $task->TASK_ID }}">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">add budget</h4>
+                                                        <h4 class="modal-title">Edit Category</h4>
                                                         <button type="button" class="btn-close"
                                                             data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form id="signUpForm" method="post"
-                                                            action="{{ route('category.save') }}">
+                                                        <form id="signUpForm" method="post" {{-- action="{{ route('task.update', $task->TASK_ID) }}" --}}>
                                                             @csrf
                                                             {{-- Project Name / Target --}}
                                                             <div class="row mb-5 mb-sm-0">
-                                                                <div class=" mb-sm-5">
+                                                                <div class="col-md-6 mb-sm-5">
                                                                     <label class="label-left fw-bold mb-2"
-                                                                        for="projectName">budget</label>
-                                                                    <input type="text" name="category_name"
-                                                                        class="form-control" id="projectName">
+                                                                        for="holyday_name">Holyday Name</label>
+                                                                    <input type="text" name="holyday_name"
+                                                                        class="form-control" id="holyday_name"
+                                                                        value="{{ $task->DAY }}">
+                                                                </div>
+                                                                <div class="col-md-6 mb-sm-5">
+                                                                    <label class="label-left fw-bold mb-2"
+                                                                        for="target">Date Holyday</label>
+                                                                    <input type="date" name="date_holyday"
+                                                                        value="{{ $task->DAY }}"
+                                                                        class="form-control" id="target">
                                                                 </div>
                                                                 <button type="submit" name="submit"
-                                                                    onclick="success()"
                                                                     class="btn btn-success">SAVE</button>
                                                             </div>
                                                     </div>
                                                     <!-- end previous / next buttons -->
                                                     </form>
                                                 </div>
-
 
                                                 <!-- Modal footer -->
 
                                             </div>
                                         </div>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            <i class='fas fa-book'></i>
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title
-                                                        </h5>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form id="signUpForm" method="post"
-                                                            action="{{ route('category.save') }}">
-                                                            @csrf
-                                                            {{-- Project Name / Target --}}
-                                                            <div class="row mb-5 mb-sm-0">
-                                                                <div class=" mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2"
-                                                                        for="projectName">budget</label>
-                                                                    <input type="text" name="category_name"
-                                                                        class="form-control" id="projectName">
-                                                                </div>
-                                                                <button type="submit" name="submit"
-                                                                    onclick="success()"
-                                                                    class="btn btn-success">SAVE</button>
-                                                            </div>
-                                                    </div>
-                                                    <!-- end previous / next buttons -->
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                 </div>
-
-
-
                 </td>
+                <td>1-1-2566</td>
+
+                {{-- <td>{{ $task->TASK_NAME }}</td> --}}
+
+
                 <td>
-                    @if ($task->STATUS == 1)
-                        {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                    @if ($project_detail->IS_APPROVE == 1)
+                        @if ($task->STATUS == 0)
+                            <a class="btn btn-warning task" data-toggle="tooltip" title="Complete"
+                                href="{{ route('task.done', $task->TASK_ID) }}" onclick="submitResult(event)"><i
+                                    class="bi bi-check-circle"></i></a>
+                        @else
+                            <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
+                                    class="bi bi-check-circle"></i></a>
+                        @endif
+                    @else
                     @endif
-                </td>
-                <td></td>
-                </tr>
-                @endforeach
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <i class='fas fa-money-check-alt'></i>
+                    </button>
 
-                </tbody>
-                @endforeach
-                </tbody>
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
 
-                </tbody>
-                </table>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">add budget</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                        @csrf
+                                        {{-- Project Name / Target --}}
+                                        <div class="row mb-5 mb-sm-0">
+                                            <div class=" mb-sm-5">
+                                                <label class="label-left fw-bold mb-2"
+                                                    for="projectName">budget</label>
+                                                <input type="text" name="category_name" class="form-control"
+                                                    id="projectName">
+                                            </div>
+                                            <button type="submit" name="submit" onclick="success()"
+                                                class="btn btn-success">SAVE</button>
+                                        </div>
+                                </div>
+                                <!-- end previous / next buttons -->
+                                </form>
+                            </div>
+
+
+                            <!-- Modal footer -->
+
+                        </div>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <i class='fas fa-book'></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                        @csrf
+                                        {{-- Project Name / Target --}}
+                                        <div class="row mb-5 mb-sm-0">
+                                            <div class=" mb-sm-5">
+                                                <label class="label-left fw-bold mb-2"
+                                                    for="projectName">budget</label>
+                                                <input type="text" name="category_name" class="form-control"
+                                                    id="projectName">
+                                            </div>
+                                            <button type="submit" name="submit" onclick="success()"
+                                                class="btn btn-success">SAVE</button>
+                                        </div>
+                                </div>
+                                <!-- end previous / next buttons -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
             </div>
+
+
+
+            </td>
+            <td>
+                @if ($task->STATUS == 1)
+                    {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                @endif
+            </td>
+            <td></td>
+            </tr>
+            @endforeach
+
+            </tbody>
+            @endforeach
+            </tbody>
+
+            </tbody>
+            </table>
         </div>
+    </div>
     </div>
 
 

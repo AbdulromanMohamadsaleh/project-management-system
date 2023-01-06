@@ -59,4 +59,9 @@ class ProjectDetial extends Model
     {
         return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
     }
+
+    public function ProjectCreator()
+    {
+        return $this->belongsto(User::class, 'RECORD_CREATOR', 'LOGIN_ID');
+    }
 }

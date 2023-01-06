@@ -115,12 +115,12 @@
                     </div>
                 </div>
 
-                <div class="text-center p-t-115">
+                <div class="text-center p-t-115 mt-5">
                     <span class="txt1">
                         Don’t have an account?
                     </span>
 
-                    <a class="txt2" href="#">
+                    <a class="txt2" href="{{ route('register') }}">
                         Sign Up
                     </a>
                 </div>
