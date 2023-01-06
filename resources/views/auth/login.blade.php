@@ -77,7 +77,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <span class="login100-form-title p-b-26">
-                    Welcome k
+                    Welcome
                 </span>
                 <span class="login100-form-title p-b-48">
                     <i class="zmdi zmdi-font"></i>
@@ -125,6 +125,13 @@
                     </a>
                 </div>
             </form>
+            <br>
+            <div class="mt-3">
+                <b>Email: admin@admin.com </b>
+                <br>
+                <b>Password: 012345678 </b>
+            </div>
         </div>
     </div>
+
 </div>

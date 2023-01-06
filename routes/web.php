@@ -50,40 +50,56 @@ Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 
 
 ###########################  Project  ###########################
-Route::get('/table', [ProjectController::class, 'Table'])->name('table');
-Route::post('/save', [ProjectController::class, 'Save'])->name('save');
-Route::get('/create', [ProjectController::class, 'Create'])->name('create');
-Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
-Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
-Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
-Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');
-Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
-Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
-Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
 
-Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
+        Route::get('/table', [ProjectController::class, 'Table'])->name('table');
+        Route::post('/save', [ProjectController::class, 'Save'])->name('save');
+        Route::get('/create', [ProjectController::class, 'Create'])->name('create');
+        Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
+        Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
+        Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
+        Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve');
+        Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
+        Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
+        Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
 
-
+        Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
+    }
+);
 ###########################  Holyday  ###########################
-Route::get('/addholyday', [HolydayController::class, 'Create'])->name('addholyday');
-Route::post('/holyday/save', [HolydayController::class, 'Save'])->name('holyday.save');
-Route::delete('/dateholyday/delete{id}', [HolydayController::class, 'Delete'])->name('holyday.delete');
-Route::post('/dateholyday/update{id}', [HolydayController::class, 'Update'])->name('holyday.update');
-Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
-
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::get('/addholyday', [HolydayController::class, 'Create'])->name('addholyday');
+        Route::post('/holyday/save', [HolydayController::class, 'Save'])->name('holyday.save');
+        Route::delete('/dateholyday/delete{id}', [HolydayController::class, 'Delete'])->name('holyday.delete');
+        Route::post('/dateholyday/update{id}', [HolydayController::class, 'Update'])->name('holyday.update');
+        Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
+    }
+);
 
 ###########################  Category  ###########################
-Route::get('/category', [CategoryController::class, 'Index'])->name('category');
-Route::post('/category/save', [CategoryController::class, 'Save'])->name('category.save');
-Route::get('/createcategory', [CategoryController::class, 'Create'])->name('createcategory');
-Route::delete('/category/delete{id}', [CategoryController::class, 'Delete'])->name('category.delete');
-Route::post('/category/update/{id}', [CategoryController::class, 'Update'])->name('category.update');
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::get('/category', [CategoryController::class, 'Index'])->name('category');
+        Route::post('/category/save', [CategoryController::class, 'Save'])->name('category.save');
+        Route::get('/createcategory', [CategoryController::class, 'Create'])->name('createcategory');
+        Route::delete('/category/delete{id}', [CategoryController::class, 'Delete'])->name('category.delete');
+        Route::post('/category/update/{id}', [CategoryController::class, 'Update'])->name('category.update');
+    }
+);
 
 
 ###########################  Login  ###########################
-Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser');
-
-
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::get('/createuser', [UserController::class, 'Create'])->name('createuser');
+    }
+);
 
 ###########################  User  ###########################
 // Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
@@ -92,8 +108,6 @@ Route::get('/createuser', [LoginController::class, 'Index'])->name('createuser')
 
 ###########################  TASK  ###########################
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
-Route::post('/updateday-task/{id}', [TaskController::class, 'Updatedaytask'])->name('task.update');
-
 
 
 
