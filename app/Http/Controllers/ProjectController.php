@@ -35,7 +35,7 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = User::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $projectManagers = User::where("POSITION", "project manager")->where("IS_ACTIVE", 1)->get();
         $team = User::all();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
