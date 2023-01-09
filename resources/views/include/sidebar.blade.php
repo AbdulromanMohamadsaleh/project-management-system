@@ -38,8 +38,11 @@
                 <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data
                     Project</a>
             @endif
-            <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check " aria-hidden="true"></i>
-                Approve Project</a>
+            @if (Auth::user()->POSITION == 'Project Manager')
+                <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check "
+                        aria-hidden="true"></i>
+                    Approve Project</a>
+            @endif
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Report</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
