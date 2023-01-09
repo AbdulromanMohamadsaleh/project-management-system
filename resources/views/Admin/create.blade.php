@@ -21,7 +21,7 @@
 
                     <div style="border: none;" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 
-                        <h1  class="fw-bold text-center fs-4">Create Project</h1>
+                        <h1 class="fw-bold text-center fs-4">Create Project</h1>
                         <form class="needs-validation" novalidate id="signUpForm" method="post"
                             action="{{ route('save') }}">
                             @csrf
@@ -111,18 +111,38 @@
                                         {{-- </div> --}}
                                         {{-- <div class="row justify-content-center" id="show-duration"></div> --}}
                                     </div>
-                                    <div class="col-md-6 mb-sm-5">
-                                        <label for="inputState" class="label-left fw-bold mb-2">Include Holydays</label>
-                                        <div class="row p-2 px-5 ">
-                                            <div style="text-align: left" class="mb-3 form-check form-check-inline">
-                                                <input class="form-check-input" name="isIncludeHolyday" type="radio"
-                                                    id="yes" value="yes">
-                                                <label class="form-check-label ms-2" for="yes">Yes</label>
+                                    <div class="col-md-6 mb-sm-5 row">
+                                        <div class="col-6">
+                                            <label for="inputState" class="label-left fw-bold mb-2">Include
+                                                WeekEnd</label>
+                                            <div class="row p-2 px-5 ">
+                                                <div style="text-align: left" class="mb-3 form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeWeekend"
+                                                        type="radio" id="yes" value="yes">
+                                                    <label class="form-check-label ms-2" for="yes">Yes</label>
+                                                </div>
+                                                <div style="text-align: left" class="form-check form-check-inline">
+                                                    <input checked class="form-check-input" name="isIncludeWeekend"
+                                                        type="radio" id="no" value="no">
+                                                    <label class="form-check-label ms-2" for="no">No</label>
+                                                </div>
                                             </div>
-                                            <div style="text-align: left" class="form-check form-check-inline">
-                                                <input class="form-check-input" name="isIncludeHolyday"
-                                                    type="radio" id="no" value="no">
-                                                <label class="form-check-label ms-2" for="no">No</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="inputState" class="label-left fw-bold mb-2">Include
+                                                Holydays</label>
+                                            <div class="row p-2 px-5 ">
+                                                <div style="text-align: left"
+                                                    class="mb-3 form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                        type="radio" id="yes" value="yes">
+                                                    <label class="form-check-label ms-2" for="yes">Yes</label>
+                                                </div>
+                                                <div style="text-align: left" class="form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                        type="radio" id="no" value="no">
+                                                    <label class="form-check-label ms-2" for="no">No</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -159,8 +179,8 @@
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="reason">Reasons</label>
-                                        <textarea style="border-color: rgb(33, 37, 41);" class="form-control @error('reason') is-invalid @enderror " rows="5" id="reason" name="reason"
-                                            value="{{ old('reason') }}"></textarea>
+                                        <textarea style="border-color: rgb(33, 37, 41);" class="form-control @error('reason') is-invalid @enderror "
+                                            rows="5" id="reason" name="reason" value="{{ old('reason') }}"></textarea>
                                         @error('reason')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

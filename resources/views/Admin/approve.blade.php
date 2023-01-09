@@ -51,9 +51,9 @@
                                 <tr style="text-align:left">
                                     <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
                                     <td>{{ $project_detail->NAME_PROJECT }}</td>
-                                    <td>{{ $project_detail->RECORD_CREATOR }}</td>
+                                    <td>{{ $project_detail->ProjectCreator->NAME }}</td>
                                     <td>{{ $project_detail->DATE_SAVE }}</td>
-                                    <td>{{ $project_detail->PROPONEN_NAME }}</td>
+                                    <td>{{ $project_detail->ProjectManager->NAME }} </td>
                                     <td>{{ $project_detail->BUDGET }}</td>
                                     <td>
                                         <div class="progress">

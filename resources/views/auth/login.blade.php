@@ -131,6 +131,18 @@
                 <br>
                 <b>Password: 012345678 </b>
             </div>
+            <br>
+            <div class="mt-3">
+                <b>Email: manager@manager.com </b>
+                <br>
+                <b>Password: 012345678 </b>
+            </div>
+            <br>
+            <div class="mt-3">
+                <b>Email: user@gmail.com</b>
+                <br>
+                <b>Password: 012345678 </b>
+            </div>
         </div>
     </div>
 

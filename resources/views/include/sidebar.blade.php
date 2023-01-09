@@ -16,7 +16,7 @@
             </div>
             <div class="ms-3">
                 <h6 class="mb-0">{{ Auth::user()->NAME }}</h6>
-                <span>Admin</span>
+                <span>{{ Auth::user()->POSITION }}</span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -32,23 +32,32 @@
                     <a href="element.html" class="dropdown-item">Other Elements</a>
                 </div>
             </div> --}}
-            <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create Project</a>
-            <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data Project</a>
-            <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check " aria-hidden="true"></i>
-                Approve Project</a>
+            @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create
+                    Project</a>
+                <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data
+                    Project</a>
+            @endif
+            @if (Auth::user()->POSITION == 'Project Manager')
+                <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check "
+                        aria-hidden="true"></i>
+                    Approve Project</a>
+            @endif
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Report</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-cog"></i>Seting</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('dateholyday.Index') }}" class="dropdown-item ms-4"><i
-                            class="fa fa-calendar me-2"></i>Date Holyday</a>
+                    @if (Auth::user()->POSITION == 'Admin')
+                        <a href="{{ route('dateholyday.Index') }}" class="dropdown-item ms-4"><i
+                                class="fa fa-calendar me-2"></i>Date Holyday</a>
+                        <a href="{{ route('category') }}" class="dropdown-item ms-4"><i class="fa fa-list-alt me-2"
+                                aria-hidden="true"></i>Category</a>
+                        <a href="{{ route('createuser') }}" class="dropdown-item ms-4"><i class="fa fa-user-plus me-2"
+                                aria-hidden="true"></i>Add user</a>
+                    @endif
                     <a href="{{ route('profile') }}" class="dropdown-item ms-4"><i class="fa fa-user me-2"
                             aria-hidden="true"></i>Profile</a>
-                    <a href="{{ route('category') }}" class="dropdown-item ms-4"><i class="fa fa-list-alt me-2"
-                            aria-hidden="true"></i>Category</a>
-                    <a href="{{ route('createuser') }}" class="dropdown-item ms-4"><i class="fa fa-user-plus me-2"
-                            aria-hidden="true"></i>Add user</a>
                 </div>
             </div>
             {{-- <div class="nav-item dropdown">

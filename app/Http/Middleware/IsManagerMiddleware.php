@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsProjectManagerMiddleware
+class IsManagerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -22,7 +22,7 @@ class IsProjectManagerMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->POSITION == 'ProjectManager') {
+        if (Auth::check() && Auth::user()->POSITION == 'Manager') {
             return $next($request);
         } else {
             return redirect()->route('login');
