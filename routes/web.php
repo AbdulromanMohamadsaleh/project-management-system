@@ -45,6 +45,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'isProjectManager', '
     Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
 });
 
+###########################  User  ###########################
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'isManager', 'PreventBackHistory']], function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+});
+
+
 ###########################  Dashboard  ###########################
 Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 

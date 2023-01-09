@@ -35,7 +35,8 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = User::where("POSITION", "project manager")->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", "Project Manager")->where("IS_ACTIVE", 1)->get();
+
         $team = User::all();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
@@ -187,14 +188,20 @@ class ProjectController extends Controller
     public function Approve()
     {
         $project_details = ProjectDetial::all();
-        // $ProjectTeam = ProjectTeam::where('DETAIL_ID', $id);
-        // $Login = Login::all();
+
         return view('Admin.approve', ['project_details' => $project_details]);
     }
 
     public function Done($id)
     {
+        if (Auth::user()->POSITION !== "Manager") {
+            return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
+            die();
+        }
+
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
+
+        $ProjectTrack = ProjectDetial::where('DETAIL_ID', $id)->update([ 'STATUS' => 'New Release,Approved,workingOn']);
         return redirect()->back();
     }
 
@@ -208,7 +215,7 @@ class ProjectController extends Controller
     {
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
-        $projectManagers = User::where("POSITION", "project manager")->where("CONFIRM", 1)->get();
+        $projectManagers = User::where("POSITION", "Project Manager")->where("IS_ACTIVE", 1)->get();
         $team = User::all();
 
         // $subset = $ProjectDetial->projectTeam->map(function ($projectTeam) {

@@ -65,4 +65,38 @@ class User extends Authenticatable
     // {
     //     return 'EMAIL';
     // }
+
+    public function getPOSITIONAttribute($val)
+    {
+        // dd($val);
+        switch ($val) {
+            case 0:
+                return 'Employee';
+            case 1:
+                return 'Admin';
+            case 2:
+                return 'Project Manager';
+            case 3:
+                return 'Manager';
+            default:
+                return 'Employee';
+        }
+    }
+
+
+    public function setPOSITIONAttribute($val)
+    {
+        if ($val == 'Employee')
+            $val = 0;
+        else if ($val == 'Admin')
+            $val = 1;
+        else if ($val == 'Project Manager')
+            $val = 2;
+        else if ($val == 'Manager')
+            $val = 3;
+        else
+            $val = 0;
+
+        $this->attributes['POSITION'] = $val;
+    }
 }
