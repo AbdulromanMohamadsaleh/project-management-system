@@ -35,16 +35,27 @@
 
                             <!-- step one -->
                             <div class="step ">
+                                <style>
+                                    .invv {
+                                        border-color: red !important;
+                                    }
 
+                                    .suc {
+                                        color: green
+                                    }
+                                </style>
                                 {{-- Project Name / Target --}}
                                 <div class="row mb-5 mb-sm-0 ">
                                     <div class="col-md-6 mb-sm-5 ">
                                         <label class="label-left fw-bold mb-2" for="projectName">Project Name</label>
-                                        <input type="text" name="projectName" value="{{ old('projectName') }}"
-                                            class="form-control @error('projectName') is-invalid @enderror "id="projectName">
+                                        <input id="projectName" type="text" name="projectName"
+                                            value="{{ old('projectName') }}"
+                                            class="form-control  @error('projectName') is-invalid @enderror">
                                         @error('projectName')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}
+                                            </div>
                                         @enderror
+                                        <div id="feedbackProjectName"></div>
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="target">Target</label>
@@ -372,5 +383,49 @@
 <script src="{{ asset('js/create_project.js') }}"></script>
 <script src="{{ asset('js/DateF.js') }}"></script>
 
+<script>
+    let projectNameY = document.getElementById('projectName');
+    let feedbackProjectName = document.getElementById('feedbackProjectName');
+
+    projectNameY.addEventListener('input', CheckIsProjectNameExist);
+
+    function CheckIsProjectNameExist(e) {
+
+        // console.log(this.value)
+
+        // (A) GET FORM DATA
+        // var data = new FormData();
+        // data.append("projectName", document.getElementById("projectName").value);
+
+        let pp = document.getElementById("projectName").value.trim()
+
+        if (!pp) {
+            return;
+        }
+
+        let urll = `http://127.0.0.1:8000/check-project-name/${pp}`
+        // (B) INIT FETCH POST
+
+
+        fetch(urll)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.msg)
+                if (data.status == 0) {
+                    projectNameY.classList.add('invv')
+                    feedbackProjectName.innerHTML = data.msg
+                    feedbackProjectName.style.color = "red"
+                } else {
+                    projectNameY.classList.remove('invv')
+                    feedbackProjectName.innerHTML = data.msg
+                    feedbackProjectName.style.color = "green"
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+</script>
 
 </html>

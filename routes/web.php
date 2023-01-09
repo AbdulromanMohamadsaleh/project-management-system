@@ -71,7 +71,7 @@ Route::group(
         Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
         Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
         Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
-        Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isProjectManager');
+        Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
@@ -120,6 +120,10 @@ Route::group(
 ###########################  TASK  ###########################
 Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
 
+
+
+
+Route::get('/check-project-name/{projectName}', [ProjectController::class, 'ValidateProjectName'])->name('project.ValidateProjectName');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
