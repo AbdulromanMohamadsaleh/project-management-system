@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
+Route::get('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
 
 ###########################  User  ###########################
 Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
@@ -71,7 +72,7 @@ Route::group(
         Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
         Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
         Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
-        Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isProjectManager');
+        Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
@@ -103,6 +104,13 @@ Route::group(
     }
 );
 
+###########################  Profile  ###########################
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::post('/editprofile/{id}', [UserController::class, 'Update'])->name('editprofile');
+    }
+);
 
 ###########################  Login  ###########################
 Route::group(

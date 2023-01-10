@@ -62,4 +62,24 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
+    public function Update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nickname' => 'required',
+            'Card_Id' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $user = User::where('LOGIN_ID', $id)->first();
+        // Getting values from the blade template form
+        $user->NAME = $request->name;
+        $user->NICKNAME = $request->nickname;
+        $user->CARD_ID = $request->Card_Id;
+        $user->TELEPHONE = $request->phone;
+        // $user->CATEGORY_ID = $id;
+        $user->timestamps = false;
+        $user->update();
+        return redirect()->back();
+    }
 }

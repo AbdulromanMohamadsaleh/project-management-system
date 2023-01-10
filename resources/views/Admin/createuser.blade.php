@@ -126,7 +126,11 @@
                                     <td>{{ $logins->AGENCY }}</td>
                                     <td>{{ $logins->POSITION }}
                                     <td>
-
+                                        @if ($logins->IS_ACTIVE == 0)
+                                        <a class="btn btn-success" data-toggle="tooltip" title="approve"
+                                        href="{{ route('activeuser', $logins->LOGIN_ID) }}">
+                                        <i class='fas fa-check-circle'></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

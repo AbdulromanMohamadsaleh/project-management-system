@@ -55,6 +55,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:prj_project_login'],
             'password' => ['required', 'string', 'min:8'],
+            'Agency' => ['required'],
+            'Position' => ['required'],
         ]);
     }
 
@@ -84,6 +86,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:prj_project_login'],
             'password' => ['required', 'string', 'min:8'],
+            'Agency' => ['required'],
+            'Position' => ['required'],
         ]);
 
 
@@ -93,6 +97,8 @@ class RegisterController extends Controller
         $user->EMAIL = $request->email;
         $user->POSITION = 0;
         $user->password = Hash::make($request->password);
+        $user->AGENCY = $request->Agency;
+        $user->POSITION = $request->Position;
         // $user->password = $request->password;
 
 

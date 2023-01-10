@@ -38,7 +38,7 @@
                 <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data
                     Project</a>
             @endif
-            @if (Auth::user()->POSITION == 'Project Manager')
+            @if (Auth::user()->POSITION == 'Manager')
                 <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check "
                         aria-hidden="true"></i>
                     Approve Project</a>

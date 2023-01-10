@@ -128,6 +128,22 @@
                         <input class="input100" type="text" name="email">
                         <span class="focus-input100" data-placeholder="Email"></span>
                     </div> --}}
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        <input class="input100" type="text" name="Agency">
+                        <span class="focus-input100" data-placeholder="Agency"></span>
+                        @error('Agency')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <select class="form-select" name="Position" aria-label="Default select example">
+                        <option selected>--Position--</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Project manager">Project manager</option>
+                        <option value="Manager">Manager</option>
+                      </select>
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
@@ -149,5 +165,7 @@
         </div>
     </div>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
