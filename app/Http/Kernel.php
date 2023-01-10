@@ -60,6 +60,8 @@ class Kernel extends HttpKernel
         'isManager' => \App\Http\Middleware\IsManagerMiddleware::class,
         'PreventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
         'isEmployee' => \App\Http\Middleware\IsEmployeeMiddleware::class,
+        'IsActiveUser' => \App\Http\Middleware\IsActiveUser::class,
+
 
 
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

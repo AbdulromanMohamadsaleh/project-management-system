@@ -42,6 +42,7 @@
                                 <th style="text-align: center;" scope="col">Budget</th>
                                 <th>Progress</th>
                                 <th>Status</th>
+                                <th style="text-align: center;" scope="col">Created at</th>
                                 <th style="text-align: center;">Action</th>
 
                             </tr>
@@ -72,20 +73,30 @@
                                     <td>
                                         @include('Admin.include.show_project_status')
                                     </td>
+                                    <td>
+                                        {{ $project_detail->created_at->diffForHumans() }}
+                                    </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
                                             href="{{ route('show', $project_detail->DETAIL_ID) }}">
                                             <i class="bi bi-eye" style="font-size: 25;"></i>
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
-                                            <a class="btn btn-success" data-toggle="tooltip" title="approve"
-                                                href="{{ route('project.aprove', $project_detail->DETAIL_ID) }}">
-                                                <i class='fas fa-check-circle'></i></a>
+                                            <form style="display: inline-block" method="GET"
+                                                action="{{ route('project.aprove', $project_detail->DETAIL_ID) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="GET">
+                                                <button type="submit"
+                                                    class="btn btn-xs btn-success btn-flat show-alert-delete-box "
+                                                    data-toggle="tooltip" title='Approve'><i
+                                                        class='fas fa-check-circle'></i></button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -101,6 +112,25 @@
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
+     $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to active  this user?",
+            text: "If you active this, it will be gone forever.",
+            icon: "success",
+            type: "success",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
     $(document).ready(function() {
         $('#example').DataTable();
     });

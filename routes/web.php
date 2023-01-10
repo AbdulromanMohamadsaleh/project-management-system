@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
-Route::get('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
+Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
 
 ###########################  User  ###########################
 Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
@@ -63,7 +63,7 @@ Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 
 ###########################  Project  ###########################
 Route::group(
-    ['middleware' => ['auth']],
+    ['middleware' => ['auth','IsActiveUser']],
     function () {
 
         Route::get('/table', [ProjectController::class, 'Table'])->name('table');

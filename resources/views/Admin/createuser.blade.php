@@ -127,11 +127,21 @@
                                     <td>{{ $logins->POSITION }}
                                     <td>
                                         @if ($logins->IS_ACTIVE == 0)
-                                        <a class="btn btn-success" data-toggle="tooltip" title="approve"
-                                        href="{{ route('activeuser', $logins->LOGIN_ID) }}">
-                                        <i class='fas fa-check-circle'></i></a>
+                                        <form style="display: inline-block" method="POST"
+                                                action="{{ route('activeuser', $logins->LOGIN_ID) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="POST">
+                                                <button type="submit"
+                                                    class="btn  btn-success  show-alert-delete-box "
+                                                    data-toggle="tooltip" title='ACTIVE'><i class='fas fa-check-circle'></i></button>
+                                         </form>
+                                    @else
+                                    <span class="badge bg-success">Active</span>
+
                                         @endif
+
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -171,13 +181,14 @@
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: "Are you sure you want to delete this record?",
-            text: "If you delete this, it will be gone forever.",
-            icon: "warning",
-            type: "warning",
+            title: "Are you sure you want to active  this user?",
+            text: "If you active this, it will be gone forever.",
+            icon: "success",
+            type: "success",
             buttons: ["Cancel", "Yes!"],
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
+            text-align: 'center',
             confirmButtonText: 'Yes, delete it!'
         }).then((willDelete) => {
             if (willDelete) {

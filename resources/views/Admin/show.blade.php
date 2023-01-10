@@ -197,8 +197,11 @@
                                     </td>
                                     <td style="text-align: left">
                                         <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
-                                        <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt"
-                                                style="font-size: 25;"></i></button>
+                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                                            <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt"
+                                                    style="font-size: 25;"></i></button>
+                                        @endif
+
                                     </td>
                                     <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
                                     <td></td>
@@ -221,56 +224,58 @@
                                     <td></td>
                                     <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
                                         {{ $task->TASK_NAME }} </td>
-                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }} <button type="button"
-                                            class="btn btn-warning btn-sm2" data-bs-toggle="modal"
-                                            data-bs-target="#Modal{{ $task->TASK_ID }}">
-                                            <i class="fas fa-pencil-alt" style="font-size: 15px;">
-                                            </i></button>
+                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}
+                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                                            <button type="button" class="btn btn-warning btn-sm2"
+                                                data-bs-toggle="modal" data-bs-target="#Modal{{ $task->TASK_ID }}">
+                                                <i class="fas fa-pencil-alt" style="font-size: 15px;">
+                                                </i></button>
 
-                                        <!-- The Modal -->
-                                        <div class="modal" id="Modal{{ $task->TASK_ID }}">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
+                                            <!-- The Modal -->
+                                            <div class="modal" id="Modal{{ $task->TASK_ID }}">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
 
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Edit Category</h4>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <!-- Modal body -->
-                                                    <div class="modal-body">
-                                                        <form id="signUpForm" method="post" {{-- action="{{ route('task.update', $task->TASK_ID) }}" --}}>
-                                                            @csrf
-                                                            {{-- Project Name / Target --}}
-                                                            <div class="row mb-5 mb-sm-0">
-                                                                <div class="col-md-6 mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2"
-                                                                        for="holyday_name">Holyday Name</label>
-                                                                    <input type="text" name="holyday_name"
-                                                                        class="form-control" id="holyday_name"
-                                                                        value="{{ $task->DAY }}">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Category</h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body">
+                                                            <form id="signUpForm" method="post" {{-- action="{{ route('task.update', $task->TASK_ID) }}" --}}>
+                                                                @csrf
+                                                                {{-- Project Name / Target --}}
+                                                                <div class="row mb-5 mb-sm-0">
+                                                                    <div class="col-md-6 mb-sm-5">
+                                                                        <label class="label-left fw-bold mb-2"
+                                                                            for="holyday_name">Holyday Name</label>
+                                                                        <input type="text" name="holyday_name"
+                                                                            class="form-control" id="holyday_name"
+                                                                            value="{{ $task->DAY }}">
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-sm-5">
+                                                                        <label class="label-left fw-bold mb-2"
+                                                                            for="target">Date Holyday</label>
+                                                                        <input type="date" name="date_holyday"
+                                                                            value="{{ $task->DAY }}"
+                                                                            class="form-control" id="target">
+                                                                    </div>
+                                                                    <button type="submit" name="submit"
+                                                                        class="btn btn-success">SAVE</button>
                                                                 </div>
-                                                                <div class="col-md-6 mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2"
-                                                                        for="target">Date Holyday</label>
-                                                                    <input type="date" name="date_holyday"
-                                                                        value="{{ $task->DAY }}"
-                                                                        class="form-control" id="target">
-                                                                </div>
-                                                                <button type="submit" name="submit"
-                                                                    class="btn btn-success">SAVE</button>
-                                                            </div>
+                                                        </div>
+                                                        <!-- end previous / next buttons -->
+                                                        </form>
                                                     </div>
-                                                    <!-- end previous / next buttons -->
-                                                    </form>
+
+                                                    <!-- Modal footer -->
+
                                                 </div>
-
-                                                <!-- Modal footer -->
-
                                             </div>
-                                        </div>
                 </div>
+                @endif
                 </td>
                 <td>1-1-2566</td>
 
@@ -278,16 +283,27 @@
 
 
                 <td>
-                    @if ($project_detail->IS_APPROVE == 1)
-                        @if ($task->STATUS == 0)
-                            <a class="btn btn-warning task" data-toggle="tooltip" title="Complete"
-                                href="{{ route('task.done', $task->TASK_ID) }}" onclick="submitResult(event)"><i
-                                    class="bi bi-check-circle"></i></a>
+                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                        @if ($project_detail->IS_APPROVE == 1)
+                            @if ($task->STATUS == 0)
+                                <form style="display: inline-block" method="GET"
+                                    action="{{ route('task.done', $task->TASK_ID) }}">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="GET">
+                                    <button style="color:white"  type="submit"
+                                        class="btn  btn-warning  show-alert-delete-box "
+                                        data-toggle="tooltip" title='Complete'><i
+                                            class='fas fa-check-circle'></i></button>
+                                </form></a>
+                            @else
+                                <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
+                                        class="bi bi-check-circle"></i></a>
+                            @endif
                         @else
-                            <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                                    class="bi bi-check-circle"></i></a>
                         @endif
                     @else
+                    @endif
+                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                     @endif
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                         <i class='fas fa-money-check-alt'></i>
@@ -329,42 +345,44 @@
                         </div>
                     </div>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        <i class='fas fa-book'></i>
-                    </button>
+                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <i class='fas fa-book'></i>
+                        </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="signUpForm" method="post" action="{{ route('category.save') }}">
-                                        @csrf
-                                        {{-- Project Name / Target --}}
-                                        <div class="row mb-5 mb-sm-0">
-                                            <div class=" mb-sm-5">
-                                                <label class="label-left fw-bold mb-2"
-                                                    for="projectName">budget</label>
-                                                <input type="text" name="category_name" class="form-control"
-                                                    id="projectName">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                            @csrf
+                                            {{-- Project Name / Target --}}
+                                            <div class="row mb-5 mb-sm-0">
+                                                <div class=" mb-sm-5">
+                                                    <label class="label-left fw-bold mb-2"
+                                                        for="projectName">budget</label>
+                                                    <input type="text" name="category_name" class="form-control"
+                                                        id="projectName">
+                                                </div>
+                                                <button type="submit" name="submit" onclick="success()"
+                                                    class="btn btn-success">SAVE</button>
                                             </div>
-                                            <button type="submit" name="submit" onclick="success()"
-                                                class="btn btn-success">SAVE</button>
-                                        </div>
+                                    </div>
+                                    <!-- end previous / next buttons -->
+                                    </form>
                                 </div>
-                                <!-- end previous / next buttons -->
-                                </form>
                             </div>
                         </div>
-                    </div>
+                    @endif
             </div>
 
 
@@ -398,6 +416,25 @@
     $(document).ready(function() {
         $('[data-toggle="toggle"]').click(function() {
             $(this).parents().next(".tbl-accordion-body").toggle();
+        });
+    });
+    $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to active  this user?",
+            text: "If you active this, it will be gone forever.",
+            icon: "success",
+            type: "success",
+            buttons: ["Yes", "Cancel!"],
+            cancelButtonColor: '#DD6B55',
+            confirmButtonColor: 'blue',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
         });
     });
 </script>
@@ -456,4 +493,5 @@
         margin-bottom: 2rem;
 
     }
+
 </style>

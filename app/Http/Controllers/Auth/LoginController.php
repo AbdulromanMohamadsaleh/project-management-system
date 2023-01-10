@@ -33,6 +33,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (Auth()->user()->POSITION == 'Admin') {
+
             return route('admin.dashboard');
         } elseif (Auth()->user() == 'Employee') {
             return route('employee.dashboard');
@@ -64,14 +65,23 @@ class LoginController extends Controller
 
         if (auth()->attempt(array('EMAIL' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->POSITION == 'Admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif (auth()->user()->POSITION == 'ProjectManager') {
-                return redirect()->route('projectManager.dashboard');
-            } elseif (auth()->user()->POSITION == 'Manager') {
-                return redirect()->route('manager.dashboard');
-            } elseif (auth()->user()->POSITION == 'Employee') {
-                return redirect()->route('employee.dashboard');
+            if (Auth::user()->IS_ACTIVE == 1) {
+
+
+                if (auth()->user()->POSITION == 'Admin') {
+                    return redirect()->route('admin.dashboard');
+                } elseif (auth()->user()->POSITION == 'ProjectManager') {
+                    return redirect()->route('projectManager.dashboard');
+                } elseif (auth()->user()->POSITION == 'Manager') {
+                    return redirect()->route('manager.dashboard');
+                } elseif (auth()->user()->POSITION == 'Employee') {
+                    return redirect()->route('employee.dashboard');
+                }
+            } else {
+                Session::flush();
+
+                Auth::logout();
+                return redirect()->route('login')->with('error', 'User Not Active');
             }
         } else {
             return redirect()->route('login')->with('error', 'Email and password are wrong');

@@ -116,4 +116,14 @@
 
 select2-dropdown
 
+.swal-footer {
+    text-align: center;
+}
+.swal-button--cancel{
+    background-color: #3AAB20;
+    color: white
+
+}
+
+
 
