@@ -201,7 +201,7 @@ class ProjectController extends Controller
 
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
 
-        $ProjectTrack = ProjectDetial::where('DETAIL_ID', $id)->update([ 'STATUS' => 'New Release,Approved,workingOn']);
+        $ProjectTrack = ProjectDetial::where('DETAIL_ID', $id)->update(['STATUS' => 'New Release,Approved,workingOn']);
         return redirect()->back();
     }
 
@@ -234,5 +234,16 @@ class ProjectController extends Controller
             'Categories' => $Categories,
             'projectTeams' => $projectTeams
         ]);
+    }
+
+
+    public function ValidateProjectName(Request $request)
+    {
+        $ProjectName = ProjectDetial::where('NAME_PROJECT', $request->projectName)->get();
+        if (count($ProjectName) > 0) {
+            return response()->json(['msg' => 'Project Name All ready Exist.', 'status' => 0]);
+        }
+
+        return response()->json(['msg' => 'Vaild Name.', 'status' => 1]);
     }
 }

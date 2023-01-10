@@ -130,6 +130,10 @@ Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('ta
 
 
 
+
+Route::get('/check-project-name/{projectName}', [ProjectController::class, 'ValidateProjectName'])->name('project.ValidateProjectName');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
