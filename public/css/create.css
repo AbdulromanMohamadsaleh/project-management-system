@@ -56,7 +56,7 @@
     background-color: #f3f3f3;
 }
 #signUpForm .form-header .stepIndicator.active::after {
-    background-color: #a7ede8;
+    background-color: #a7ede8 !important;
 }
 #signUpForm .form-header .stepIndicator.finish::after {
     background-color: #009688;

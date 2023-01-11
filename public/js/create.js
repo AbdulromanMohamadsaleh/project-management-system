@@ -10,6 +10,7 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "none";
     } else {
     document.getElementById("prevBtn").style.display = "inline";
+
     }
     if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
@@ -21,18 +22,21 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("step");
     // Exit the function if any field in the current tab is invalid:
     if (n == 1 && !validateForm()) return false;
     // Hide the current tab:
     x[currentTab].style.display = "none";
+
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
     document.getElementById("signUpForm").submit();
+    x[currentTab].style.display="block"
     return false;
     }
     // Otherwise, display the correct tab:
@@ -101,6 +105,7 @@ function fixStepIndicator(n) {
     for (i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
     // x[i].className = x[i].className.replace(" finish", "");
+
     }
     //... and adds the "active" class on the current step:
     // x[n].className += " active finish ";
