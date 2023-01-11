@@ -66,8 +66,12 @@
                         @endif
                     @endif
                     <details class="panel">
+                        @php
+                            $approveData = explode(',', $ProjectTrack->APPROVED_BY);
+                        @endphp
                         <summary>Approve</summary>
-                        <p><strong>Approved By: </strong> Manager <br><br>
+                        <p><strong>Approved By: </strong> {{ $approveData[0] }}
+                        <p><strong>Approved Date: </strong> {{ $approveData[1] }}
                     </details>
                 </li>
 
@@ -108,7 +112,8 @@
                                                     <div>
                                                         {{ $countAct . '. ' . $act->ACTIVITY_NAME }}
                                                     </div>
-                                                    <div >
+                                                    <div>
+
                                                         @if ($act->STATUS == 0)
                                                             {{-- <i class="bi bi-circle icon-1-5rem "></i> --}}
                                                         @else
@@ -132,10 +137,22 @@
                                                             <p class="my-1 py-1">
                                                                 {{ ++$countTask . '. ' . $task->TASK_NAME }}</p>
                                                         </div>
-                                                        <div style="align-items: center;" class="col-6 d-flex  justify-content-end  pe-4">
+                                                        <div style="align-items: center;"
+                                                            class="col-6 d-flex  justify-content-end  pe-4">
                                                             @if ($task->STATUS == 0)
                                                                 <i class="bi bi-x-circle-fill icon-red"></i>
                                                             @else
+                                                                @php
+                                                                    $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                                                                @endphp
+                                                                <div class="me-3">
+                                                                    <div>
+                                                                        {{ $TASK_TRACKER[0] }}
+                                                                    </div>
+                                                                    <div>
+                                                                        {{ $TASK_TRACKER[1] }}
+                                                                    </div>
+                                                                </div>
                                                                 <i class="bi bi-check-circle-fill icon-green "></i>
                                                             @endif
                                                         </div>

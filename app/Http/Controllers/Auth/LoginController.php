@@ -81,7 +81,7 @@ class LoginController extends Controller
                 Session::flush();
 
                 Auth::logout();
-                return redirect()->route('login')->with('error', 'User Not Active');
+                return redirect()->route('login')->with('errorNotActive', 'User Not Active');
             }
         } else {
             return redirect()->route('login')->with('error', 'Email and password are wrong');

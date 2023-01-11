@@ -281,10 +281,9 @@
                                     action="{{ route('task.done', $task->TASK_ID) }}">
                                     @csrf
                                     <input name="_method" type="hidden" value="GET">
-                                    <button style="color:white"  type="submit"
-                                        class="btn  btn-warning  show-alert-delete-box "
-                                        data-toggle="tooltip" title='Complete'><i
-                                            class='fas fa-check-circle'></i></button>
+                                    <button style="color:white" type="submit"
+                                        class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
+                                        title='Complete'><i class='fas fa-check-circle'></i></button>
                                 </form></a>
                             @else
                                 <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
@@ -381,7 +380,17 @@
             </td>
             <td>
                 @if ($task->STATUS == 1)
-                    {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                    @php
+                        $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                    @endphp
+                    <div class="me-3">
+                        <div>
+                            {{ $TASK_TRACKER[0] }}
+                        </div>
+                        <div>
+                            {{ $TASK_TRACKER[1] }}
+                        </div>
+                    </div>
                 @endif
             </td>
             <td></td>
@@ -484,6 +493,7 @@
         margin-bottom: 2rem;
 
     }
+
     .swal-footer {
     text-align: center;
 }
@@ -491,93 +501,5 @@
     background-color: #3AAB20;
     color: white
 
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: "Poppins", sans-serif;
-}
-
-.container {
-  width: 100%;
-}
-
-.stepper-wrapper {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.stepper-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
-}
-
-.stepper-item::before {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #ccc;
-  width: 100%;
-  top: 20px;
-  left: -50%;
-  z-index: 2;
-}
-
-.stepper-item::after {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #ccc;
-  width: 100%;
-  top: 20px;
-  left: 50%;
-  z-index: 2;
-}
-
-.stepper-item .step-counter {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #ccc;
-  margin-bottom: 6px;
-}
-
-.stepper-item.active {
-  font-weight: bold;
-}
-
-.stepper-item.completed .step-counter {
-  background-color: #4bb543;
-}
-
-.stepper-item.completed::after {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #4bb543;
-  width: 100%;
-  top: 20px;
-  left: 50%;
-  z-index: 3;
-}
-
-.stepper-item:first-child::before {
-  content: none;
-}
-.stepper-item:last-child::after {
-  content: none;
 }
 </style>

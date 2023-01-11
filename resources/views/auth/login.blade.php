@@ -70,10 +70,14 @@
     </div>
 </div>
 @endsection --}}
+@include('include.header')
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
+            @if (Session::has('errorNotActive'))
+                <p class="text-center alert alert-danger">{{ Session::get('errorNotActive') }}</p>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <span class="login100-form-title p-b-26">
@@ -126,19 +130,19 @@
                 </div>
             </form>
             <br>
-            <div class="mt-3">
+            <div class="mt-1">
                 <b>Email: admin@admin.com </b>
                 <br>
                 <b>Password: 012345678 </b>
             </div>
-            <br>
-            <div class="mt-3">
+
+            <div class="mt-1">
                 <b>Email: manager@manager.com </b>
                 <br>
                 <b>Password: 012345678 </b>
             </div>
-            <br>
-            <div class="mt-3">
+
+            <div class="mt-1">
                 <b>Email: user@gmail.com</b>
                 <br>
                 <b>Password: 012345678 </b>

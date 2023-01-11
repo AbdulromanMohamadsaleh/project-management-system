@@ -1,6 +1,8 @@
 
 let IncludeWeekend = "no";
 
+var TotalDaysToComplateProject = 0;
+
 var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
 
 HolyDaysDate = HolyDays.map(h => h.HOLYDAY_DATE);
@@ -163,6 +165,8 @@ function updateEndDateGeneral(a) {
 
 
 function addDays(date, days) {
+    TotalDaysToComplateProject = days;
+
     if (days > 10000 || days == 0 || days == "")
         return new Date();
 
@@ -190,6 +194,7 @@ function addDays(date, days) {
 
 function addMonths(date, month) {
     day = 30 * month;
+    TotalDaysToComplateProject = day;
     if (day > 10000 || day == 0 || day == "")
         return new Date();
 
@@ -214,6 +219,7 @@ function addMonths(date, month) {
 
 function addWeeks(date, weeks) {
     day = 7 * weeks;
+    TotalDaysToComplateProject = day;
     if (day > 10000 || day == 0 || day == "")
         return new Date();
 
