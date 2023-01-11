@@ -25,9 +25,7 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with("track")->get();
-        dd()
-
+        $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->get();
         return view('Admin.table', ['project_details' => $project_details]);
     }
 
