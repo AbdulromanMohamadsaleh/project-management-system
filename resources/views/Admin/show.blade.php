@@ -20,12 +20,12 @@
     <!-- Content Start -->
     <div class="content">
         <!-- Navbar Start -->
-        @include('include.navbar')
+        @include('include.navbar')<br>
 
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <dt><b class="border-bottom border-primary">View Project</b></dt>
+                    <dt><b class="border-bottom border-primary mt-1">View Project</b></dt>
                 </div>
                 <div class="col-sm-6">
                 </div>
@@ -35,33 +35,24 @@
 
             <!-- Recent Sales Start -->
             <div class="container mt-3 ">
-                <div class="horizontal-timeline">
-
-                    <ul class="list-inline items">
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                @if ($project_detail->STATUS == 'New Release')
-                                    <div class="event-date badge bg-info"> New Release</div>
-                                @endif
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-success">Approved</div>
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-danger">Progress</div>
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-warning">Complete</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <div class="stepper-wrapper">
+                    <div class="stepper-item completed">
+                      <div class="step-counter">1</div>
+                      <div class="step-name">New Release</div>
+                    </div>
+                    <div class="stepper-item completed">
+                      <div class="step-counter">2</div>
+                      <div class="step-name">Approved</div>
+                    </div>
+                    <div class="stepper-item active">
+                      <div class="step-counter">3</div>
+                      <div class="step-name">Progress</div>
+                    </div>
+                    <div class="stepper-item">
+                      <div class="step-counter">4</div>
+                      <div class="step-name">Completed</div>
+                    </div>
+                  </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -500,5 +491,93 @@
     background-color: #3AAB20;
     color: white
 
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 100%;
+}
+
+.stepper-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.stepper-item::before {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: -50%;
+  z-index: 2;
+}
+
+.stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 2;
+}
+
+.stepper-item .step-counter {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 6px;
+}
+
+.stepper-item.active {
+  font-weight: bold;
+}
+
+.stepper-item.completed .step-counter {
+  background-color: #4bb543;
+}
+
+.stepper-item.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #4bb543;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 3;
+}
+
+.stepper-item:first-child::before {
+  content: none;
+}
+.stepper-item:last-child::after {
+  content: none;
 }
 </style>
