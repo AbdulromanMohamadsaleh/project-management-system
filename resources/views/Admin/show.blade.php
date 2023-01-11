@@ -427,7 +427,7 @@
             text: "If you active this, it will be gone forever.",
             icon: "success",
             type: "success",
-            buttons: ["Yes", "Cancel!"],
+            buttons: ["Cancel", "Yes!"],
             cancelButtonColor: '#DD6B55',
             confirmButtonColor: 'blue',
             confirmButtonText: 'Yes, delete it!'
@@ -493,5 +493,12 @@
         margin-bottom: 2rem;
 
     }
+    .swal-footer {
+    text-align: center;
+}
+.swal-button--confirm{
+    background-color: #3AAB20;
+    color: white
 
+}
 </style>
