@@ -48,15 +48,25 @@ function validateForm() {
 
     for (i = 0; i < y.length; i++) {
 
+
+
             // If a field is empty... taskDuration
             if ((y[i].value == "" && y[i].name != "taskDuration[]")||(IsDate1AfterDate2()&&y[i].type=="date")) {
                 // add an "invalid" class to the field:
-                y[i].className += " invalid";
+                if(!y[i].classList.contains('is-invalid')){
+
+                    y[i].className += " invalid is-invalid";
+                }
                 // and set the current valid status to false
+
                 valid = false;
             }else{
+
                 y[i].classList.remove("invalid")
+                y[i].classList.remove("is-invalid")
             }
+
+
 
         }
 
@@ -67,14 +77,17 @@ function validateForm() {
         if (selectinput[i].value == "") {
             // add an "invalid" class to the field:
             selectinput[i].style.borderColor = "#ffaba5";
-
+            selectinput[i].classList.add("is-invalid")
             // and set the current valid status to false
             valid = false;
         }else{
+            selectinput[i].classList.remove("is-invalid")
            selectinput[i].style.borderColor = "#e3e3e3";
         }
     }
     // If the valid status is true, mark the step as finished and valid:
+    valid = IsProjectNameValid && valid;
+
     if (valid) {
     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
     }
@@ -168,3 +181,81 @@ function IsDate1AfterDate2() {
     //calculate time difference
     return date1.getTime() > date2.getTime();
 }
+
+
+
+
+
+// Validate Project Name
+let projectNameY = document.getElementById('projectName');
+let feedbackProjectName = document.getElementById('feedbackProjectName');
+let IsProjectNameValid = false;
+
+projectNameY.addEventListener('input', CheckIsProjectNameExist);
+
+function CheckIsProjectNameExist(e) {
+
+    // console.log(this.value)
+
+    // (A) GET FORM DATA
+    // var data = new FormData();
+    // data.append("projectName", document.getElementById("projectName").value);
+
+    let pp = document.getElementById("projectName").value.trim()
+
+    if (!pp) {
+        return;
+    }
+
+    let urll = `http://127.0.0.1:8000/check-project-name/${pp}`
+    // (B) INIT FETCH POST
+
+
+    fetch(urll)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status == 0) {
+                feedbackProjectName.classList.add('invv')
+                projectNameY.classList.add('is-invalid')
+                feedbackProjectName.innerHTML = data.msg
+                IsProjectNameValid = false;
+
+            } else {
+                feedbackProjectName.classList.remove('invv')
+                projectNameY.classList.remove('is-invalid')
+                feedbackProjectName.innerHTML = ""
+                // feedbackProjectName.style.color="green"
+                IsProjectNameValid = true;
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+}
+
+
+let targetInput = document.getElementById('target');
+
+targetInput.addEventListener('input',(e)=>{
+    let targetInvalid = document.getElementById('target-invalid');
+    if(e.target.value.length<5){
+        targetInvalid.innerHTML="Target Must be More Than 5 Characters";
+        targetInvalid.classList.add("invv");
+        if(!e.target.classList.contains("is-invalid")){
+            e.target.classList.add("is-invalid");
+        }
+
+    }else{
+        if(e.target.classList.contains("is-invalid")){
+            e.target.classList.remove("is-invalid");
+            targetInvalid.innerHTML="";
+            targetInvalid.classList.remove("invv");
+        }
+    }
+} );
+
+function ValidateInputs(){
+
+}
+

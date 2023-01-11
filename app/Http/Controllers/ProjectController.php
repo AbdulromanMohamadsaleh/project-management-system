@@ -239,9 +239,23 @@ class ProjectController extends Controller
 
     public function ValidateProjectName(Request $request)
     {
+        // $request->validate([
+        //     'projectName' => 'required|unique:prj_detail,NAME_PROJECT',
+        //     'reason' => 'string|min:10',
+        //     'objectve' => 'string|min:10',
+        //     'location' => 'string',
+        //     'target' => 'string|min:10',
+        //     'expectedRresults' => 'string|min:10',
+        //     'projectStart' => 'date',
+        //     'projectEnd' => 'date|after:projectStart',
+        //     'category' => 'exists:prj_category,CATEGORY_ID',
+        //     'projectManager' => 'exists:prj_project_login,LOGIN_ID',
+        // ]);
+
         $ProjectName = ProjectDetial::where('NAME_PROJECT', $request->projectName)->get();
+
         if (count($ProjectName) > 0) {
-            return response()->json(['msg' => 'Project Name All ready Exist.', 'status' => 0]);
+            return response()->json(['msg' => 'The project name has already been taken.', 'status' => 0]);
         }
 
         return response()->json(['msg' => 'Vaild Name.', 'status' => 1]);

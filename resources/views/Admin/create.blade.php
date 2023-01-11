@@ -36,19 +36,31 @@
                             <!-- step one -->
                             <div class="step ">
                                 <style>
-                                    .invv {
-                                        border-color: red !important;
+                                    .selectBorderInvalid {
+                                        border-color: #dc3545 !important;
+                                        box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%) !important
                                     }
 
+                                    .invv {
+                                        font-weight: bold !important;
+                                        margin-top: 0.25rem !important;
+                                        font-size: .875em !important;
+                                        color: #dc3545 !important;
+                                    }
+
+
                                     .suc {
-                                        color: green
+                                        font-weight: bold !important;
+                                        margin-top: 0.25rem !important;
+                                        font-size: .875em !important;
+                                        color: green !important;
                                     }
                                 </style>
                                 {{-- Project Name / Target --}}
                                 <div class="row mb-5 mb-sm-0 ">
                                     <div class="col-md-6 mb-sm-5 ">
                                         <label class="label-left fw-bold mb-2" for="projectName">Project Name</label>
-                                        <input id="projectName" type="text" name="projectName"
+                                        <input required id="projectName" type="text" name="projectName"
                                             value="{{ old('projectName') }}"
                                             class="form-control  @error('projectName') is-invalid @enderror">
                                         @error('projectName')
@@ -59,11 +71,12 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="target">Target</label>
-                                        <input type="text" name="target" value="{{ old('target') }}"
+                                        <input required type="text" name="target" value="{{ old('target') }}"
                                             class="form-control @error('target') is-invalid @enderror " id="target">
                                         @error('target')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                        <div id="target-invalid"></div>
                                     </div>
                                 </div>
 
@@ -72,7 +85,7 @@
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2 " for="projectStart">Start Project
                                             Date</label>
-                                        <input type="date"
+                                        <input required type="date"
                                             class="form-control @error('projectStart') is-invalid @enderror"
                                             id="projectStart" name="projectStart">
                                         @error('projectStart')
@@ -96,8 +109,9 @@
                                         <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
-                                                <input checked class="form-check-input" name="projectDurationFormat"
-                                                    type="radio" id="day" value="day">
+                                                <input required checked class="form-check-input"
+                                                    name="projectDurationFormat" type="radio" id="day"
+                                                    value="day">
                                                 <label checked class="form-check-label" for="day">Day</label>
                                             </div>
                                             <div class="label-left col form-check form-check-inline">
@@ -110,9 +124,10 @@
                                                     type="radio" id="month" value="month">
                                                 <label class="form-check-label" for="month">Month</label>
                                             </div>
-                                            <input class="form-check-input" hidden name="totalDate" type="text"
-                                                value="0">
-                                            <input type="number" min='0' max='10000000'
+                                            {{-- <input class="form-check-input" hidden name="totalDate" type="text"
+                                                value="0"> --}}
+
+                                            <input required type="number" min='0' max='10000000'
                                                 class="form-control mt-3" id="Duration" name="projectDuration"
                                                 value="{{ old('projectDuration') }}">
                                         </div>
@@ -216,7 +231,7 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="Category" class="label-left fw-bold mb-2">Category</label>
-                                        <select name="category" id="Category"
+                                        <select required name="category" id="Category"
                                             class="form-select  @error('category') is-invalid @enderror">
                                             <option selected value="">Choose...</option>
                                             @if (count($Categories) > 0)
@@ -239,7 +254,7 @@
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectManager" class="label-left fw-bold mb-2">Project
                                             Manager</label>
-                                        <select name="projectManager" id="projectManager"
+                                        <select required name="projectManager" id="projectManager"
                                             class="form-select @error('projectManager') is-invalid @enderror">
                                             <option selected value="">Choose...</option>
                                             @if (count($projectManagers) > 0)
@@ -257,7 +272,8 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label>
-                                        <select style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
+                                        <select required
+                                            style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
                                             class="form-select js-example-basic-multiple" id="projectTeam"
                                             name="projectTeam[]" multiple="multiple">
                                             @if (count($team) > 0)
@@ -281,20 +297,33 @@
                                 <p class="text-center mb-4">Add Activity</p>
 
                                 {{-- 1 activity --}}
-                                <div class="row " firstActivity id="activity-1">
+                                <div class="row col-12" firstActivity id="activity-1">
                                     <div class="mb-3 col-10">
-                                        <input class="form-control form-control-lg mb-3" name="activityName[]"
-                                            type="text" placeholder="Activity"
-                                            aria-label=".form-control-lg example">
-                                        <input type="text" hidden class="taskCounter" name="taskCounter[]"
-                                            value="1">
+                                        {{-- <label for="">1</label> --}}
+
+
+                                        <div class="input-group mb-3">
+                                            <span class=" me-3 mt-2 fs-5" id="numbering">1</span>
+                                            <input class="form-control form-control-lg mb-3" name="activityName[]"
+                                                type="text" placeholder="Activity" id="ActivityBorder"
+                                                aria-label=".form-control-lg example">
+                                            <input type="text" hidden class="taskCounter" name="taskCounter[]"
+                                                value="1">
+                                        </div>
+
                                         <!-- Tasks -->
                                         <div class="taskWrap">
 
+
                                             <div class="row d-flex justify-content-end ">
                                                 <div class="mb-3 col-7">
-                                                    <input class="form-control form-control-lg mb-3" name="taskName[]"
-                                                        type="text" placeholder="Task" aria-label="Task">
+                                                    <div class="input-group mb-3">
+                                                        <span class=" me-3 mt-2 fs-5" id="numberingTask">1.1</span>
+                                                        <input id="TaskBorder"
+                                                            class="form-control form-control-lg mb-3"
+                                                            name="taskName[]" type="text" placeholder="Task"
+                                                            aria-label="Task">
+                                                    </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <input class="form-control form-control-lg mb-3"
@@ -306,7 +335,7 @@
                                                             class="bi bi-trash"></i></button>
                                                 </div>
                                                 <div class="mb-3 col-1 ttt task-1">
-                                                    <button type="button" title="New Task"
+                                                    <button type="button" title="New Task" onclick="Numbreings()"
                                                         class="btn btn-success btn-add-task">+</button>
                                                 </div>
                                             </div>
@@ -315,7 +344,7 @@
                                     </div>
 
                                     <div class="col-1  ">
-                                        <button type="button" id="btnAddNewActivity"
+                                        <button type="button" onclick="Numbreings()" id="btnAddNewActivity"
                                             class="btn btn-success add-task"title="New Activity">+</button>
                                     </div>
                                 </div>
@@ -384,48 +413,68 @@
 <script src="{{ asset('js/DateF.js') }}"></script>
 
 <script>
-    let projectNameY = document.getElementById('projectName');
-    let feedbackProjectName = document.getElementById('feedbackProjectName');
+    // let projectNameY = document.getElementById('projectName');
+    // let feedbackProjectName = document.getElementById('feedbackProjectName');
 
-    projectNameY.addEventListener('input', CheckIsProjectNameExist);
+    // projectNameY.addEventListener('input', CheckIsProjectNameExist);
 
-    function CheckIsProjectNameExist(e) {
+    // function CheckIsProjectNameExist(e) {
 
-        // console.log(this.value)
+    //     // console.log(this.value)
 
-        // (A) GET FORM DATA
-        // var data = new FormData();
-        // data.append("projectName", document.getElementById("projectName").value);
+    //     // (A) GET FORM DATA
+    //     // var data = new FormData();
+    //     // data.append("projectName", document.getElementById("projectName").value);
 
-        let pp = document.getElementById("projectName").value.trim()
+    //     let pp = document.getElementById("projectName").value.trim()
 
-        if (!pp) {
-            return;
-        }
+    //     if (!pp) {
+    //         return;
+    //     }
 
-        let urll = `http://127.0.0.1:8000/check-project-name/${pp}`
-        // (B) INIT FETCH POST
+    //     let urll = `http://127.0.0.1:8000/check-project-name/${pp}`
+    //     // (B) INIT FETCH POST
 
 
-        fetch(urll)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.msg)
-                if (data.status == 0) {
-                    projectNameY.classList.add('invv')
-                    feedbackProjectName.innerHTML = data.msg
-                    feedbackProjectName.style.color = "red"
-                } else {
-                    projectNameY.classList.remove('invv')
-                    feedbackProjectName.innerHTML = data.msg
-                    feedbackProjectName.style.color = "green"
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    //     fetch(urll)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.status == 0) {
+    //                 feedbackProjectName.classList.add('invv')
+    //                 projectNameY.classList.add('is-invalid')
+    //                 feedbackProjectName.innerHTML = data.msg
 
-    }
+    //             } else {
+    //                 feedbackProjectName.classList.remove('invv')
+    //                 projectNameY.classList.remove('is-invalid')
+    //                 feedbackProjectName.innerHTML = data.msg
+    //                 feedbackProjectName.style.color="green"
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+
+    // }
+
+    // activityBorder = document.querySelectorAll('[id = "ActivityBorder"]'),
+    //     numberings = document.querySelectorAll('[id = "numbering"]'),
+    //     btnAddNewActivity = document.getElementById('btnAddNewActivity');
+    // newRow = document.getElementById('newrow');
+
+    // btnAddNewActivity.addEventListener('click', () => {
+    //     activityBorder = document.querySelectorAll('[id = "ActivityBorder"]'),
+    //         activityBorder.forEach((act, ind) => {
+    //             numberings = document.querySelectorAll('[id = "numbering"]'),
+    //                 numberings[ind].innerHTML = ind + 1;
+    //         });
+
+
+    // });
+
+
+
+
 </script>
 
 </html>
