@@ -1,7 +1,7 @@
 
 let IncludeWeekend = "no";
 
-var TotalDaysToComplateProject = 0;
+
 
 var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
 

@@ -66,12 +66,17 @@
                         @endif
                     @endif
                     <details class="panel">
-                        @php
-                            $approveData = explode(',', $ProjectTrack->APPROVED_BY);
-                        @endphp
-                        <summary>Approve</summary>
-                        <p><strong>Approved By: </strong> {{ $approveData[0] }}
-                        <p><strong>Approved Date: </strong> {{ $approveData[1] }}
+                        @if ($project_detail->IS_APPROVE == 1)
+                            @php
+                                $approveData = explode(',', $ProjectTrack->APPROVED_BY);
+                            @endphp
+                            <summary>Approve</summary>
+                            <p><strong>Approved By: </strong> {{ $approveData[0] }}
+                            <p><strong>Approved Date: </strong> {{ $approveData[1] }}
+                            @else
+                                <summary>Approve</summary>
+                            <p>Waiting To Approve</p>
+                        @endif
                     </details>
                 </li>
 

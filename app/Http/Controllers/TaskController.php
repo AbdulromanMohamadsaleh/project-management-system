@@ -23,8 +23,9 @@ class TaskController extends Controller
         $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
         $totalTasks = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
 
+        $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
+
         if (($completeTasksCounter - 1) >= 0) {
-            $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
             $Project->STATUS = "New Release,Approved,Progress,workingOn";
             $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,Progress,workingOn', 'STATUS' => 2]);
 
@@ -32,11 +33,13 @@ class TaskController extends Controller
         }
 
         if ($completeTasksCounter == $totalTasks) {
-            $Task->activity->STATUS = 1;
-            $Task->activity->save();
+            $Project->STATUS = "New Release,Approved,Progress,Complete";
+            $Project->save();
+            // $Task->activity->STATUS = 1;
+            // $Task->activity->save();
         } else {
-            $Task->activity->STATUS = 0;
-            $Task->activity->save();
+            // $Task->activity->STATUS = 0;
+            // $Task->activity->save();
         }
 
 
