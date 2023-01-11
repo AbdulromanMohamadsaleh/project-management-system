@@ -20,12 +20,12 @@
     <!-- Content Start -->
     <div class="content">
         <!-- Navbar Start -->
-        @include('include.navbar')
+        @include('include.navbar')<br>
 
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <dt><b class="border-bottom border-primary">View Project</b></dt>
+                    <dt><b class="border-bottom border-primary mt-1">View Project</b></dt>
                 </div>
                 <div class="col-sm-6">
                 </div>
@@ -35,33 +35,24 @@
 
             <!-- Recent Sales Start -->
             <div class="container mt-3 ">
-                <div class="horizontal-timeline">
-
-                    <ul class="list-inline items">
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                @if ($project_detail->STATUS == 'New Release')
-                                    <div class="event-date badge bg-info"> New Release</div>
-                                @endif
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-success">Approved</div>
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-danger">Progress</div>
-                            </div>
-                        </li>
-                        <li class="list-inline-item items-list">
-                            <div class="px-5">
-                                <div class="event-date badge bg-warning">Complete</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <div class="stepper-wrapper">
+                    <div class="stepper-item completed">
+                      <div class="step-counter">1</div>
+                      <div class="step-name">New Release</div>
+                    </div>
+                    <div class="stepper-item completed">
+                      <div class="step-counter">2</div>
+                      <div class="step-name">Approved</div>
+                    </div>
+                    <div class="stepper-item active">
+                      <div class="step-counter">3</div>
+                      <div class="step-name">Progress</div>
+                    </div>
+                    <div class="stepper-item">
+                      <div class="step-counter">4</div>
+                      <div class="step-name">Completed</div>
+                    </div>
+                  </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -504,11 +495,11 @@
     }
 
     .swal-footer {
-        text-align: center;
-    }
+    text-align: center;
+}
+.swal-button--confirm{
+    background-color: #3AAB20;
+    color: white
 
-    .swal-button--confirm {
-        background-color: #3AAB20;
-        color: white
-    }
+}
 </style>
