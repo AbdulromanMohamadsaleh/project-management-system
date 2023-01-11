@@ -290,10 +290,9 @@
                                     action="{{ route('task.done', $task->TASK_ID) }}">
                                     @csrf
                                     <input name="_method" type="hidden" value="GET">
-                                    <button style="color:white"  type="submit"
-                                        class="btn  btn-warning  show-alert-delete-box "
-                                        data-toggle="tooltip" title='Complete'><i
-                                            class='fas fa-check-circle'></i></button>
+                                    <button style="color:white" type="submit"
+                                        class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
+                                        title='Complete'><i class='fas fa-check-circle'></i></button>
                                 </form></a>
                             @else
                                 <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
@@ -390,7 +389,17 @@
             </td>
             <td>
                 @if ($task->STATUS == 1)
-                    {{ date('d-m-Y', strtotime($task->COPLATE_TIME)) }}
+                    @php
+                        $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                    @endphp
+                    <div class="me-3">
+                        <div>
+                            {{ $TASK_TRACKER[0] }}
+                        </div>
+                        <div>
+                            {{ $TASK_TRACKER[1] }}
+                        </div>
+                    </div>
                 @endif
             </td>
             <td></td>
@@ -493,12 +502,13 @@
         margin-bottom: 2rem;
 
     }
-    .swal-footer {
-    text-align: center;
-}
-.swal-button--confirm{
-    background-color: #3AAB20;
-    color: white
 
-}
+    .swal-footer {
+        text-align: center;
+    }
+
+    .swal-button--confirm {
+        background-color: #3AAB20;
+        color: white
+    }
 </style>

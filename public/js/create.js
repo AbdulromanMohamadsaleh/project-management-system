@@ -100,9 +100,12 @@ function fixStepIndicator(n) {
     var i, x = document.getElementsByClassName("stepIndicator");
     for (i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
+    // x[i].className = x[i].className.replace(" finish", "");
     }
     //... and adds the "active" class on the current step:
-    x[n].className += " active";
+    // x[n].className += " active finish ";
+        x[n].className += " active  ";
+
 }
 
 

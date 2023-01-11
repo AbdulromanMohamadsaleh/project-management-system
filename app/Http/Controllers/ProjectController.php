@@ -53,6 +53,7 @@ class ProjectController extends Controller
         })->first();
 
 
+
         // dd($project_detail->activity);
         $sum = 0;
         foreach ($project_detail->activity as $act) {
@@ -73,9 +74,11 @@ class ProjectController extends Controller
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
+        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+
         $status = explode(',', $ProjectDetail->STATUS);
 
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'status' => $status]);
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status]);
     }
 
     public function Save(ProjectStoreRequest $request)
@@ -201,7 +204,7 @@ class ProjectController extends Controller
 
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
 
-        $ProjectTrack = ProjectDetial::where('DETAIL_ID', $id)->update(['STATUS' => 'New Release,Approved,workingOn']);
+        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
         return redirect()->back();
     }
 
