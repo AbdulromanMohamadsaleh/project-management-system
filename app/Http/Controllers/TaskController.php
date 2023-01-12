@@ -35,29 +35,33 @@ class TaskController extends Controller
         }
 
         // Calculate Precentage
-        // $totalTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks")->first();
-        // $totalTaskOfTheProject = $totalTaskOfTheProject->tasks->count();
+        $totalTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks")->first();
 
-        // $totalCompleteTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks",function($q){
-        //     $q->where('STATUS', 1)->get();
-        // })->first();
+        $totalCompleteTaskOfTheProject = 0;
+
+        foreach ($totalTaskOfTheProject->tasks as $task) {
+            if ($task->STATUS == 1)
+                $totalCompleteTaskOfTheProject++;
+        }
+
+        $totalTaskOfTheProject = $totalTaskOfTheProject->tasks->count();
 
         // $totalTaskOfTheProject->tasks->count();
-        // dd($totalCompleteTaskOfTheProject->count());
-        // $precentage = floor(($totalCompleteTaskOfTheProject * 100) / $totalTaskOfTheProject);
-        // $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+        // dd($totalTaskOfTheProject);
+        $precentage = floor(($totalCompleteTaskOfTheProject * 100) / $totalTaskOfTheProject);
+        $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
 
-        // $ProjectDetialg->PROJECT_PERCENTAGE = $precentage;
-        // $ProjectDetialg->save();
+        $ProjectDetialg->PROJECT_PERCENTAGE = $precentage;
+        $ProjectDetialg->save();
 
         if ($completeTasksCounter == $totalTasks) {
             $Project->STATUS = "New Release,Approved,Progress,Complete";
             $Project->save();
-            // $Task->activity->STATUS = 1;
-            // $Task->activity->save();
+            $Task->activity->STATUS = 1;
+            $Task->activity->save();
         } else {
-            // $Task->activity->STATUS = 0;
-            // $Task->activity->save();
+            $Task->activity->STATUS = 0;
+            $Task->activity->save();
         }
 
 

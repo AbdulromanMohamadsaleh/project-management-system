@@ -34,6 +34,11 @@ function nextPrev(n) {
 
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
+
+    if (currentTab == x.length){
+        x[currentTab-1].style.display="block"
+    }
+
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
@@ -47,6 +52,8 @@ function nextPrev(n) {
 
 function validateForm() {
     // This function deals with validation of the form fields
+    CheckIsProjectNameExist();
+
     var x, y, i, valid = true;
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");

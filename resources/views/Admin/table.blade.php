@@ -37,7 +37,7 @@
                                 <th style="text-align: center;" scope="col">ID Project</th>
                                 <th style="text-align: center;" scope="col">Name Porject</th>
                                 <th style="text-align: center;" scope="col">Record Caretor</th>
-                                <th style="text-align: center;" scope="col">Date Record</th>
+                                {{-- <th style="text-align: center;" scope="col">Date Record</th> --}}
                                 <th>Progress</th>
                                 <th>Status</th>
                                 <th style="text-align: center;" scope="col">Created at</th>
@@ -51,7 +51,7 @@
                                     <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
                                     <td>{{ $project_detail->NAME_PROJECT }}</td>
                                     <td>{{ $project_detail->RECORD_CREATOR }}</td>
-                                    <td>{{ $project_detail->DATE_SAVE }}</td>
+                                    {{-- <td>{{ $project_detail->DATE_SAVE }}</td> --}}
                                     <td>
                                         <div class="progress">
                                             <div class="progress-bar {{ $project_detail->track->PROJECT_PERCENTAGE == '100' ? 'bg-success' : 'bg-warning' }} "
