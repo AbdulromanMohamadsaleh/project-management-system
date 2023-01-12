@@ -23,6 +23,8 @@ class TaskController extends Controller
         $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
         $totalTasks = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
 
+
+
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
         if (($completeTasksCounter - 1) >= 0) {
@@ -31,6 +33,22 @@ class TaskController extends Controller
 
             $Project->save();
         }
+
+        // Calculate Precentage
+        // $totalTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks")->first();
+        // $totalTaskOfTheProject = $totalTaskOfTheProject->tasks->count();
+
+        // $totalCompleteTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks",function($q){
+        //     $q->where('STATUS', 1)->get();
+        // })->first();
+
+        // $totalTaskOfTheProject->tasks->count();
+        // dd($totalCompleteTaskOfTheProject->count());
+        // $precentage = floor(($totalCompleteTaskOfTheProject * 100) / $totalTaskOfTheProject);
+        // $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+
+        // $ProjectDetialg->PROJECT_PERCENTAGE = $precentage;
+        // $ProjectDetialg->save();
 
         if ($completeTasksCounter == $totalTasks) {
             $Project->STATUS = "New Release,Approved,Progress,Complete";

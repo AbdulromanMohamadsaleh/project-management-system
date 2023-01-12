@@ -54,9 +54,11 @@
                                     <td>{{ $project_detail->DATE_SAVE }}</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                aria-label="Example with label" style="width: 25%;" aria-valuenow="25"
-                                                aria-valuemin="0" aria-valuemax="100">{{ $project_detail->track->PROJECT_PERCENTAGE }}%</div>
+                                            <div class="progress-bar {{ $project_detail->track->PROJECT_PERCENTAGE == '100' ? 'bg-success' : 'bg-warning' }} "
+                                                role="progressbar" aria-label="Example with label"
+                                                style="width: {{ $project_detail->track->PROJECT_PERCENTAGE }}%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                {{ $project_detail->track->PROJECT_PERCENTAGE }}%</div>
                                         </div>
                                         {{-- <div class="progress">
                                             <div class="progress-bar" role="progressbar" style="width: 50%"
@@ -83,7 +85,8 @@
                                         </a>
                                         @if ($project_detail->IS_APPROVE == 0)
                                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip"
-                                                title="edit project" href="{{ route('update.project',$project_detail->DETAIL_ID) }}">
+                                                title="edit project"
+                                                href="{{ route('update.project', $project_detail->DETAIL_ID) }}">
                                                 <i class="fas fa-pencil-alt" style="font-size: 25;">
                                                 </i>
                                             </a>
@@ -94,9 +97,9 @@
                                                 action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit"
-                                                    class="btn btn-danger  show-alert-delete-box "
-                                                    data-toggle="tooltip" title='Delete'><i class="bi bi-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger  show-alert-delete-box "
+                                                    data-toggle="tooltip" title='Delete'><i
+                                                        class="bi bi-trash"></i></button>
                                             </form>
                                         @endif
                                     </td>
