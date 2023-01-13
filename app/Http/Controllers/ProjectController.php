@@ -20,6 +20,7 @@ class ProjectController extends Controller
 {
     public function Index()
     {
+        
         return view('Admin.index');
     }
 
@@ -28,7 +29,6 @@ class ProjectController extends Controller
         $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
             $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
         }])->get();
-
 
         return view('Admin.table', ['project_details' => $project_details]);
     }
@@ -85,10 +85,10 @@ class ProjectController extends Controller
         return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status]);
     }
 
-    public function Save(ProjectStoreRequest $request)
+    public function Save(Request $request)
     {
 
-        $validated = $request->validated();
+        // $validated = $request->validated();
 
         $ProjectDetial = new ProjectDetial();
 
@@ -123,6 +123,8 @@ class ProjectController extends Controller
         $ProjectDetial = ProjectDetial::where('DETAIL_ID', $detail_id)->first();
 
         $ProjectDetial->projectTeam()->attach($request->projectTeam);
+
+
 
         // Create Project Tracker Table
         $ProjectTrack = new ProjectTrack();
@@ -267,4 +269,17 @@ class ProjectController extends Controller
 
         return response()->json(['msg' => 'Vaild Name.', 'status' => 1]);
     }
+
+    // public function ValidateProjectAJAX(ProjectStoreRequest $request)
+    // {
+
+    // }
+
+
+
+
+
+
+    // Custom Functions
+
 }

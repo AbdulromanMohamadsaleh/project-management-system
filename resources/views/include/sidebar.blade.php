@@ -19,7 +19,7 @@
                 <span>{{ Auth::user()->POSITION }}</span>
             </div>
         </div>
-        <div class="navbar-nav w-100">
+        <div class="navbar-nav  nav w-100">
             <a href="{{ route('dashboard') }}" class="nav-item nav-link active"><i
                     class="fa fa-dashboard"></i></i>Dashboard
             </a>

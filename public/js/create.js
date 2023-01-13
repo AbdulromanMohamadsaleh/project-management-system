@@ -252,25 +252,25 @@ function CheckIsProjectNameExist(e) {
 }
 
 
-let targetInput = document.getElementById('target');
+// let targetInput = document.getElementById('target');
 
-targetInput.addEventListener('input',(e)=>{
-    let targetInvalid = document.getElementById('target-invalid');
-    if(e.target.value.length<5){
-        targetInvalid.innerHTML="Target Must be More Than 5 Characters";
-        targetInvalid.classList.add("invv");
-        if(!e.target.classList.contains("is-invalid")){
-            e.target.classList.add("is-invalid");
-        }
+// targetInput.addEventListener('input',(e)=>{
+//     let targetInvalid = document.getElementById('target-invalid');
+//     if(e.target.value.length<5){
+//         targetInvalid.innerHTML="Target Must be More Than 5 Characters";
+//         targetInvalid.classList.add("invv");
+//         if(!e.target.classList.contains("is-invalid")){
+//             e.target.classList.add("is-invalid");
+//         }
 
-    }else{
-        if(e.target.classList.contains("is-invalid")){
-            e.target.classList.remove("is-invalid");
-            targetInvalid.innerHTML="";
-            targetInvalid.classList.remove("invv");
-        }
-    }
-} );
+//     }else{
+//         if(e.target.classList.contains("is-invalid")){
+//             e.target.classList.remove("is-invalid");
+//             targetInvalid.innerHTML="";
+//             targetInvalid.classList.remove("invv");
+//         }
+//     }
+// } );
 
 function ValidateTotalDate(){
 
