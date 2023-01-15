@@ -140,7 +140,8 @@
                                                     <div class="row mb-0 pb-0">
                                                         <div class="col-6 ps-3 ">
                                                             <p class="my-1 py-1">
-                                                                {{ ++$countTask . '. ' . $task->TASK_NAME }}</p>
+                                                                {{ $countAct . '.' . ++$countTask . ' ' . $task->TASK_NAME }}
+                                                            </p>
                                                         </div>
                                                         <div style="align-items: center;"
                                                             class="col-6 d-flex  justify-content-end  pe-4">

@@ -34,6 +34,11 @@ function nextPrev(n) {
 
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
+
+    if (currentTab == x.length){
+        x[currentTab-1].style.display="block"
+    }
+
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
@@ -47,6 +52,8 @@ function nextPrev(n) {
 
 function validateForm() {
     // This function deals with validation of the form fields
+    CheckIsProjectNameExist();
+
     var x, y, i, valid = true;
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");
@@ -245,25 +252,25 @@ function CheckIsProjectNameExist(e) {
 }
 
 
-let targetInput = document.getElementById('target');
+// let targetInput = document.getElementById('target');
 
-targetInput.addEventListener('input',(e)=>{
-    let targetInvalid = document.getElementById('target-invalid');
-    if(e.target.value.length<5){
-        targetInvalid.innerHTML="Target Must be More Than 5 Characters";
-        targetInvalid.classList.add("invv");
-        if(!e.target.classList.contains("is-invalid")){
-            e.target.classList.add("is-invalid");
-        }
+// targetInput.addEventListener('input',(e)=>{
+//     let targetInvalid = document.getElementById('target-invalid');
+//     if(e.target.value.length<5){
+//         targetInvalid.innerHTML="Target Must be More Than 5 Characters";
+//         targetInvalid.classList.add("invv");
+//         if(!e.target.classList.contains("is-invalid")){
+//             e.target.classList.add("is-invalid");
+//         }
 
-    }else{
-        if(e.target.classList.contains("is-invalid")){
-            e.target.classList.remove("is-invalid");
-            targetInvalid.innerHTML="";
-            targetInvalid.classList.remove("invv");
-        }
-    }
-} );
+//     }else{
+//         if(e.target.classList.contains("is-invalid")){
+//             e.target.classList.remove("is-invalid");
+//             targetInvalid.innerHTML="";
+//             targetInvalid.classList.remove("invv");
+//         }
+//     }
+// } );
 
 function ValidateTotalDate(){
 

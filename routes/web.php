@@ -63,7 +63,7 @@ Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 
 ###########################  Project  ###########################
 Route::group(
-    ['middleware' => ['auth','IsActiveUser']],
+    ['middleware' => ['auth', 'IsActiveUser']],
     function () {
 
         Route::get('/table', [ProjectController::class, 'Table'])->name('table');
@@ -126,8 +126,12 @@ Route::group(
 
 
 ###########################  TASK  ###########################
-Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
-
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+    }
+);
 
 
 

@@ -32,4 +32,5 @@ class ProjectTask extends Model
     {
         return $this->belongsTo(ProjectActivity::class, 'ACTIVITY_ID', 'ACTIVITY_ID');
     }
+    
 }

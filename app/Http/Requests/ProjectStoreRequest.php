@@ -25,11 +25,11 @@ class ProjectStoreRequest extends FormRequest
     {
         return [
             'projectName' => 'required|unique:prj_detail,NAME_PROJECT',
-            'reason' => 'string|min:10',
-            'objectve' => 'string|min:10',
-            'location' => 'string',
-            'target' => 'string|min:10',
-            'expectedRresults' => 'string|min:10',
+            'reason' => 'string|min:5|max:255',
+            'objectve' => 'string|min:5|max:255',
+            'location' => 'string|max:255',
+            'target' => 'string|min:5|max:255',
+            'expectedRresults' => 'string|min:5',
             'projectStart' => 'date',
             'projectEnd' => 'date|after:projectStart',
             'category' => 'exists:prj_category,CATEGORY_ID',

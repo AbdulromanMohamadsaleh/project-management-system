@@ -64,4 +64,18 @@ class ProjectDetial extends Model
     {
         return $this->belongsto(User::class, 'RECORD_CREATOR', 'LOGIN_ID');
     }
+
+    public function tasks()
+    {
+        return $this->hasManyThrough(
+            ProjectTask::class,
+            ProjectActivity::class,
+            'DETAIL_ID', // Foreign key on ProjectActivity table...
+            'ACTIVITY_ID', // Foreign key on tasks table...
+            'DETAIL_ID', // Local key on countries table...
+            'ACTIVITY_ID' // Local key on ProjectActivity table...
+        );
+    }
+
+    
 }
