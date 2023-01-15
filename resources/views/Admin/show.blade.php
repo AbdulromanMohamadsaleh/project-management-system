@@ -407,7 +407,6 @@
     </div>
     </div>
 
-
 </body>
 @include('include.scrip');
 <!-- Template Javascript -->
