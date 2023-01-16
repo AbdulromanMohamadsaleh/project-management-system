@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
+
 Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
 
 ###########################  User  ###########################
