@@ -40,9 +40,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
 
 Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
 
-###########################  User  ###########################
+###########################  Project Manager  ###########################
 Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
-    Route::get('/dashboard', [UserController::class, 'index'])->name('projectManager.dashboard');
+    Route::get('/dashboard', [ProjectManagerController::class, 'index'])->name('projectManager.dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
 });
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'isManager', 'Prev
     Route::get('/dashboard', [UserController::class, 'index'])->name('manager.dashboard');
 });
 
-###########################  Manager  ###########################
+###########################  Employee  ###########################
 Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'isEmployee', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('employee.dashboard');
 });
