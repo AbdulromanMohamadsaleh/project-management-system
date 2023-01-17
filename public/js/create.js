@@ -110,6 +110,21 @@ function validateForm() {
     // If the valid status is true, mark the step as finished and valid:
     valid = IsProjectNameValid && valid && validateTotalDurationTask;
 
+    // This is for make the duration task red if its in valid
+    let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
+    if(!validateTotalDurationTask){
+        taskDurationUserInput.forEach((inp)=>{
+            inp.className += " invalid is-invalid";
+        })
+    }else{
+        taskDurationUserInput.forEach((inp)=>{
+        if(inp.classList.contains('is-invalid')){
+            inp.classList.remove("invalid");
+            inp.classList.remove("is-invalid");
+            }
+        })
+    }
+
 
 
     if (valid) {
@@ -294,7 +309,7 @@ function CheckIsProjectNameExist(e) {
 
 function ValidateProjectDuration(){
 
-    
+
 
     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
 
@@ -311,14 +326,18 @@ function ValidateProjectDuration(){
 
 
     if(TotalDaysToComplateProject < totalDurationUserInput){
-        console.log(TotalDaysToComplateProject , totalDurationUserInput)
+
         document.getElementById("alert").classList.toggle('d-none')
+
+
         setTimeout(function() {
             document.getElementById("alert").classList.toggle('d-none');
-        }, 2000)
+        }, 3000)
 
         return false;
     }
+
+
 
     return true;
 }
