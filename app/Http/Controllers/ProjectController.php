@@ -20,7 +20,7 @@ class ProjectController extends Controller
 {
     public function Index()
     {
-        
+
         return view('Admin.index');
     }
 
@@ -56,7 +56,9 @@ class ProjectController extends Controller
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
+        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
 
+        $status = explode(',', $ProjectTrack->TRACKER);
 
         // dd($project_detail->activity);
         $sum = 0;
@@ -70,7 +72,7 @@ class ProjectController extends Controller
 
 
         $project_detail->TotalDays = $sum;
-        return view('Admin.show', ['project_detail' => $project_detail], ['TeamsName' => $project_detail->projectTeam]);
+        return view('Admin.show', ['project_detail' => $project_detail,'status' => $status], ['TeamsName' => $project_detail->projectTeam]);
     }
     public function Timeline($id)
     {

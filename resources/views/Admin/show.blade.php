@@ -32,27 +32,26 @@
             </div>
         </div>
         <div class="container-fluid py-5">
-
             <!-- Recent Sales Start -->
             <div class="container mt-3 ">
                 <div class="stepper-wrapper">
-                    <div class="stepper-item completed">
-                      <div class="step-counter">1</div>
-                      <div class="step-name">New Release</div>
+                    <div class="stepper-item {{in_array('New Release', $status)?"completed": "active"}}">
+                        <div class="step-counter">1</div>
+                        <div class="step-name">New Release</div>
                     </div>
-                    <div class="stepper-item completed">
-                      <div class="step-counter">2</div>
-                      <div class="step-name">Approved</div>
+                    <div class="stepper-item {{in_array('Approved', $status)?"completed": "active"}}">
+                        <div class="step-counter">2</div>
+                        <div class="step-name">Approved</div>
                     </div>
-                    <div class="stepper-item active">
-                      <div class="step-counter">3</div>
-                      <div class="step-name">Progress</div>
+                    <div class="stepper-item {{in_array('Progress', $status)?"completed": "active"}}">
+                        <div class="step-counter">3</div>
+                        <div class="step-name">Progress</div>
                     </div>
-                    <div class="stepper-item">
-                      <div class="step-counter">4</div>
-                      <div class="step-name">Completed</div>
+                    <div class="stepper-item {{in_array('Completed', $status)?"completed": "active"}}">
+                        <div class="step-counter">4</div>
+                        <div class="step-name">Completed</div>
                     </div>
-                  </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -494,86 +493,89 @@
     }
 
     .swal-footer {
-    text-align: center;
-}
-.swal-button--confirm{
-    background-color: #3AAB20;
-    color: white
+        text-align: center;
+    }
 
-}
-.stepper-wrapper {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.stepper-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
+    .swal-button--confirm {
+        background-color: #3AAB20;
+        color: white
+    }
 
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
-}
+    .stepper-wrapper {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
 
-.stepper-item::before {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #ccc;
-  width: 100%;
-  top: 20px;
-  left: -50%;
-  z-index: 2;
-}
+    .stepper-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
 
-.stepper-item::after {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #ccc;
-  width: 100%;
-  top: 20px;
-  left: 50%;
-  z-index: 2;
-}
+        @media (max-width: 768px) {
+            font-size: 12px;
+        }
+    }
 
-.stepper-item .step-counter {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #ccc;
-  margin-bottom: 6px;
-}
+    .stepper-item::before {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #ccc;
+        width: 100%;
+        top: 20px;
+        left: -50%;
+        z-index: 2;
+    }
 
-.stepper-item.active {
-  font-weight: bold;
-}
+    .stepper-item::after {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #ccc;
+        width: 100%;
+        top: 20px;
+        left: 50%;
+        z-index: 2;
+    }
 
-.stepper-item.completed .step-counter {
-  background-color: #4bb543;
-}
+    .stepper-item .step-counter {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ccc;
+        margin-bottom: 6px;
+    }
 
-.stepper-item.completed::after {
-  position: absolute;
-  content: "";
-  border-bottom: 2px solid #4bb543;
-  width: 100%;
-  top: 20px;
-  left: 50%;
-  z-index: 3;
-}
+    .stepper-item.active {
+        font-weight: bold;
+    }
 
-.stepper-item:first-child::before {
-  content: none;
-}
-.stepper-item:last-child::after {
-  content: none;
-}
+    .stepper-item.completed .step-counter {
+        background-color: #4bb543;
+    }
+
+    .stepper-item.completed::after {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #4bb543;
+        width: 100%;
+        top: 20px;
+        left: 50%;
+        z-index: 3;
+    }
+
+    .stepper-item:first-child::before {
+        content: none;
+    }
+
+    .stepper-item:last-child::after {
+        content: none;
+    }
 </style>
