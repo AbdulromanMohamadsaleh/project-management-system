@@ -51,12 +51,21 @@ function nextPrev(n) {
 }
 
 function validateForm() {
-    // This function deals with validation of the form fields
-    CheckIsProjectNameExist();
 
     var x, y, i, valid = true;
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");
+
+    // This function deals with validation of the form fields
+    CheckIsProjectNameExist();
+
+    // Check if user pass the total duration of the project when enter task duration
+    let validateTotalDurationTask= true;
+    if(currentTab >= x.length-1){
+        validateTotalDurationTask = ValidateProjectDuration();
+    }
+
+
     // A loop that checks every input field in the current tab:
 
     for (i = 0; i < y.length; i++) {
@@ -99,7 +108,9 @@ function validateForm() {
         }
     }
     // If the valid status is true, mark the step as finished and valid:
-    valid = IsProjectNameValid && valid;
+    valid = IsProjectNameValid && valid && validateTotalDurationTask;
+
+
 
     if (valid) {
     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
@@ -272,7 +283,43 @@ function CheckIsProjectNameExist(e) {
 //     }
 // } );
 
-function ValidateTotalDate(){
+// function AddTaskDurationFunctionForNewTask(){
+//     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
+//         taskDurationUserInput.forEach((duration,index)=>{
+//             duration.addEventListener('input',ValidateProjectDuration)
 
+//         })
+
+// }
+
+function ValidateProjectDuration(){
+
+    
+
+    let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
+
+    let totalDurationUserInput = 0;
+
+    taskDurationUserInput.forEach(d=>{
+        if(d.value==""){
+            totalDurationUserInput = parseInt(totalDurationUserInput);
+        }else{
+            totalDurationUserInput = parseInt(totalDurationUserInput) + parseInt(d.value);
+        }
+    })
+
+
+
+    if(TotalDaysToComplateProject < totalDurationUserInput){
+        console.log(TotalDaysToComplateProject , totalDurationUserInput)
+        document.getElementById("alert").classList.toggle('d-none')
+        setTimeout(function() {
+            document.getElementById("alert").classList.toggle('d-none');
+        }, 2000)
+
+        return false;
+    }
+
+    return true;
 }
 

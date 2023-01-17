@@ -30,7 +30,9 @@ body {
   max-width: 960px;
 }
 
-
+#alert{
+    display: none;
+}
 /* */
 
 .panel-default>.panel-heading {

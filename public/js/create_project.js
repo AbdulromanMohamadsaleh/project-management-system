@@ -37,7 +37,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
-                                                    <input class="form-control form-control-lg mb-3"
+                                                    <input class="form-control form-control-lg mb-3" id="taskDuration"
                                                         name="taskDuration[]"   type="number" min='1' placeholder="Day"
                                                         aria-label="Task">
                                                 </div>
@@ -138,7 +138,7 @@
 
             Numbreings()
         })
-
+        // AddTaskDurationFunctionForNewTask()
     }
 
 function addNewTaskInput() {
@@ -168,7 +168,7 @@ function addNewTaskInput() {
             </div>
         </div>
         <div class="col-2">
-            <input class="form-control form-control-lg mb-3"
+            <input class="form-control form-control-lg mb-3" id="taskDuration"
                 name="taskDuration[]" min='1' type="number" placeholder="Day"
                 aria-label="Task">
         </div>
@@ -225,6 +225,7 @@ function addNewTaskInput() {
         Numbreings();
     })
     Numbreings();
+    // AddTaskDurationFunctionForNewTask()
 }
 
 

@@ -56,6 +56,8 @@
                                         color: green !important;
                                     }
                                 </style>
+
+
                                 {{-- Project Name / Target --}}
                                 <div class="row mb-5 mb-sm-0 ">
                                     <div class="col-md-6 mb-sm-5 ">
@@ -119,11 +121,11 @@
                                                     type="radio" id="week" value="week">
                                                 <label class="form-check-label" for="week">Week</label>
                                             </div>
-                                            <div class="label-left col form-check form-check-inline">
+                                            {{-- <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDurationFormat"
                                                     type="radio" id="month" value="month">
                                                 <label class="form-check-label" for="month">Month</label>
-                                            </div>
+                                            </div> --}}
                                             {{-- <input class="form-check-input" hidden name="totalDate" type="text"
                                                 value="0"> --}}
 
@@ -326,7 +328,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
-                                                    <input class="form-control form-control-lg mb-3"
+                                                    <input class="form-control form-control-lg mb-3" id="taskDuration"
                                                         name="taskDuration[]" min='1' type="number"
                                                         placeholder="Day" aria-label="Task">
                                                 </div>
@@ -352,6 +354,15 @@
 
                             </div>
 
+                            <div id="alert"
+                                class="d-none alert alert-danger d-flex align-items-center justify-content-center"
+                                role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-3"></i>
+                                <div class="text-center">
+                                    The number of project days exceeded the set date.
+                                </div>
+                            </div>
+                            
                             <!-- step three -->
                             {{-- <div class="step">
                                 <p class="text-center mb-4">We will never sell it</p>
@@ -471,10 +482,6 @@
 
 
     // });
-
-
-
-
 </script>
 
 </html>

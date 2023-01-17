@@ -2,7 +2,6 @@
 let IncludeWeekend = "no";
 
 
-
 var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
 
 HolyDaysDate = HolyDays.map(h => h.HOLYDAY_DATE);
@@ -57,19 +56,21 @@ function updateEndDate(e) {
             }
         })
 
-    } else if (projectDurationFormat == 'month') {
-        projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
+    }
+    // else if (projectDurationFormat == 'month') {
+    //     projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
 
-        isIncludeHolyday.forEach((e)=>{
-            if(e.checked==true){
-                if(e.value=="yes"){
+    //     isIncludeHolyday.forEach((e)=>{
+    //         if(e.checked==true){
+    //             if(e.value=="yes"){
 
-                    projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
-            }
+    //                 projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
+    //         }
 
-            }
-        })
-    } else {
+    //         }
+    //     })
+    // }
+    else {
         projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
 
         isIncludeHolyday.forEach((e)=>{
@@ -99,14 +100,16 @@ function updateEndDateForRadios(e) {
             projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
         }
 
-    } else if (projectDurationFormat == 'month') {
-        projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
-        if(e.target.value=="yes"){
+    }
+    // else if (projectDurationFormat == 'month') {
+    //     projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
+    //     if(e.target.value=="yes"){
 
-            // console.log(convertToHtmlDateFormat(removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value)))
-            projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
-        }
-    } else {
+    //         // console.log(convertToHtmlDateFormat(removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value)))
+    //         projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
+    //     }
+    // }
+    else {
         projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
         if(e.target.value=="yes"){
 
@@ -135,19 +138,21 @@ function updateEndDateGeneral(a) {
 
             }
         })
-    } else if (projectDurationFormat == 'month') {
-        projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
-        isIncludeHolyday.forEach((e)=>{
+    }
+    // else if (projectDurationFormat == 'month') {
+    //     projectEnd.valueAsDate = addMonths(projectStart.value, parseInt(amount))
+    //     isIncludeHolyday.forEach((e)=>{
 
-            if(e.checked==true){
-                if(e.value=="yes"){
+    //         if(e.checked==true){
+    //             if(e.value=="yes"){
 
-                    projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
-            }
+    //                 projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
+    //         }
 
-            }
-        })
-    } else {
+    //         }
+    //     })
+    // }
+    else {
         projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
         isIncludeHolyday.forEach((e)=>{
 
