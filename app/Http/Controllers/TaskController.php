@@ -29,9 +29,12 @@ class TaskController extends Controller
 
         if (($completeTasksCounter - 1) >= 0) {
             $Project->STATUS = "New Release,Approved,Progress,workingOn";
-            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,Progress,workingOn', 'STATUS' => 2]);
-
             $Project->save();
+
+            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
+            $ProjectTrack->STATUS = 2;
+            $ProjectTrack->save();
         }
 
         // Calculate Precentage
@@ -54,9 +57,18 @@ class TaskController extends Controller
         $ProjectDetialg->PROJECT_PERCENTAGE = $precentage;
         $ProjectDetialg->save();
 
-        if ($completeTasksCounter == $totalTasks) {
-            $Project->STATUS = "New Release,Approved,Progress,Complete";
+        if ($precentage == "100") {
+            $Project->STATUS = "New Release,Approved,Progress,Completed";
             $Project->save();
+
+            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,Completed';
+            $ProjectTrack->STATUS = 3;
+            $ProjectTrack->save();
+        }
+
+        if ($completeTasksCounter == $totalTasks) {
+
             $Task->activity->STATUS = 1;
             $Task->activity->save();
         } else {

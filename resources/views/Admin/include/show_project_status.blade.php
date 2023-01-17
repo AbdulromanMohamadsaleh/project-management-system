@@ -18,7 +18,7 @@
                                                 @case('Progress')
                                                     <span style="background-color: orange" class="badge rounded-pill "  >{{ $result }}</span>
                                                     @break
-                                                @case('Complete')
+                                                @case('Completed')
                                                     <span class="badge rounded-pill text-bg-success"  >{{ $result }}</span>
                                                     @break
                                                 @default
