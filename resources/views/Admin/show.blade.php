@@ -35,19 +35,19 @@
             <!-- Recent Sales Start -->
             <div class="container mt-3 ">
                 <div class="stepper-wrapper">
-                    <div class="stepper-item {{in_array('New Release', $status)?"completed": "active"}}">
+                    <div class="stepper-item {{ in_array('New Release', $status) ? 'completed' : 'active' }}">
                         <div class="step-counter">1</div>
                         <div class="step-name">New Release</div>
                     </div>
-                    <div class="stepper-item {{in_array('Approved', $status)?"completed": "active"}}">
+                    <div class="stepper-item {{ in_array('Approved', $status) ? 'completed' : 'active' }}">
                         <div class="step-counter">2</div>
                         <div class="step-name">Approved</div>
                     </div>
-                    <div class="stepper-item {{in_array('Progress', $status)?"completed": "active"}}">
+                    <div class="stepper-item {{ in_array('Progress', $status) ? 'completed' : 'active' }}">
                         <div class="step-counter">3</div>
                         <div class="step-name">Progress</div>
                     </div>
-                    <div class="stepper-item {{in_array('Completed', $status)?"completed": "active"}}">
+                    <div class="stepper-item {{ in_array('Completed', $status) ? 'completed' : 'active' }}">
                         <div class="step-counter">4</div>
                         <div class="step-name">Completed</div>
                     </div>
@@ -125,232 +125,149 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <br>
-            <div class="container row mt-3 ">
-                <div class="col-md-4">
-                    <div class="card card-outline card-lime">
-                        <div class="card-header">
-                            <span><b>Team Member/s:</b></span>
-                            <div class="card-tools">
+                <div class="container row mt-3 ">
+                    <div class="col-md-4">
+                        <div class="card card-outline card-lime">
+                            <div class="card-header">
+                                <span><b>Team Member/s:</b></span>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="users-list clearfix list-group list-group-horizontal justify-content-center"
+                                    style="flex-wrap: wrap">
+                                    @foreach ($TeamsName as $TeamsName)
+                                        <li class="nav-link">
+                                            <img class="rounded-circle" src="{{ asset('images/user.jpg') }}"
+                                                alt="User Image">
+                                            <a style="text-decoration: none; color: black;" class="users-list-name"
+                                                href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
+                                        </li>
+                                    @endforeach
+                                    <!-- <span class="users-list-date">Today</span> -->
+                                </ul>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <ul class="users-list clearfix list-group list-group-horizontal justify-content-center"
-                                style="flex-wrap: wrap">
-                                @foreach ($TeamsName as $TeamsName)
-                                    <li class="nav-link">
-                                        <img class="rounded-circle" src="{{ asset('images/user.jpg') }}"
-                                            alt="User Image">
-                                        <a style="text-decoration: none; color: black;" class="users-list-name"
-                                            href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
-                                    </li>
-                                @endforeach
-                                <!-- <span class="users-list-date">Today</span> -->
-                            </ul>
+                    </div>
+                    <div class="row col-8">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-danger me-2"> <i class="fas fa-pencil-alt"
+                                        style="font-size: 25;"></i>
+                                    <button type="button" class="btn btn-primary"><i class="bi bi-alarm"
+                                            style="font-size: 25;"></i></button>
+                                    <button type="button" class="btn btn-primary"><i class="bi bi-list-task"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-8 ">
-                    <b>Total Date = {{ $project_detail->TotalDays . ' ' . $project_detail->activity[0]->DAY_WEEK }}
-                    </b>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Activity</th>
-                                <th>Date</th>
-                                <th>Date Start Task</th>
-                                <th>Action</th>
-                                <th>Status</th>
-                                <th>Quality Work</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tbody class="tbl-accordion-header">
-                            @php
-                                $i = 1;
-                            @endphp
-                            @foreach ($project_detail->activity as $act)
-                                @php
-                                    $sum = 0;
-
-                                    foreach ($act->tasks as $task) {
-                                        $sum += intval($task->DAY);
-                                    }
-                                @endphp
+                    <div class="col">
+                        <b>Total Date = {{ $project_detail->TotalDays . ' ' . $project_detail->activity[0]->DAY_WEEK }}
+                        </b>
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
-                                    </td>
-                                    <td style="text-align: left">
-                                        <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
-                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                                            <button type="button" class="btn btn-danger"> <i class="fas fa-pencil-alt"
-                                                    style="font-size: 25;"></i></button>
-                                        @endif
-
-                                    </td>
-                                    <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-
-                                        @if ($act->STATUS == 1)
-                                            <b class="text-success"> Completed</b>
-                                        @else
-                                            <b>-</b>
-                                        @endif
-                                    </td>
+                                    <th></th>
+                                    <th>Activity</th>
+                                    <th>Date</th>
+                                    <th>Date Start Task</th>
+                                    <th>Action</th>
+                                    <th>Status</th>
+                                    <th>Quality Work</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                            <tbody class="tbl-accordion-header">
                                 @php
-                                    $o = 1;
+                                    $i = 1;
                                 @endphp
-                        <tbody class="tbl-accordion-body">
-                            @foreach ($act->tasks as $task)
-                                <tr>
-                                    <td></td>
-                                    <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
-                                        {{ $task->TASK_NAME }} </td>
-                                    <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}
-                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                                            <button type="button" class="btn btn-warning btn-sm2"
-                                                data-bs-toggle="modal" data-bs-target="#Modal{{ $task->TASK_ID }}">
-                                                <i class="fas fa-pencil-alt" style="font-size: 15px;">
-                                                </i></button>
+                                @foreach ($project_detail->activity as $act)
+                                    @php
+                                        $sum = 0;
 
-                                            <!-- The Modal -->
-                                            <div class="modal" id="Modal{{ $task->TASK_ID }}">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
+                                        foreach ($act->tasks as $task) {
+                                            $sum += intval($task->DAY);
+                                        }
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
+                                        </td>
+                                        <td style="text-align: left">
+                                            <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
+                                            @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                                                </button>
+                                            @endif
 
-                                                        <!-- Modal Header -->
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Category</h4>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal"></button>
-                                                        </div>
-                                                        <!-- Modal body -->
-                                                        <div class="modal-body">
-                                                            <form id="signUpForm" method="post" {{-- action="{{ route('task.update', $task->TASK_ID) }}" --}}>
-                                                                @csrf
-                                                                {{-- Project Name / Target --}}
-                                                                <div class="row mb-5 mb-sm-0">
-                                                                    <div class="col-md-6 mb-sm-5">
-                                                                        <label class="label-left fw-bold mb-2"
-                                                                            for="holyday_name">Holyday Name</label>
-                                                                        <input type="text" name="holyday_name"
-                                                                            class="form-control" id="holyday_name"
-                                                                            value="{{ $task->DAY }}">
-                                                                    </div>
-                                                                    <div class="col-md-6 mb-sm-5">
-                                                                        <label class="label-left fw-bold mb-2"
-                                                                            for="target">Date Holyday</label>
-                                                                        <input type="date" name="date_holyday"
-                                                                            value="{{ $task->DAY }}"
-                                                                            class="form-control" id="target">
-                                                                    </div>
-                                                                    <button type="submit" name="submit"
-                                                                        class="btn btn-success">SAVE</button>
-                                                                </div>
-                                                        </div>
-                                                        <!-- end previous / next buttons -->
-                                                        </form>
-                                                    </div>
+                                        </td>
+                                        <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
 
-                                                    <!-- Modal footer -->
+                                            @if ($act->STATUS == 1)
+                                                <b class="text-success"> Completed</b>
+                                            @else
+                                                <b>-</b>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $o = 1;
+                                    @endphp
+                            <tbody class="tbl-accordion-body">
+                                @foreach ($act->tasks as $task)
+                                    <tr>
+                                        <td></td>
+                                        <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
+                                            {{ $task->TASK_NAME }} </td>
+                                        <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}
+                                            @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                    </div>
+                    @endif
+                    </td>
+                    <td>1-1-2566</td>
 
-                                                </div>
-                                            </div>
-                </div>
-                @endif
-                </td>
-                <td>1-1-2566</td>
-
-                {{-- <td>{{ $task->TASK_NAME }}</td> --}}
+                    {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
 
-                <td>
-                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                        @if ($project_detail->IS_APPROVE == 1)
-                            @if ($task->STATUS == 0)
-                                <form style="display: inline-block" method="GET"
-                                    action="{{ route('task.done', $task->TASK_ID) }}">
-                                    @csrf
-                                    <input name="_method" type="hidden" value="GET">
-                                    <button style="color:white" type="submit"
-                                        class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
-                                        title='Complete'><i class='fas fa-check-circle'></i></button>
-                                </form></a>
+                    <td>
+                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                            @if ($project_detail->IS_APPROVE == 1)
+                                @if ($task->STATUS == 0)
+                                    <form style="display: inline-block" method="GET"
+                                        action="{{ route('task.done', $task->TASK_ID) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="GET">
+                                        <button style="color:white" type="submit"
+                                            class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
+                                            title='Complete'><i class='fas fa-check-circle'></i></button>
+                                    </form></a>
+                                @else
+                                    <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
+                                            class="bi bi-check-circle"></i></a>
+                                @endif
                             @else
-                                <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                                        class="bi bi-check-circle"></i></a>
                             @endif
                         @else
                         @endif
-                    @else
-                    @endif
-                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                    @endif
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                        <i class='fas fa-money-check-alt'></i>
-                    </button>
-
-                    <!-- The Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">add budget</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form id="signUpForm" method="post" action="{{ route('category.save') }}">
-                                        @csrf
-                                        {{-- Project Name / Target --}}
-                                        <div class="row mb-5 mb-sm-0">
-                                            <div class=" mb-sm-5">
-                                                <label class="label-left fw-bold mb-2"
-                                                    for="projectName">budget</label>
-                                                <input type="text" name="category_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <button type="submit" name="submit" onclick="success()"
-                                                class="btn btn-success">SAVE</button>
-                                        </div>
-                                </div>
-                                <!-- end previous / next buttons -->
-                                </form>
-                            </div>
-
-
-                            <!-- Modal footer -->
-
-                        </div>
-                    </div>
-                    <!-- Button trigger modal -->
-                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class='fas fa-book'></i>
+                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                        @endif
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <i class='fas fa-money-check-alt'></i>
                         </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
+
+                                    <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <h4 class="modal-title">add budget</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
+                                    <!-- Modal body -->
                                     <div class="modal-body">
                                         <form id="signUpForm" method="post" action="{{ route('category.save') }}">
                                             @csrf
@@ -369,39 +286,86 @@
                                     <!-- end previous / next buttons -->
                                     </form>
                                 </div>
+
+
+                                <!-- Modal footer -->
+
+                            </div>
+                        </div>
+                        <!-- Button trigger modal -->
+                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class='fas fa-book'></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                                @csrf
+                                                {{-- Project Name / Target --}}
+                                                <div class="row mb-5 mb-sm-0">
+                                                    <div class=" mb-sm-5">
+                                                        <label class="label-left fw-bold mb-2"
+                                                            for="projectName">budget</label>
+                                                        <input type="text" name="category_name" class="form-control"
+                                                            id="projectName">
+                                                    </div>
+                                                    <button type="submit" name="submit" onclick="success()"
+                                                        class="btn btn-success">SAVE</button>
+                                                </div>
+                                        </div>
+                                        <!-- end previous / next buttons -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                </div>
+
+
+
+                </td>
+                <td>
+                    @if ($task->STATUS == 1)
+                        @php
+                            $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                        @endphp
+                        <div class="me-3">
+                            <div>
+                                {{ $TASK_TRACKER[0] }}
+                            </div>
+                            <div>
+                                {{ $TASK_TRACKER[1] }}
                             </div>
                         </div>
                     @endif
+                </td>
+                <td></td>
+                </tr>
+                @endforeach
+
+                </tbody>
+                @endforeach
+                </tbody>
+
+                </tbody>
+                </table>
+            </div>
             </div>
 
+            <br>
 
-
-            </td>
-            <td>
-                @if ($task->STATUS == 1)
-                    @php
-                        $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
-                    @endphp
-                    <div class="me-3">
-                        <div>
-                            {{ $TASK_TRACKER[0] }}
-                        </div>
-                        <div>
-                            {{ $TASK_TRACKER[1] }}
-                        </div>
-                    </div>
-                @endif
-            </td>
-            <td></td>
-            </tr>
-            @endforeach
-
-            </tbody>
-            @endforeach
-            </tbody>
-
-            </tbody>
-            </table>
         </div>
     </div>
     </div>
