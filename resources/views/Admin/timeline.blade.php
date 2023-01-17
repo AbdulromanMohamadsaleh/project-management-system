@@ -173,7 +173,7 @@
                 </li>
 
                 <li class="timeline">
-                    @if (in_array('Complete', $status))
+                    @if (in_array('Completed', $status))
                         <div class="icon done"></div>
                     @else
                         @if ($end == 'workingOn' && $countStatus == 5)
