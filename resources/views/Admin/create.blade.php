@@ -362,7 +362,7 @@
                                     The number of project days exceeded the set date.
                                 </div>
                             </div>
-                            
+
                             <!-- step three -->
                             {{-- <div class="step">
                                 <p class="text-center mb-4">We will never sell it</p>
@@ -424,6 +424,7 @@
 <script src="{{ asset('js/DateF.js') }}"></script>
 
 <script>
+    
     // let projectNameY = document.getElementById('projectName');
     // let feedbackProjectName = document.getElementById('feedbackProjectName');
 

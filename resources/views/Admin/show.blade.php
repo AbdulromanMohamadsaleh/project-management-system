@@ -149,8 +149,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-8">
-                    <div class="col">
+
+                    <div class="col-8">
                         <div class="card">
                             <div class="card-body">
                                 <button type="button" class="btn btn-danger me-2"> <i class="fas fa-pencil-alt"
@@ -161,7 +161,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col mt-4">
                         <b>Total Date = {{ $project_detail->TotalDays . ' ' . $project_detail->activity[0]->DAY_WEEK }}
                         </b>
                         <table>
@@ -332,7 +332,7 @@
                             </div>
                         @endif
                 </div>
-
+                <!-- Dete -->
 
 
                 </td>

@@ -57,7 +57,10 @@ function validateForm() {
     y = x[currentTab].getElementsByTagName("input");
 
     // This function deals with validation of the form fields
-    CheckIsProjectNameExist();
+    let ProjectNameInput = document.getElementById("projectName").value.trim()
+
+    if(ProjectNameInput.length < 255 && ProjectNameInput.length > 1 )
+        CheckIsProjectNameExist();
 
     // Check if user pass the total duration of the project when enter task duration
     let validateTotalDurationTask= true;
@@ -73,14 +76,15 @@ function validateForm() {
 
 
             // If a field is empty... taskDuration
-            if ((y[i].value == "" && y[i].name != "taskDuration[]")||(IsDate1AfterDate2()&&y[i].type=="date")) {
+
+            if ( y[i].value.length > 255 || ((y[i].value == "" || (y[i].value.length<=1 && y[i].type != "number" && y[i].name != "taskCounter[]" ) )  && y[i].name != "taskDuration[]")|| ((IsDate1AfterDate2() && y[i].type=="date"))) {
                 // add an "invalid" class to the field:
                 if(!y[i].classList.contains('is-invalid')){
 
                     y[i].className += " invalid is-invalid";
                 }
                 // and set the current valid status to false
-
+                console.log(y[i].value);
                 valid = false;
             }else{
 
@@ -108,6 +112,7 @@ function validateForm() {
         }
     }
     // If the valid status is true, mark the step as finished and valid:
+    console.log(IsProjectNameValid,valid,validateTotalDurationTask)
     valid = IsProjectNameValid && valid && validateTotalDurationTask;
 
     // This is for make the duration task red if its in valid

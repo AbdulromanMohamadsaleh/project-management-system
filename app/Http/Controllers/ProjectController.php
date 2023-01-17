@@ -39,7 +39,7 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = User::where("POSITION", "Project Manager")->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
 
         $team = User::all();
         return view('Admin.create', [
@@ -226,7 +226,8 @@ class ProjectController extends Controller
     {
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
-        $projectManagers = User::where("POSITION", "Project Manager")->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
+
         $team = User::all();
 
         // $subset = $ProjectDetial->projectTeam->map(function ($projectTeam) {
