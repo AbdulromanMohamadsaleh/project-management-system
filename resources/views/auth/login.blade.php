@@ -81,8 +81,9 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <span class="login100-form-title p-b-26">
-                    Welcome
+                    LOGIN
                 </span>
+                <img src="{{asset("images/logo.png")}}" style="width: 100%" alt="">
                 <span class="login100-form-title p-b-48">
                     <i class="zmdi zmdi-font"></i>
                 </span>
@@ -111,8 +112,8 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
+                    <div class="wrap-login100-form-btn ">
+                        <div class="login100-form-bgbtn " ></div>
                         <button type="submit" class="login100-form-btn">
                             Login
                         </button>

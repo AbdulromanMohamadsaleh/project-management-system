@@ -85,8 +85,8 @@
                 <p class="login100-form-title p-b-26">
                     Register
                 </p>
-                <center> <img class="rounded-circle" src="{{ asset('images/1.png') }}" alt="" style="width: 40%;">
-                </center>
+                <img src="{{ asset('images/logo.png') }}" style="width: 100%" alt="">
+
                 <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                     @csrf
                     <span class="login100-form-title p-b-48">
@@ -143,16 +143,16 @@
                         <option value="Admin">Admin</option>
                         <option value="Project manager">Project manager</option>
                         <option value="Manager">Manager</option>
-                      </select>
+                    </select>
                     <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
+                        <div class="wrap-login100-form-btn mt-3">
+                            <div class="login100-form-bgbtn "></div>
                             <button class="login100-form-btn" type="submit">
                                 register
                             </button>
                         </div>
                     </div>
-                    <div class="text-center p-t-115">
+                    <div class="text-center p-t-115 mt-5">
                         <span class="txt1">
                             have an account?
                         </span>
@@ -165,7 +165,10 @@
         </div>
     </div>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
 </body>
