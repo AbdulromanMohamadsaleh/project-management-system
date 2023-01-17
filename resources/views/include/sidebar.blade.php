@@ -20,9 +20,28 @@
             </div>
         </div>
         <div class="navbar-nav  nav w-100">
-            <a href="{{ route('dashboard') }}" class="nav-item nav-link active"><i
-                    class="fa fa-dashboard"></i></i>Dashboard
-            </a>
+            @switch(Auth::user()->POSITION)
+                @case('Admin')
+                    <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link active"><i
+                            class="fa fa-dashboard"></i></i>Dashboard
+                    </a>
+                @break
+
+                @case('Employee')
+                    <a href="{{ route('employee.dashboard') }}" class="nav-item nav-link active"><i
+                            class="fa fa-dashboard"></i></i>Dashboard
+                    </a>
+                @break
+
+                @case('Project Manager')
+                    <a href="{{ route('projectManager.dashboard') }}" class="nav-item nav-link active"><i
+                            class="fa fa-dashboard"></i></i>Dashboard
+                    </a>
+                @break
+
+                @default
+            @endswitch
+
             {{-- <div class="nav-item dropdown">
                 <a href="{{ route('create') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Save Project</a>
@@ -32,7 +51,9 @@
                     <a href="element.html" class="dropdown-item">Other Elements</a>
                 </div>
             </div> --}}
-            @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+            @if (Auth::user()->POSITION == 'Employee' ||
+                    Auth::user()->POSITION == 'Project Manager' ||
+                    Auth::user()->POSITION == 'Admin')
                 <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create
                     Project</a>
                 <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data

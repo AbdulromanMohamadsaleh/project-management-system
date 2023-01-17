@@ -328,7 +328,7 @@ function ValidateProjectDuration(){
         }
     })
 
-
+    console.log(TotalDaysToComplateProject);
 
     if(TotalDaysToComplateProject < totalDurationUserInput){
 

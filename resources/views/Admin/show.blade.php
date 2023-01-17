@@ -1,4 +1,31 @@
 @include('include.header')
+@php
+    function ConvertDaysToWeek($days)
+    {
+        $weeks = intval($days / 7);
+        $days = $days % 7;
+        $result = '';
+        if ($weeks) {
+            if ($weeks == 1) {
+                $result = $weeks . ' week';
+            } else {
+                $result = $weeks . ' weeks';
+            }
+        }
+        if ($days) {
+            if ($weeks) {
+                $result = $result . ' and ';
+            }
+
+            if ($days == 1) {
+                $result = $result . $days . ' day';
+            } else {
+                $result = $result . $days . ' days';
+            }
+        }
+        return $result;
+    }
+@endphp
 
 <body>
     {{-- <div class="container-xxl position-relative bg-white d-flex p-0">
@@ -43,7 +70,7 @@
                         <div class="step-counter">2</div>
                         <div class="step-name">Approved</div>
                     </div>
-                    <div class="stepper-item {{in_array('Progress', $status)?"completed": "active"}}">
+                    <div class="stepper-item {{ in_array('Progress', $status) ? 'completed' : 'active' }}">
                         <div class="step-counter">3</div>
                         <div class="step-name">Progress</div>
                     </div>
@@ -157,12 +184,13 @@
                                         style="font-size: 25;"></i>
                                     <button type="button" class="btn btn-primary"><i class="bi bi-alarm"
                                             style="font-size: 25;"></i></button>
-                                    <button type="button" class="btn btn-primary"><i class="bi bi-list-task"></i></button>
+                                    <button type="button" class="btn btn-primary"><i
+                                            class="bi bi-list-task"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="col mt-4">
-                        <b>Total Date = {{ $project_detail->TotalDays . ' ' . $project_detail->activity[0]->DAY_WEEK }}
+                        <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
                         </b>
                         <table>
                             <thead>
@@ -191,7 +219,8 @@
                                     @endphp
                                     <tr>
                                         <td>
-                                            <a data-toggle="toggle"><strong><i class='fas fa-angle-down'></i></strong></a>
+                                            <a data-toggle="toggle"><strong><i
+                                                        class='fas fa-angle-down'></i></strong></a>
                                         </td>
                                         <td style="text-align: left">
                                             <strong>{{ $i++ }}.{{ $act->ACTIVITY_NAME }}</strong>
@@ -200,7 +229,7 @@
                                             @endif
 
                                         </td>
-                                        <td>{{ $sum }} {{ $act->DAY_WEEK }}</td>
+                                        <td>{{ ConvertDaysToWeek($sum) }} </td>
                                         <td></td>
                                         <td></td>
                                         <td>
@@ -221,7 +250,7 @@
                                         <td></td>
                                         <td style="margin:10px;text-align: left ">{{ $i - 1 . '.' . $o++ }}
                                             {{ $task->TASK_NAME }} </td>
-                                        <td>{{ $task->DAY }} {{ $act->DAY_WEEK }}
+                                        <td>{{ $task->DAY }} Days
                                             @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                     </div>
                     @endif
@@ -253,38 +282,24 @@
                         @endif
                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                         @endif
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#myModal-{{ $task->TASK_ID }}">
                             <i class='fas fa-money-check-alt'></i>
                         </button>
 
                         <!-- The Modal -->
-                        <div class="modal" id="myModal">
+                        <div class="modal" id="myModal-{{ $task->TASK_ID }}">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
 
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">add budget</h4>
+                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                        <form id="signUpForm" method="post" action="{{ route('category.save') }}">
-                                            @csrf
-                                            {{-- Project Name / Target --}}
-                                            <div class="row mb-5 mb-sm-0">
-                                                <div class=" mb-sm-5">
-                                                    <label class="label-left fw-bold mb-2"
-                                                        for="projectName">budget</label>
-                                                    <input type="text" name="category_name" class="form-control"
-                                                        id="projectName">
-                                                </div>
-                                                <button type="submit" name="submit" onclick="success()"
-                                                    class="btn btn-success">SAVE</button>
-                                            </div>
-                                    </div>
-                                    <!-- end previous / next buttons -->
-                                    </form>
+                                        @include("project.show.include.tab_edit_budget")
                                 </div>
 
 
@@ -300,8 +315,8 @@
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
+                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -311,15 +326,16 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="signUpForm" method="post" action="{{ route('category.save') }}">
+                                            <form id="signUpForm" method="post"
+                                                action="{{ route('category.save') }}">
                                                 @csrf
                                                 {{-- Project Name / Target --}}
                                                 <div class="row mb-5 mb-sm-0">
                                                     <div class=" mb-sm-5">
                                                         <label class="label-left fw-bold mb-2"
                                                             for="projectName">budget</label>
-                                                        <input type="text" name="category_name" class="form-control"
-                                                            id="projectName">
+                                                        <input type="text" name="category_name"
+                                                            class="form-control" id="projectName">
                                                     </div>
                                                     <button type="submit" name="submit" onclick="success()"
                                                         class="btn btn-success">SAVE</button>
@@ -362,11 +378,11 @@
                 </tbody>
                 </table>
             </div>
-            </div>
-
-            <br>
-
         </div>
+
+        <br>
+
+    </div>
     </div>
     </div>
 
