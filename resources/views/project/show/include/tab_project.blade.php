@@ -44,7 +44,7 @@
     </div>
 
     <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
-        Chart
+        @include('project.show.activity_gantt_chart')
     </div>
 
 </div>

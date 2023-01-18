@@ -28,7 +28,10 @@ class TaskController extends Controller
 
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
-        if (($completeTasksCounter - 1) >= 0) {
+        if (($completeTasksCounter - 1) == 0) {
+            $Task->activity->START_DATE = date("Y/m/d");
+            $Task->activity->save();
+
             $Project->STATUS = "New Release,Approved,Progress,workingOn";
             $Project->save();
 
@@ -69,7 +72,7 @@ class TaskController extends Controller
         }
 
         if ($completeTasksCounter == $totalTasks) {
-
+            $Task->activity->END_DATE = date("Y/m/d");
             $Task->activity->STATUS = 1;
             $Task->activity->save();
         } else {
@@ -86,7 +89,7 @@ class TaskController extends Controller
     {
         return view('Admin.addholyday');
     }
-    public function SaveBudget(request $request,$id)
+    public function SaveBudget(request $request, $id)
     {
 
         $Task = ProjectTask::where('TASK_ID', $id)->first();

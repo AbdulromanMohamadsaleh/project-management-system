@@ -64,7 +64,20 @@ class ProjectController extends Controller
         $sum = 0;
         foreach ($project_detail->activity as $act) {
 
+            // dd(intval(date('m', strtotime($act->START_DATE))));
 
+            $Syear = intval(date('Y', strtotime($act->START_DATE)));
+            $Smonth = intval(date('m', strtotime($act->START_DATE)));
+            $Sday = intval(date('d', strtotime($act->START_DATE)));
+
+            if ($act->END_DATE) {
+
+                $Eyear = intval(date('Y', strtotime($act->END_DATE)));
+                $Emonth = intval(date('m', strtotime($act->END_DATE)));
+                $Eday = intval(date('d', strtotime($act->END_DATE)));
+                // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
+            }
+            // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             foreach ($act->tasks as $task) {
                 $sum += intval($task->DAY);
             }
@@ -72,7 +85,7 @@ class ProjectController extends Controller
 
 
         $project_detail->TotalDays = $sum;
-        return view('Admin.show', ['project_detail' => $project_detail,'status' => $status], ['TeamsName' => $project_detail->projectTeam]);
+        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status], ['TeamsName' => $project_detail->projectTeam]);
     }
     public function Timeline($id)
     {
