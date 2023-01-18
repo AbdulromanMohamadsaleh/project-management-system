@@ -299,90 +299,76 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                        @include("project.show.include.tab_edit_budget")
-                                </div>
-
-
-                                <!-- Modal footer -->
-
-                            </div>
-                        </div>
-                        <!-- Button trigger modal -->
-                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class='fas fa-book'></i>
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="signUpForm" method="post"
-                                                action="{{ route('category.save') }}">
-                                                @csrf
-                                                {{-- Project Name / Target --}}
-                                                <div class="row mb-5 mb-sm-0">
-                                                    <div class=" mb-sm-5">
-                                                        <label class="label-left fw-bold mb-2"
-                                                            for="projectName">budget</label>
-                                                        <input type="text" name="category_name"
-                                                            class="form-control" id="projectName">
-                                                    </div>
-                                                    <button type="submit" name="submit" onclick="success()"
-                                                        class="btn btn-success">SAVE</button>
-                                                </div>
-                                        </div>
-                                        <!-- end previous / next buttons -->
-                                        </form>
+                                        @include('project.show.include.tab_edit_budget')
                                     </div>
+
+
+                                    <!-- Modal footer -->
+
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                        </div>
+                        <!-- Dete -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#myModal2-{{ $task->TASK_ID }}">
+                            <i class='fas fa-notes-medical'></i>
+                        </button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal2-{{ $task->TASK_ID }}">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        @include("project.show.include.tab_edit_note")
+                                    </div>
+
+
+                                    <!-- Modal footer -->
+
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                        </div>
+                    </td>
+                    <td>
+                        @if ($task->STATUS == 1)
+                            @php
+                                $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                            @endphp
+                            <div class="me-3">
+                                <div>
+                                    {{ $TASK_TRACKER[0] }}
+                                </div>
+                                <div>
+                                    {{ $TASK_TRACKER[1] }}
                                 </div>
                             </div>
                         @endif
+                    </td>
+                    <td></td>
+                    </tr>
+                    @endforeach
+
+                    </tbody>
+                    @endforeach
+                    </tbody>
+
+                    </tbody>
+                    </table>
                 </div>
-                <!-- Dete -->
-
-
-                </td>
-                <td>
-                    @if ($task->STATUS == 1)
-                        @php
-                            $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
-                        @endphp
-                        <div class="me-3">
-                            <div>
-                                {{ $TASK_TRACKER[0] }}
-                            </div>
-                            <div>
-                                {{ $TASK_TRACKER[1] }}
-                            </div>
-                        </div>
-                    @endif
-                </td>
-                <td></td>
-                </tr>
-                @endforeach
-
-                </tbody>
-                @endforeach
-                </tbody>
-
-                </tbody>
-                </table>
             </div>
+
+            <br>
+
         </div>
-
-        <br>
-
-    </div>
     </div>
     </div>
 
