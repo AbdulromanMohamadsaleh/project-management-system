@@ -28,111 +28,12 @@
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Category</h6>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                      </button>
 
-                      <!-- The Modal -->
-                      <div class="modal" id="myModal">
-                        <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Create Category</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form id="signUpForm" method="post" action="{{ route('category.save') }}">
-                                    @csrf
-                                        {{-- Project Name / Target --}}
-                                        <div class="row mb-5 mb-sm-0">
-                                            <div class=" mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Category Name</label>
-                                                <input type="text" name="category_name" class="form-control" id="projectName">
-                                            </div>
-                                            <button type="submit" name="submit"  onclick="success()" class="btn btn-success">SAVE</button>
-                                        </div>
-                                    </div>
-                                    <!-- end previous / next buttons -->
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-
-                          </div>
-                        </div>
                       </div>
                     {{-- <a href="{{route('createcategory')}}"><button type="button" class="btn btn-primary" data-toggle="tooltip" title="add category"><i class="fa fa-plus" aria-hidden="true"></i></button></a> --}}
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="example">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center;" scope="col">ID</th>
-                                <th style="text-align: center;" scope="col">Name Category</th>
-                                <th style="text-align: center;">Action</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                                @foreach ( $Category as $Categorys )
-                                <tr style="text-align: center">
-                                    <td >{{$Categorys->CATEGORY_ID}}</td>
-                                    <td>{{$Categorys->NAME_CATEGORY}}</td>
-                                    <td class="">
-                                        <button type="button" class="btn btn-warning btn-sm2" data-bs-toggle="modal" data-bs-target="#Modal{{$Categorys->CATEGORY_ID}}">
-                                            <i class="fas fa-pencil-alt" style="font-size: 15px;">
-                                            </i></button>
-
-                                          <!-- The Modal -->
-                                          <div class="modal" id="Modal{{$Categorys->CATEGORY_ID}}">
-                                            <div class="modal-dialog modal-lg">
-                                              <div class="modal-content">
-
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                  <h4 class="modal-title">Edit Category</h4>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <!-- Modal body -->
-                                                <div class="modal-body">
-                                                    <form id="signUpForm" method="post" action="{{ route('category.update',$Categorys->CATEGORY_ID) }}">
-                                                        @csrf
-                                                            {{-- Project Name / Target --}}
-                                                            <div class="row mb-5 mb-sm-0">
-                                                                <div class=" mb-sm-5">
-                                                                    <label class="label-left fw-bold mb-2" for="projectName">Category Name</label>
-                                                                    <input value="{{$Categorys->NAME_CATEGORY}}" type="text" name="category_name" class="form-control" id="projectName">
-                                                                </div>
-                                                                <button type="submit" name="submit"  class="btn btn-success">SAVE</button>
-                                                            </div>
-                                                        </div>
-                                                        <!-- end previous / next buttons -->
-                                                    </form>
-                                                </div>
-
-                                                <!-- Modal footer -->
-
-                                              </div>
-                                            </div>
-                                          </div>
-                                         <form style="display: inline-block" method="POST"
-                                                action="{{ route('category.delete', $Categorys->CATEGORY_ID) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit"
-                                                    class="btn  btn-danger show-alert-delete-box "
-                                                    data-toggle="tooltip" title='Delete'><i class="bi bi-trash"  style="font-size: 15px;"></i></button>
-                                            </form>
-                                        </i>
-                                         </a>
-                                   </td>
-                                </tr>
-                                @endforeach
-                        </tbody>
-                    </table>
+                 @include("category.include.table_category")
                 </div>
             </div>
         </div>

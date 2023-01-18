@@ -28,125 +28,13 @@
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Recent Salse</h6>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                        <i class="fa fa-plus" aria-hidden="true"></i></button>
-                    </button>
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Create User</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form id="signUpForm" method="post" action="{{ route('holyday.save') }}">
-                                        @csrf
-                                        {{-- Project Name / Target --}}
-                                        <div class="row mb-5 mb-sm-0">
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Emial</label>
-                                                <input type="text" name="holyday_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Password
-                                                    </label>
-                                                <input type="text" name="holyday_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Confirm Password
-                                                    </label>
-                                                <input type="text" name="holyday_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Name
-                                                    </label>
-                                                <input type="text" name="holyday_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Agency
-                                                    Name</label>
-                                                <input type="text" name="holyday_name" class="form-control"
-                                                    id="projectName">
-                                            </div>
-                                            <div class="col-md-6 mb-sm-5">
-                                                <label class="label-left fw-bold mb-2" for="projectName">Positon</label>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected> select Position</option>
-                                                    <option value="1">admin</option>
-                                                    <option value="2">empoyeee</option>
-                                                    <option value="3">project manager</option>
-                                                    <option value="3">manager</option>
-                                                    <option value="3">member</option>
-                                                  </select>
-                                            </div>
-                                            <button type="submit" name="submit" class="btn btn-success">SAVE</button>
-                                        </div>
-                                </div>
-                                <!-- end previous / next buttons -->
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-
-                        </div>
-                    </div>
-                </div>
+                    @include("createuser.include.createuser")
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="example">
-                        <thead>
-                            <tr>
-                                <th scope="col">Number</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Nickname</th>
-                                <th scope="col">Card_id</th>
-                                <th scope="col">Tel</th>
-                                <th scope="col">Agency</th>
-                                <th scope="col">Position</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($login as $logins)
-                                <tr style="text-align:left">
-                                    <td>{{ $logins->LOGIN_ID }}</td>
-                                    <td>{{ $logins->EMAIL }}</td>
-                                    <td>{{ $logins->NAME }}</td>
-                                    <td>{{ $logins->NICKNAME }}</td>
-                                    <td>{{ $logins->CARD_ID }}</td>
-                                    <td>{{ $logins->TELEPHONE }}</td>
-                                    <td>{{ $logins->AGENCY }}</td>
-                                    <td>{{ $logins->POSITION }}
-                                    <td>
-                                        @if ($logins->IS_ACTIVE == 0)
-                                        <form style="display: inline-block" method="POST"
-                                                action="{{ route('activeuser', $logins->LOGIN_ID) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="POST">
-                                                <button type="submit"
-                                                    class="btn  btn-success  show-alert-delete-box "
-                                                    data-toggle="tooltip" title='ACTIVE'><i class='fas fa-check-circle'></i></button>
-                                         </form>
-                                    @else
-                                    <span class="badge bg-success">Active</span>
-
-                                        @endif
-
-                                    </td>
-
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    @include("createuser.include.tableuser")
                 </div>
+                </div>
+
             </div>
         </div>
         <!-- Recent Sales End -->
