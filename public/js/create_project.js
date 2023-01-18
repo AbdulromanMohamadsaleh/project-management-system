@@ -1,145 +1,147 @@
     // {-- Activity Section --}
+const projectStart = document.querySelector('input[name="projectStart"]');
+projectStart.valueAsDate = new Date();
 
-    const addActivityButton = document.querySelector('#btnAddNewActivity')
-    const activityWraper = document.querySelector('#activityWrap')
-    const btnsAddTask = document.querySelectorAll('.btn-add-task');
-    let activityCounter = 1;
+const addActivityButton = document.querySelector('#btnAddNewActivity')
+const activityWraper = document.querySelector('#activityWrap')
+const btnsAddTask = document.querySelectorAll('.btn-add-task');
+let activityCounter = 1;
 
-    addActivityButton.addEventListener('click', addNewActivityInput)
+addActivityButton.addEventListener('click', addNewActivityInput)
 
-    btnsAddTask.forEach(btnAddTask => {
-        btnAddTask.addEventListener('click', addNewTaskInput)
-    })
+btnsAddTask.forEach(btnAddTask => {
+    btnAddTask.addEventListener('click', addNewTaskInput)
+})
 
-    function addNewActivityInput() {
-        activityCounter++
-        let activityID = `activity-${activityCounter}-` + Math.floor(Math.random() * 100) + 1;
+function addNewActivityInput() {
+    activityCounter++
+    let activityID = `activity-${activityCounter}-` + Math.floor(Math.random() * 100) + 1;
 
-        const newActivityElement = `<hr >
-                                    <div class="mb-3 col-10 pt-4">
-                                        <div class="input-group mb-3">
-                                            <div class=" me-3 mt-2 fs-5" id="numbering"></div>
-                                            <input id="ActivityBorder" class="form-control form-control-lg mb-3" name="activityName[]"
-                                                type="text" placeholder="Activity "
-                                                aria-label=".form-control-lg example" >
-                                                <input type="text"   class="taskCounter" hidden name="taskCounter[]"  value="1">
-                                        </div>
-                                            <!-- Tasks -->
-                                        <div class="taskWrap">
-                                            <div class="row d-flex justify-content-end">
+    const newActivityElement = `<hr >
+                                <div class="mb-3 col-10 pt-4">
+                                    <div class="input-group mb-3">
+                                        <div class=" me-3 mt-2 fs-5" id="numbering"></div>
+                                        <input id="ActivityBorder" class="form-control form-control-lg mb-3" name="activityName[]"
+                                            type="text" placeholder="Activity "
+                                            aria-label=".form-control-lg example" >
+                                            <input type="text"   class="taskCounter" hidden name="taskCounter[]"  value="1">
+                                    </div>
+                                        <!-- Tasks -->
+                                    <div class="taskWrap">
+                                        <div class="row d-flex justify-content-end">
 
-                                                <div class="mb-3 col-7">
-                                                <div class="input-group mb-3">
-                                                        <span class=" me-3 mt-2 fs-5" id="numberingTask">1</span>
-                                                    <input class="form-control form-control-lg mb-3"
-                                                        id="TaskBorder" name="taskName[]"  type="text" placeholder="Task"
-                                                        aria-label="Task">
-                                                    </div>
+                                            <div class="mb-3 col-7">
+                                            <div class="input-group mb-3">
+                                                    <span class=" me-3 mt-2 fs-5" id="numberingTask">1</span>
+                                                <input class="form-control form-control-lg mb-3"
+                                                    id="TaskBorder" name="taskName[]"  type="text" placeholder="Task"
+                                                    aria-label="Task">
                                                 </div>
-                                                <div class="col-2">
-                                                    <input class="form-control form-control-lg mb-3" id="taskDuration"
-                                                        name="taskDuration[]"   type="number" min='1' placeholder="Day"
-                                                        aria-label="Task">
-                                                </div>
-                                                <div class="mb-3 col-1">
-                                                    <button type="button" title="Delete Task" disabled
-                                                            class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
-                                                </div>
-                                                <div class="mb-2 col-1 ttt task-1" >
-                                                    <button type="button" title="New Task"
-                                                            class="btn btn-success btn-add-task ">+</button>
-                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <input class="form-control form-control-lg mb-3" id="taskDuration"
+                                                    name="taskDuration[]"   type="number" min='1' placeholder="Day"
+                                                    aria-label="Task">
+                                            </div>
+                                            <div class="mb-3 col-1">
+                                                <button type="button" title="Delete Task" disabled
+                                                        class="btn btn-danger btn-delete-task"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                            <div class="mb-2 col-1 ttt task-1" >
+                                                <button type="button" title="New Task"
+                                                        class="btn btn-success btn-add-task ">+</button>
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="col-1 pt-4">
-                                                    <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity"><i class="bi bi-trash"></i></button>
-                                        </div>
-                                        <div class="col-1 pt-4" id='newrow'>
-                                            <button onclick="Numbreings()" type="button" id="btnAddNewActivity"
-                                                class="btn btn-success add-task"title="New Task">+</button>
-                                        </div>
-                                `
+                                </div>
+                                    <div class="col-1 pt-4">
+                                                <button type="button" title="Delete Acivity" class="btn btn-danger delete-activity"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                    <div class="col-1 pt-4" id='newrow'>
+                                        <button onclick="Numbreings()" type="button" id="btnAddNewActivity"
+                                            class="btn btn-success add-task"title="New Task">+</button>
+                                    </div>
+                            `
 
 
 
 
 
-        const newCreatedDiv = document.createElement('div');
-        newCreatedDiv.classList.add('row');
+    const newCreatedDiv = document.createElement('div');
+    newCreatedDiv.classList.add('row');
 
-        newCreatedDiv.innerHTML = newActivityElement;
-        activityWraper.appendChild(newCreatedDiv)
-        newCreatedDiv.setAttribute('id', activityID);
+    newCreatedDiv.innerHTML = newActivityElement;
+    activityWraper.appendChild(newCreatedDiv)
+    newCreatedDiv.setAttribute('id', activityID);
 
-        // Check is First Activity
-        if (activityCounter - 1 == 1) {
-            this.parentElement.remove()
+    // Check is First Activity
+    if (activityCounter - 1 == 1) {
+        this.parentElement.remove()
+
+    } else {
+
+        newCreatedDiv.previousSibling.querySelector('#btnAddNewActivity').parentElement.remove()
+
+    }
+    const addActivityButton = document.querySelector('#btnAddNewActivity')
+    addActivityButton.addEventListener('click', addNewActivityInput)
+    // Add Task
+    const btnsAddTask = document.querySelectorAll('.btn-add-task');
+    btnsAddTask.forEach(btnAddTask => {
+        btnAddTask.addEventListener('click', addNewTaskInput)
+
+    })
+
+    const newCreatedDivAddActivity = document.createElement('div');
+    newCreatedDivAddActivity.classList.add('col-1');
+    newCreatedDivAddActivity.classList.add('pt-4');
+    newCreatedDivAddActivity.innerHTML = `
+                                        <button type="button" id="btnAddNewActivity"
+                                            class="btn btn-success add-task"title="New Task">+</button>
+                                    `
+
+    Numbreings()
+                                    // Delete-activity
+    newCreatedDiv.querySelector('.delete-activity').addEventListener('click', function(e) {
+        activityCounter--
+
+
+        // Not Last Sibling
+        if (document.querySelector(`#${activityID}`).nextSibling != null) {
+            // Dont Move Add Button
+            console.log("Not Last Sibling")
 
         } else {
+            if (activityCounter == 1) {
+                //  Move Add Button to First Activity
+                const newCreatedDivAddActivity = document.createElement('div');
+                newCreatedDivAddActivity.classList.add('col-1');
+                newCreatedDivAddActivity.innerHTML = `
+                                        <button type="button" id="btnAddNewActivity"
+                                            class="btn btn-success add-task"title="New Task">+</button>
+                                    `
 
-            newCreatedDiv.previousSibling.querySelector('#btnAddNewActivity').parentElement.remove()
-
-        }
-        const addActivityButton = document.querySelector('#btnAddNewActivity')
-        addActivityButton.addEventListener('click', addNewActivityInput)
-        // Add Task
-        const btnsAddTask = document.querySelectorAll('.btn-add-task');
-        btnsAddTask.forEach(btnAddTask => {
-            btnAddTask.addEventListener('click', addNewTaskInput)
-
-        })
-
-        const newCreatedDivAddActivity = document.createElement('div');
-        newCreatedDivAddActivity.classList.add('col-1');
-        newCreatedDivAddActivity.classList.add('pt-4');
-        newCreatedDivAddActivity.innerHTML = `
-                                            <button type="button" id="btnAddNewActivity"
-                                                class="btn btn-success add-task"title="New Task">+</button>
-                                        `
-
-        Numbreings()
-                                        // Delete-activity
-        newCreatedDiv.querySelector('.delete-activity').addEventListener('click', function(e) {
-            activityCounter--
-
-
-            // Not Last Sibling
-            if (document.querySelector(`#${activityID}`).nextSibling != null) {
-                // Dont Move Add Button
-                console.log("Not Last Sibling")
+                document.querySelector(`#activity-1`).appendChild(newCreatedDivAddActivity)
+                const addActivityButton = document.querySelector('#btnAddNewActivity')
+                addActivityButton.addEventListener('click', addNewActivityInput)
 
             } else {
-                if (activityCounter == 1) {
-                    //  Move Add Button to First Activity
-                    const newCreatedDivAddActivity = document.createElement('div');
-                    newCreatedDivAddActivity.classList.add('col-1');
-                    newCreatedDivAddActivity.innerHTML = `
-                                            <button type="button" id="btnAddNewActivity"
-                                                class="btn btn-success add-task"title="New Task">+</button>
-                                        `
+                //  Move Add Button
+                document.querySelector(`#${activityID}`).previousSibling.appendChild(
+                    newCreatedDivAddActivity);
+                const addActivityButton = document.querySelector('#btnAddNewActivity')
+                addActivityButton.addEventListener('click', addNewActivityInput)
 
-                    document.querySelector(`#activity-1`).appendChild(newCreatedDivAddActivity)
-                    const addActivityButton = document.querySelector('#btnAddNewActivity')
-                    addActivityButton.addEventListener('click', addNewActivityInput)
-
-                } else {
-                    //  Move Add Button
-                    document.querySelector(`#${activityID}`).previousSibling.appendChild(
-                        newCreatedDivAddActivity);
-                    const addActivityButton = document.querySelector('#btnAddNewActivity')
-                    addActivityButton.addEventListener('click', addNewActivityInput)
-
-                }
             }
+        }
 
-            document.querySelector(`#${activityID}`).remove()
-            // this.parentElement.parentElement.remove()
+        document.querySelector(`#${activityID}`).remove()
+        // this.parentElement.parentElement.remove()
 
-            Numbreings()
-        })
-        // AddTaskDurationFunctionForNewTask()
-    }
+        Numbreings()
+    })
+    // AddTaskDurationFunctionForNewTask()
+}
 
 function addNewTaskInput() {
 

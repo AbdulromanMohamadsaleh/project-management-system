@@ -235,7 +235,7 @@ class ProjectController extends Controller
         return redirect()->back();
     }
 
-    public function Update(ProjectDetial $ProjectDetial)
+    public function Edit(ProjectDetial $ProjectDetial)
     {
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
@@ -249,9 +249,7 @@ class ProjectController extends Controller
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
 
-
-
-        return view('Admin.update', [
+        return view('Admin.edit', [
             'projectManagers' => $projectManagers,
             'project_detail' => $ProjectDetial,
             'team' => $team,
@@ -259,6 +257,35 @@ class ProjectController extends Controller
             'Categories' => $Categories,
             'projectTeams' => $projectTeams
         ]);
+    }
+
+
+    public function Update(Request $request, $id)
+    {
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+
+        $ProjectDetail->NAME_PROJECT = $request->projectName;
+        $ProjectDetail->REASONS = $request->reason;
+        $ProjectDetail->OBJECTIVE = $request->objectve;
+        $ProjectDetail->LOCATION = $request->location;
+        $ProjectDetail->TARGET = $request->target;
+        $ProjectDetail->RESULT = $request->expectedRresults;
+
+        $ProjectDetail->DATE_START = $request->projectStart;
+        $ProjectDetail->DATE_END = $request->projectEnd;
+        $ProjectDetail->CATEGORY_ID = $request->category;
+
+        $ProjectDetail->PROJECT_MANAGER = $request->projectManager;
+        $ProjectDetail->BUDGET = $request->budget;
+        $ProjectDetail->TOTAL_DATE = $request->projectDuration . " " . $request->projectDurationFormat;
+
+        $ProjectDetail->save();
+
+        $ProjectDetial = ProjectDetial::where('DETAIL_ID', $ProjectDetail->DETAIL_ID)->first();
+
+        $ProjectDetial->projectTeam()->attach($request->projectTeam);
+
+        return redirect()->back();
     }
 
 
