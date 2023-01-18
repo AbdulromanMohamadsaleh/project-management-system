@@ -82,7 +82,7 @@
 
                 <li class="timeline">
                     @if (in_array('Progress', $status))
-                        @if ($countStatus == 4 && !in_array('Complete', $status))
+                        @if ($countStatus == 4 && !in_array('Completed', $status))
                             <div class="icon layer-plus"></div>
                         @else
                             <div class="icon done"></div>
