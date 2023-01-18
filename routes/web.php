@@ -131,7 +131,9 @@ Route::group(
     ['middleware' => ['auth']],
     function () {
         Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+        Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
     }
+
 );
 
 

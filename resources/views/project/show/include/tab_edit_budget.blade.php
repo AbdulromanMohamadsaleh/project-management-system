@@ -16,12 +16,12 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home-{{ $task->TASK_ID }}" role="tabpanel"
         aria-labelledby="nav-home-tab" tabindex="0">
-        <form id="signUpForm" method="post" action="{{ route('budget.save') }}">
+        <form id="signUpForm" method="post" action="{{ route('task.savebudget',$task->TASK_ID) }}">
             @csrf
             <div class="row mb-5 mb-sm-0">
                 <div class=" mb-sm-5">
                     <label class="label-left fw-bold mb-2" for="projectName">Add budget</label>
-                    <input value="{{ $task->TASK_BUDGET }}" type="number" name="category_name" class="form-control"
+                    <input value="{{ $task->TASK_BUDGET }}" type="number" name="budget" class="form-control"
                         id="projectName">
                 </div>
                 <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
@@ -51,7 +51,7 @@
             <div class="row mb-5 mb-sm-0">
                 <div class=" mb-sm-5">
                     <label class="label-left fw-bold mb-2" for="projectName">Show budget</label>
-                    <input  value="{{ $task->TASK_BUDGET }}" type="number" name="category_name" class="form-control"
+                    <input disabled value="{{ $task->TASK_BUDGET }}" type="number" name="category_name" class="form-control"
                         id="projectName">
                 </div>
             </div>
