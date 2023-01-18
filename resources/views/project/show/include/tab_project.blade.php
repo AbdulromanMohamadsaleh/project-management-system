@@ -11,16 +11,17 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
         <button class="nav-link active" id="nav-show-project-tab" data-bs-toggle="tab" data-bs-target="#nav-show-project"
-            type="button" role="tab" aria-controls="nav-show-project" aria-selected="true">Show</button>
+            type="button" role="tab" aria-controls="nav-show-project" aria-selected="true"><i class="bi bi-eye"  style="font-size: 25px"></i></button>
 
         <button class="nav-link " id="nav-edit-project-tab" data-bs-toggle="tab" data-bs-target="#nav-edit-project"
-            type="button" role="tab" aria-controls="nav-edit-project" aria-selected="true">Edit</button>
+            type="button" role="tab" aria-controls="nav-edit-project" aria-selected="true" data-toggle="tooltip" title='Edit' style="font-size: 25px"><i class="bi bi-pencil"></i></button>
+        </button>
 
         <button class="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline"
-            type="button" role="tab" aria-controls="nav-timeline" aria-selected="false">Timeline</button>
+            type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"  data-toggle="tooltip" title='Timeline'><i class="bi bi-alarm" style="font-size: 25px"></i></button>
 
         <button class="nav-link" id="nav-chart-tab" data-bs-toggle="tab" data-bs-target="#nav-chart" type="button"
-            role="tab" aria-controls="nav-chart" aria-selected="false">Chart</button>
+            role="tab" aria-controls="nav-chart" aria-selected="false" data-toggle="tooltip" title='Chart task'><i class="bi bi-bar-chart-steps" style="font-size: 25px"></i></button>
 
     </div>
 </nav>

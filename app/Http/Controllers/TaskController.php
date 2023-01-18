@@ -85,10 +85,7 @@ class TaskController extends Controller
 
         return redirect()->back();
     }
-    public function Create()
-    {
-        return view('Admin.addholyday');
-    }
+
     public function SaveBudget(request $request, $id)
     {
 
@@ -98,21 +95,15 @@ class TaskController extends Controller
         $Task->save();
         return redirect()->back();
     }
+    public function SaveNote(request $request, $id)
+    {
 
-    // public function Update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'holyday_name' => 'required',
-    //         'date_holyday' => 'required',
-    //     ]);
+        $Task = ProjectTask::where('TASK_ID', $id)->first();
+        $Task->TASK_NOTE = $request->note;
+        $Task->timestamps = false;
+        $Task->save();
+        return redirect()->back();
+    }
 
-    //     $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
-    //     // Getting values from the blade template form
-    //     $Holyday->HOLYDAY_NAME = $request->holyday_name;
-    //     $Holyday->HOLYDAY_DATE = $request->date_holyday;
-    //     // $Holyday->CATEGORY_ID = $id;
-    //     $Holyday->timestamps = false;
-    //     $Holyday->update();
-    //     return redirect()->back();
-    // }
+
 }

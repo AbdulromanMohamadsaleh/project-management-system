@@ -63,7 +63,7 @@
 </div>
 @endif
 </td>
-<td>1-1-2566</td>
+<td></td>
 
 {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 

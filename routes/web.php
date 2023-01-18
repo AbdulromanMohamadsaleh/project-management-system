@@ -132,6 +132,8 @@ Route::group(
     function () {
         Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
         Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
+        Route::post('/savenote-task/{id}', [TaskController::class, 'SaveNote'])->name('task.savenote');
+
     }
 
 );
