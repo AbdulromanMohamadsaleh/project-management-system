@@ -2,53 +2,55 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    // google.charts.load('current', {
-    //     'packages': ['gantt']
-    // });
     google.charts.load("current", {
         packages: ["timeline"]
     });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-        var container = document.getElementById("timeline");
+        var container = document.getElementById('timeline-chart');
+        var chart = new google.visualization.Timeline(container);
         var dataTable = new google.visualization.DataTable();
 
         dataTable.addColumn({
-            type: "string",
-            id: "Term"
+            type: 'string',
+            id: 'Activity'
         });
         dataTable.addColumn({
-            type: "string",
-            id: "Phase"
+            type: 'string',
+            id: 'Task'
         });
         dataTable.addColumn({
-            type: "date",
-            id: "Start"
+            type: 'date',
+            id: 'Start'
         });
         dataTable.addColumn({
-            type: "date",
-            id: "End"
+            type: 'date',
+            id: 'End'
         });
-
         dataTable.addRows([
-
+            // ['Briefing Meeting', 'Baseline', new Date(2020, 2, 6), new Date(2020, 2, 10)],
+            // ['Briefing Meeting', 'Forecast', new Date(2020, 2, 7), new Date(2020, 2, 11)],
+            // ['Briefing Meeting', 'Actual', new Date(2020, 2, 6), new Date(2020, 2, 13)],
+            // ['Concept Design', 'Baseline', new Date(2020, 2, 6), new Date(2020, 2, 10)],
+            // ['Concept Design', 'Forecast', new Date(2020, 2, 7), new Date(2020, 2, 11)],
+            // ['Concept Design', 'Actual', new Date(2020, 2, 6), new Date(2020, 2, 13)]
             @php
-                foreach ($project_detail->activity as $act) {
+                foreach ($tasks as $task) {
                     // date('d', strtotime($act->START_DATE)
-                    if ($act->START_DATE && $act->END_DATE && $act->START_DATE != $act->END_DATE) {
-                        $Syear = intval(date('Y', strtotime($act->START_DATE)));
-                        $Smonth = intval(date('m', strtotime($act->START_DATE)));
-                        $Sday = intval(date('d', strtotime($act->START_DATE)));
+                    if ($task->START_DATE && $task->COPLATE_TIME) {
+                        $Syear = intval(date('Y', strtotime($task->START_DATE)));
+                        $Smonth = intval(date('m', strtotime($task->START_DATE)));
+                        $Sday = intval(date('d', strtotime($task->START_DATE)));
 
-                        $Eyear = intval(date('Y', strtotime($act->END_DATE)));
-                        $Emonth = intval(date('m', strtotime($act->END_DATE)));
-                        $Eday = intval(date('d', strtotime($act->END_DATE)));
+                        $Eyear = intval(date('Y', strtotime($task->COPLATE_TIME)));
+                        $Emonth = intval(date('m', strtotime($task->COPLATE_TIME)));
+                        $Eday = intval(date('d', strtotime($task->COPLATE_TIME)));
 
                         echo "['" .
-                            $act->ACTIVITY_ID .
+                            $task->activity->ACTIVITY_NAME .
                             "', '" .
-                            $act->ACTIVITY_NAME .
+                            $task->TASK_NAME .
                             "', " .
                             ' new Date(' .
                             $Syear .
@@ -65,47 +67,31 @@
                             ')' .
                             '],
                         ';
-                        // ["1", "Planning Activities", new Date(2016, 0, 1), new Date(2016, 11, 31)],
                     }
                 }
-
             @endphp
-
         ]);
 
         var options = {
-            // height: 400,
+            // timeline: {colorByRowLabel: true},
 
-            title: 'Toppings I Like On My Pizza',
-            // timeline: {
-            //     showRowLabels: false
-            // },
             timeline: {
-                colorByRowLabel: true,
-                showRowLabels: false,
-                // rowLabelStyle: {
-                //     fontName: 'Helvetica',
-                //     fontSize: 24,
-                //     color: '#603913'
-                // },
+                rowLabelStyle: {
+                    fontName: 'Helvetica',
+                    fontSize: 18,
+                    color: '#603913'
+                },
                 barLabelStyle: {
                     fontName: 'Garamond',
                     fontSize: 14
                 }
             },
-            animation: {
-                startup: true,
-                duration: 1000,
-                easing: "in"
-            },
-            avoidOverlappingGridLines: true,
-            backgroundColor: "#fff",
-            colors: ["#2b91a6", "#40ad48", "#f05c56", "#f37520", "#514b43"],
-            is3D: true,
-
+            height: 1000,
         };
 
-        var chart = new google.visualization.Timeline(container);
+
+
+
         chart.draw(dataTable, options);
 
         function resizeCharts() {
@@ -132,17 +118,11 @@
     <div class="content">
         <!-- Navbar Start -->
         @include('include.navbar')<br>
-        <h1 class="fw-bold text-center fs-4">Activity Timeline of {{ $project_detail->NAME_PROJECT }}</h1>
+        <h1 class="fw-bold text-center fs-4">Task Timeline of {{ $project->NAME_PROJECT }}</h1>
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <style>
-                        #timeline {
-                            width: 100%;
-                            height: 400px;
-                        }
-                    </style>
-                    <div id="timeline" class="mt-5"></div>
+                    <div class="mt-5" id="timeline-chart"></div>
                 </div>
             </div>
         </div>

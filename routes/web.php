@@ -131,9 +131,11 @@ Route::group(
     ['middleware' => ['auth']],
     function () {
         Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+        Route::get('/task-timeline/{id}', [TaskController::class, 'Timeline'])->name('task.timeline');
+        Route::get('/activity-timeline/{id}', [TaskController::class, 'ActivityTimeline'])->name('activity.timeline');
+        Route::get('/sart-task/{id}', [TaskController::class, 'Start'])->name('task.start');
         Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
         Route::post('/savenote-task/{id}', [TaskController::class, 'SaveNote'])->name('task.savenote');
-
     }
 
 );

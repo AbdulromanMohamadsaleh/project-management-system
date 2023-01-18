@@ -162,12 +162,12 @@
                                             <div class="row p-2 px-5 ">
                                                 <div style="text-align: left"
                                                     class="mb-3 form-check form-check-inline">
-                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                    <input  class="form-check-input" name="isIncludeHolyday"
                                                         type="radio" id="yes" value="yes">
                                                     <label class="form-check-label ms-2" for="yes">Yes</label>
                                                 </div>
                                                 <div style="text-align: left" class="form-check form-check-inline">
-                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                    <input checked class="form-check-input" name="isIncludeHolyday"
                                                         type="radio" id="no" value="no">
                                                     <label class="form-check-label ms-2" for="no">No</label>
                                                 </div>
@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="objectve">Objective</label>
-                                        <textarea class="form-control @error('objectve') is-invalid @enderror" rows="5" id="objectve" name="objectve"
+                                        <textarea style="white-space: pre-wrap;" class="form-control @error('objectve') is-invalid @enderror" rows="5" id="objectve" name="objectve"
                                             value="{{ old('objectve') }}"></textarea>
                                         @error('objectve')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -424,7 +424,6 @@
 <script src="{{ asset('js/DateF.js') }}"></script>
 
 <script>
-    
     // let projectNameY = document.getElementById('projectName');
     // let feedbackProjectName = document.getElementById('feedbackProjectName');
 

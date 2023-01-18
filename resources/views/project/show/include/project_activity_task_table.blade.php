@@ -7,7 +7,7 @@
                 <th></th>
                 <th>Activity</th>
                 <th>Date</th>
-                <th>Date Start Task</th>
+                <th>Date Start</th>
                 <th>Action</th>
                 <th>Status</th>
                 <th>Quality Work</th>
@@ -38,7 +38,12 @@
 
                     </td>
                     <td>{{ ConvertDaysToWeek($sum) }} </td>
-                    <td></td>
+                    @php
+                        if ($act->START_DATE) {
+                            $result = explode(' ', $act->START_DATE);
+                        }
+                    @endphp
+                    <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                     <td></td>
                     <td>
 
@@ -72,12 +77,22 @@
     @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
         @if ($project_detail->IS_APPROVE == 1)
             @if ($task->STATUS == 0)
-                <form style="display: inline-block" method="GET" action="{{ route('task.done', $task->TASK_ID) }}">
-                    @csrf
-                    <input name="_method" type="hidden" value="GET">
-                    <button style="color:white" type="submit" class="btn  btn-warning  show-alert-delete-box "
-                        data-toggle="tooltip" title='Complete'><i class='fas fa-check-circle'></i></button>
-                </form></a>
+                @if ($task->START_DATE == null)
+                    <form style="display: inline-block" method="GET" action="{{ route('task.start', $task->TASK_ID) }}">
+                        @csrf
+                        <input name="_method" type="hidden" value="GET">
+                        <button style="color:white" type="submit" class="btn  btn-warning  show-alert-delete-box "
+                            data-toggle="tooltip" title='Start Task'><i class="bi bi-clock-history"></i></button>
+                    </form>
+                @else
+                    <form style="display: inline-block" method="GET"
+                        action="{{ route('task.done', $task->TASK_ID) }}">
+                        @csrf
+                        <input name="_method" type="hidden" value="GET">
+                        <button style="color:white" type="submit" class="btn  btn-warning  show-alert-delete-box "
+                            data-toggle="tooltip" title='Complete'><i class='fas fa-check-circle'></i></button>
+                    </form>
+                @endif
             @else
                 <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
                         class="bi bi-check-circle"></i></a>

@@ -11,17 +11,21 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
         <button class="nav-link active" id="nav-show-project-tab" data-bs-toggle="tab" data-bs-target="#nav-show-project"
-            type="button" role="tab" aria-controls="nav-show-project" aria-selected="true"><i class="bi bi-eye"  style="font-size: 25px"></i></button>
+            type="button" role="tab" aria-controls="nav-show-project" aria-selected="true"><i class="bi bi-eye"
+                style="font-size: 25px"></i></button>
 
         <button class="nav-link " id="nav-edit-project-tab" data-bs-toggle="tab" data-bs-target="#nav-edit-project"
-            type="button" role="tab" aria-controls="nav-edit-project" aria-selected="true" data-toggle="tooltip" title='Edit' style="font-size: 25px"><i class="bi bi-pencil"></i></button>
+            type="button" role="tab" aria-controls="nav-edit-project" aria-selected="true" data-toggle="tooltip"
+            title='Edit' style="font-size: 25px"><i class="bi bi-pencil"></i></button>
         </button>
 
         <button class="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline"
-            type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"  data-toggle="tooltip" title='Timeline'><i class="bi bi-alarm" style="font-size: 25px"></i></button>
+            type="button" role="tab" aria-controls="nav-timeline" aria-selected="false" data-toggle="tooltip"
+            title='Timeline'><i class="bi bi-alarm" style="font-size: 25px"></i></button>
 
         <button class="nav-link" id="nav-chart-tab" data-bs-toggle="tab" data-bs-target="#nav-chart" type="button"
-            role="tab" aria-controls="nav-chart" aria-selected="false" data-toggle="tooltip" title='Chart task'><i class="bi bi-bar-chart-steps" style="font-size: 25px"></i></button>
+            role="tab" aria-controls="nav-chart" aria-selected="false" data-toggle="tooltip" title='Chart task'><i
+                class="bi bi-bar-chart-steps" style="font-size: 25px"></i></button>
 
     </div>
 </nav>
@@ -44,8 +48,22 @@
         Timeline
     </div>
 
-    <div  class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
-        @include('project.show.activity_gantt_chart')
+    <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
+        {{-- @include('project.show.activity_gantt_chart') --}}
+        {{-- @include('project.show.task_timeline') --}}
+        <ul class="nav nav-pills nav-fill mt-4">
+            <li class="nav-item my-2">
+                <a class=" btn btn-primary" href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
+                    Timeline</a>
+            </li>
+            <li class="nav-item my-2">
+                <a class="btn btn-primary" href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
+                    Timeline</a>
+            </li>
+
+
+        </ul>
+
     </div>
 
 </div>
