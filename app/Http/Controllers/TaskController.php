@@ -8,6 +8,7 @@ use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
+use Illuminate\Console\View\Components\Task as ComponentsTask;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
@@ -27,32 +28,15 @@ class TaskController extends Controller
 
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
-        // if (($completeTasksCounter - 1) >= 0) {
-        //     $Project->STATUS = "New Release,Approved,Progress,workingOn";
-        //     $Project->save();
-
-        //     $Task->activity->END_DATE = date("Y/m/d");
-        //     $Task->activity->save();
-
-        //     $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-        //     $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
-        //     $ProjectTrack->STATUS = 2;
-        //     $ProjectTrack->save();
-        // }
-
-        if (($completeTasksCounter - 1) == 0) {
+        if (($completeTasksCounter - 1) >= 0) {
             $Project->STATUS = "New Release,Approved,Progress,workingOn";
             $Project->save();
-
-            $Task->activity->START_DATE = date("Y/m/d");
-            $Task->activity->save();
 
             $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
             $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
             $ProjectTrack->STATUS = 2;
             $ProjectTrack->save();
         }
-
 
         // Calculate Precentage
         $totalTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks")->first();
@@ -77,6 +61,7 @@ class TaskController extends Controller
         if ($precentage == "100") {
             $Project->STATUS = "New Release,Approved,Progress,Completed";
             $Project->save();
+
             $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
             $ProjectTrack->TRACKER = 'New Release,Approved,Progress,Completed';
             $ProjectTrack->STATUS = 3;
@@ -84,7 +69,7 @@ class TaskController extends Controller
         }
 
         if ($completeTasksCounter == $totalTasks) {
-            $Task->activity->END_DATE = date("Y/m/d");
+
             $Task->activity->STATUS = 1;
             $Task->activity->save();
         } else {
@@ -97,5 +82,34 @@ class TaskController extends Controller
 
         return redirect()->back();
     }
+    public function Create()
+    {
+        return view('Admin.addholyday');
+    }
+    public function SaveBudget(request $request,$id)
+    {
 
+        $Task = ProjectTask::where('TASK_ID', $id)->first();
+        $Task->TASK_BUDGET = $request->budget;
+        $Task->timestamps = false;
+        $Task->save();
+        return redirect()->back();
+    }
+
+    // public function Update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'holyday_name' => 'required',
+    //         'date_holyday' => 'required',
+    //     ]);
+
+    //     $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
+    //     // Getting values from the blade template form
+    //     $Holyday->HOLYDAY_NAME = $request->holyday_name;
+    //     $Holyday->HOLYDAY_DATE = $request->date_holyday;
+    //     // $Holyday->CATEGORY_ID = $id;
+    //     $Holyday->timestamps = false;
+    //     $Holyday->update();
+    //     return redirect()->back();
+    // }
 }
