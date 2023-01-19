@@ -28,18 +28,18 @@ class TaskController extends Controller
 
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
-        if (($completeTasksCounter - 1) == 0) {
-            $Task->activity->START_DATE = date("Y/m/d");
-            $Task->activity->save();
+        // if (($completeTasksCounter - 1) == 0) {
+        //     $Task->activity->START_DATE = date("Y/m/d");
+        //     $Task->activity->save();
 
-            $Project->STATUS = "New Release,Approved,Progress,workingOn";
-            $Project->save();
+        //     $Project->STATUS = "New Release,Approved,Progress,workingOn";
+        //     $Project->save();
 
-            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
-            $ProjectTrack->STATUS = 2;
-            $ProjectTrack->save();
-        }
+        //     $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+        //     $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
+        //     $ProjectTrack->STATUS = 2;
+        //     $ProjectTrack->save();
+        // }
 
         // Calculate Precentage
         $totalTaskOfTheProject = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->with("tasks")->first();
@@ -92,6 +92,22 @@ class TaskController extends Controller
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->START_DATE = date("Y/m/d");
         $Task->timestamps = false;
+        $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
+
+        if (($completeTasksCounter) == 0) {
+            $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
+            $Task->activity->START_DATE = date("Y/m/d");
+            $Task->activity->save();
+
+            $Project->STATUS = "New Release,Approved,Progress,workingOn";
+            $Project->save();
+
+            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
+            $ProjectTrack->STATUS = 2;
+            $ProjectTrack->save();
+        }
+
         $Task->save();
         return redirect()->back();
     }

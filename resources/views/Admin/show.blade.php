@@ -88,6 +88,7 @@
 
 </body>
 @include('include.scrip');
+@include('alert.alert')
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
@@ -238,7 +239,7 @@
     }
 
     .stepper-item.completed .step-counter {
-        background-color: #4bb543;
+        background-color: #78e770;
     }
 
     .stepper-item.completed::after {

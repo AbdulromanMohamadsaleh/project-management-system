@@ -1,7 +1,8 @@
 <div class="col mt-4">
     <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
     </b><br>
-    <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ?"text-danger":"" }}">Total Budget = {{ $project_detail->TotalBudget }}฿</span>
+    <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ? 'text-danger' : '' }}">Total Budget =
+            {{ $project_detail->TotalBudget }}฿</span>
     </b>
     <table>
         <thead>
@@ -69,111 +70,124 @@
                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                         @endif
                     </td>
-<td></td>
+                    <td></td>
 
-{{-- <td>{{ $task->TASK_NAME }}</td> --}}
-
-
-<td>
-    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-        @if ($project_detail->IS_APPROVE == 1)
-            @if ($task->STATUS == 0)
-                <form style="display: inline-block" method="GET" action="{{ route('task.done', $task->TASK_ID) }}">
-                    @csrf
-                    <input name="_method" type="hidden" value="GET">
-                    <button style="color:white" type="submit" class="btn  btn-warning  show-alert-delete-box "
-                        data-toggle="tooltip" title='Complete'><i class='fas fa-check-circle'></i></button>
-                </form></a>
-            @else
-                <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                        class="bi bi-check-circle"></i></a>
-            @endif
-            @else
-        @endif
-    @else
-    @endif
-    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-    @endif
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-        data-bs-target="#myModal-{{ $task->TASK_ID }}">
-        <i class='fas fa-money-check-alt'></i>
-    </button>
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal-{{ $task->TASK_ID }}">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    @include('project.show.include.tab_edit_budget')
-
-                </div>
+                    {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
 
-                <!-- Modal footer -->
+                    <td>
+                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                            @if ($project_detail->IS_APPROVE == 1)
+                                @if ($task->STATUS == 0)
+                                    @if ($task->START_DATE)
+                                        <form style="display: inline-block" method="GET"
+                                            action="{{ route('task.done', $task->TASK_ID) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="GET">
+                                            <button style="color:white" type="submit"
+                                                class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
+                                                title='Complete'><i class='fas fa-check-circle'></i></button>
+                                        </form>
+                                    @else
+                                        <form style="display: inline-block" method="GET"
+                                            action="{{ route('task.start', $task->TASK_ID) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="GET">
+                                            <button style="color:white" type="submit"
+                                                class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
+                                                title='Complete'><i class="bi bi-clock-history"></i></button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
+                                            class="bi bi-check-circle"></i></a>
+                                @endif
+                            @else
+                            @endif
+                        @else
+                        @endif
+                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                        @endif
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#myModal-{{ $task->TASK_ID }}">
+                            <i class='fas fa-money-check-alt'></i>
+                        </button>
 
-            </div>
-        </div>
-        <!-- Button trigger modal -->
-    </div>
-    <!-- Dete -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-        data-bs-target="#myModal2-{{ $task->TASK_ID }}">
-        <i class='fas fa-notes-medical'></i>
-    </button>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal-{{ $task->TASK_ID }}">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
 
-    <!-- The Modal -->
-    <div class="modal" id="myModal2-{{ $task->TASK_ID }}">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        @include('project.show.include.tab_edit_budget')
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    @include('project.show.include.tab_edit_note')
-                </div>
+                                    </div>
 
 
-                <!-- Modal footer -->
+                                    <!-- Modal footer -->
 
-            </div>
-        </div>
-        <!-- Button trigger modal -->
-    </div>
-</td>
-<td>
-    @if ($task->STATUS == 1)
-        @php
-            $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
-        @endphp
-        <div class="me-3">
-            <div>
-                {{ $TASK_TRACKER[0] }}
-            </div>
-            <div>
-                {{ $TASK_TRACKER[1] }}
-            </div>
-        </div>
-    @endif
-</td>
-<td></td>
-</tr>
-@endforeach
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                        </div>
+                        <!-- Dete -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#myModal2-{{ $task->TASK_ID }}">
+                            <i class='fas fa-notes-medical'></i>
+                        </button>
 
-</tbody>
-@endforeach
-</tbody>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal2-{{ $task->TASK_ID }}">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
 
-</tbody>
-</table>
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        @include('project.show.include.tab_edit_note')
+                                    </div>
+
+
+                                    <!-- Modal footer -->
+
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                        </div>
+                    </td>
+                    <td>
+                        @if ($task->STATUS == 1)
+                            @php
+                                $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                            @endphp
+                            <div class="me-3">
+                                <div>
+                                    {{ $TASK_TRACKER[0] }}
+                                </div>
+                                <div>
+                                    {{ $TASK_TRACKER[1] }}
+                                </div>
+                            </div>
+                        @endif
+                    </td>
+                    <td></td>
+                </tr>
+            @endforeach
+
+        </tbody>
+        @endforeach
+        </tbody>
+
+        </tbody>
+    </table>
 </div>

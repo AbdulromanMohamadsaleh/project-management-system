@@ -349,29 +349,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    $('.show-alert-delete-box').click(function(event) {
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-       document.getElementById("nextBtn").classList.add('show-alert-delete-box');
-        swal({
-            title: "Are you sure you want to active  this user?",
-            text: "If you active this, it will be gone forever.",
-            icon: "success",
-            type: "success",
-            buttons: ["Cancel", "Yes!"],
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((willDelete) => {
-            if (willDelete) {
-                document.getElementById("signUpForm").submit()
-            }
-        });
-    });
-
-
-
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({});
     });

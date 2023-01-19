@@ -16,11 +16,8 @@ function showTab(n) {
     }
     if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
-
-
     } else {
     document.getElementById("nextBtn").innerHTML = "Next";
-
     }
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
@@ -45,7 +42,7 @@ function nextPrev(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
-    
+    document.getElementById("signUpForm").submit();
     x[currentTab].style.display="block"
     return false;
     }
