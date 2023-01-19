@@ -15,6 +15,7 @@ use App\Models\ProjectActivity;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProjectStoreRequest;
 use SebastianBergmann\LinesOfCode\Counter;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
 {
@@ -29,6 +30,11 @@ class ProjectController extends Controller
         $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
             $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
         }])->get();
+
+        // if (session('success')) {
+        //     // Alert::toast('Toast Message', 'Success');
+        //     Alert::success('Success!', 'Project Created Successfully');
+        // }
 
         return view('Admin.table', ['project_details' => $project_details]);
     }
@@ -211,7 +217,7 @@ class ProjectController extends Controller
             // $ProjectActivity->save();
         }
 
-        return redirect()->route('table');
+        return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
     public function Approve()
@@ -231,13 +237,14 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
 
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
-        return redirect()->back();
+
+        return redirect()->back()->with("success", "Project Appreoved Successfully");;
     }
 
     public function Delete($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Project Deleted Successfully");
     }
 
     public function Edit(ProjectDetial $ProjectDetial)
@@ -290,7 +297,7 @@ class ProjectController extends Controller
 
         $ProjectDetial->projectTeam()->attach($request->projectTeam);
 
-        return redirect()->back();
+        return redirect()->back()->with("success", "Project Edited Successfully");
     }
 
 

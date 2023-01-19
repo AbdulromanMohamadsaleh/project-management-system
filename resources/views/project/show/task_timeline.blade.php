@@ -36,9 +36,11 @@
             // ['Concept Design', 'Forecast', new Date(2020, 2, 7), new Date(2020, 2, 11)],
             // ['Concept Design', 'Actual', new Date(2020, 2, 6), new Date(2020, 2, 13)]
             @php
+                $counter = 0;
                 foreach ($tasks as $task) {
                     // date('d', strtotime($act->START_DATE)
                     if ($task->START_DATE && $task->COPLATE_TIME) {
+                        $counter++;
                         $Syear = intval(date('Y', strtotime($task->START_DATE)));
                         $Smonth = intval(date('m', strtotime($task->START_DATE)));
                         $Sday = intval(date('d', strtotime($task->START_DATE)));
@@ -76,6 +78,7 @@
             // timeline: {colorByRowLabel: true},
 
             timeline: {
+                colorByRowLabel: true,
                 rowLabelStyle: {
                     fontName: 'Helvetica',
                     fontSize: 18,
@@ -122,7 +125,11 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <div class="mt-5" id="timeline-chart"></div>
+                    @if ($counter > 0)
+                        <div class="mt-5" id="timeline-chart"></div>
+                    @else
+                        <h3 class="mt-4 text-danger fw-bold text-center fs-4">No Timeline</h3>
+                    @endif
                 </div>
             </div>
         </div>

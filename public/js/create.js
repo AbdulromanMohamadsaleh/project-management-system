@@ -16,8 +16,11 @@ function showTab(n) {
     }
     if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
+
+
     } else {
     document.getElementById("nextBtn").innerHTML = "Next";
+
     }
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
@@ -42,7 +45,7 @@ function nextPrev(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
-    document.getElementById("signUpForm").submit();
+    
     x[currentTab].style.display="block"
     return false;
     }
@@ -55,7 +58,7 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");
-
+    let textLenght = true;
     // This function deals with validation of the form fields
     let ProjectNameInput = document.getElementById("projectName").value.trim()
 
@@ -98,6 +101,7 @@ function validateForm() {
 
     selectinput = x[currentTab].getElementsByTagName("select");
 
+
     for (i = 0; i < selectinput.length; i++) {
         // If a field is empty...
         if (selectinput[i].value == "") {
@@ -113,7 +117,7 @@ function validateForm() {
     }
     // If the valid status is true, mark the step as finished and valid:
     // console.log(IsProjectNameValid,valid,validateTotalDurationTask)
-    valid = IsProjectNameValid && valid && validateTotalDurationTask;
+    valid = IsProjectNameValid && valid && validateTotalDurationTask && textLenght;
 
     // This is for make the duration task red if its in valid
     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');

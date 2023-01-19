@@ -54,11 +54,11 @@
         {{-- @include('project.show.task_timeline') --}}
         <ul class="nav nav-pills nav-fill mt-4">
             <li class="nav-item my-2">
-                <a class=" btn btn-primary" href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
+                <a class=" btn btn-primary" target="_blank" href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
                     Timeline</a>
             </li>
             <li class="nav-item my-2">
-                <a class="btn btn-primary" href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
+                <a class="btn btn-primary" target="_blank" href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
                     Timeline</a>
             </li>
 

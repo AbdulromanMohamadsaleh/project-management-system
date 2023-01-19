@@ -1,5 +1,6 @@
 @include('include.header')
 
+
 <body>
     {{-- <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
@@ -117,8 +118,7 @@
 
 </body>
 @include('include.scrip');
-
-
+{{-- @include('sweetalert::alert') --}}
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
@@ -145,5 +145,7 @@
         $('#example').DataTable();
     });
 </script>
+
+@include('alert.alert');
 
 </html>

@@ -34,9 +34,11 @@
         dataTable.addRows([
 
             @php
+                $counter = 0;
                 foreach ($project_detail->activity as $act) {
                     // date('d', strtotime($act->START_DATE)
                     if ($act->START_DATE && $act->END_DATE && $act->START_DATE != $act->END_DATE) {
+                        $counter++;
                         $Syear = intval(date('Y', strtotime($act->START_DATE)));
                         $Smonth = intval(date('m', strtotime($act->START_DATE)));
                         $Sday = intval(date('d', strtotime($act->START_DATE)));
@@ -136,13 +138,17 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <style>
-                        #timeline {
-                            width: 100%;
-                            height: 400px;
-                        }
-                    </style>
-                    <div id="timeline" class="mt-5"></div>
+                    @if ($counter > 0)
+                        <style>
+                            #timeline {
+                                width: 100%;
+                                height: 400px;
+                            }
+                        </style>
+                        <div id="timeline" class="mt-5"></div>
+                    @else
+                        <h3 class="mt-4 text-danger fw-bold text-center fs-4">No Timeline</h3>
+                    @endif
                 </div>
             </div>
         </div>
