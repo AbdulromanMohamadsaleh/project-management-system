@@ -56,8 +56,8 @@
                     Auth::user()->POSITION == 'Admin')
                 <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create
                     Project</a>
-                <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>Data
-                    Project</a>
+                <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>
+                    Projects</a>
             @endif
             @if (Auth::user()->POSITION == 'Manager')
                 <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check "

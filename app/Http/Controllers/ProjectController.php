@@ -15,7 +15,7 @@ use App\Models\ProjectActivity;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProjectStoreRequest;
 use SebastianBergmann\LinesOfCode\Counter;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class ProjectController extends Controller
 {
     public function Index()
@@ -29,6 +29,11 @@ class ProjectController extends Controller
         $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
             $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
         }])->get();
+
+        // if (session('success')) {
+        //     // Alert::toast('Toast Message', 'Success');
+        //     Alert::success('Success!', 'Project Created Successfully');
+        // }
 
         return view('Admin.table', ['project_details' => $project_details]);
     }

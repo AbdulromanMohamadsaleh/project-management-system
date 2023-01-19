@@ -55,7 +55,7 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("step");
     y = x[currentTab].getElementsByTagName("input");
-
+    let textLenght = true;
     // This function deals with validation of the form fields
     let ProjectNameInput = document.getElementById("projectName").value.trim()
 
@@ -98,6 +98,7 @@ function validateForm() {
 
     selectinput = x[currentTab].getElementsByTagName("select");
 
+  
     for (i = 0; i < selectinput.length; i++) {
         // If a field is empty...
         if (selectinput[i].value == "") {
@@ -113,7 +114,7 @@ function validateForm() {
     }
     // If the valid status is true, mark the step as finished and valid:
     // console.log(IsProjectNameValid,valid,validateTotalDurationTask)
-    valid = IsProjectNameValid && valid && validateTotalDurationTask;
+    valid = IsProjectNameValid && valid && validateTotalDurationTask && textLenght;
 
     // This is for make the duration task red if its in valid
     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
