@@ -60,18 +60,17 @@
                         {{ $task->TASK_NAME }} </td>
                     <td>{{ $task->DAY }} Days
                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-</div>
-@endif
-</td>
+                        @endif
+                    </td>
 <td></td>
 
 {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
 
-<td>
-    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-        @if ($project_detail->IS_APPROVE == 1)
-            @if ($task->STATUS == 0)
+                    <td>
+                 @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                      @if ($project_detail->IS_APPROVE == 1)
+                         @if ($task->STATUS == 0)
                 <form style="display: inline-block" method="GET" action="{{ route('task.done', $task->TASK_ID) }}">
                     @csrf
                     <input name="_method" type="hidden" value="GET">
@@ -82,7 +81,7 @@
                 <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
                         class="bi bi-check-circle"></i></a>
             @endif
-        @else
+            @else
         @endif
     @else
     @endif
