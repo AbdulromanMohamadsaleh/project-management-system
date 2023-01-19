@@ -70,15 +70,15 @@ Route::group(
         Route::get('/table', [ProjectController::class, 'Table'])->name('table');
         Route::post('/save', [ProjectController::class, 'Save'])->name('save');
         Route::get('/create', [ProjectController::class, 'Create'])->name('create');
-        Route::get('/update/{ProjectDetial}', [ProjectController::class, 'Update'])->name('update.project');
+        Route::get('/edit/{ProjectDetial}', [ProjectController::class, 'Edit'])->name('update.project');
         Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
         Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
         Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
-
-        Route::delete('/delete{id}', [ProjectController::class, 'Delete'])->name('project.delete');
+        Route::post('/update/{id}', [ProjectController::class, 'Update'])->name('project.update');
+        Route::delete('/delete/{id}', [ProjectController::class, 'Delete'])->name('project.delete');
     }
 );
 ###########################  Holyday  ###########################
@@ -131,9 +131,11 @@ Route::group(
     ['middleware' => ['auth']],
     function () {
         Route::get('/complete-task/{id}', [TaskController::class, 'Complete'])->name('task.done');
+        Route::get('/task-timeline/{id}', [TaskController::class, 'Timeline'])->name('task.timeline');
+        Route::get('/activity-timeline/{id}', [TaskController::class, 'ActivityTimeline'])->name('activity.timeline');
+        Route::get('/sart-task/{id}', [TaskController::class, 'Start'])->name('task.start');
         Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
         Route::post('/savenote-task/{id}', [TaskController::class, 'SaveNote'])->name('task.savenote');
-
     }
 
 );

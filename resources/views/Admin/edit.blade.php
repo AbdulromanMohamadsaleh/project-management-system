@@ -23,37 +23,64 @@
 
                         <h1 class="text-center fs-4">Edit Project</h1>
                         <form class="needs-validation" novalidate id="signUpForm" method="post"
-                            action="{{ route('save') }}">
+                            action="{{ route('project.update', $project_detail->DETAIL_ID) }}">
                             @csrf
                             <!-- start step indicators -->
                             <div class=" form-header d-flex mb-5">
                                 <span class="fw-bold stepIndicator">Detail</span>
-                                <span class="fw-bold stepIndicator">Activity</span>
-                                {{-- <span class="stepIndicator">Personal Details</span> --}}
+                                {{-- <span class="fw-bold stepIndicator">Activity</span>
+                                <span class="stepIndicator">Personal Details</span> --}}
                             </div>
                             <!-- end step indicators -->
 
                             <!-- step one -->
+
                             <div class="step ">
+                                <style>
+                                    .selectBorderInvalid {
+                                        border-color: #dc3545 !important;
+                                        box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%) !important
+                                    }
+
+                                    .invv {
+                                        font-weight: bold !important;
+                                        margin-top: 0.25rem !important;
+                                        font-size: .875em !important;
+                                        color: #dc3545 !important;
+                                    }
+
+
+                                    .suc {
+                                        font-weight: bold !important;
+                                        margin-top: 0.25rem !important;
+                                        font-size: .875em !important;
+                                        color: green !important;
+                                    }
+                                </style>
+
 
                                 {{-- Project Name / Target --}}
                                 <div class="row mb-5 mb-sm-0 ">
                                     <div class="col-md-6 mb-sm-5 ">
                                         <label class="label-left fw-bold mb-2" for="projectName">Project Name</label>
-                                        <input type="text" name="projectName"
+                                        <input required id="projectName" type="text" name="projectName"
                                             value="{{ $project_detail->NAME_PROJECT }}"
-                                            class="form-control @error('projectName') is-invalid @enderror "id="projectName">
+                                            class="form-control  @error('projectName') is-invalid @enderror">
                                         @error('projectName')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}
+                                            </div>
                                         @enderror
+                                        <div id="feedbackProjectName"></div>
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="target">Target</label>
-                                        <input type="text" name="target" value="{{ $project_detail->TARGET }}"
+                                        <input required type="text" name="target"
+                                            value="{{ $project_detail->TARGET }}"
                                             class="form-control @error('target') is-invalid @enderror " id="target">
                                         @error('target')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                        <div id="target-invalid"></div>
                                     </div>
                                 </div>
 
@@ -62,7 +89,7 @@
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2 " for="projectStart">Start Project
                                             Date</label>
-                                        <input type="date" value="{{ $project_detail->DATE_START }}"
+                                        <input required type="date" value="{{ $project_detail->DATE_START }}"
                                             class="form-control @error('projectStart') is-invalid @enderror"
                                             id="projectStart" name="projectStart">
                                         @error('projectStart')
@@ -70,7 +97,8 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
-                                        <label class="label-left fw-bold mb-2" for="projectEnd">End Project Date</label>
+                                        <label class="label-left fw-bold mb-2" for="projectEnd">End Project
+                                            Date</label>
                                         <input type="date" readonly
                                             class="form-control @error('projectEnd') is-invalid @enderror"
                                             id="projectEnd" name="projectEnd" value="{{ $project_detail->DATE_END }}">
@@ -80,8 +108,9 @@
                                     </div>
                                 </div>
 
+
                                 @php
-                                    $date_info = explode(' ', $project_detail->TOTAL_DATE);
+                                    $result = explode(' ', $project_detail->TOTAL_DATE);
                                 @endphp
                                 {{-- Project Duration Format / Project Days --}}
                                 <div class="row mb-5 mb-sm-0">
@@ -89,28 +118,21 @@
                                         <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
-                                                <input {{ $date_info[1] == 'day' ? 'checked' : '' }}
+                                                <input required {{ $result[1] == 'day' ? 'checked' : '' }}
                                                     class="form-check-input" name="projectDurationFormat" type="radio"
                                                     id="day" value="day">
-                                                <label class="form-check-label" for="day">Day</label>
+                                                <label checked class="form-check-label" for="day">Day</label>
                                             </div>
                                             <div class="label-left col form-check form-check-inline">
-                                                <input {{ $date_info[1] == 'week' ? 'checked' : '' }}
-                                                    class="form-check-input" name="projectDurationFormat" type="radio"
-                                                    id="week" value="week">
+                                                <input class="form-check-input" name="projectDurationFormat"
+                                                    type="radio" id="week"
+                                                    {{ $result[1] == 'week' ? 'checked' : '' }} value="week">
                                                 <label class="form-check-label" for="week">Week</label>
                                             </div>
-                                            <div class="label-left col form-check form-check-inline">
-                                                <input {{ $date_info[1] == 'month' ? 'checked' : '' }}
-                                                    class="form-check-input" name="projectDurationFormat" type="radio"
-                                                    id="month" value="month">
-                                                <label class="form-check-label" for="month">Month</label>
-                                            </div>
-                                            <input class="form-check-input" hidden name="totalDate" type="text"
-                                                value="0">
-                                            <input type="number" min='0' max='10000000'
+
+                                            <input required type="number" min='0' max='10000000'
                                                 class="form-control mt-3" id="Duration" name="projectDuration"
-                                                value="{{ $date_info[0] }}">
+                                                value="{{ $result[0] }}">
                                         </div>
                                         {{-- <div class="row"> --}}
                                         {{-- <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
@@ -118,18 +140,38 @@
                                         {{-- </div> --}}
                                         {{-- <div class="row justify-content-center" id="show-duration"></div> --}}
                                     </div>
-                                    <div class="col-md-6 mb-sm-5">
-                                        <label for="inputState" class="label-left fw-bold mb-2">Include Holydays</label>
-                                        <div class="row p-2 px-5 ">
-                                            <div style="text-align: left" class="mb-3 form-check form-check-inline">
-                                                <input class="form-check-input" name="isIncludeHolyday" type="radio"
-                                                    id="yes" value="yes">
-                                                <label class="form-check-label ms-2" for="yes">Yes</label>
+                                    <div class="col-md-6 mb-sm-5 row">
+                                        <div class="col-6">
+                                            <label for="inputState" class="label-left fw-bold mb-2">Include
+                                                WeekEnd</label>
+                                            <div class="row p-2 px-5 ">
+                                                <div style="text-align: left" class="mb-3 form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeWeekend"
+                                                        type="radio" id="yes" value="yes">
+                                                    <label class="form-check-label ms-2" for="yes">Yes</label>
+                                                </div>
+                                                <div style="text-align: left" class="form-check form-check-inline">
+                                                    <input checked class="form-check-input" name="isIncludeWeekend"
+                                                        type="radio" id="no" value="no">
+                                                    <label class="form-check-label ms-2" for="no">No</label>
+                                                </div>
                                             </div>
-                                            <div style="text-align: left" class="form-check form-check-inline">
-                                                <input class="form-check-input" name="isIncludeHolyday"
-                                                    type="radio" id="no" value="no">
-                                                <label class="form-check-label ms-2" for="no">No</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="inputState" class="label-left fw-bold mb-2">Include
+                                                Holydays</label>
+                                            <div class="row p-2 px-5 ">
+                                                <div style="text-align: left"
+                                                    class="mb-3 form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                        type="radio" id="yes" value="yes">
+                                                    <label class="form-check-label ms-2" for="yes">Yes</label>
+                                                </div>
+                                                <div style="text-align: left" class="form-check form-check-inline">
+                                                    <input class="form-check-input" name="isIncludeHolyday"
+                                                        type="radio" id="no" value="no">
+                                                    <label class="form-check-label ms-2" for="no">No</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -194,13 +236,13 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="Category" class="label-left fw-bold mb-2">Category</label>
-                                        <select name="category" id="Category"
+                                        <select required name="category" id="Category"
                                             class="form-select  @error('category') is-invalid @enderror">
-                                            <option value="">Choose...</option>
+                                            <option selected value="">Choose...</option>
                                             @if (count($Categories) > 0)
                                                 @foreach ($Categories as $Category)
                                                     <option
-                                                        {{ $project_detail->CATEGORY_ID == $Category->CATEGORY_ID ? 'selected' : ' ' }}
+                                                        {{ $Category->CATEGORY_ID == $project_detail->CATEGORY_ID ? 'selected' : '' }}
                                                         value="{{ $Category->CATEGORY_ID }}">
                                                         {{ $Category->NAME_CATEGORY }}</option>
                                                 @endforeach
@@ -219,13 +261,13 @@
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectManager" class="label-left fw-bold mb-2">Project
                                             Manager</label>
-                                        <select name="projectManager" id="projectManager"
+                                        <select required name="projectManager" id="projectManager"
                                             class="form-select @error('projectManager') is-invalid @enderror">
                                             <option selected value="">Choose...</option>
                                             @if (count($projectManagers) > 0)
                                                 @foreach ($projectManagers as $projectManager)
                                                     <option
-                                                        {{ $project_detail->PROJECT_MANAGER == $projectManager->LOGIN_ID ? 'selected' : '' }}
+                                                        {{ $projectManager->LOGIN_ID == $project_detail->PROJECT_MANAGER ? 'selected' : '' }}
                                                         value="{{ $projectManager->LOGIN_ID }}">
                                                         {{ $projectManager->NAME }}</option>
                                                 @endforeach
@@ -239,7 +281,8 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label>
-                                        <select style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
+                                        <select required
+                                            style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
                                             class="form-select js-example-basic-multiple" id="projectTeam"
                                             name="projectTeam[]" multiple="multiple">
                                             @if (count($team) > 0)
@@ -260,70 +303,6 @@
 
                             </div>
 
-                            <!-- step two -->
-                            <div class="step " id="activityWrap">
-                                <p class="text-center mb-4">Add Activity</p>
-
-                                {{-- 1 activity --}}
-                                <div class="row " firstActivity id="activity-1">
-                                    <div class="mb-3 col-10">
-                                        <input class="form-control form-control-lg mb-3" name="activityName[]"
-                                            type="text" placeholder="Activity"
-                                            aria-label=".form-control-lg example">
-                                        <input type="text" hidden class="taskCounter" name="taskCounter[]"
-                                            value="1">
-                                        <!-- Tasks -->
-                                        <div class="taskWrap">
-
-                                            <div class="row d-flex justify-content-end ">
-                                                <div class="mb-3 col-7">
-                                                    <input class="form-control form-control-lg mb-3" name="taskName[]"
-                                                        type="text" placeholder="Task" aria-label="Task">
-                                                </div>
-                                                <div class="col-2">
-                                                    <input class="form-control form-control-lg mb-3"
-                                                        name="taskDuration[]" min='1' type="number"
-                                                        placeholder="Day" aria-label="Task">
-                                                </div>
-                                                <div class="col-1"><button type="button" disabled
-                                                        title="Delete Task" class="btn btn-danger btn-delete-task "><i
-                                                            class="bi bi-trash"></i></button>
-                                                </div>
-                                                <div class="mb-3 col-1 ttt task-1">
-                                                    <button type="button" title="New Task"
-                                                        class="btn btn-success btn-add-task">+</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-1  ">
-                                        <button type="button" id="btnAddNewActivity"
-                                            class="btn btn-success add-task"title="New Activity">+</button>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <!-- step three -->
-                            {{-- <div class="step">
-                                <p class="text-center mb-4">We will never sell it</p>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Full name" oninput="this.className = ''"
-                                        name="fullname">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Mobile" oninput="this.className = ''"
-                                        name="mobile">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" placeholder="Address" oninput="this.className = ''"
-                                        name="address">
-                                </div>
-                            </div> --}}
-
                             <!-- start previous / next buttons -->
                             <div class="mt-4 d-flex justify-content-center">
                                 <div class="col-6 row form-footer">
@@ -332,6 +311,12 @@
                                 </div>
                             </div>
 
+                            {{-- <div class="mt-4 d-flex justify-content-center">
+                                <div class="col-6 row form-footer">
+
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Submit</button>
+                                </div>
+                            </div> --}}
                             <input id="HolyDays" hidden type="text" value="{{ $Holydays }}"
                                 placeholder="Address" name="address">
                             <!-- end previous / next buttons -->
@@ -377,7 +362,6 @@
     });
 </script>
 
-<script src="{{ asset('js/create_project.js') }}"></script>
 <script src="{{ asset('js/DateF.js') }}"></script>
 
 

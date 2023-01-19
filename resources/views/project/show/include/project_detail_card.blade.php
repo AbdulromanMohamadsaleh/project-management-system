@@ -20,9 +20,9 @@
                                     <dd>{{ $project_detail->NAME_PROJECT }}</dd>
                                     <dt><b class="border-bottom text-break border-primary">Resons</b>
                                     </dt>
-                                    <dd>{{ $project_detail->REASONS }}</dd>
+                                    <dd>{!! nl2br($project_detail->REASONS) !!}</dd>
                                     <dt><b class="border-bottom border-primary">Objective</b></dt>
-                                    <dd>{{ $project_detail->OBJECTIVE }}</dd>
+                                    <dd>{!! nl2br($project_detail->OBJECTIVE) !!}</dd>
 
 
 
@@ -31,25 +31,27 @@
                                                             <dd>{{ $project_detail->DATE_SAVE }}</dd>
                                                             <dt><b class="border-bottom border-primary">Project Name</b>
                                                             </dt> --}}
-                                    <b class="border-bottom text-break border-primary">Resons</b>
+                                    {{-- <b class="border-bottom text-break border-primary">Resons</b>
                                     </dt>
                                     <dd>{{ $project_detail->REASONS }}</dd>
-                                    <dt>
+                                    <dt> --}}
                                 </div>
                             </dl>
                         </div>
                         <div class="col-sm-6">
                             <dl>
 
-                                <dt><b class="border-bottom border-primary">Objective</b>
+                                {{-- <dt><b class="border-bottom border-primary">Objective</b>
                                 </dt>
-                                <dd>{{ $project_detail->OBJECTIVE }}</dd>
+                                <dd>
+                                    {!! nl2br($project_detail->OBJECTIVE) !!}
+                                </dd> --}}
                                 <dt><b class="border-bottom border-primary">Target</b></dt>
                                 <dd>{{ $project_detail->TARGET }}</dd>
                                 <dt><b class="border-bottom border-primary">Location</b></dt>
                                 <dd>{{ $project_detail->LOCATION }}</dd>
                                 <dt><b class="border-bottom border-primary">Results</b></dt>
-                                <dd>{{ $project_detail->RESULT }}</dd>
+                                <dd>{!! nl2br($project_detail->RESULT) !!}</dd>
                                 <dl>
                                     <dt><b class="border-bottom border-primary">Start Date</b></dt>
                                     <dd>{{ $project_detail->DATE_START }}</dd>

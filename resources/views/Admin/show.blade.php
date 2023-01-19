@@ -101,7 +101,7 @@
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: "Are you sure you want to active  this user?",
+            title: "Are you sure you want to make this action?",
             text: "If you active this, it will be gone forever.",
             icon: "success",
             type: "success",

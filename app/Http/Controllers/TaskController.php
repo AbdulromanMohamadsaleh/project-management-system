@@ -86,6 +86,37 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
+    public function Start($id)
+    {
+
+        $Task = ProjectTask::where('TASK_ID', $id)->first();
+        $Task->START_DATE = date("Y/m/d");
+        $Task->timestamps = false;
+        $Task->save();
+        return redirect()->back();
+    }
+
+
+
+    public function ActivityTimeline($id)
+    {
+        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
+            $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
+        })->first();
+
+        return view('project.show.activity_gantt_chart', ['project_detail' => $project_detail]);
+    }
+
+
+    public function Timeline($id)
+    {
+        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
+            $q->orderBy('created_at', 'ASC')->get();
+        })->first();
+
+        return view('project.show.task_timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
+    }
+
     public function SaveBudget(request $request, $id)
     {
 
@@ -104,6 +135,4 @@ class TaskController extends Controller
         $Task->save();
         return redirect()->back();
     }
-
-
 }

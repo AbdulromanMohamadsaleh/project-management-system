@@ -7,7 +7,7 @@
                 <th></th>
                 <th>Activity</th>
                 <th>Date</th>
-                <th>Date Start Task</th>
+                <th>Date Start</th>
                 <th>Action</th>
                 <th>Status</th>
                 <th>Quality Work</th>
@@ -38,7 +38,12 @@
 
                     </td>
                     <td>{{ ConvertDaysToWeek($sum) }} </td>
-                    <td></td>
+                    @php
+                        if ($act->START_DATE) {
+                            $result = explode(' ', $act->START_DATE);
+                        }
+                    @endphp
+                    <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                     <td></td>
                     <td>
 
@@ -67,10 +72,10 @@
 {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 
 
-                    <td>
-                 @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                      @if ($project_detail->IS_APPROVE == 1)
-                         @if ($task->STATUS == 0)
+<td>
+    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+        @if ($project_detail->IS_APPROVE == 1)
+            @if ($task->STATUS == 0)
                 <form style="display: inline-block" method="GET" action="{{ route('task.done', $task->TASK_ID) }}">
                     @csrf
                     <input name="_method" type="hidden" value="GET">

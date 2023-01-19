@@ -112,7 +112,7 @@ function validateForm() {
         }
     }
     // If the valid status is true, mark the step as finished and valid:
-    console.log(IsProjectNameValid,valid,validateTotalDurationTask)
+    // console.log(IsProjectNameValid,valid,validateTotalDurationTask)
     valid = IsProjectNameValid && valid && validateTotalDurationTask;
 
     // This is for make the duration task red if its in valid
@@ -237,7 +237,7 @@ function IsDate1AfterDate2() {
 // Validate Project Name
 let projectNameY = document.getElementById('projectName');
 let feedbackProjectName = document.getElementById('feedbackProjectName');
-let IsProjectNameValid = false;
+let IsProjectNameValid = true;
 
 projectNameY.addEventListener('input', CheckIsProjectNameExist);
 
