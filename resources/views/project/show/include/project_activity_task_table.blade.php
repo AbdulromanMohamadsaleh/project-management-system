@@ -9,8 +9,8 @@
             <tr>
                 <th></th>
                 <th>Activity</th>
-                <th>Date</th>
-                <th>Date Start</th>
+                <th>Duration</th>
+                <th>Start Date</th>
                 <th>Action</th>
                 <th>Status</th>
                 <th>Quality Work</th>
@@ -70,7 +70,18 @@
                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                         @endif
                     </td>
-                    <td></td>
+                    <td>
+                        @if ($task->START_DATE)
+                            @php
+                                if ($act->START_DATE) {
+                                    $result = explode(' ', $act->START_DATE);
+                                }
+                            @endphp
+                            {{ $result[0] }}
+                        @else
+                            -
+                        @endif
+                    </td>
 
                     {{-- <td>{{ $task->TASK_NAME }}</td> --}}
 

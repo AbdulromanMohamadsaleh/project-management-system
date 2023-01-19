@@ -21,10 +21,17 @@ class HolydayController extends Controller
     }
     public function Save(request $request)
     {
-        $Holydays = Holyday::count();
+        $Holydays = new Holyday();
+        $HolydaysCounter = Holyday::count();
 
-        $Holydays = "HDAY" . sprintf("%04d", ($Holydays == 0 || $Holydays == '' ? 1 : $Holydays + 1));
-        $Holydays = new Holyday(['HOLYDAY_ID' => $Holydays]);
+        $HolydaysID = "HDAY" . sprintf("%04d", ($HolydaysCounter == 0 || $HolydaysCounter == '' ? 1 : $HolydaysCounter + 1));
+
+        $HolydaysCounterId = 1;
+        while (Holyday::where('HOLYDAY_ID', $HolydaysID)->first()) {
+            $HolydaysID = "HDAY" . sprintf("%04d", ($HolydaysCounter == 0 || $HolydaysCounter == '' ? 1 : $HolydaysCounter + ++$HolydaysCounterId));
+        }
+
+        $Holydays->HOLYDAY_ID = $HolydaysID;
         $Holydays->HOLYDAY_NAME = $request->holyday_name;
         $Holydays->HOLYDAY_DATE = $request->date_holyday;
         $Holydays->timestamps = false;
