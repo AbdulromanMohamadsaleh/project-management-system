@@ -335,22 +335,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
     crossorigin="anonymous"></script>
+
 @include('include.scrip');
 
-
-
-
-
-{{-- <script src="{{ asset('lib/chart/chart.min.js') }}"></script>
-<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-</script> --}}
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -362,6 +349,29 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
+    $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+       document.getElementById("nextBtn").classList.add('show-alert-delete-box');
+        swal({
+            title: "Are you sure you want to active  this user?",
+            text: "If you active this, it will be gone forever.",
+            icon: "success",
+            type: "success",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                document.getElementById("signUpForm").submit()
+            }
+        });
+    });
+
+
+
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({});
     });

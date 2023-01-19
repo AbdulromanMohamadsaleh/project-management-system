@@ -108,11 +108,12 @@
 </body>
 @include('include.scrip');
 
+@include('alert.alert')
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-     $('.show-alert-delete-box').click(function(event) {
+    $('.show-alert-delete-box').click(function(event) {
         var form = $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();

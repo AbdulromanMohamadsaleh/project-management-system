@@ -232,7 +232,8 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
 
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
-        return redirect()->back();
+
+        return redirect()->back()->with("success", "Project Appreoved Successfully");;
     }
 
     public function Delete($id)
