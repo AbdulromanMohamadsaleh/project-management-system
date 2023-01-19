@@ -146,4 +146,6 @@
     });
 </script>
 
+@include('alert.alert');
+
 </html>

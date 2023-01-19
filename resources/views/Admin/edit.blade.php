@@ -335,17 +335,22 @@
 
 <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
     crossorigin="anonymous"></script>
+@include('include.scrip');
 
-<script src="{{ asset('lib/chart/chart.min.js') }}"></script>
+
+
+
+
+{{-- <script src="{{ asset('lib/chart/chart.min.js') }}"></script>
 <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
 <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
 <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
-<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+<script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-</script>
+</script> --}}
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -363,6 +368,6 @@
 </script>
 
 <script src="{{ asset('js/DateF.js') }}"></script>
-
+@include('alert.alert')
 
 </html>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProjectStoreRequest;
 use SebastianBergmann\LinesOfCode\Counter;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class ProjectController extends Controller
 {
     public function Index()
@@ -211,7 +212,7 @@ class ProjectController extends Controller
             // $ProjectActivity->save();
         }
 
-        return redirect()->route('table');
+        return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
     public function Approve()
@@ -237,7 +238,7 @@ class ProjectController extends Controller
     public function Delete($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Project Deleted Successfully");
     }
 
     public function Edit(ProjectDetial $ProjectDetial)
@@ -290,7 +291,7 @@ class ProjectController extends Controller
 
         $ProjectDetial->projectTeam()->attach($request->projectTeam);
 
-        return redirect()->back();
+        return redirect()->back()->with("success", "Project Edited Successfully");
     }
 
 
