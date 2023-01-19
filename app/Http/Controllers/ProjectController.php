@@ -77,15 +77,20 @@ class ProjectController extends Controller
                 $Eday = intval(date('d', strtotime($act->END_DATE)));
                 // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             }
+            $totalBudget = 0;
             // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             foreach ($act->tasks as $task) {
+                $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
             }
         }
 
 
         $project_detail->TotalDays = $sum;
-        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status], ['TeamsName' => $project_detail->projectTeam]);
+        $project_detail->TotalBudget = $totalBudget;
+        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+        $status = explode(',', $project_detail->STATUS);
+        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status,'TeamsName' => $project_detail->projectTeam,'ProjectTrack' => $ProjectTrack ]);
     }
     public function Timeline($id)
     {

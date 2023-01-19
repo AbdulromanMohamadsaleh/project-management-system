@@ -1,5 +1,7 @@
 <div class="col mt-4">
     <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
+    </b><br>
+    <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ?"text-danger":"" }}">Total Budget = {{ $project_detail->TotalBudget }}฿</span>
     </b>
     <table>
         <thead>
@@ -110,6 +112,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     @include('project.show.include.tab_edit_budget')
+
                 </div>
 
 

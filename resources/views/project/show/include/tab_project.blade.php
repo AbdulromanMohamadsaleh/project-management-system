@@ -45,8 +45,9 @@
     </div>
 
     <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
-        Timeline
+        @include("timeline.show.include.showtimeline")
     </div>
+
 
     <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
         {{-- @include('project.show.activity_gantt_chart') --}}
