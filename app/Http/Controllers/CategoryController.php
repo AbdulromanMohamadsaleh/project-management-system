@@ -18,10 +18,17 @@ class CategoryController extends Controller
     }
     public function Save(request $request)
     {
-        $Category = Category::count();
+        $Category = new Category();
+        $CategoryCounter = Category::count();
 
-        $Category = "CTY" . sprintf("%04d", ($Category == 0 ||  $Category == '' ? 1 :  $Category + 1));
-        $Category = new Category(['CATEGORY_ID' => $Category]);
+        $CATEGORY_ID = "CTY" . sprintf("%04d", ($CategoryCounter == 0 || $CategoryCounter == '' ? 1 : $CategoryCounter + 1));
+
+        $CategoryCounterId = 1;
+        while (Category::where('CATEGORY_ID', $CATEGORY_ID)->first()) {
+            $CATEGORY_ID = "CTY" . sprintf("%04d", ($CategoryCounter == 0 || $CategoryCounter == '' ? 1 : $CategoryCounter + ++$CategoryCounterId));
+        }
+
+        $Category->CATEGORY_ID = $CATEGORY_ID;
         $Category->NAME_CATEGORY = $request->category_name;
         $Category->timestamps = false;
         $Category->save();
