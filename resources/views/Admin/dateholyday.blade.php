@@ -29,7 +29,7 @@
     <!-- Recent Sales End -->
 </body>
 @include('include.scrip');
-
+@include('alert.alert')
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>

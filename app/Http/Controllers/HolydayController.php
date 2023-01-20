@@ -36,12 +36,12 @@ class HolydayController extends Controller
         $Holydays->HOLYDAY_DATE = $request->date_holyday;
         $Holydays->timestamps = false;
         $Holydays->save();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Add Holyday Successfully");
     }
     public function Delete($id)
     {
         $Holydays = Holyday::where('HOLYDAY_ID', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Delete Holyday Successfully");
     }
 
     public function Update(Request $request, $id)
@@ -58,6 +58,6 @@ class HolydayController extends Controller
         // $Holyday->CATEGORY_ID = $id;
         $Holyday->timestamps = false;
         $Holyday->update();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Edit Holyday Successfully");
     }
 }

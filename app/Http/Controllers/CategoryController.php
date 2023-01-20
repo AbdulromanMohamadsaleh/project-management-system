@@ -32,13 +32,13 @@ class CategoryController extends Controller
         $Category->NAME_CATEGORY = $request->category_name;
         $Category->timestamps = false;
         $Category->save();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Add Category Successfully");
     }
 
     public function Delete($id)
     {
         $Category = Category::where('CATEGORY_ID', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Delete Category Successfully");
     }
 
     public function Update(Request $request, $id)
@@ -52,6 +52,6 @@ class CategoryController extends Controller
         // $Category->CATEGORY_ID = $id;
         $Category->timestamps = false;
         $Category->update();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Edit Category Successfully");
     }
 }
