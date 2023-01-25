@@ -2,6 +2,34 @@
     @case('Admin')
         <script>
             (async function() {
+
+                let BarChartData = @php  echo $data['BarChartData'] @endphp;
+
+                let BarData = Object.entries(BarChartData);
+
+                let yearChart = BarData.map(x => x[0]);
+                let projectChart = BarData.map(x => x[1]);
+
+                new Chart(
+                    document.getElementById('bar-chart'), {
+                        type: 'bar',
+                        data: {
+                            labels: yearChart,
+                            datasets: [{
+                                label: `Project`,
+                                data: projectChart,
+                                backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 205, 86)'
+                                ],
+                            }]
+                        }
+                    }
+                );
+            })();
+
+            (async function() {
                 let doneProject = @php echo $data['totalInCompleteProject']@endphp;
                 let ProggressProject = @php echo $data['totalInProggressProject']@endphp;
                 let PendingProject = @php echo $data['totalPendingProject']@endphp;

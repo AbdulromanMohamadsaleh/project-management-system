@@ -18,14 +18,24 @@ class AdminController extends Controller
     {
         $data['totalUsersData'] = User::all();
 
-        $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->get();
-        $data['totalInProggressProjectData'] = ProjectDetial::where('IS_APPROVE', 1)->get();
-        $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->get();
+        $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
+        $data['totalInProggressProjectData'] = ProjectDetial::where('IS_APPROVE', 1)->with('ProjectCreator')->get();
+        $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
+
+        $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
+            return $user->project;
+        });
+
 
         $data['totalUsers'] = count($data['totalUsersData']);
         $data['totalPendingProject'] = count($data['totalPendingProjectData']);
         $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
         $data['totalInCompleteProject'] = count($data['totalInCompleteProjectData']);
+
+
+        $data['BarChartData'] = ProjectDetial::all()->groupBy(function ($item, $key) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
+        })->map->count()->toJson();
 
         return view('Admin.index', ['data' => $data]);
     }
