@@ -74,23 +74,26 @@
 
                 let BarData = Object.entries(BarChartData);
 
-                
+                let yearChart = BarData.map(x => x[0]);
+                let projectChart = BarData.map(x => x[1]);
 
+                console.log(yearChart);
+                console.log(projectChart);
 
-                console.log(BarData);
                 new Chart(document.getElementById("bar-chart"), {
                     type: 'bar',
                     data: {
-                        labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
+                        labels: yearChart,
                         datasets: [{
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850",
-                                "#c45850"
+                            label: "Projects",
+                            backgroundColor: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a",
+                                "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"
                             ],
-                            data: [2478, 5267, 734, 784, 433, 500]
+                            data: projectChart
                         }]
                     },
                     options: {
+
                         legend: {
                             display: false
                         },
@@ -119,8 +122,10 @@
                 ]);
 
                 var options = {
+
                     title: 'Progress/Done',
                     is3D: true,
+                    colors: ['#00bfa0', '#ef9b20'],
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
