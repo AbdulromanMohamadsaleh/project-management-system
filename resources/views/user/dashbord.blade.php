@@ -66,7 +66,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/chart.js') }}"></script>
+    {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
     @include('Dashboard.include.chart')
 </body>
 

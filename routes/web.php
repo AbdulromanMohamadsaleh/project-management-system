@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/test', function(){
+    return view('testChart.index');
+});
+
 Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
     Auth::routes();
 });
