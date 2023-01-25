@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 @php
-                    $project_details = $data['userInCompletedProjectsData'];
+                    $project_details = $data['totalInCompleteProjectData'];
                 @endphp
                 <div style="overflow: scroll" class="table-responsive">
                     @include('table_project.table_dashbord')
