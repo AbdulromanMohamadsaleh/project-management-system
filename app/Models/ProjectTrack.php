@@ -29,7 +29,6 @@ class ProjectTrack extends Model
 
     public function project()
     {
-        return $this->belongsTo(ProjectDetial::class, '
-        ', 'DETAIL_ID');
+        return $this->belongsTo(ProjectDetial::class, 'PROJECT_ID', 'DETAIL_ID');
     }
 }
