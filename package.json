@@ -15,6 +15,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "chart.js": "^4.2.0",
         "frappe-gantt": "^0.6.1",
         "frappe-gantt-extended": "^0.7.0",
         "jquery": "^3.6.2"

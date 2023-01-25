@@ -104,18 +104,22 @@ class UserController extends Controller
         // Projects the User On it
         $data['userInProjects'] = $user->projects->count();
 
+        $data['userInProjectsData'] = $user->projects;
+
         // Comleted Projects the User On it
         $userInCompletedProjects = $user->projects->filter(function ($project) {
             return $project->track->STATUS === 3;
         });
+
         $data['userInCompletedProjects'] = $userInCompletedProjects->count();
+        $data['userInCompletedProjectsData'] = $userInCompletedProjects;
 
         // In Proggress Projects the User On it
         $userInProggressProjects = $user->projects->filter(function ($project) {
             return $project->track->STATUS === 2 || $project->track->STATUS === 1;
         });
         $data['userInProggressProjects'] = $userInProggressProjects->count();
-
+        $data['userInProggressData'] = $userInProggressProjects;
 
         return $data;
     }
