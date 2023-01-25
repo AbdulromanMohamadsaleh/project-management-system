@@ -13,11 +13,11 @@
                     </div>
                 </a>
             </div>
-            @include('Admin.modal_view.modal_projectall')
+            @include('Admin.modal_view.modal_project_panding_approve')
         </div>
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a data-bs-toggle="modal" data-bs-target="#modal2">
+                <a data-bs-toggle="modal" data-bs-target="#modal3">
                     <div class="wrimagecard-topimage_header" style="background-color:rgb(249, 200, 161)">
                         <center><i class="fas fa-tasks" style="color:orange;font-size:70px;"></i></center>
                     </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a data-bs-toggle="modal" data-bs-target="#modal3">
+                <a data-bs-toggle="modal" data-bs-target="#modal2">
                     <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
                         <center><i class="fas fa-clipboard-check" style="color:#16A085;font-size:70px;"></i>
                         </center>

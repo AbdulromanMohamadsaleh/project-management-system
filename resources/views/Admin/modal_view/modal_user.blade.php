@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 @php
-                    $project_details = $data['totalUsersData'];
+                    $login = $data['totalUsersData'];
                 @endphp
                 <div style="overflow: scroll" class="table-responsive">
                     @include('createuser.include.tableuser')
