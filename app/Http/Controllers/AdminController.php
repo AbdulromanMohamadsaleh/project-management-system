@@ -16,12 +16,16 @@ class AdminController extends Controller
 
     public function index()
     {
-        $data['totalUsers'] = User::all()->count();
+        $data['totalUsersData'] = User::all();
 
-        $data['totalPendingProject'] = ProjectDetial::where('IS_APPROVE', 0)->count();
-        $data['totalInProggressProject'] = ProjectDetial::where('IS_APPROVE', 1)->count();
+        $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->get();
+        $data['totalInProggressProjectData'] = ProjectDetial::where('IS_APPROVE', 1)->get();
+        $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->get();
 
-        $data['totalInCompleteProject'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->count();
+        $data['totalUsers'] = count($data['totalUsersData']);
+        $data['totalPendingProject'] = count($data['totalPendingProjectData']);
+        $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
+        $data['totalInCompleteProject'] = count($data['totalInCompleteProjectData']);
 
         return view('Admin.index', ['data' => $data]);
     }
