@@ -2,7 +2,7 @@
     @case('Admin')
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
+                <a href="">
                     <div class="wrimagecard-topimage_header" style="background-color:rgba(187, 120, 36, 0.1) ">
                         <center><i class="fas fa-user-clock" style="color:#825d09;font-size:70px;"></i></center>
                     </div>
@@ -70,7 +70,7 @@
     @case('Employee')
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <div class="wrimagecard-topimage_header" style="background-color:rgba(187, 120, 36, 0.1) ">
                         <center><i class="fas fa-user-clock" style="color:#825d09;font-size:70px;"></i></center>
                     </div>
@@ -80,12 +80,12 @@
                         </h4>
                     </div>
                 </a>
+                @include('Dashboard.include.modal_projectall')
             </div>
         </div>
-
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
+                <a data-bs-toggle="modal" data-bs-target="#modal">
                     <div class="wrimagecard-topimage_header" style="background-color:rgb(249, 200, 161)">
                         <center><i class="fas fa-tasks" style="color:orange;font-size:70px;"></i></center>
                     </div>
@@ -96,11 +96,12 @@
                     </div>
                 </a>
             </div>
+            @include('Dashboard.include.modal_projectprogress')
         </div>
 
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
+                <a data-bs-toggle="modal" data-bs-target="#modal2">
                     <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
                         <center><i class="fas fa-clipboard-check" style="color:#16A085;font-size:70px;"></i></center>
                     </div>
@@ -113,6 +114,7 @@
                 </a>
             </div>
         </div>
+        @include('Dashboard.include.modal_projectcomplate')
     @break
 
     @default

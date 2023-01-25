@@ -42,6 +42,10 @@
     <div class="tab-pane fade  " id="nav-edit-project" role="tabpanel" aria-labelledby="nav-edit-project-tab"
         tabindex="0">
 
+        <div class="d-flex justify-content-center mt-3">
+            @include('project.show.include.tap_edit_add_task')
+        </div>
+
 
     <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
         @include("timeline.show.include.showtimeline")
