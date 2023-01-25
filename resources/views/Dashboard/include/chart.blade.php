@@ -191,7 +191,7 @@
                             ],
                             datasets: [{
                                 label: 'My First Dataset',
-                                data: [ProggressProject, doneProject],
+                                data: [doneProject, ProggressProject ],
                                 backgroundColor: [
                                     // '#00bfa0',
                                     'rgba(75, 192, 192 , 0.8)',

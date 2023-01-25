@@ -22,8 +22,7 @@
                             <input type="text" name="create_holyday_name" class="form-control"
                                 id="create_holyday_name">
 
-                            <span class="  text-danger"
-                                id="create_holyday_name_error">
+                            <span class=" fw-bold text-danger" id="create_holyday_name_error">
 
                             </span>
 
@@ -33,6 +32,9 @@
                                 Holyday</label>
                             <input type="date" name="create_date_holyday" class="form-control"
                                 id="create_date_holyday">
+                            <span class="  text-danger fw-bold" id="create_date_holyday_error">
+
+                            </span>
                         </div>
                         <button id="submitCreateHolyDay" type="button" name="submit"
                             class="btn btn-success">SAVE</button>

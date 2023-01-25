@@ -34,13 +34,16 @@
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
+    //  Create Holy Day
     $(document).ready(function() {
         $('#example').DataTable();
     });
 
     $('.show-alert-delete-box').click(function(event) {
         var form = $(this).closest("form");
-        var name = $(this).data("name");
+        // var name = $(this).data("name");
+        // console.log(form.children(".formdiv").findnext('input[name="delete_holy_day_ID"]').val())
+
         event.preventDefault();
         swal({
             title: "Are you sure you want to delete this record?",
@@ -57,27 +60,8 @@
             }
         });
     });
-    // $('.btn-sm2').on('click', function(e) {
-    //     e.preventDefault();
-    //     const href = $(this).attr('href')
-    //     Swal.fire({
-    //         title: 'Edit ?',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'OK',
-    //         cancelButtonText: 'CANCEL'
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             document.location.href = href;
-    //         }
-    //     })
-    // }
-
 
     //  Create Holy Day
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -124,17 +108,33 @@
             },
 
             error: function(error) {
+                let holyDayNameErrorMessage = error.responseJSON.errors.create_holyday_name;
+                let holyDayNameErrorElement = document.querySelector('#create_holyday_name_error');
+
+                let holyDayDateErrorMessage = error.responseJSON.errors.create_date_holyday;
+                let holyDayDateErrorElement = document.querySelector('#create_date_holyday_error');
+
+                if (holyDayNameErrorMessage) {
+
+                    holyDayNameErrorElement.innerHTML = holyDayNameErrorMessage
+                }
+
+                if (holyDayDateErrorMessage) {
+                    holyDayDateErrorElement.innerHTML = holyDayDateErrorMessage
+                }
 
 
-                document.querySelector('#create_holyday_name_error').innerHTML = error.responseJSON
-                    .errors.create_holyday_name
-                document.querySelector('#create_date_holyday').innerHTML = error.responseJSON.errors
-                    .create_date_holyday
+                setTimeout(() => {
+                    holyDayNameErrorElement.innerHTML = ""
+                    holyDayDateErrorElement.innerHTML = ""
+                }, 5000);
+
 
             }
         });
 
     });
 </script>
+@include('alert.alert')
 
 </html>
