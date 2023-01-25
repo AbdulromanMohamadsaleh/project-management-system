@@ -19,8 +19,16 @@ class HolydayController extends Controller
     {
         return view('Admin.addholyday');
     }
-    public function Save(request $request)
+    public function Save(Request $request)
     {
+
+        $request->validate([
+            'create_holyday_name' => 'required|min:2|max:20|unique:prj_holyday_date,HOLYDAY_NAME',
+            'create_date_holyday' => 'required|date',
+        ]);
+
+
+
         $Holydays = new Holyday();
         $HolydaysCounter = Holyday::count();
 
@@ -32,11 +40,19 @@ class HolydayController extends Controller
         }
 
         $Holydays->HOLYDAY_ID = $HolydaysID;
-        $Holydays->HOLYDAY_NAME = $request->holyday_name;
-        $Holydays->HOLYDAY_DATE = $request->date_holyday;
+        $Holydays->HOLYDAY_NAME = $request->create_holyday_name;
+        $Holydays->HOLYDAY_DATE = $request->create_date_holyday;
         $Holydays->timestamps = false;
         $Holydays->save();
-        return redirect()->back()->with("success", "Add Holyday Successfully");
+
+
+        $Holyday = Holyday::all();
+        return response()->json([
+            "success" => "Added Holyday Successfully", 'status' => 'success',
+            'response_code' => 200,
+            'data' => $Holyday->toJson()
+        ]);
+        // return redirect()->back()->with("success", "Add Holyday Successfully");
     }
     public function Delete($id)
     {
@@ -50,6 +66,7 @@ class HolydayController extends Controller
             'holyday_name' => 'required',
             'date_holyday' => 'required',
         ]);
+
 
         $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
         // Getting values from the blade template form

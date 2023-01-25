@@ -51,7 +51,7 @@
         </tbody>
     </table>
 @else
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger text-center" role="alert">
         No Projects
     </div>
 @endif

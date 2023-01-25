@@ -36,7 +36,6 @@ class AdminController extends Controller
         $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
         $data['totalInCompleteProject'] = count($data['totalInCompleteProjectData']);
 
-
         $data['BarChartData'] = ProjectDetial::all()->groupBy(function ($item, $key) {
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();

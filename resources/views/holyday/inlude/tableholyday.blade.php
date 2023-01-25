@@ -1,3 +1,4 @@
+<div id="refresher">
 <table class="table" id="example">
     <thead>
         <tr>
@@ -21,3 +22,4 @@
         @endforeach
     </tbody>
 </table>
+</div>

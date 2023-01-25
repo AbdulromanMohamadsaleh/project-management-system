@@ -12,23 +12,30 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="signUpForm" method="post" action="{{ route('holyday.save') }}">
+                <form id="createHolyDayForm" class="formCustom" method="post">
                     @csrf
                     {{-- Project Name / Target --}}
                     <div class="row mb-5 mb-sm-0">
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="projectName">Holyday
+                            <label class="label-left fw-bold mb-2" for="create_holyday_name">Holyday
                                 Name</label>
-                            <input type="text" name="holyday_name" class="form-control"
-                                id="projectName">
+                            <input type="text" name="create_holyday_name" class="form-control"
+                                id="create_holyday_name">
+
+                            <span class="  text-danger"
+                                id="create_holyday_name_error">
+
+                            </span>
+
                         </div>
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="target">Date
+                            <label class="label-left fw-bold mb-2" for="create_date_holyday">Date
                                 Holyday</label>
-                            <input type="date" name="date_holyday" class="form-control"
-                                id="target">
+                            <input type="date" name="create_date_holyday" class="form-control"
+                                id="create_date_holyday">
                         </div>
-                        <button type="submit" name="submit" class="btn btn-success">SAVE</button>
+                        <button id="submitCreateHolyDay" type="button" name="submit"
+                            class="btn btn-success">SAVE</button>
                     </div>
             </div>
             <!-- end previous / next buttons -->

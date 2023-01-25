@@ -55,5 +55,43 @@ export function GanttChart(ganttChartElement, tasks, taskDurations) {
       ${years.join("")}
   `;
 
+  // create grid
+  const containerTasks = contentFragment.querySelector(
+    "#gantt-grid-container__tasks"
+  );
+  const containerTimePeriods = contentFragment.querySelector(
+    "#gantt-grid-container__time"
+  );
+
+  const addTaskForm = contentFragment.querySelector("#add-task");
+  const addTaskDurationForm =
+    contentFragment.querySelector("#add-task-duration");
+  const taskSelect = addTaskDurationForm.querySelector("#select-task");
+
+  function createGrid() {
+    const startMonth = new Date(
+      parseInt(fromSelectYear.value),
+      parseInt(fromSelectMonth.value)
+    );
+    const endMonth = new Date(
+      parseInt(toSelectYear.value),
+      parseInt(toSelectMonth.value)
+    );
+    const numMonths = monthDiff(startMonth, endMonth) + 1;
+
+    // clear first each time it is changed
+    containerTasks.innerHTML = "";
+    containerTimePeriods.innerHTML = "";
+
+    // createTaskRows();
+    // createMonthsRow(startMonth, numMonths);
+    // createDaysRow(startMonth, numMonths);
+    // createDaysOfTheWeekRow(startMonth, numMonths);
+    // createTaskRowsTimePeriods(startMonth, numMonths);
+    // addTaskDurations();
+  }
+
+  createGrid();
+
   ganttChartElement.appendChild(contentFragment);
 }
