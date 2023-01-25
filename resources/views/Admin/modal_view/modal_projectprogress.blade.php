@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 @php
-                    $project_details = $data['userInProggressData'];
+                    $project_details = $data['totalInProggressProjectData'];
                 @endphp
                 <div style="overflow: scroll" class="table-responsive">
                     @include('table_project.table_dashbord')
