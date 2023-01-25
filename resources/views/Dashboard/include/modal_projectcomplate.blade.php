@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Project Complate</h5>
@@ -9,8 +9,9 @@
                 @php
                     $project_details = $data['userInCompletedProjectsData'];
                 @endphp
-
-                @include('table_project.table_project')
+                <div style="overflow: scroll" class="table-responsive">
+                    @include('table_project.table_dashbord')
+                </div>
             </div>
         </div>
     </div>
