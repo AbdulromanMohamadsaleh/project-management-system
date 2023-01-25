@@ -24,3 +24,7 @@
 <script src="
 https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js
 "></script>
+<link href="
+https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/Chart.min.css
+" rel="stylesheet">
+</link>
