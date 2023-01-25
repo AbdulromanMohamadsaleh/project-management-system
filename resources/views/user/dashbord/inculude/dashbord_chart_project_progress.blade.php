@@ -2,4 +2,4 @@
     <h6 class="mb-0">Projects Progress</h6>
     {{-- <a href="">Show All</a> --}}
 </div>
-<div id="piechart_3d"  style="width: 100%; height: 500px;"></div>
+<canvas id="pie-chart"  style="width: 100%;max-width:700px;height: 10%;max-height:372px"></canvas>

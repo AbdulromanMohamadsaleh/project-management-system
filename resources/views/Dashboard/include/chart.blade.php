@@ -1,62 +1,36 @@
 @switch(Auth::user()->POSITION)
     @case('Admin')
         <script>
-            $(function() {
-                new Chart(document.getElementById("bar-chart"), {
-                    type: 'bar',
-                    data: {
-                        labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
-                        datasets: [{
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850",
-                                "#c45850"
-                            ],
-                            data: [2478, 5267, 734, 784, 433, 500]
-                        }]
-                    },
-                    options: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Project'
-                        }
-                    }
-                });
-            })
-            google.charts.load("current", {
-                packages: ["corechart"]
-            });
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
+            (async function() {
                 let doneProject = @php echo $data['totalInCompleteProject']@endphp;
                 let ProggressProject = @php echo $data['totalInProggressProject']@endphp;
                 let PendingProject = @php echo $data['totalPendingProject']@endphp;
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Progress', 'Hours per Day'],
-                    ['Complete', doneProject],
-                    ['Progress', ProggressProject],
-                    ['New Release', PendingProject],
-                    // ['Watch TV', 2],
-                    // ['Sleep', 7]
-                ]);
 
-                // var options = {
-                //     title: 'Progress/Done',
-                //     colors:['#1ABC9C','#F4D03F','#CACFD2'],
-                //     is3D: true,
-                // };
+                new Chart(
+                    document.getElementById('pie-chart'), {
+                        type: 'pie',
+                        data: {
+                            labels: [
+                                'New Release',
+                                'In Progress',
+                                'Complete',
 
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                chart.draw(data, {
-                    title: 'Progress/Done',
-                    colors: ['#1ABC9C', '#F4D03F', '#CACFD2'],
-                    is3D: true,
-                });
-            }
+                            ],
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [PendingProject, ProggressProject, doneProject],
+                                backgroundColor: [
+                                    '#CACFD2',
+                                    '#F4D03F',
+                                    '#1ABC9C',
+                                ],
+                                hoverOffset: 4
+                            }]
+                        }
+                    }
+                );
+            })();
         </script>
     @break
 
@@ -68,7 +42,7 @@
 
     @case('Employee')
         <script>
-            $(function() {
+            (async function() {
 
                 let BarChartData = @php  echo $data['BarChartData'] @endphp;
 
@@ -77,60 +51,52 @@
                 let yearChart = BarData.map(x => x[0]);
                 let projectChart = BarData.map(x => x[1]);
 
-                console.log(yearChart);
-                console.log(projectChart);
-
-                new Chart(document.getElementById("bar-chart"), {
-                    type: 'bar',
-                    data: {
-                        labels: yearChart,
-                        datasets: [{
-                            label: "Projects",
-                            backgroundColor: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a",
-                                "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"
-                            ],
-                            data: projectChart
-                        }]
-                    },
-                    options: {
-
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Project'
+                new Chart(
+                    document.getElementById('bar-chart'), {
+                        type: 'bar',
+                        data: {
+                            labels: yearChart,
+                            datasets: [{
+                                label: `Project`,
+                                data: projectChart,
+                                backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 205, 86)'
+                                ],
+                            }]
                         }
                     }
-                });
-            })
+                );
+            })();
 
-            google.charts.load("current", {
-                packages: ["corechart"]
-            });
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-
+            (async function() {
                 let doneProject = @php echo $data['userInCompletedProjects']@endphp;
                 let ProggressProject = @php echo $data['userInProggressProjects']@endphp;
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Progress', 'Hours per Day'],
-                    ['Done', doneProject],
-                    ['Progress', ProggressProject],
-                ]);
+                new Chart(
+                    document.getElementById('pie-chart'), {
+                        type: 'pie',
+                        data: {
+                            labels: [
+                                'Complete',
+                                'In Progress',
 
-                var options = {
+                            ],
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [ProggressProject, doneProject],
+                                backgroundColor: [
+                                    '#00bfa0',
+                                    '#ef9b20',
 
-                    title: 'Progress/Done',
-                    is3D: true,
-                    colors: ['#00bfa0', '#ef9b20'],
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                chart.draw(data, options);
-            }
+                                ],
+                                hoverOffset: 4
+                            }]
+                        }
+                    }
+                );
+            })();
         </script>
     @break
 

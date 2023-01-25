@@ -51,7 +51,8 @@
                             <h6 class="mb-0">Project Progress</h6>
                             <a href="">Show All</a>
                         </div>
-                        <div id="piechart_3d" style="width: 500px; height: 500px;"></div>
+                        <canvas style="width: 100%;max-width:700px;height: 10%;max-height:372px"
+                            id="pie-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -94,6 +95,7 @@
     {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
 
     @include('Dashboard.include.chart')
+
 </body>
 
 </html>

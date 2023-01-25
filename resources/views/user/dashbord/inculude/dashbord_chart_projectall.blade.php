@@ -4,6 +4,6 @@
             <h6 class="mb-0">Project All</h6>
             {{-- <a href="">Show All</a> --}}
         </div>
-        <canvas id="bar-chart"></canvas>
+        <canvas id="bar-chart" style="width: 100%;max-width:700px"></canvas>
     </div>
 </div>
