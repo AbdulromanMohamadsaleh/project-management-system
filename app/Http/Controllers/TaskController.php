@@ -141,7 +141,7 @@ class TaskController extends Controller
         $Task->TASK_BUDGET = $request->budget;
         $Task->timestamps = false;
         $Task->save();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Add Budget Successfully");
     }
     public function SaveNote(request $request, $id)
     {
@@ -150,6 +150,6 @@ class TaskController extends Controller
         $Task->TASK_NOTE = $request->note;
         $Task->timestamps = false;
         $Task->save();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Add Note Successfully");
     }
 }

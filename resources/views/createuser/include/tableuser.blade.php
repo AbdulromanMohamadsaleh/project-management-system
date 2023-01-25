@@ -33,7 +33,7 @@
                                 class="btn  btn-success  show-alert-delete-box "
                                 data-toggle="tooltip" title='ACTIVE'><i class='fas fa-check-circle'></i></button>
                      </form>
-                @else
+                     @else
                 <span class="badge bg-success">Active</span>
 
                     @endif

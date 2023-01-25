@@ -18,21 +18,29 @@ class CategoryController extends Controller
     }
     public function Save(request $request)
     {
-        $Category = Category::count();
+        $Category = new Category();
+        $CategoryCounter = Category::count();
 
-        $Category = "CTY" . sprintf("%04d", ($Category == 0 ||  $Category == '' ? 1 :  $Category + 1));
-        $Category = new Category(['CATEGORY_ID' => $Category]);
+
+        $CATEGORY_ID = "CTY" . sprintf("%04d", ($CategoryCounter == 0 || $CategoryCounter == '' ? 1 : $CategoryCounter + 1));
+
+        $CategoryCounterId = 1;
+        while (Category::where('CATEGORY_ID', $CATEGORY_ID)->first()) {
+            $CATEGORY_ID = "CTY" . sprintf("%04d", ($CategoryCounter == 0 || $CategoryCounter == '' ? 1 : $CategoryCounter + ++$CategoryCounterId));
+        }
+
+        $Category->CATEGORY_ID = $CATEGORY_ID;
 
         $Category->NAME_CATEGORY = $request->category_name;
         $Category->timestamps = false;
         $Category->save();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Add Category Successfully");
     }
 
     public function Delete($id)
     {
         $Category = Category::where('CATEGORY_ID', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Delete Category Successfully");
     }
 
     public function Update(Request $request, $id)
@@ -46,6 +54,6 @@ class CategoryController extends Controller
         // $Category->CATEGORY_ID = $id;
         $Category->timestamps = false;
         $Category->update();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Edit Category Successfully");
     }
 }
