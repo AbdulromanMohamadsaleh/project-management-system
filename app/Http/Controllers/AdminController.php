@@ -18,8 +18,12 @@ class AdminController extends Controller
     {
         $data['totalUsersData'] = User::all();
 
+        $projects = ProjectDetial::where('IS_APPROVE', 1)->with('ProjectCreator')->get();
+        $data['totalInProggressProjectData'] = $projects->filter(function ($project) {
+            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+        });
+
         $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
-        $data['totalInProggressProjectData'] = ProjectDetial::where('IS_APPROVE', 1)->with('ProjectCreator')->get();
         $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
 
         $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
