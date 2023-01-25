@@ -118,6 +118,7 @@ class UserController extends Controller
         $userInProggressProjects = $user->projects->filter(function ($project) {
             return $project->track->STATUS === 2 || $project->track->STATUS === 1;
         });
+        
         $data['userInProggressProjects'] = $userInProggressProjects->count();
         $data['userInProggressData'] = $userInProggressProjects;
 
