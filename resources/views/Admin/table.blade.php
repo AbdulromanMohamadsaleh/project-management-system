@@ -51,7 +51,7 @@
                                 <tr style="text-align:left">
                                     <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
                                     <td>{{ $project_detail->NAME_PROJECT }}</td>
-                                    <td>{{ $project_detail->RECORD_CREATOR }}</td>
+                                    <td>{{ $project_detail->ProjectCreator->NAME }}</td>
                                     {{-- <td>{{ $project_detail->DATE_SAVE }}</td> --}}
                                     <td>
                                         <div class="progress">
@@ -84,7 +84,7 @@
                                             href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
                                             <i class="bi bi-alarm" style="font-size: 25;"></i>
                                         </a>
-                                        @if ($project_detail->IS_APPROVE == 0)
+                                        @if ($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin')
                                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip"
                                                 title="edit project"
                                                 href="{{ route('update.project', $project_detail->DETAIL_ID) }}">
@@ -93,7 +93,7 @@
                                             </a>
                                         @endif
 
-                                        @if ($project_detail->IS_APPROVE == 0)
+                                        @if ($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin')
                                             <form style="display: inline-block" method="POST"
                                                 action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
                                                 @csrf

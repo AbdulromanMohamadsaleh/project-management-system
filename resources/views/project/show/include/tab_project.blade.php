@@ -41,8 +41,7 @@
 
     <div class="tab-pane fade  " id="nav-edit-project" role="tabpanel" aria-labelledby="nav-edit-project-tab"
         tabindex="0">
-        Edit
-    </div>
+
 
     <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
         @include("timeline.show.include.showtimeline")
