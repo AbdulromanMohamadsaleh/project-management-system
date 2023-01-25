@@ -12,8 +12,8 @@ class ProjectTeam extends Model
     use HasFactory;
     protected $table = 'prj_project_team';
     protected $fillable = [
-        'ID_NAME',
-        'RELATED_NAME',
+        // 'ID_NAME',
+        // 'RELATED_NAME',
         'DETAIL_ID',
     ];
 
@@ -21,4 +21,9 @@ class ProjectTeam extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(ProjectDetial::class, 'DETAIL_ID', 'DETAIL_ID');
+    }
 }

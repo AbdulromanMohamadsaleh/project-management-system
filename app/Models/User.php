@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $table = 'prj_project_login';
     protected $primaryKey = 'LOGIN_ID';
     protected $keyType = 'string';
+
     protected $fillable = [
         'LOGIN_ID',
         'NAME',
@@ -65,6 +66,29 @@ class User extends Authenticatable
     // {
     //     return 'EMAIL';
     // }
+
+
+    // public function projects()
+    // {
+    //     return $this->hasManyThrough(
+    //         ProjectDetial::class,
+    //         ProjectTeam::class,
+    //         'TEAM_ID', // Foreign key on ProjectActivity table...
+    //         'DETAIL_ID', // Foreign key on tasks table...
+    //         'DETAIL_ID', // Local key on countries table...
+    //         'DETAIL_ID' // Local key on ProjectActivity table...
+    //     );
+    // }
+
+    public function projects()
+    {
+        return $this->belongsToMany(
+            ProjectDetial::class,
+            'prj_project_team',
+            'LOGIN_ID',
+            'DETAIL_ID'
+        );
+    }
 
     public function getPOSITIONAttribute($val)
     {

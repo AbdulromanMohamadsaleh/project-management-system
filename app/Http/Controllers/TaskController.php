@@ -130,7 +130,8 @@ class TaskController extends Controller
             $q->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        return view('project.show.task_timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
+        // return view('project.show.task_timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
+        return view('project.show.timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
     }
 
     public function SaveBudget(request $request, $id)

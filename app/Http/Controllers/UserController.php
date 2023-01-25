@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use App\Models\Login;
+use Flowframe\Trend\Trend;
+use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,17 +16,18 @@ class UserController extends Controller
     //
     public function index()
     {
-        return view('user.dashbord');
+        $data = $this->GetDashboardCardSummary();
+
+
+        return view('user.dashbord', ['data' => $data]);
     }
+
     public function Profile()
     {
         $profile = User::first();
         return view('Admin.profile', ['profile' => $profile]);
     }
-    // public function Login()
-    // {
-    //     return view('user.login');
-    // }
+
     public function Register()
     {
         return view('user.register');
@@ -81,5 +85,38 @@ class UserController extends Controller
         $user->timestamps = false;
         $user->update();
         return redirect()->back();
+    }
+
+    public function GetDashboardCardSummary()
+    {
+        $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
+            $q->where('IS_APPROVE', 1)->with('track')->get();
+        })->first();
+
+
+        $data['BarChartData'] = $user->projects->groupBy(function ($item, $key) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
+        })->map->count()->toJson();
+
+
+
+
+        // Projects the User On it
+        $data['userInProjects'] = $user->projects->count();
+
+        // Comleted Projects the User On it
+        $userInCompletedProjects = $user->projects->filter(function ($project) {
+            return $project->track->STATUS === 3;
+        });
+        $data['userInCompletedProjects'] = $userInCompletedProjects->count();
+
+        // In Proggress Projects the User On it
+        $userInProggressProjects = $user->projects->filter(function ($project) {
+            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+        });
+        $data['userInProggressProjects'] = $userInProggressProjects->count();
+
+
+        return $data;
     }
 }

@@ -22,6 +22,7 @@ class CategoryController extends Controller
 
         $Category = "CTY" . sprintf("%04d", ($Category == 0 ||  $Category == '' ? 1 :  $Category + 1));
         $Category = new Category(['CATEGORY_ID' => $Category]);
+
         $Category->NAME_CATEGORY = $request->category_name;
         $Category->timestamps = false;
         $Category->save();

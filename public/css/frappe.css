@@ -1,0 +1,57 @@
+.gantt-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.chart-controls {
+    text-align: center;
+}
+.chart-controls > p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.chart-label {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.gantt .bar {
+    fill: rgb(172, 172, 172) !important;
+}
+.gantt .bar-progress {
+    fill: rgb(112 167 255) !important;
+}
+
+.gantt .bar-label {
+    fill: #000000 !important;
+    font-weight: 500 !important;
+    font-size: 15px  !important;
+}
+
+.special .bar {
+    fill: green !important;
+}
+.special .bar-progress {
+    fill: blue !important;
+}
+
+.details-container{
+    padding: 1rem;
+}
+
+.gantt .bar-wrapper {
+    color: white !important;
+
+}
+
+.popup-wrapper{
+color: white !important;
+width: max-content !important;
+}
+
+.task-name{
+    color: white !important;
+    font-size: 1rem !important;
+}

@@ -78,6 +78,7 @@
             // timeline: {colorByRowLabel: true},
 
             timeline: {
+                
                 colorByRowLabel: true,
                 rowLabelStyle: {
                     fontName: 'Helvetica',

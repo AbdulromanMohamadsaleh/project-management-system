@@ -27,9 +27,8 @@
         <!-- Sale & Revenue Start -->
         <div class="container-fluid">
             <div class="row">
-            <div class="col-md-4 col-sm-4">
-                @include("user.dashbord.inculude.dasrhbord_summary_card")
-        </div>
+                @include('Dashboard.include.dasrhbord_summary_card')
+            </div>
         </div>
         <!-- Sale & Revenue End -->
 
@@ -37,10 +36,10 @@
         <!-- Sales Chart Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
-                @include("user.dashbord.inculude.dashbord_chart_projectall")
+                @include('user.dashbord.inculude.dashbord_chart_projectall')
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light text-center rounded p-4">
-                        @include("user.dashbord.inculude.dashbord_chart_project_progress")
+                        @include('user.dashbord.inculude.dashbord_chart_project_progress')
                     </div>
                 </div>
             </div>
@@ -68,7 +67,7 @@
     <!-- Template Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
-
+    @include('Dashboard.include.chart')
 </body>
 
 </html>
