@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -54,7 +55,7 @@ Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectM
 
 ###########################  Manager  ###########################
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'isManager', 'PreventBackHistory']], function () {
-    Route::get('/dashboard', [UserController::class, 'index'])->name('manager.dashboard');
+    Route::get('/dashboard', [ManagerController::class, 'index'])->name('manager.dashbord');
 });
 
 ###########################  Employee  ###########################

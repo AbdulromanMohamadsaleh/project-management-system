@@ -73,6 +73,7 @@ class UserController extends Controller
             'nickname' => 'required',
             'Card_Id' => 'required',
             'phone' => 'required',
+            'img' => 'mimes:png,jpg,jpeg|max:2048'
         ]);
 
         $user = User::where('LOGIN_ID', $id)->first();
@@ -81,6 +82,10 @@ class UserController extends Controller
         $user->NICKNAME = $request->nickname;
         $user->CARD_ID = $request->Card_Id;
         $user->TELEPHONE = $request->phone;
+        $imageName = time().'.'.$request->img->extension();
+        $file_path = app_path().'/images'.$user->IMG;
+        $request->img->move(public_path('images'), $imageName);
+        $user->IMG = $imageName;
         // $user->CATEGORY_ID = $id;
         $user->timestamps = false;
         $user->update();
@@ -118,7 +123,7 @@ class UserController extends Controller
         $userInProggressProjects = $user->projects->filter(function ($project) {
             return $project->track->STATUS === 2 || $project->track->STATUS === 1;
         });
-        
+
         $data['userInProggressProjects'] = $userInProggressProjects->count();
         $data['userInProggressData'] = $userInProggressProjects;
 
