@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/test', function(){
+Route::get('/test', function () {
     return view('testChart.index');
 });
 
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectM
 
 ###########################  Manager  ###########################
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'isManager', 'PreventBackHistory']], function () {
-    Route::get('/dashboard', [ManagerController::class, 'index'])->name('manager.dashbord');
+    Route::get('/dashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
 });
 
 ###########################  Employee  ###########################
@@ -98,6 +98,8 @@ Route::group(
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
     }
 );
+
+// url: "{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}",
 
 ###########################  Category  ###########################
 Route::group(

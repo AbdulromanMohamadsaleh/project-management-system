@@ -1,44 +1,44 @@
 <div class="col-sm-3">
-    <p class="mb-0">Full Name</p>
+    <b class="mb-0">Full Name</b>
 </div>
 <div class="col-sm-9">
-    <p class="text-muted mb-0">{{ Auth::user()->NAME  }}</p>
+    <p class="text-muted mb-0">{{ Auth::user()->NAME }}</p>
 </div>
 </div>
 <hr>
 <div class="row">
-<div class="col-sm-3">
-    <p class="mb-0">Nick Name</p>
-</div>
-<div class="col-sm-9">
-    <p class="text-muted mb-0">{{ Auth::user()->NICKNAME }}</p>
-</div>
-</div>
-<hr>
-<div class="row">
-<div class="col-sm-3">
-    <p class="mb-0">Card_Id</p>
-</div>
-<div class="col-sm-9">
-    <p class="text-muted mb-0">{{ Auth::user()->CARD_ID }}</p>
-</div>
+    <div class="col-sm-3">
+        <b class="mb-0">NickName:</b>
+    </div>
+    <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ Auth::user()->NICKNAME }}</p>
+    </div>
 </div>
 <hr>
 <div class="row">
-<div class="col-sm-3">
-    <p class="mb-0">Email</p>
-</div>
-<div class="col-sm-9">
-    <p class="text-muted mb-0">{{ Auth::user()->EMAIL }}</p>
-</div>
+    <div class="col-sm-3">
+        <b class="mb-0">ID Card:</b>
+    </div>
+    <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ Auth::user()->CARD_ID }}</p>
+    </div>
 </div>
 <hr>
 <div class="row">
-<div class="col-sm-3">
-    <p class="mb-0">Phone</p>
+    <div class="col-sm-3">
+        <b class="mb-0">Email:</b>
+    </div>
+    <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ Auth::user()->EMAIL }}</p>
+    </div>
 </div>
-<div class="col-sm-9">
-    <p class="text-muted mb-0">{{ Auth::user()->TELEPHONE }}</p>
-</div>
+<hr>
+<div class="row">
+    <div class="col-sm-3">
+        <b class="mb-0">Phone:</b>
+    </div>
+    <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ Auth::user()->TELEPHONE }}</p>
+    </div>
 </div>
 <hr>

@@ -42,7 +42,7 @@
                             <h6 class="mb-0">Project All</h6>
                             <a href=""></a>
                         </div>
-                        <canvas id="bar-chart2"></canvas>
+                        <canvas id="bar-chart"></canvas>
                     </div>
                 </div>
                 <div class="col-sm-12 col-xl-6">
@@ -52,7 +52,7 @@
                             <a href="">Show All</a>
                         </div>
                         <canvas style="width: 100%;max-width:700px;height: 10%;max-height:372px"
-                            id="pie-chart2"></canvas>
+                            id="pie-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -79,8 +79,7 @@
     </div>
 
     <!-- JavaScript Libraries -->
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('lib/chart/chart.min.js') }}"></script>
     <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
@@ -90,16 +89,12 @@
     <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
 
-    @include('Dashboard.include.chart')
     <!-- Template Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
 
-
-    <!-- Template Javascript -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @include('Dashboard.include.chart')
 
 
 </body>

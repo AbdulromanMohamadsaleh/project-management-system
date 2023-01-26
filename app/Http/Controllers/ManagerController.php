@@ -32,9 +32,12 @@ class ManagerController extends Controller
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
 
+        $data['BarChartDataSumBudget'] = ProjectDetial::all()->groupBy(function ($item, $key) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
+        })->map->sum('BUDGET')->toJson();
 
+        // dd($data['BarChartDataSumBudget']);
 
         return view('manager.dashbord', ['data' => $data]);
     }
-
 }

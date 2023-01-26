@@ -34,7 +34,7 @@
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-    //  Create Holy Day
+    //  Delete Holy Day
     $(document).ready(function() {
         $('#example').DataTable();
     });
@@ -134,6 +134,84 @@
         });
 
     });
+
+
+    // Edit Holydays
+
+    // var editHolyDayForm = document.querySelector('#edit_holy_day_form');
+
+    // editHolyDayForms = document.querySelectorAll('[id = "edit_holy_day_form"]'),
+    //     editHolyDayForms.forEach((form, ind) => {
+
+    //         numberingsTask = document.querySelectorAll('[class = "taskWrap"]');
+    //         const childrenTasks = numberingsTask[ind].children
+
+    //     });
+
+    // $("#submitCreateHolyDay").click(function(e) {
+
+    //     e.preventDefault();
+
+    //     var dataform = new FormData(createHolyDayForm);
+    //     $.ajax({
+    //         method: 'POST',
+    //         processData: false,
+    //         contentType: false,
+
+    //         data: dataform,
+    //         success: function(response) {
+
+    //             Swal.fire({
+    //                 position: 'center',
+    //                 icon: 'success',
+    //                 title: response.success,
+    //                 showConfirmButton: false,
+    //                 timer: 2000,
+    //                 timerProgressBar: true,
+    //             })
+
+    //             let holyDaysResponse = JSON.parse(response.data);
+    //             document.querySelector('#create_holyday_name').value = ""
+    //             document.querySelector('#create_date_holyday').value = ""
+    //             // document.querySelector('#myModal').style.display = "none"
+    //             $('#myModal').modal('hide')
+    //             $('#refresher').load(location.href + ' #refresher')
+
+    //             setTimeout(() => {
+    //                 $('#example').DataTable()
+    //             }, 1000);
+
+    //             // document.querySelector('body').classList.remove('modal-open')
+    //             // document.querySelector('.modal-backdrop').remove()
+    //         },
+
+    //         error: function(error) {
+    //             let holyDayNameErrorMessage = error.responseJSON.errors.create_holyday_name;
+    //             let holyDayNameErrorElement = document.querySelector('#create_holyday_name_error');
+
+    //             let holyDayDateErrorMessage = error.responseJSON.errors.create_date_holyday;
+    //             let holyDayDateErrorElement = document.querySelector('#create_date_holyday_error');
+
+    //             if (holyDayNameErrorMessage) {
+
+    //                 holyDayNameErrorElement.innerHTML = holyDayNameErrorMessage
+    //             }
+
+    //             if (holyDayDateErrorMessage) {
+    //                 holyDayDateErrorElement.innerHTML = holyDayDateErrorMessage
+    //             }
+
+
+    //             setTimeout(() => {
+    //                 holyDayNameErrorElement.innerHTML = ""
+    //                 holyDayDateErrorElement.innerHTML = ""
+    //             }, 5000);
+
+
+    //         }
+    //     });
+
+    // });
 </script>
 @include('alert.alert')
 

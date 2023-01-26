@@ -9,4 +9,16 @@
             timerProgressBar: true,
         })
     </script>
+@elseif (session()->has('error'))
+    <script>
+        console.log("ff")
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '{{ session()->get('error') }}',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        })
+    </script>
 @endif

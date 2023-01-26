@@ -15,21 +15,23 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="signUpForm" method="post" action="{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}">
+                <form id="edit_holy_day_form" class="formCustom" method="post"
+                    action="{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}">
                     @csrf
-                    {{-- Project Name / Target --}}
                     <div class="row mb-5 mb-sm-0">
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="holyday_name">Holyday Name</label>
-                            <input type="text" name="holyday_name" class="form-control" id="holyday_name"
+                            <input type="text" name="edit_holyday_name" class="form-control" id="holyday_name"
                                 value="{{ $Holyday->HOLYDAY_NAME }}">
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="target">Date Holyday</label>
-                            <input type="date" name="date_holyday" value="{{ $Holyday->HOLYDAY_DATE }}"
+                            <input type="date" name="edit_create_date_holyday" value="{{ $Holyday->HOLYDAY_DATE }}"
                                 class="form-control" id="target">
                         </div>
-                        <button type="submit" name="submit" class="btn btn-success">SAVE</button>
+                        {{-- <input type="text" value="{{ $Holyday->HOLYDAY_ID }}"> --}}
+                        <button id="submitCreateHolyDay" type="buttom" name="submit"
+                            class="btn btn-success">SAVE</button>
                     </div>
             </div>
             <!-- end previous / next buttons -->

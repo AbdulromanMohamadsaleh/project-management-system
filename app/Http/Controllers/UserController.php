@@ -82,10 +82,15 @@ class UserController extends Controller
         $user->NICKNAME = $request->nickname;
         $user->CARD_ID = $request->Card_Id;
         $user->TELEPHONE = $request->phone;
-        $imageName = time().'.'.$request->img->extension();
-        $file_path = app_path().'/images'.$user->IMG;
-        $request->img->move(public_path('images'), $imageName);
-        $user->IMG = $imageName;
+        $user->DEPARTMENT = $request->Department;
+        if ($request->img) {
+
+            $imageName = time() . '.' . $request->img->extension();
+            $file_path = app_path() . '/images' . $user->IMG;
+            $request->img->move(public_path('images'), $imageName);
+            $user->IMG = $imageName;
+        }
+
         // $user->CATEGORY_ID = $id;
         $user->timestamps = false;
         $user->update();

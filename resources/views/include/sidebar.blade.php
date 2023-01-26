@@ -8,7 +8,7 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
-                <img class="rounded-circle" src="{{ asset('images/')."/".Auth::user()->IMG }}" alt=""
+                <img class="rounded-circle" src="{{ asset('images/') . '/' . Auth::user()->IMG }}" alt=""
                     style="width: 40px; height: 40px;">
                 <div
                     class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
@@ -35,6 +35,12 @@
 
                 @case('Project Manager')
                     <a href="{{ route('projectManager.dashboard') }}" class="nav-item nav-link active"><i
+                            class="fa fa-dashboard"></i></i>Dashboard
+                    </a>
+                @break
+
+                @case('Manager')
+                    <a href="{{ route('manager.dashboard') }}" class="nav-item nav-link active"><i
                             class="fa fa-dashboard"></i></i>Dashboard
                     </a>
                 @break

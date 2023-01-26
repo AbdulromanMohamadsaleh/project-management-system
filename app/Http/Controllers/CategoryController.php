@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -46,14 +47,32 @@ class CategoryController extends Controller
     public function Update(Request $request, $id)
     {
         // Validation for required fields (and using some regex to validate our numeric value)
-        $request->validate([
-            'category_name' => 'required',
-        ]);
+        // $request->validate([
+        //     'category_name' => 'required|unique:prj_category,NAME_CATEGORY',
+        // ]);
+
+        $validator = $this->getValidator($request);
+
+        if ($validator->fails()) {
+            dd($validator->errors()->first());
+            // return redirect()->back()->with("error", $validator->errors()->first());
+            return $this->errorResponse($validator->errors()->first());
+        }
+
         $Category = Category::where('CATEGORY_ID', $id)->first();
         $Category->NAME_CATEGORY = $request->input('category_name');
         // $Category->CATEGORY_ID = $id;
         $Category->timestamps = false;
         $Category->update();
         return redirect()->back()->with("success", "Edit Category Successfully");
+    }
+
+    protected function getValidator(Request $request)
+    {
+        $rules = [
+            'category_name' => 'required|unique:prj_category,NAME_CATEGORY',
+        ];
+
+        return dd(Validator::make($request->all(), $rules));
     }
 }

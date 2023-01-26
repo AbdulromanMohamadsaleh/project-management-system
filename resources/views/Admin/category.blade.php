@@ -74,26 +74,26 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-    $('.btn-sm2').on('click', function(e) {
-        e.preventDefault();
-        const href = $(this).attr('href')
-        Swal.fire({
-            title: 'Edit ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'OK',
-            cancelButtonText: 'CANCEL'
-        }).then((result) => {
-            if (result.value) {
-                document.location.href = href;
-            }
-        })
-    })
+    // $(document).ready(function() {
+    //     $('#example').DataTable();
+    // });
+    // $('.btn-sm2').on('click', function(e) {
+    //     e.preventDefault();
+    //     const href = $(this).attr('href')
+    //     Swal.fire({
+    //         title: 'Edit ?',
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'OK',
+    //         cancelButtonText: 'CANCEL'
+    //     }).then((result) => {
+    //         if (result.value) {
+    //             document.location.href = href;
+    //         }
+    //     })
+    // })
 
 </script>
 

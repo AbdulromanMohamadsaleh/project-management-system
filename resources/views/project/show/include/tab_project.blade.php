@@ -14,10 +14,7 @@
             type="button" role="tab" aria-controls="nav-show-project" aria-selected="true"><i class="bi bi-eye"
                 style="font-size: 25px"></i></button>
 
-        <button class="nav-link " id="nav-edit-project-tab" data-bs-toggle="tab" data-bs-target="#nav-edit-project"
-            type="button" role="tab" aria-controls="nav-edit-project" aria-selected="true" data-toggle="tooltip"
-            title='Edit' style="font-size: 25px"><i class="bi bi-pencil"></i></button>
-        </button>
+
 
         <button class="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline"
             type="button" role="tab" aria-controls="nav-timeline" aria-selected="false" data-toggle="tooltip"
@@ -41,14 +38,12 @@
 
     <div class="tab-pane fade  " id="nav-edit-project" role="tabpanel" aria-labelledby="nav-edit-project-tab"
         tabindex="0">
+    </div>
 
-        <div class="d-flex justify-content-center mt-3">
-            @include('project.show.include.tap_edit_add_task')
-        </div>
 
 
     <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
-        @include("timeline.show.include.showtimeline")
+        @include('timeline.show.include.showtimeline')
     </div>
 
 
@@ -57,11 +52,13 @@
         {{-- @include('project.show.task_timeline') --}}
         <ul class="nav nav-pills nav-fill mt-4">
             <li class="nav-item my-2">
-                <a class=" btn btn-primary" target="_blank" href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
+                <a class=" btn btn-primary" target="_blank"
+                    href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
                     Timeline</a>
             </li>
             <li class="nav-item my-2">
-                <a class="btn btn-primary" target="_blank" href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
+                <a class="btn btn-primary" target="_blank"
+                    href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
                     Timeline</a>
             </li>
 

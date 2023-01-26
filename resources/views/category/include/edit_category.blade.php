@@ -20,7 +20,7 @@
                     <div class="row mb-5 mb-sm-0">
                         <div class=" mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">Category Name</label>
-                            <input value="{{$Categorys->NAME_CATEGORY}}" type="text" name="category_name" class="form-control" id="projectName">
+                            <input required value="{{$Categorys->NAME_CATEGORY}}" type="text" name="category_name" class="form-control" id="projectName">
                         </div>
                         <button type="submit" name="submit"  class="btn btn-success">SAVE</button>
                     </div>
