@@ -24,7 +24,7 @@ class HolydayController extends Controller
     {
 
         $request->validate([
-            'create_holyday_name' => 'required|min:2|max:50|unique:prj_holyday_date,HOLYDAY_NAME',
+            'create_holyday_name' => 'required|min:2|max:50',
             'create_date_holyday' => 'required|date', // after:now
         ]);
 
@@ -67,7 +67,7 @@ class HolydayController extends Controller
         $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
 
         $request->validate([
-            'edit_holyday_name' => 'required|min:2|max:50|unique:prj_holyday_date,HOLYDAY_NAME',
+            'edit_holyday_name' => 'required|min:2|max:50',
             'edit_create_date_holyday' => 'required|date', // after:now
         ]);
 
