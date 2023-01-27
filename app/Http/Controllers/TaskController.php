@@ -152,4 +152,31 @@ class TaskController extends Controller
         $Task->save();
         return redirect()->back()->with("success", "Add Note Successfully");
     }
+    public function EditTask(Request $request, $id)
+    {
+        $Task = ProjectTask::where('TASK_ID', $id)->first();
+
+        $request->validate([
+            'task' => 'required',
+            'day' => 'required',
+            'edit_satart_date'=>'required',
+            // after:now
+        ]);
+
+
+        // Getting values from the blade template form
+        $Task->TASK_NAME = $request->task;
+        $Task->DAY = $request->day;
+        $Task->START_DATE = $request->edit_satart_date;
+        // $Holyday->CATEGORY_ID = $id;
+        $Task->save();
+
+        // return response()->json([
+        //     "success" => "Holyday Edited Successfully", 'status' => 'success',
+        //     'response_code' => 200,
+        // ]);
+
+
+        return redirect()->back()->with("success", "Edit Task and Day Successfully");
+    }
 }

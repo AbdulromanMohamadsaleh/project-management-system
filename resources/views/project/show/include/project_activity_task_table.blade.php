@@ -47,7 +47,7 @@
                         }
                     @endphp
                     <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
-                    <td></td>
+                    <td>@include('edit_activity_task.modal_edit_activity')</td>
                     <td>
 
                         @if ($act->STATUS == 1)
@@ -71,6 +71,9 @@
                         @endif
                     </td>
                     <td>
+                        @php
+                            $result=[0];
+                        @endphp
                         @if ($task->START_DATE)
                             @php
                                 if ($act->START_DATE) {
@@ -82,99 +85,13 @@
                             -
                         @endif
                     </td>
-
-                    {{-- <td>{{ $task->TASK_NAME }}</td> --}}
-
-
                     <td>
-                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                            @if ($project_detail->IS_APPROVE == 1)
-                                @if ($task->STATUS == 0)
-                                    @if ($task->START_DATE)
-                                        <form style="display: inline-block" method="GET"
-                                            action="{{ route('task.done', $task->TASK_ID) }}">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="GET">
-                                            <button style="color:white" type="submit"
-                                                class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
-                                                title='Complete'><i class='fas fa-check-circle'></i></button>
-                                        </form>
-                                    @else
-                                        <form style="display: inline-block" method="GET"
-                                            action="{{ route('task.start', $task->TASK_ID) }}">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="GET">
-                                            <button style="color:white" type="submit"
-                                                class="btn  btn-warning  show-alert-delete-box " data-toggle="tooltip"
-                                                title='Complete'><i class="bi bi-clock-history"></i></button>
-                                        </form>
-                                    @endif
-                                @else
-                                    <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i
-                                            class="bi bi-check-circle"></i></a>
-                                @endif
-                            @else
-                            @endif
-                        @else
-                        @endif
+                        @include('Admin.button_startdate_complatedate.button')
                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                         @endif
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#myModal-{{ $task->TASK_ID }}">
-                            <i class='fas fa-money-check-alt'></i>
-                        </button>
-
-                        <!-- The Modal -->
-                        <div class="modal" id="myModal-{{ $task->TASK_ID }}">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        @include('project.show.include.tab_edit_budget')
-
-                                    </div>
-
-
-                                    <!-- Modal footer -->
-
-                                </div>
-                            </div>
-                            <!-- Button trigger modal -->
-                        </div>
-                        <!-- Dete -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#myModal2-{{ $task->TASK_ID }}">
-                            <i class='fas fa-notes-medical'></i>
-                        </button>
-
-                        <!-- The Modal -->
-                        <div class="modal" id="myModal2-{{ $task->TASK_ID }}">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">{{ $task->TASK_NAME }}</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        @include('project.show.include.tab_edit_note')
-                                    </div>
-
-
-                                    <!-- Modal footer -->
-
-                                </div>
-                            </div>
-                            <!-- Button trigger modal -->
-                        </div>
+                        @include('modal_budget_note.modal_budget')
+                        @include('modal_budget_note.modal_note')
+                        @include('edit_activity_task.edit_activity_task')
                     </td>
                     <td>
                         @if ($task->STATUS == 1)

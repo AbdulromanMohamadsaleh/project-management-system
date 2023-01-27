@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
@@ -144,6 +145,15 @@ Route::group(
         Route::get('/sart-task/{id}', [TaskController::class, 'Start'])->name('task.start');
         Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
         Route::post('/savenote-task/{id}', [TaskController::class, 'SaveNote'])->name('task.savenote');
+        Route::post('/edittask/{id}', [TaskController::class, 'EditTask'])->name('task.edit');
+    }
+
+);
+###########################  activity  ###########################
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::post('/editactivity/{id}', [ActivityController::class, 'EditActivity'])->name('activity.edit');
     }
 
 );
