@@ -8,7 +8,9 @@
         <ul class="users-list clearfix list-group list-group-horizontal justify-content-center" style="flex-wrap: wrap">
             @foreach ($TeamsName as $TeamsName)
                 <li class="nav-link">
-                    <img class="rounded-circle" src="{{ asset('images/user.jpg') }}" alt="User Image">
+
+                    <img style="width:40px;hight:40px" class="rounded-circle"
+                        src="{{ asset('images/') . '/' . Auth::user()->IMG }}" alt="User Image">
                     <a style="text-decoration: none; color: black;" class="users-list-name"
                         href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
                 </li>
