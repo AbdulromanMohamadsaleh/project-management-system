@@ -53,6 +53,8 @@
     $(document).ready(function() {
         $('#example').DataTable();
     });
+
+
 </script>
 
 @include('alert.alert');

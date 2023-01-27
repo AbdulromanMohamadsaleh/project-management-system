@@ -13,7 +13,7 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody id="download-forms-table-tbody">
 
 
             @foreach ($project_details as $project_detail)
