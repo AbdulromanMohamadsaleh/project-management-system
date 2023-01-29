@@ -17,12 +17,19 @@
             <div class="bg-light text-center rounded p-4">
                 <div class="category-filter">
                     <select id="categoryFilter" class="form-control">
-                      <option value="">Show All</option>
-                      <option value="2023">2023</option>
-                      <option value="2022">2022</option>
+                        <option value="">Show All</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
                     </select>
-                  </div>
+                </div>
                 <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="category-filter">
+                        <select id="categoryFilter" class="form-control">
+                            <option value="">Show All</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
                     <h6 class="mb-0">Holyday</h6>
                     @include('holyday.inlude.ceateholyday')
                 </div>
@@ -142,16 +149,19 @@
 
     });
 
-    $("#choice").change(function(){
-  $("#table tbody tr").hide();
-  $("#table tbody tr."+$(this).val()).show('fast');
-});
+    $("#choice").change(function() {
+        $("#table tbody tr").hide();
+        $("#table tbody tr." + $(this).val()).show('fast');
+    });
 
-//this JS calls the tablesorter plugin that we already use on our site
-$("#table").tablesorter( {sortList: [[0,0]]} );
+    //this JS calls the tablesorter plugin that we already use on our site
+    $("#table").tablesorter({
+        sortList: [
+            [0, 0]
+        ]
+    });
 
-<<<<<<< Updated upstream
-=======
+
     // var editHolyDayForm = document.querySelector('#edit_holy_day_form');
 
     // editHolyDayForms = document.querySelectorAll('[id = "edit_holy_day_form"]'),
@@ -227,59 +237,16 @@ $("#table").tablesorter( {sortList: [[0,0]]} );
 
     // });
 
-    var oTable = $('#example').DataTable({
-        processing: true,
-        responsive: true,
-        serverSide: true,
-        stateSave: false,
-        pageLength: 25,
-        order: [0, 'desc'],
-        columnDefs: [{
-                searchable: false,
-                targets: [2, 5, 8, 9, 10, 12]
-            },
-            {
-                orderable: false,
-                targets: [8, 9, 10, 12]
-            }
-        ],
-        // ajax: {
-        //     url: 'get.php',
-        //     type: 'GET',
-        //     error: function(xhr, error, code) {
-        //         console.warn(xhr);
-        //         alert(xhr.responseJSON.message);
-        //     }
-        // }
-        ,
-        initComplete: function(settings, json) {
-            // Add select filter
-            $('#dataTable_length').append('<label>&nbsp; App ID:</label>');
-            $('#dataTable_length').append(
-                '<select class="form-control input-sm"  id="am_aplicacion_id"></select>');
-            am_aplicacion_ids = [{
-                0: '2022'
-            }, {
-                1: '2023'
-            }, {
-                2: 'App ID 2'
-            }];
-            for (var key in am_aplicacion_ids) {
-                var obj = am_aplicacion_ids[key];
-                for (var prop in obj) {
-                    if (obj.hasOwnProperty(prop)) {
-                        $('#am_aplicacion_id').append('<option value="' + prop + '">' + obj[prop] +
-                            '</option>');
-                    }
-                }
-            }
-            // Filter results on select change
-            $('#am_aplicacion_id').on('change', function() {
-                oTable.columns(2).search($(this).val()).draw();
-            });
-        }
+    $("#choice").change(function() {
+        $("#table tbody tr").hide();
+        $("#table tbody tr." + $(this).val()).show('fast');
     });
->>>>>>> Stashed changes
+    //this JS calls the tablesorter plugin that we already use on our site
+    $("#table").tablesorter({
+        sortList: [
+            [0, 0]
+        ]
+    });
 </script>
 @include('alert.alert')
 
