@@ -15,13 +15,13 @@
         <!-- Recent Sales Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
-                <div class="category-filter">
+                {{-- <div class="category-filter">
                     <select id="categoryFilter" class="form-control">
                         <option value="">Show All</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <div class="category-filter">
                         <select id="categoryFilter" class="form-control">
