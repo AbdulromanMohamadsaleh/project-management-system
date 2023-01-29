@@ -42,9 +42,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
     //  Delete Holy Day
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
+    // $(document).ready(function() {
+    //     $('#example').DataTable();
+    // });
 
     $('.show-alert-delete-box').click(function(event) {
         var form = $(this).closest("form");
@@ -150,6 +150,136 @@
 //this JS calls the tablesorter plugin that we already use on our site
 $("#table").tablesorter( {sortList: [[0,0]]} );
 
+<<<<<<< Updated upstream
+=======
+    // var editHolyDayForm = document.querySelector('#edit_holy_day_form');
+
+    // editHolyDayForms = document.querySelectorAll('[id = "edit_holy_day_form"]'),
+    //     editHolyDayForms.forEach((form, ind) => {
+
+    //         numberingsTask = document.querySelectorAll('[class = "taskWrap"]');
+    //         const childrenTasks = numberingsTask[ind].children
+
+    //     });
+
+    // $("#submitCreateHolyDay").click(function(e) {
+
+    //     e.preventDefault();
+
+    //     var dataform = new FormData(createHolyDayForm);
+    //     $.ajax({
+    //         method: 'POST',
+    //         processData: false,
+    //         contentType: false,
+
+    //         data: dataform,
+    //         success: function(response) {
+
+    //             Swal.fire({
+    //                 position: 'center',
+    //                 icon: 'success',
+    //                 title: response.success,
+    //                 showConfirmButton: false,
+    //                 timer: 2000,
+    //                 timerProgressBar: true,
+    //             })
+
+    //             let holyDaysResponse = JSON.parse(response.data);
+    //             document.querySelector('#create_holyday_name').value = ""
+    //             document.querySelector('#create_date_holyday').value = ""
+    //             // document.querySelector('#myModal').style.display = "none"
+    //             $('#myModal').modal('hide')
+    //             $('#refresher').load(location.href + ' #refresher')
+
+    //             setTimeout(() => {
+    //                 $('#example').DataTable()
+    //             }, 1000);
+
+    //             // document.querySelector('body').classList.remove('modal-open')
+    //             // document.querySelector('.modal-backdrop').remove()
+    //         },
+
+    //         error: function(error) {
+    //             let holyDayNameErrorMessage = error.responseJSON.errors.create_holyday_name;
+    //             let holyDayNameErrorElement = document.querySelector('#create_holyday_name_error');
+
+    //             let holyDayDateErrorMessage = error.responseJSON.errors.create_date_holyday;
+    //             let holyDayDateErrorElement = document.querySelector('#create_date_holyday_error');
+
+    //             if (holyDayNameErrorMessage) {
+
+    //                 holyDayNameErrorElement.innerHTML = holyDayNameErrorMessage
+    //             }
+
+    //             if (holyDayDateErrorMessage) {
+    //                 holyDayDateErrorElement.innerHTML = holyDayDateErrorMessage
+    //             }
+
+
+    //             setTimeout(() => {
+    //                 holyDayNameErrorElement.innerHTML = ""
+    //                 holyDayDateErrorElement.innerHTML = ""
+    //             }, 5000);
+
+
+    //         }
+    //     });
+
+    // });
+
+    var oTable = $('#example').DataTable({
+        processing: true,
+        responsive: true,
+        serverSide: true,
+        stateSave: false,
+        pageLength: 25,
+        order: [0, 'desc'],
+        columnDefs: [{
+                searchable: false,
+                targets: [2, 5, 8, 9, 10, 12]
+            },
+            {
+                orderable: false,
+                targets: [8, 9, 10, 12]
+            }
+        ],
+        // ajax: {
+        //     url: 'get.php',
+        //     type: 'GET',
+        //     error: function(xhr, error, code) {
+        //         console.warn(xhr);
+        //         alert(xhr.responseJSON.message);
+        //     }
+        // }
+        ,
+        initComplete: function(settings, json) {
+            // Add select filter
+            $('#dataTable_length').append('<label>&nbsp; App ID:</label>');
+            $('#dataTable_length').append(
+                '<select class="form-control input-sm"  id="am_aplicacion_id"></select>');
+            am_aplicacion_ids = [{
+                0: '2022'
+            }, {
+                1: '2023'
+            }, {
+                2: 'App ID 2'
+            }];
+            for (var key in am_aplicacion_ids) {
+                var obj = am_aplicacion_ids[key];
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop)) {
+                        $('#am_aplicacion_id').append('<option value="' + prop + '">' + obj[prop] +
+                            '</option>');
+                    }
+                }
+            }
+            // Filter results on select change
+            $('#am_aplicacion_id').on('change', function() {
+                oTable.columns(2).search($(this).val()).draw();
+            });
+        }
+    });
+>>>>>>> Stashed changes
 </script>
 @include('alert.alert')
 

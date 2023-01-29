@@ -1,4 +1,5 @@
 <div id="refresher">
+<<<<<<< Updated upstream
 <table class="table" id="filterTable">
     <thead>
         <tr>
@@ -18,10 +19,35 @@
                     @include("holyday.inlude.editholyda")
                     @include("holyday.inlude.deleteholyday")
                 </td>
+=======
+    <table class="table" id="example">
+        <thead>
+            <tr id="dataTable_length"></tr>
+            <tr>
+                <th style="text-align: center;" scope="col">Holyday Name</th>
+                <th style="text-align: center;" scope="col">Date Holyday</th>
+                <th style="text-align: center;">Action</th>
+
+>>>>>>> Stashed changes
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach ($holydays as $Holyday)
+                <tr>
+                    <td style="text-align:left">{{ $Holyday->HOLYDAY_NAME }}</td>
+                    <td style="text-align:center">{{ $Holyday->HOLYDAY_DATE }}</td>
+                    </center>
+                    <td class="project-actions text-right">
+
+                        @if ($Holyday->year > date('Y'))
+                            @include('holyday.inlude.editholyda')
+                        @endif
+                        @include('holyday.inlude.deleteholyday')
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 <script>
     $("document").ready(function () {

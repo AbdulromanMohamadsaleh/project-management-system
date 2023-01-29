@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Holyday;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,10 @@ class HolydayController extends Controller
     {
         $Holydays = Holyday::all();
 
-
+        foreach ($Holydays as $Holyday) {
+            $year = new Carbon($Holyday->HOLYDAY_DATE);
+            $Holyday->year = $year->year;
+        }
 
         return view('Admin.dateholyday', ['holydays' => $Holydays]);
     }

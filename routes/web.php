@@ -80,6 +80,10 @@ Route::group(
         Route::get('/edit/{ProjectDetial}', [ProjectController::class, 'Edit'])->name('update.project');
         Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
         Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
+        // Gantt Tracker
+
+        Route::get('/gantt_Chart/{id}', [ProjectController::class, 'GanttChart'])->name('ganttChart');
+
         Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');

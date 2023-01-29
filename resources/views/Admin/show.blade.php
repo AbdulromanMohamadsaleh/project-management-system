@@ -89,6 +89,7 @@
 </body>
 @include('include.scrip');
 @include('alert.alert')
+
 <!-- Template Javascript -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
@@ -117,7 +118,7 @@
         });
     });
 </script>
-
+<script src="{{ asset('js/order_list.js') }}"></script>
 </html>
 <style>
     table {
