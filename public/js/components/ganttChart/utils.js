@@ -47,3 +47,29 @@ export function createFormattedDateFromDate(date) {
   }
   return `${date.getFullYear()}-${monthStr}-${dayStr}`;
 }
+
+
+export function getDiffNumberOfDays(date1, date2) {
+    // const date1 = new Date(start);
+    // const date2 = new Date(end);
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = date2.getTime() - date1.getTime();
+
+    // Calculating the no. of days between two dates
+    const diffInDays = Math.round(diffInTime / oneDay);
+
+    return diffInDays;
+}
+
+export function diff_weeks(dt2, dt1)
+ {
+
+  var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= (60 * 60 * 24 * 7);
+  return Math.abs(Math.round(diff));
+
+ }

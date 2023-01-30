@@ -128,7 +128,18 @@ export function cssStyles() {
         grid-auto-columns: minmax(30px, 1fr);
         text-align: center;
         height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid #e9eaeb;
     }
+
+    .gantt-time-period-project-week {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(100px, 1fr);
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid #e9eaeb;
+    }
+
 
     .gantt-time-period span {
       margin: auto;
@@ -141,6 +152,8 @@ export function cssStyles() {
 
     .gantt-time-period-cell {
       position: relative;
+      display: flex;
+      align-items: center;
       outline: 0.5px solid ${outlineColor};
     }
 

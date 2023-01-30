@@ -27,8 +27,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-        const tasks = @php echo $tasks @endphp
-        
+        const tasks = @php echo $tasks @endphp;
+        const project = @php echo $project @endphp
     </script>
     <script src="{{ asset('js/script.js') }}" type="module" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,5 +40,9 @@
 <body>
     <div role="gantt-chart"></div>
 </body>
+<script>
+
+
+</script>
 
 </html>

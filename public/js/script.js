@@ -4,11 +4,12 @@
 
     // can have multiple instances of Gantt chart
     document.addEventListener("DOMContentLoaded", () => {
-        console.log(tasks)
+        // console.log(tasks)
         tasks.forEach((task)=>{
              task.start = new Date(task.start);
               task.end = new Date(task.end)
         })
+        // console.log(project)
         // get data - could get from server
         // const tasks = [{
         //         id: 1,
@@ -59,7 +60,7 @@
         //         end: new Date("2022/1/18"),
         //     },
         // ];
-        
+
         //   const taskDurations = [
         //     {
         //       id: "1",
@@ -80,10 +81,22 @@
         //       task: 4,
         //     },
         //   ];
+        project.DATE_END = new Date(project.DATE_END);
+        project.DATE_START = new Date(project.DATE_START);
 
         const ganttCharts = document.querySelectorAll("[role=gantt-chart]");
         ganttCharts.forEach(ganttChart => {
-            new GanttChart(ganttChart, tasks);
+            new GanttChart(ganttChart, tasks,project);
         });
+
+
+
+
+// document.getElementsByClassName('taskDuration').style.height='30px';
+
+
+        // $('.taskDuration').css('height', '30px');
+
+
     });
 
