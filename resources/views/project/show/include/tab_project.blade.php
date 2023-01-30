@@ -50,7 +50,7 @@
     <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
         {{-- @include('project.show.activity_gantt_chart') --}}
         {{-- @include('project.show.task_timeline') --}}
-        <ul class="nav nav-pills nav-fill mt-4">
+        {{-- <ul class="nav nav-pills nav-fill mt-4">
             <li class="nav-item my-2">
                 <a class=" btn btn-primary" target="_blank"
                     href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
@@ -63,8 +63,8 @@
             </li>
 
 
-        </ul>
-
+        </ul> --}}
+        @include('project.show.include.sort')
     </div>
 
 </div>

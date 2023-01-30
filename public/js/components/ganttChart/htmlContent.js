@@ -19,9 +19,9 @@ export function createHtmlContentFragment() {
 
       <div id="add-forms-container">
 
-          <div class="inner-form-container">
+          <div style="display: none; class="inner-form-container">
 
-                <form id="add-task">
+                <form style="display:hidden" id="add-task">
                   <h1>Add Task</h1>
                   <div><input placeholder="Add task name" type="text"></div>
                   <button type="submit">
@@ -31,7 +31,7 @@ export function createHtmlContentFragment() {
 
 
 
-                <form id="add-task-duration">
+                <form style="display:hidden" id="add-task-duration">
                     <h1>Add Task duration</h1>
                     <div class="inner-form-container">
                         <fieldset >

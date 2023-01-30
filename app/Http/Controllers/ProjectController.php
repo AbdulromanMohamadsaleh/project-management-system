@@ -97,11 +97,16 @@ class ProjectController extends Controller
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
         $status = explode(',', $project_detail->STATUS);
 
+
         $Holydays = Holyday::all()->toJson();
 
 
         return view('Admin.show', ['project_detail' => $project_detail,  'Holydays' => $Holydays ,'status' => $status,'TeamsName' => $project_detail->projectTeam,'ProjectTrack' => $ProjectTrack ]);
+
+        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status, 'TeamsName' => $project_detail->projectTeam, 'ProjectTrack' => $ProjectTrack]);
+
     }
+
     public function Timeline($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
@@ -329,6 +334,36 @@ class ProjectController extends Controller
         return response()->json(['msg' => 'Vaild Name.', 'status' => 1]);
     }
 
+
+
+
+    public function GanttChart($id)
+    {
+        // $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
+        //     $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
+        // })->first();
+
+        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+
+        // $status = explode(',', $ProjectDetail->STATUS);
+
+        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
+            $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
+        })->first();
+
+        $tasks = $project_detail->tasks->toArray();
+
+
+        $tasks = json_encode($tasks);
+
+        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail]);
+    }
+
+    public function ConvertTimestampToDateStringFormate($date)
+    {
+        $newdate = explode(" ", $date);
+        return str_replace("-", "/", $newdate[0]);
+    }
     // public function ValidateProjectAJAX(ProjectStoreRequest $request)
     // {
 
