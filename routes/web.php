@@ -146,6 +146,7 @@ Route::group(
         Route::post('/savebudget-task/{id}', [TaskController::class, 'SaveBudget'])->name('task.savebudget');
         Route::post('/savenote-task/{id}', [TaskController::class, 'SaveNote'])->name('task.savenote');
         Route::post('/edittask/{id}', [TaskController::class, 'EditTask'])->name('task.edit');
+        Route::post('/delatetask/{id}', [TaskController::class, 'DelateTask'])->name('task.delete');
     }
 
 );
@@ -153,7 +154,9 @@ Route::group(
 Route::group(
     ['middleware' => ['auth']],
     function () {
+        Route::get('/addactivity', [ActivityController::class, 'Create'])->name('activity.add');
         Route::post('/editactivity/{id}', [ActivityController::class, 'EditActivity'])->name('activity.edit');
+        Route::post('/delateactivity/{id}', [ActivityController::class, 'DelateActivity'])->name('activity.delete');
     }
 
 );

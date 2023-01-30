@@ -96,7 +96,11 @@ class ProjectController extends Controller
         $project_detail->TotalBudget = $totalBudget;
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
         $status = explode(',', $project_detail->STATUS);
-        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status,'TeamsName' => $project_detail->projectTeam,'ProjectTrack' => $ProjectTrack ]);
+
+        $Holydays = Holyday::all()->toJson();
+
+
+        return view('Admin.show', ['project_detail' => $project_detail,  'Holydays' => $Holydays ,'status' => $status,'TeamsName' => $project_detail->projectTeam,'ProjectTrack' => $ProjectTrack ]);
     }
     public function Timeline($id)
     {
@@ -185,7 +189,7 @@ class ProjectController extends Controller
 
             $counterId2 = 1;
             while (ProjectActivity::where('ACTIVITY_ID', $ActivityId)->first()) {
-                $ActivityId = "ACT"  . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $projectCounter + ++$counterId2));
+                $ActivityId = "ACT"  . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $ActivityCounter + ++$counterId2));
             }
 
             $ProjectActivity = new ProjectActivity(['ACTIVITY_ID' => $ActivityId]);

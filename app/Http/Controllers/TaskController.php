@@ -179,4 +179,11 @@ class TaskController extends Controller
 
         return redirect()->back()->with("success", "Edit Task and Day Successfully");
     }
+    public function DelateTask($id)
+    {
+        $Task = ProjectTask::where('TASK_ID', $id)->delete();
+
+
+        return redirect()->back()->with("success", "Delete task Successfully");
+    }
 }

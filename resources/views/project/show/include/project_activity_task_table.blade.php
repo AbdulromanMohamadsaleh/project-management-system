@@ -1,9 +1,19 @@
 <div class="col mt-4">
-    <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
-    </b><br>
-    <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ? 'text-danger' : '' }}">Total Budget =
-            {{ $project_detail->TotalBudget }}฿</span>
-    </b>
+    <div class="row">
+        <div class="col">
+            <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
+            </b><br>
+            <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ? 'text-danger' : '' }}">Total Budget =
+                    {{ $project_detail->TotalBudget }}฿</span>
+            </b>
+        </div>
+        <div class="col-1">
+            @include( 'edit_activity_task.add_activity_task')
+        </div>
+
+
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -47,7 +57,9 @@
                         }
                     @endphp
                     <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
-                    <td>@include('edit_activity_task.modal_edit_activity')</td>
+                    <td>@include('edit_activity_task.modal_edit_activity')
+                    @include('edit_activity_task.delate_activity')
+                    </td>
                     <td>
 
                         @if ($act->STATUS == 1)
@@ -92,6 +104,7 @@
                         @include('modal_budget_note.modal_budget')
                         @include('modal_budget_note.modal_note')
                         @include('edit_activity_task.edit_activity_task')
+                        @include('edit_activity_task.delate_task')
                     </td>
                     <td>
                         @if ($task->STATUS == 1)
