@@ -66,8 +66,6 @@ class LoginController extends Controller
         if (auth()->attempt(array('EMAIL' => $input['email'], 'password' => $input['password']))) {
 
             if (Auth::user()->IS_ACTIVE == 1) {
-
-
                 if (auth()->user()->POSITION == 'Admin') {
                     return redirect()->route('admin.dashboard');
                 } elseif (auth()->user()->POSITION == 'ProjectManager') {
@@ -87,4 +85,5 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'Email and password are wrong');
         }
     }
+
 }

@@ -6,6 +6,11 @@
             <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ? 'text-danger' : '' }}">Total Budget =
                     {{ $project_detail->TotalBudget }}฿</span>
             </b>
+            <b class="ms-3">@if ($project_detail->BUDGET < $project_detail->TotalBudget)
+                <span class="text-danger">Budget Exceed: {{$project_detail->TotalBudget - $project_detail->BUDGET }}฿</span>
+                         @else
+                         <span class="text-success">Budget Remainning: {{  $project_detail->BUDGET - $project_detail->TotalBudget}}฿</span>
+            @endif</b>
         </div>
         <div class="col-1">
             @include( 'edit_activity_task.add_activity_task')
