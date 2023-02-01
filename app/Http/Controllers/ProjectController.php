@@ -68,6 +68,7 @@ class ProjectController extends Controller
 
         // dd($project_detail->activity);
         $sum = 0;
+        $totalBudget = 0;
         foreach ($project_detail->activity as $act) {
 
             // dd(intval(date('m', strtotime($act->START_DATE))));
@@ -83,7 +84,7 @@ class ProjectController extends Controller
                 $Eday = intval(date('d', strtotime($act->END_DATE)));
                 // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             }
-            $totalBudget = 0;
+
             // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             foreach ($act->tasks as $task) {
                 $totalBudget += $task->TASK_BUDGET;
@@ -101,9 +102,27 @@ class ProjectController extends Controller
         $Holydays = Holyday::all()->toJson();
 
 
-        return view('Admin.show', ['project_detail' => $project_detail,  'Holydays' => $Holydays ,'status' => $status,'TeamsName' => $project_detail->projectTeam,'ProjectTrack' => $ProjectTrack ]);
 
-        return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status, 'TeamsName' => $project_detail->projectTeam, 'ProjectTrack' => $ProjectTrack]);
+        // $project = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
+        //     $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
+        // })->first();
+
+        // $tasks = $project->tasks->toArray();
+
+
+        // $tasks = json_encode($tasks);
+
+        return view('Admin.show', [
+            'project_detail' => $project_detail,
+            'Holydays' => $Holydays,
+            'status' => $status,
+            'TeamsName' => $project_detail->projectTeam,
+            'ProjectTrack' => $ProjectTrack,
+            // 'tasks' => $tasks,
+            // 'project' => $project
+        ]);
+
+        // return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status, 'TeamsName' => $project_detail->projectTeam, 'ProjectTrack' => $ProjectTrack]);
 
     }
 

@@ -73,3 +73,11 @@ export function diff_weeks(dt2, dt1)
   return Math.abs(Math.round(diff));
 
  }
+
+
+export function differenceInMonths(date1, date2) {
+  const monthDiff = date1.getMonth() - date2.getMonth();
+  const yearDiff = date1.getYear() - date2.getYear();
+
+  return monthDiff + yearDiff * 12;
+}

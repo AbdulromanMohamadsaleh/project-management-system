@@ -31,7 +31,7 @@ export function createHtmlContentFragment() {
 
 
 
-                <form style="display:hidden" id="add-task-duration">
+                <form style="display: none;" id="add-task-duration">
                     <h1>Add Task duration</h1>
                     <div class="inner-form-container">
                         <fieldset >
@@ -59,7 +59,7 @@ export function createHtmlContentFragment() {
 
             </div>
 
-          <div class="tracker-period">
+          <div style="display: none;" class="tracker-period">
               <h1 >Tracker Period</h1>
               <div>
                   <div id="settings">

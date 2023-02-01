@@ -8,6 +8,7 @@ import {
   createFormattedDateFromDate,
   getDiffNumberOfDays,
   diff_weeks,
+  differenceInMonths,
 } from "./utils.js";
 
 export function GanttChart(ganttChartElement, tasks, project) {
@@ -80,19 +81,19 @@ export function GanttChart(ganttChartElement, tasks, project) {
         contentFragment.querySelector("#add-task-duration");
     const taskSelect = addTaskDurationForm.querySelector("#select-task");
 
-    function createGrid() {
+    function createGrid(startMonth,endMonth) {
         var ProjectWeekCounter=1;
 
-        const startMonth = new Date(
-        parseInt(fromSelectYear.value),
-        parseInt(fromSelectMonth.value)
-        );
-        const endMonth = new Date(
-        parseInt(toSelectYear.value),
-        parseInt(toSelectMonth.value)
-        );
+        // const startMonth = new Date(
+        // parseInt(fromSelectYear.value),
+        // parseInt(fromSelectMonth.value)
+        // );
+        // const endMonth = new Date(
+        // parseInt(toSelectYear.value),
+        // parseInt(toSelectMonth.value)
+        // );
         const numMonths = monthDiff(startMonth, endMonth) + 1;
-
+        console.log(endMonth)
         // clear first each time it is changed
         containerTasks.innerHTML = "";
         containerTimePeriods.innerHTML = "";
@@ -108,7 +109,7 @@ export function GanttChart(ganttChartElement, tasks, project) {
         addTaskDurations();
     }
 
-    createGrid();
+    createGrid(tasks[0].start,project.DATE_END);
 
     ganttChartElement.appendChild(contentFragment);
 
@@ -239,7 +240,7 @@ export function GanttChart(ganttChartElement, tasks, project) {
 
         for (let i = 0; i < numMonths; i++) {
         const timePeriodEl = document.createElement("div");
-        timePeriodEl.className = "gantt-time-period";
+        timePeriodEl.className = "gantt-time-period-project-weeks";
         containerTimePeriods.appendChild(timePeriodEl);
 
         // add days as children
@@ -257,12 +258,13 @@ export function GanttChart(ganttChartElement, tasks, project) {
 
                 if(dayCounter == 7 ){
                 let dayEl = document.createElement("div");
-                dayEl.className = "gantt-time-period-project-week";
+                dayEl.className = "gantt-time-period";
                 ;
                 const dayElSpan = document.createElement("span");
                 if(numWeeks >= ProjectWeekCounter){
                     dayElSpan.innerHTML = `Week ${ProjectWeekCounter}`;
-
+                    if(numWeeks == ProjectWeekCounter)
+                        break;
                 }
                 dayEl.appendChild(dayElSpan);
                 timePeriodEl.appendChild(dayEl);

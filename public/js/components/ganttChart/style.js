@@ -131,15 +131,21 @@ export function cssStyles() {
         outline: 0.5px solid #e9eaeb;
     }
 
-    .gantt-time-period-project-week {
+    .gantt-time-period-project-weeks {
         display: grid;
         grid-auto-flow: column;
-        grid-auto-columns: minmax(100px, 1fr);
+        // grid-template-columns: 22.6%;
+        grid-auto-columns: minmax(22.6%, 1fr);
+        background: #f3f3f3;
         text-align: center;
         height: ${CELL_HEIGHT}px;
         outline: 0.5px solid #e9eaeb;
+        // overflow: hidden;
     }
 
+    .gantt-time-period-project-weeks .gantt-time-period{
+        z-index: 1;
+    }
 
     .gantt-time-period span {
       margin: auto;
@@ -172,8 +178,8 @@ export function cssStyles() {
       position: absolute;
       height: ${CELL_HEIGHT}px;
       z-index: 1;
-      background: linear-gradient(90deg, rgba(158,221,255,1) 0%, rgba(0,149,228,1) 100%);
-      border-radius: 5px;
+    background: linear-gradient(90deg, #e5e5e5 0%, rgb(50 50 50) 100%);
+    border-radius: 5px;
       box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
       cursor: move;
     }

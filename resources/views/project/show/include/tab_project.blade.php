@@ -30,7 +30,7 @@
 <div class="tab-content" id="nav-tabContent">
 
 
-    <div class="tab-pane fade show active" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
+    <div  class="tab-pane fade show active" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
         tabindex="0">
         @include('project.show.include.project_activity_task_table')
     </div>
@@ -52,19 +52,23 @@
         {{-- @include('project.show.task_timeline') --}}
         {{-- <ul class="nav nav-pills nav-fill mt-4">
             <li class="nav-item my-2">
-                <a class=" btn btn-primary" target="_blank"
-                    href="{{ route('task.timeline', $project_detail->DETAIL_ID) }}">Task
-                    Timeline</a>
-            </li>
-            <li class="nav-item my-2">
                 <a class="btn btn-primary" target="_blank"
-                    href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
-                    Timeline</a>
+                href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
+                Timeline</a>
             </li>
 
 
         </ul> --}}
+        <ul class="nav nav-pills nav-fill mt-4">
+            <li class="nav-item my-2">
+                <a class=" btn btn-primary" target="_blank"
+                    href="{{ route('ganttChart', $project_detail->DETAIL_ID) }}">Task
+                    Gantt Chart</a>
+            </li>
+        </ul>
         @include('project.show.include.sort')
+
+        {{-- @include('testChart.index') --}}
     </div>
 
 </div>

@@ -66,7 +66,8 @@
 </div>
 
 
-<script>
+
+{{-- <script>
     function updateOrder() {
         $('.sortable li .order').each(function(index) {
             $(this).val(index + 1);
@@ -107,4 +108,4 @@
 
         }
     })
-</script>
+</script> --}}

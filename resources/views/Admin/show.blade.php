@@ -1,5 +1,13 @@
 @include('include.header')
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet" />
+{{-- //Sort --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
 @php
+
     function ConvertDaysToWeek($days)
     {
         $weeks = intval($days / 7);
@@ -83,7 +91,9 @@
             <br>
 
         </div>
+
     </div>
+
     </div>
 
 </body>
@@ -119,6 +129,8 @@
     });
 </script>
 <script src="{{ asset('js/order_list.js') }}"></script>
+<script src="{{ asset('js/script.js') }}" type="module" defer></script>
+
 </html>
 <style>
     table {
