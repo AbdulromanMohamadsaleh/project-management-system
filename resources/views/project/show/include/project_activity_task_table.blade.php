@@ -170,6 +170,11 @@
     .toggleArror:hover {
         cursor: pointer
     }
+
+    .glyphicon-move {
+        cursor: move;
+        cursor: -webkit-grabbing;
+    }
 </style>
 
 
@@ -318,7 +323,7 @@
 
         </tbody>
     </table> --}}
-    <div class="row " style="overflow: auto">
+    <div class="row refresher " style="overflow: auto">
         <table style="width: -webkit-fill-available;" class="mt-3 nestedTable">
             <thead>
                 <tr>
@@ -351,11 +356,20 @@
                         {{-- Start Act Info --}}
                         {{-- <input id="actId" type="text" value="{{ $act->ACTIVITY_ORDER }}" hidden> --}}
                         <div class="act-order">
-                            <tr>
+
+                            <tr data-activityOrder="">
+
                                 <td style="font-size: 1.6rem;" class="spacer ">
-                                    <i id="showMore" data-id="{{ $act->ACTIVITY_ID }}" class="toggleArror showMore fa fa-angle-double-right"></i>
+                                    <i style="font-size: 1.3rem;" class="bi bi-arrows-move glyphicon-move mr-3"></i>
+                                    <i id="showMore" data-id="{{ $act->ACTIVITY_ID }}"
+                                        class=" toggleArror showMore fa fa-angle-double-right"></i>
+
+                                    <span hidden data-activityId="{{ $act->ACTIVITY_ID }}" id="activityId"></span>
+
+                                    {{-- <span data-activityId="{{ $act->ACTIVITY_ID }}" hidden id="projectId"></span> --}}
+
                                 </td>
-                                <td><b>{{ $act->ACTIVITY_ORDER }}.</b></td>
+                                <td><b class="order">{{ $act->ACTIVITY_ORDER }}.</b></td>
                                 <td>{{ $act->ACTIVITY_NAME }}</td>
                                 <td>{{ ConvertDaysToWeek($sum) }}</td>
                                 @php
@@ -399,7 +413,7 @@
                         @endphp
 
                         @foreach ($act->tasks as $task)
-                            <tr id="showTasks{{ $act->ACTIVITY_ID }}" class="display-none"
+                            <tr id="showTasks{{ $act->ACTIVITY_ID }}" class="taskRow display-none"
                                 style="background: #f9f9f9;">
                                 <td class="spacer" <br></td>
                                 <td class="spacer">
@@ -462,6 +476,9 @@
             </tr>
         </table>
     </div>
+
+
+
 </div>
 
 
@@ -469,22 +486,13 @@
 
 
 
+
 <script>
-    // $(".showMore").click(function() {
-    //     var tr = $(this).parent().parent().nextAll('#showTasks');
-    //     $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
-    //     if (tr.is(".display-none")) {
-    //         tr.removeClass('display-none');
-    //     } else {
-    //         tr.addClass('display-none');
-    //     }
-    // })
-
-    $(".showMore").click(function() {
+    function ToggleTableArror() {
         // var actId = $(this).parent().parent().nextAll('#actId');
-         var actId = $(this).data( "id" );
+        var actId = $(this).data("id");
 
-        console.log(actId)
+
         var tr = $(this).parent().parent().nextAll('#showTasks' + actId);
         $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
         if (tr.is(".display-none")) {
@@ -492,69 +500,114 @@
         } else {
             tr.addClass('display-none');
         }
-    })
+    }
 
-    // showMoreButton = document.querySelectorAll('[id = "showMore"]');
-
-    // showMoreButton.forEach((element, indx) => {
-    //     element.addEventListener("click", (e) => {
-
-    //         showTasksButton = document.querySelectorAll('[id = "showTasks"]');
-    //         // showTasksHeaderButton = document.querySelectorAll('[id = "showTasksHeader"]');
-
-    //         e.target.classList.toggle('fa-angle-double-right')
-    //         e.target.classList.toggle('fa-angle-double-down')
-
-    //         if (showTasksButton[indx].classList.contains("display-none")) {
-    //             // showTasksHeaderButton[indx].classList.remove('display-none');
-    //             showTasksButton[indx].classList.remove('display-none');
-    //         } else {
-    //             // showTasksHeaderButton[indx].classList.add('display-none');
-    //             showTasksButton[indx].classList.add('display-none');
-    //         }
-    //     })
-    // });
+    $(".showMore").click(ToggleTableArror)
 </script>
 
 <script>
+    $(document).ready(SotredList);
+
     function updateOrder() {
-        $('.sortable  .order').each(function(index) {
-            $(this).val(index + 1);
+        $('#myList  .order').each(function(index) {
+            $(this).html(`${index + 1}`)
+            // $(this).data('data-activityOrder',index + 1);
         });
     }
 
-    $(document).ready(function() {
-        $(".sortable").sortable({
+    function SotredList() {
+        $("#myList").sortable({
             update: function(event, ui) {
                 updateOrder();
+                var itemEl = event.item
+                var tt = ui.item.context
+                activityOrders = document.querySelectorAll('[class = "order"]');
+                activityIds = document.querySelectorAll('[id = "activityId"]');
+                let activitys = [];
+                activityOrders.forEach((element, index) => {
+                    let taskId = activityIds[index];
+                    let ttt = {
+                        taskId: taskId.dataset.activityid,
+                        order: element.innerHTML
+                    }
+
+                    activitys.push(ttt)
+                });
+                ajaxSaveActivityOrder(activitys)
+            },
+            draggable: ".act-order",
+            animation: 200,
+            ghostClass: 'ghost',
+            handle: '.glyphicon-move',
+            animation: 150
+        });
+        // $('.taskRow').sortable('disabled', true);
+    }
+
+    function ajaxSaveActivityOrder(dataOrder) {
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+
+        let dddd = JSON.stringify(dataOrder)
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    });
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            // processData: false,
+            // contentType: false,
+            dataType: "json",
+            url: "{{ route('activity.saveOrder') }}",
+            data: {
+                "_method": 'POST',
+                "_token": token,
+                'dd': dddd,
+            },
+            success: function(response) {
+
+                $('.refresher').load(location.href + ' .refresher')
+
+                setTimeout(() => {
+                    $(".showMore").click(ToggleTableArror);
+                    $(document).ready(SotredList);
+                }, 1000);
 
 
-    $('#toggleSortable').click(function() {
-        if ($("#myList").sortable("instance")) {
-            $("#myList").sortable("destroy");
-            console.log("default")
-            $(this).addClass("active")
+            },
 
-            $("#myList ").addClass("cs")
-            $("#myList ").removeClass("ds");
-            $("#myList").removeClass("sortable").addClass("disabledd");
+            error: function(error) {
+
+            }
+        });
+
+    }
+    // $('#toggleSortable').click(function() {
+    //     if ($("#myList").sortable("instance")) {
+    //         $("#myList").sortable("destroy");
+    //         console.log("default")
+    //         $(this).addClass("active")
+
+    //         $("#myList #act-order").addClass("cs")
+    //         $("#myList #act-order").removeClass("ds");
+    //         $("#myList").removeClass("sortable").addClass("disabledd");
 
 
-        } else {
-            $("#myList").sortable();
-            $(this).removeClass("active")
-            $("#myList ").addClass("ds")
-            $("#myList ").removeClass("cs");
-            $("#myList").removeClass("disabled").addClass("sortable");
-            $(".sortable").sortable({
-                update: function(event, ui) {
-                    updateOrder();
-                }
-            });
+    //     } else {
+    //         $("#myList").sortable();
+    //         $(this).removeClass("active")
+    //         $("#myList #act-order").addClass("ds")
+    //         $("#myList #act-order").removeClass("cs");
+    //         $("#myList").removeClass("disabled").addClass("sortable");
+    //         $(".sortable").sortable({
+    //             update: function(event, ui) {
+    //                 updateOrder();
+    //             }
+    //         });
 
-        }
-    })
+    //     }
+    // })
 </script>

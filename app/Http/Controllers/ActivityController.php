@@ -104,4 +104,27 @@ class ActivityController extends Controller
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
+
+    public function SaveOrder(Request $request)
+    {
+        // $request->validate([
+        //     'create_holyday_name' => 'required|min:2|max:50',
+        //     'create_date_holyday' => 'required|date', // after:now
+        // ]);
+
+
+        foreach (json_decode($request->dd) as $act) {
+            $ProjectActivity = ProjectActivity::where('ACTIVITY_ID', $act->taskId)->first();
+            // Getting values from the blade template form
+            $ProjectActivity->ACTIVITY_ORDER = $act->order;
+            // $Holyday->CATEGORY_ID = $id;
+            $ProjectActivity->timestamps = false;
+            $ProjectActivity->update();
+        }
+        return response()->json([
+            "success" => "Holyday Added Successfully", 'status' => 'success',
+            'response_code' => 200,
+            // 'data' => $Holyday->toJson()
+        ]);
+    }
 }

@@ -59,7 +59,7 @@ class ProjectController extends Controller
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
-            $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
+            $q->orderBy('ACTIVITY_ORDER')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();

@@ -111,11 +111,7 @@
                 document.querySelector('#create_date_holyday').value = ""
                 // document.querySelector('#myModal').style.display = "none"
                 $('#myModal').modal('hide')
-                $('#refresher').load(location.href + ' #refresher')
-
-                setTimeout(() => {
-                    $('#example').DataTable()
-                }, 1000);
+                
 
                 // document.querySelector('body').classList.remove('modal-open')
                 // document.querySelector('.modal-backdrop').remove()

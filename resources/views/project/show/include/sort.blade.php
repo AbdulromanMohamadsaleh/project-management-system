@@ -49,7 +49,7 @@
     }
 </style>
 
-
+{{-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
@@ -63,49 +63,50 @@
         <li class="itemm"><input class="order" type="text" disabled /><span>Item 4</span></li>
     </ul>
 
-</div>
+</div> --}}
 
 
 
-{{-- <script>
-    function updateOrder() {
-        $('.sortable li .order').each(function(index) {
-            $(this).val(index + 1);
-        });
-    }
+<script>
+    // function updateOrder() {
+    //     $('.sortable li .order').each(function(index) {
+    //         $(this).val(index + 1);
+    //     });
+    // }
 
-    $(document).ready(function() {
-        $(".sortable").sortable({
-            update: function(event, ui) {
-                updateOrder();
-            }
-        });
-    });
-
-
-    $('#toggleSortable').click(function() {
-        if ($("#myList").sortable("instance")) {
-            $("#myList").sortable("destroy");
-            console.log("default")
-            $(this).addClass("active")
-
-            $("ul#myList li").addClass("cs")
-            $("ul#myList li").removeClass("ds");
-            $("#myList").removeClass("sortable").addClass("disabledd");
+    // $(document).ready(function() {
+    //     $(".sortable").sortable({
+    //         update: function(event, ui) {
+    //             updateOrder();
+    //         },
+    //         animation: 150,
+    //     });
+    // });
 
 
-        } else {
-            $("#myList").sortable();
-            $(this).removeClass("active")
-            $("ul#myList li").addClass("ds")
-            $("ul#myList li").removeClass("cs");
-            $("#myList").removeClass("disabled").addClass("sortable");
-            $(".sortable").sortable({
-                update: function(event, ui) {
-                    updateOrder();
-                }
-            });
+    // $('#toggleSortable').click(function() {
+    //     if ($("#myList").sortable("instance")) {
+    //         $("#myList").sortable("destroy");
+    //         console.log("default")
+    //         $(this).addClass("active")
 
-        }
-    })
-</script> --}}
+    //         $("ul#myList li").addClass("cs")
+    //         $("ul#myList li").removeClass("ds");
+    //         $("#myList").removeClass("sortable").addClass("disabledd");
+
+
+    //     } else {
+    //         $("#myList").sortable();
+    //         $(this).removeClass("active")
+    //         $("ul#myList li").addClass("ds")
+    //         $("ul#myList li").removeClass("cs");
+    //         $("#myList").removeClass("disabled").addClass("sortable");
+    //         $(".sortable").sortable({
+    //             update: function(event, ui) {
+    //                 updateOrder();
+    //             }
+    //         });
+
+    //     }
+    // })
+</script>

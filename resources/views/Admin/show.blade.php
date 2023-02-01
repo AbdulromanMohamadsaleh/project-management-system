@@ -128,7 +128,7 @@
         });
     });
 </script>
-<script src="{{ asset('js/order_list.js') }}"></script>
+{{-- <script src="{{ asset('js/order_list.js') }}"></script> --}}
 <script src="{{ asset('js/script.js') }}" type="module" defer></script>
 
 </html>
