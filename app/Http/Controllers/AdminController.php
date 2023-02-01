@@ -39,6 +39,7 @@ class AdminController extends Controller
         $data['BarChartData'] = ProjectDetial::all()->groupBy(function ($item, $key) {
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
+        $data['last']  = ProjectDetial::latest('DETAIL_ID')->limit(5)->get();
 
         return view('Admin.index', ['data' => $data]);
     }

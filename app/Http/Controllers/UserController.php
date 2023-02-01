@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\LastProjectTrait;
 
 use App\Models\Login;
+use App\Models\ProjectDetial;
 use Flowframe\Trend\Trend;
 use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
@@ -13,19 +15,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //
+    use LastProjectTrait;
+
     public function index()
     {
         $data = $this->GetDashboardCardSummary();
 
-
+        $data['last']  = $this->getLastProject();
         return view('user.dashbord', ['data' => $data]);
     }
 
     public function Profile()
     {
         $profile = User::first();
-        return view('Admin.profile', ['profile' => $profile]);
+        $data['last']  = $this->getLastProject();
+        return view('Admin.profile', ['profile' => $profile ,'data' => $data]);
     }
 
     public function Register()
@@ -36,7 +40,8 @@ class UserController extends Controller
     public function Create()
     {
         $User = User::all();
-        return view('Admin.createuser', ['login' => $User]);
+        $data['last']  = $this->getLastProject();
+        return view('Admin.createuser', ['login' => $User,'data' => $data]);
     }
     public function Login()
     {
