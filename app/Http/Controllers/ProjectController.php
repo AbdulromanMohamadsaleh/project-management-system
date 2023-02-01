@@ -14,11 +14,13 @@ use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProjectStoreRequest;
+use App\Traits\LastProjectTrait;
 use SebastianBergmann\LinesOfCode\Counter;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
 {
+    use LastProjectTrait;
     public function Index()
     {
 
@@ -35,8 +37,8 @@ class ProjectController extends Controller
         //     // Alert::toast('Toast Message', 'Success');
         //     Alert::success('Success!', 'Project Created Successfully');
         // }
-
-        return view('Admin.table', ['project_details' => $project_details]);
+        $data['last']  = $this->getLastProject();
+        return view('Admin.table', ['project_details' => $project_details ,'data' => $data]);
     }
 
     public function Create()
@@ -48,11 +50,13 @@ class ProjectController extends Controller
         $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
 
         $team = User::all();
+        $data['last']  = $this->getLastProject();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
             'team' => $team,
             'Holydays' => $Holydays,
-            'Categories' => $Categories
+            'Categories' => $Categories,
+            'data' => $data
         ]);
     }
 
@@ -108,8 +112,7 @@ class ProjectController extends Controller
         // })->first();
 
         // $tasks = $project->tasks->toArray();
-
-
+        $data['last']  = $this->getLastProject();
         // $tasks = json_encode($tasks);
 
         return view('Admin.show', [
@@ -118,6 +121,7 @@ class ProjectController extends Controller
             'status' => $status,
             'TeamsName' => $project_detail->projectTeam,
             'ProjectTrack' => $ProjectTrack,
+            'data' => $data,
             // 'tasks' => $tasks,
             // 'project' => $project
         ]);
@@ -135,8 +139,8 @@ class ProjectController extends Controller
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
 
         $status = explode(',', $ProjectDetail->STATUS);
-
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status]);
+        $data['last']  = $this->getLastProject();
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status , 'data' => $data]);
     }
 
     public function Save(Request $request)
@@ -251,8 +255,8 @@ class ProjectController extends Controller
     public function Approve()
     {
         $project_details = ProjectDetial::all();
-
-        return view('Admin.approve', ['project_details' => $project_details]);
+        $data['last']  = $this->getLastProject();
+        return view('Admin.approve', ['project_details' => $project_details,'data' => $data]);
     }
 
     public function Done($id)
@@ -289,13 +293,15 @@ class ProjectController extends Controller
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
 
+        $data['last']  = $this->getLastProject();
         return view('Admin.edit', [
             'projectManagers' => $projectManagers,
             'project_detail' => $ProjectDetial,
             'team' => $team,
             'Holydays' => $Holydays,
             'Categories' => $Categories,
-            'projectTeams' => $projectTeams
+            'projectTeams' => $projectTeams,
+            'data' => $data,
         ]);
     }
 
@@ -374,8 +380,8 @@ class ProjectController extends Controller
 
 
         $tasks = json_encode($tasks);
-
-        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail]);
+        $data['last']  = $this->getLastProject();
+        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail,'data' => $data]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)

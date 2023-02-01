@@ -53,27 +53,19 @@
         </div>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="fa fa-bell me-lg-2"></i>
+                <i style="position: relative;" class="fa fa-bell me-lg-2"><span style="position: absolute; top: 1px; right: -3px;" class="badge rounded-pill badge-notification bg-danger">{{count($data['last'])}}</span></i>
                 <span class="d-none d-lg-inline-flex">Notificatin</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+       <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+            @foreach ( $data['last'] as $lastproject  )
                 <a href="#" class="dropdown-item">
-                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                    <small>15 minutes ago</small>
+                    <h6 class="fw-normal mb-0">{{$lastproject->NAME_PROJECT}}</h6>
+                    <small>{{$lastproject->track->APPROVED_BY}}</small>
                 </a>
                 <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                    <h6 class="fw-normal mb-0">New user added</h6>
-                    <small>15 minutes ago</small>
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                    <h6 class="fw-normal mb-0">Password changed</h6>
-                    <small>15 minutes ago</small>
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item text-center">See all notifications</a>
-            </div>
+            @endforeach
+            <a href="#" class="dropdown-item text-center">See all notifications</a>
+        </div>
         </div>
         <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
