@@ -155,20 +155,19 @@ class TaskController extends Controller
     public function EditTask(Request $request, $id)
     {
         $Task = ProjectTask::where('TASK_ID', $id)->first();
-
+        // dd($request->all());
         $request->validate([
             'task' => 'required',
             'day' => 'required',
-            'edit_satart_date'=>'required',
+            'edit_satart_date' => 'required',
             // after:now
         ]);
 
-
-        // Getting values from the blade template form
         $Task->TASK_NAME = $request->task;
         $Task->DAY = $request->day;
+
         $Task->START_DATE = $request->edit_satart_date;
-        // $Holyday->CATEGORY_ID = $id;
+
         $Task->save();
 
         // return response()->json([

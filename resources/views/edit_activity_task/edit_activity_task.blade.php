@@ -1,10 +1,11 @@
 <button style="background-color:orange" type="button" class="btn btn-warning" data-bs-toggle="modal"
-    data-bs-target="#modaltask">
+    data-bs-target="#modaltask-{{ $task->TASK_ID }}">
     <i class="bi bi-pencil"></i>
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="modaltask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modaltask-{{ $task->TASK_ID }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -28,8 +29,8 @@
                         <div class="row">
                             <div class=" mb-sm-5 col-6 ">
                                 <label class="label-left fw-bold mb-2" for="projectName">Start Date</label>
-                                <input value="{{ $result?$result[0]:'' }}" type="date" name="edit_satart_date" class="form-control"
-                                    id="projectName">
+                                <input value="{{ $result ? $result[0] : '' }}" type="date" name="edit_satart_date"
+                                    class="form-control" id="projectName">
                             </div>
                         </div>
                         <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>

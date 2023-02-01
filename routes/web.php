@@ -157,11 +157,12 @@ Route::group(
 );
 ###########################  activity  ###########################
 Route::group(
-    ['middleware' => ['auth']],
+    ['prefix' => 'projectManager', 'middleware' => ['auth']],
     function () {
         Route::get('/addactivity', [ActivityController::class, 'Create'])->name('activity.add');
+        Route::post('/saveAtivity/{id}', [ActivityController::class, 'Save'])->name('activity.save');
         Route::post('/editactivity/{id}', [ActivityController::class, 'EditActivity'])->name('activity.edit');
-        Route::post('/delateactivity/{id}', [ActivityController::class, 'DelateActivity'])->name('activity.delete');
+        Route::post('/delateactivity/{id}/{ProjectDetial}', [ActivityController::class, 'DelateActivity'])->name('activity.delete');
         Route::post('/saveAtivityOrder', [ActivityController::class, 'SaveOrder'])->name('activity.saveOrder');
     }
 

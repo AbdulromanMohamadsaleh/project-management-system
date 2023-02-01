@@ -175,6 +175,11 @@
         cursor: move;
         cursor: -webkit-grabbing;
     }
+
+    .glyphicon-move-tasks {
+        cursor: move;
+        cursor: -webkit-grabbing;
+    }
 </style>
 
 
@@ -330,6 +335,9 @@
                     <th class="spacer ">
                         <br>
                     </th>
+                    <th class="spacer ">
+                        <br>
+                    </th>
                     <th class="">#</th>
                     <th class="">Activity</th>
                     <th class="">Duration</th>
@@ -357,10 +365,12 @@
                         {{-- <input id="actId" type="text" value="{{ $act->ACTIVITY_ORDER }}" hidden> --}}
                         <div class="act-order">
 
-                            <tr data-activityOrder="">
-
+                            <tr>
+                                <td style="border-right: 1px solid #ccc;">
+                                    <i style="font-size: 1.3rem;" class="bi bi-arrows-move glyphicon-move mr-4"></i>
+                                </td>
                                 <td style="font-size: 1.6rem;" class="spacer ">
-                                    <i style="font-size: 1.3rem;" class="bi bi-arrows-move glyphicon-move mr-3"></i>
+
                                     <i id="showMore" data-id="{{ $act->ACTIVITY_ID }}"
                                         class=" toggleArror showMore fa fa-angle-double-right"></i>
 
@@ -396,6 +406,9 @@
 
 
                         <tr class="display-none" style="background: #eaeaef;" class=" subt hideOnMobile">
+                            <th class="spacer ">
+                                <br>
+                            </th>
                             <td class="spacer header">
                                 <br>
                             </td>
@@ -412,10 +425,17 @@
                             $o = 1;
                         @endphp
 
+
                         @foreach ($act->tasks as $task)
-                            <tr id="showTasks{{ $act->ACTIVITY_ID }}" class="taskRow display-none"
+                            <tr id="showTasks{{ $act->ACTIVITY_ID }}" class=" taskRow display-none"
                                 style="background: #f9f9f9;">
-                                <td class="spacer" <br></td>
+                                <td style="border-right: 1px solid #ccc;">
+                                    <br>
+                                </td>
+                                <td class="spacer">
+                                    {{-- <i style="font-size: 1.3rem;"
+                                        class="bi bi-arrows-move glyphicon-move-tasks mr-4"></i> --}}
+                                </td>
                                 <td class="spacer">
                                     {{ $act->ACTIVITY_ORDER . '.' . $o++ }}
                                 </td>
@@ -427,10 +447,9 @@
                                     @endphp
                                     @if ($task->START_DATE)
                                         @php
-                                            if ($act->START_DATE) {
-                                                $result = explode(' ', $act->START_DATE);
-                                            }
+                                            $result = explode(' ', $task->START_DATE);
                                         @endphp
+
                                         {{ $result[0] }}
                                     @else
                                         -
@@ -491,8 +510,6 @@
     function ToggleTableArror() {
         // var actId = $(this).parent().parent().nextAll('#actId');
         var actId = $(this).data("id");
-
-
         var tr = $(this).parent().parent().nextAll('#showTasks' + actId);
         $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
         if (tr.is(".display-none")) {
@@ -502,7 +519,26 @@
         }
     }
 
+    function ToggleAllTableArrorAnHideTasksRow() {
+        let trRow = $('.taskRow');
+        let showMoreArror = $('.showMore');
+
+        trRow.each((index) => {
+            if (!trRow[index].classList.contains(".display-none")) {
+                trRow[index].classList.add('display-none');
+                showMoreArror.each((index) => {
+                    if (!showMoreArror[index].classList.contains(".fa-angle-double-right")) {
+                        showMoreArror[index].classList.add('fa-angle-double-right');
+                        showMoreArror[index].classList.remove('fa-angle-double-down');
+                    }
+                })
+                $(this).toggleClass('fa-angle-double-right ')
+            }
+        })
+    }
     $(".showMore").click(ToggleTableArror)
+
+    $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
 </script>
 
 <script>
@@ -534,12 +570,14 @@
                     activitys.push(ttt)
                 });
                 ajaxSaveActivityOrder(activitys)
+
             },
             draggable: ".act-order",
             animation: 200,
             ghostClass: 'ghost',
             handle: '.glyphicon-move',
-            animation: 150
+            animation: 150,
+
         });
         // $('.taskRow').sortable('disabled', true);
     }
@@ -574,6 +612,26 @@
                 setTimeout(() => {
                     $(".showMore").click(ToggleTableArror);
                     $(document).ready(SotredList);
+                    $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
+                    $('.show-alert-delete-box').click(function(event) {
+                        var form = $(this).closest("form");
+                        var name = $(this).data("name");
+                        event.preventDefault();
+                        swal({
+                            title: "Are you sure you want to delete this record?",
+                            text: "If you delete this, it will be gone forever.",
+                            icon: "warning",
+                            type: "warning",
+                            buttons: ["Cancel", "Yes!"],
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((willDelete) => {
+                            if (willDelete) {
+                                form.submit();
+                            }
+                        });
+                    });
                 }, 1000);
 
 
@@ -585,29 +643,8 @@
         });
 
     }
-    // $('#toggleSortable').click(function() {
-    //     if ($("#myList").sortable("instance")) {
-    //         $("#myList").sortable("destroy");
-    //         console.log("default")
-    //         $(this).addClass("active")
-
-    //         $("#myList #act-order").addClass("cs")
-    //         $("#myList #act-order").removeClass("ds");
-    //         $("#myList").removeClass("sortable").addClass("disabledd");
 
 
-    //     } else {
-    //         $("#myList").sortable();
-    //         $(this).removeClass("active")
-    //         $("#myList #act-order").addClass("ds")
-    //         $("#myList #act-order").removeClass("cs");
-    //         $("#myList").removeClass("disabled").addClass("sortable");
-    //         $(".sortable").sortable({
-    //             update: function(event, ui) {
-    //                 updateOrder();
-    //             }
-    //         });
 
-    //     }
-    // })
+    /// Tasks Drag
 </script>

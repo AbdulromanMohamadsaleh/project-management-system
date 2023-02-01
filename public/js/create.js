@@ -164,9 +164,6 @@ const StartDateProject = document.getElementById("projectStart");
 const EndDateProject = document.getElementById("projectEnd");
 const totalDate = document.querySelector('input[name="totalDate"]');
 
-// for(const radioButton of radioButtons){
-//     radioButton.addEventListener('change', getProjectDuration);
-// }
 
 function getProjectDuration(){
     differenceDays = daysDifference();
@@ -244,12 +241,6 @@ projectNameY.addEventListener('input', CheckIsProjectNameExist);
 
 function CheckIsProjectNameExist(e) {
 
-    // console.log(this.value)
-
-    // (A) GET FORM DATA
-    // var data = new FormData();
-    // data.append("projectName", document.getElementById("projectName").value);
-
     let pp = document.getElementById("projectName").value.trim()
 
     if (!pp) {
@@ -283,35 +274,6 @@ function CheckIsProjectNameExist(e) {
 
 }
 
-
-// let targetInput = document.getElementById('target');
-
-// targetInput.addEventListener('input',(e)=>{
-//     let targetInvalid = document.getElementById('target-invalid');
-//     if(e.target.value.length<5){
-//         targetInvalid.innerHTML="Target Must be More Than 5 Characters";
-//         targetInvalid.classList.add("invv");
-//         if(!e.target.classList.contains("is-invalid")){
-//             e.target.classList.add("is-invalid");
-//         }
-
-//     }else{
-//         if(e.target.classList.contains("is-invalid")){
-//             e.target.classList.remove("is-invalid");
-//             targetInvalid.innerHTML="";
-//             targetInvalid.classList.remove("invv");
-//         }
-//     }
-// } );
-
-// function AddTaskDurationFunctionForNewTask(){
-//     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
-//         taskDurationUserInput.forEach((duration,index)=>{
-//             duration.addEventListener('input',ValidateProjectDuration)
-
-//         })
-
-// }
 
 function ValidateProjectDuration(){
 
