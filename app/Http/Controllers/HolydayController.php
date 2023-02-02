@@ -5,19 +5,28 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Holyday;
 use Illuminate\Http\Request;
+use App\Traits\LastProjectTrait;
 
 class HolydayController extends Controller
 {
+    use LastProjectTrait;
     public function Index()
     {
         $Holydays = Holyday::all();
-
+        $years = [];
         foreach ($Holydays as $Holyday) {
             $year = new Carbon($Holyday->HOLYDAY_DATE);
             $Holyday->year = $year->year;
+            if (!in_array($year->year, $years)) {
+                $years[] = $year->year;
+            }
         }
 
-        return view('Admin.dateholyday', ['holydays' => $Holydays]);
+        $data['years'] = $years;
+
+        $data['last']  = $this->getLastProject();
+
+        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data]);
     }
     public function Create()
     {

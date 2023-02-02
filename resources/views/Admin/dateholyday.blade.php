@@ -26,8 +26,12 @@
                     <div class="category-filter">
                         <select id="categoryFilter" class="form-control">
                             <option value="">Show All</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
+                            @foreach ($data['years'] as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+
+
+
                         </select>
                     </div>
                     <h6 class="mb-0">Holyday</h6>
@@ -111,7 +115,7 @@
                 document.querySelector('#create_date_holyday').value = ""
                 // document.querySelector('#myModal').style.display = "none"
                 $('#myModal').modal('hide')
-                
+
 
                 // document.querySelector('body').classList.remove('modal-open')
                 // document.querySelector('.modal-backdrop').remove()
