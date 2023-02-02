@@ -11,7 +11,7 @@ import {
   differenceInMonths,
 } from "./utils.js";
 
-export function GanttChart(ganttChartElement, tasks, project) {
+export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,firstTaskStartDate) {
     const months = [
         "Jan",
         "Feb",
@@ -36,7 +36,7 @@ export function GanttChart(ganttChartElement, tasks, project) {
         if(i==tasks[0].start.getDaysInMonth){
             monthOptionsHTMLStrArr.push(`<option  selected value="${i}">${months[i]}</option>`);
         }else{
-             monthOptionsHTMLStrArr.push(`<option value="${i}">${months[i]}</option>`);
+            monthOptionsHTMLStrArr.push(`<option value="${i}">${months[i]}</option>`);
         }
 
     }
@@ -109,7 +109,7 @@ export function GanttChart(ganttChartElement, tasks, project) {
         addTaskDurations();
     }
 
-    createGrid(tasks[0].start,project.DATE_END);
+    createGrid(tasks[0].start,lastTaskEndDate);
 
     ganttChartElement.appendChild(contentFragment);
 
@@ -263,15 +263,14 @@ export function GanttChart(ganttChartElement, tasks, project) {
                 const dayElSpan = document.createElement("span");
                 if(numWeeks >= ProjectWeekCounter){
                     dayElSpan.innerHTML = `Week ${ProjectWeekCounter}`;
-                    if(numWeeks == ProjectWeekCounter)
-                        break;
-                }
-                dayEl.appendChild(dayElSpan);
+                     console.log(ProjectWeekCounter)
+                     dayEl.appendChild(dayElSpan);
                 timePeriodEl.appendChild(dayEl);
+                    if(numWeeks == ProjectWeekCounter)
+                        return;
+                }
+
                 ProjectWeekCounter++;
-
-
-
                 dayCounter=0;
             }
 

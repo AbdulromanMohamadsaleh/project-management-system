@@ -5,11 +5,20 @@
     // can have multiple instances of Gantt chart
     document.addEventListener("DOMContentLoaded", () => {
         // console.log(tasks)
+        let lastTaskEndDate = new Date("1000-01-31");
+        let firstTaskStartDate = new Date("5000-01-31");
         tasks.forEach((task)=>{
-             task.start = new Date(task.start);
-              task.end = new Date(task.end)
+            task.start = new Date(task.start);
+            task.end = new Date(task.end)
+            if(lastTaskEndDate < task.end)
+                lastTaskEndDate = task.end;
+
+            if(firstTaskStartDate >task.start)
+            firstTaskStartDate = task.start;
+
+
         })
-        // console.log(project)
+        console.log(tasks)
         // get data - could get from server
         // const tasks = [{
         //         id: 1,
@@ -86,7 +95,7 @@
 
         const ganttCharts = document.querySelectorAll("[role=gantt-chart]");
         ganttCharts.forEach(ganttChart => {
-            new GanttChart(ganttChart, tasks,project);
+            new GanttChart(ganttChart, tasks,project,lastTaskEndDate,firstTaskStartDate);
         });
 
 

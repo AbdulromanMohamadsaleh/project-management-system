@@ -329,7 +329,7 @@
         </tbody>
     </table> --}}
     <div class="row refresher " style="overflow: auto">
-        <table style="width: -webkit-fill-available;" class="mt-3 nestedTable">
+        <table class="tasklists" style="width: -webkit-fill-available;" class="mt-3 nestedTable">
             <thead>
                 <tr>
                     <th class="spacer ">
@@ -348,7 +348,7 @@
                 </tr>
             </thead>
             <tr>
-                <tbody id="myList" class="sortable">
+                <tbody id="myList" class=" sortable">
                     @php
                         $i = 1;
                     @endphp
@@ -365,14 +365,14 @@
                         {{-- <input id="actId" type="text" value="{{ $act->ACTIVITY_ORDER }}" hidden> --}}
                         <div class="act-order">
 
-                            <tr>
+                            <tr class="act-rows">
                                 <td style="border-right: 1px solid #ccc;">
-                                    <i style="font-size: 1.3rem;" class="bi bi-arrows-move glyphicon-move mr-4"></i>
+                                    <i style="font-size: 1.3rem;" class="bi bi-list glyphicon-move mr-4"></i>
                                 </td>
                                 <td style="font-size: 1.6rem;" class="spacer ">
 
                                     <i id="showMore" data-id="{{ $act->ACTIVITY_ID }}"
-                                        class=" toggleArror showMore fa fa-angle-double-right"></i>
+                                        class=" toggleArror showMore showMore-{{ $act->ACTIVITY_ID }} fa fa-angle-double-right"></i>
 
                                     <span hidden data-activityId="{{ $act->ACTIVITY_ID }}" id="activityId"></span>
 
@@ -426,64 +426,71 @@
                         @endphp
 
 
-                        @foreach ($act->tasks as $task)
-                            <tr id="showTasks{{ $act->ACTIVITY_ID }}" class=" taskRow display-none"
-                                style="background: #f9f9f9;">
-                                <td style="border-right: 1px solid #ccc;">
-                                    <br>
-                                </td>
-                                <td class="spacer">
-                                    {{-- <i style="font-size: 1.3rem;"
-                                        class="bi bi-arrows-move glyphicon-move-tasks mr-4"></i> --}}
-                                </td>
-                                <td class="spacer">
-                                    {{ $act->ACTIVITY_ORDER . '.' . $o++ }}
-                                </td>
-                                <td>{{ $task->TASK_NAME }} </td>
-                                <td>{{ $task->DAY }} Days</td>
-                                <td>
-                                    @php
-                                        $result = [0];
-                                    @endphp
-                                    @if ($task->START_DATE)
-                                        @php
-                                            $result = explode(' ', $task->START_DATE);
-                                        @endphp
+                        <div class="tsk-order">
 
-                                        {{ $result[0] }}
-                                    @else
-                                        -
-                                    @endif
-                                </td>
-                                <td>
-                                    @include('Admin.button_startdate_complatedate.button')
-                                    @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
-                                    @endif
-                                    @include('modal_budget_note.modal_budget')
-                                    @include('modal_budget_note.modal_note')
-                                    @include('edit_activity_task.edit_activity_task')
-                                    @include('edit_activity_task.delate_task')
-                                </td>
-                                <td>
-                                    @if ($task->STATUS == 1)
+                            @foreach ($act->tasks as $task)
+                                <tr id="showTasks{{ $act->ACTIVITY_ID }}"
+                                    class="tasksOrder taskRow display-none taskRow-{{ $act->ACTIVITY_ID }}"
+                                    style="background: #f9f9f9;">
+
+                                    <td style="border-right: 1px solid #ccc;">
+                                        <br>
+                                    </td>
+                                    <td class="spacer">
+                                        <i style="font-size: 1.3rem;" class="bi bi-list glyphicon-move-tasks mr-4"
+                                            data-activityId="{{ $act->ACTIVITY_ID }}"></i>
+
+                                    </td>
+                                    <td class="spacer">
+                                        {{ $act->ACTIVITY_ORDER . '.' . $o++ }}
+                                    </td>
+                                    <td>{{ $task->TASK_NAME }} </td>
+                                    <td>{{ $task->DAY }} Days</td>
+                                    <td>
                                         @php
-                                            $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                                            $result = [0];
                                         @endphp
-                                        <div class="me-3">
-                                            <div>
-                                                {{ $TASK_TRACKER[0] }}
+                                        @if ($task->START_DATE)
+                                            @php
+                                                $result = explode(' ', $task->START_DATE);
+                                            @endphp
+
+                                            {{ $result[0] }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @include('Admin.button_startdate_complatedate.button')
+                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                                        @endif
+                                        @include('modal_budget_note.modal_budget')
+                                        @include('modal_budget_note.modal_note')
+                                        @include('edit_activity_task.edit_activity_task')
+                                        @include('edit_activity_task.delate_task')
+                                    </td>
+                                    <td>
+                                        @if ($task->STATUS == 1)
+                                            @php
+                                                $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                                            @endphp
+                                            <div class="me-3">
+                                                <div>
+                                                    {{ $TASK_TRACKER[0] }}
+                                                </div>
+                                                <div>
+                                                    {{ $TASK_TRACKER[1] }}
+                                                </div>
                                             </div>
-                                            <div>
-                                                {{ $TASK_TRACKER[1] }}
-                                            </div>
-                                        </div>
-                                    @endif
-                                </td>
-                                <td class="spacer">
-                                    <br>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        @endif
+                                    </td>
+                                    <td class="spacer">
+                                        <br>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </div>
 
 
                         {{-- End Task 1 --}}
@@ -532,16 +539,53 @@
                         showMoreArror[index].classList.remove('fa-angle-double-down');
                     }
                 })
-                $(this).toggleClass('fa-angle-double-right ')
+                // $(this).toggleClass('fa-angle-double-right ')
             }
         })
     }
+
+    function ToggleAllTableArrorAnHideTasksRowV2() {
+        let actId = $(this).data("activityid");
+        let currentRow = $(`.showMore-${actId}`);
+        let rrr = $(this.closest(".taskRow"))
+        let id = rrr[0].id;
+        let trRow = $('.taskRow');
+        let showMoreArror = $('.showMore');
+
+        trRow.each((index) => {
+
+            if (!trRow[index].classList.contains(".display-none") && trRow[index].id != id) {
+                trRow[index].classList.add('display-none');
+                showMoreArror.each((index2) => {
+                    if (!showMoreArror[index2].classList.contains(".fa-angle-double-right")) {
+                        showMoreArror[index2].classList.add('fa-angle-double-right');
+                        showMoreArror[index2].classList.remove('fa-angle-double-down');
+                    }
+                })
+
+                // $(this).toggleClass('fa-angle-double-right ')
+            }
+
+
+
+        })
+
+        if (!currentRow[0].classList.contains(".fa-angle-double-down")) {
+            console.log("hhhh")
+            currentRow[0].classList.add('fa-angle-double-down');
+            currentRow[0].classList.remove('fa-angle-double-right');
+        }
+    }
+
+
     $(".showMore").click(ToggleTableArror)
 
     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
+    $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
 </script>
 
 <script>
+    $(document).ready(SotredListV2);
     $(document).ready(SotredList);
 
     function updateOrder() {
@@ -577,6 +621,10 @@
             ghostClass: 'ghost',
             handle: '.glyphicon-move',
             animation: 150,
+            items: '> tr.act-rows',
+            connectWith: '.act-order',
+
+
 
         });
         // $('.taskRow').sortable('disabled', true);
@@ -613,6 +661,7 @@
                     $(".showMore").click(ToggleTableArror);
                     $(document).ready(SotredList);
                     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
+                    $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
                     $('.show-alert-delete-box').click(function(event) {
                         var form = $(this).closest("form");
                         var name = $(this).data("name");
@@ -644,7 +693,56 @@
 
     }
 
+    function SotredListV2() {
+        $(".tasklists").sortable({
+            update: function(event, ui) {
+                // updateOrder();
 
+                // var itemEl = event.item
+                // var tt = ui.item.context
+                // activityOrders = document.querySelectorAll('[class = "order"]');
+                // activityIds = document.querySelectorAll('[id = "activityId"]');
+                // let activitys = [];
+                // activityOrders.forEach((element, index) => {
+                //     let taskId = activityIds[index];
+                //     let ttt = {
+                //         taskId: taskId.dataset.activityid,
+                //         order: element.innerHTML
+                //     }
+
+                //     activitys.push(ttt)
+                // });
+                // ajaxSaveActivityOrder(activitys)
+
+            },
+            draggable: ".tsk-order",
+            animation: 200,
+            ghostClass: 'ghost',
+            handle: '.glyphicon-move-tasks',
+            animation: 150,
+            items: 'tr.tasksOrder',
+            connectWith: '.tsk-order',
+            move: function( /**Event*/ evt, /**Event*/ originalEvent) {
+                console.log("hhh");
+                // Example: https://jsbin.com/nawahef/edit?js,output
+                // console.log(evt.dragged); // dragged HTMLElement
+                // evt.draggedRect; // DOMRect {left, top, right, bottom}
+                // evt.related; // HTMLElement on which have guided
+                // evt.relatedRect; // DOMRect
+                // evt
+                //     .willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+                // originalEvent.clientY; // mouse position
+                // return false; — for cancel
+                // return -1; — insert before target
+                // return 1; — insert after target
+                // return true; — keep default insertion point based on the direction
+                // return void; — keep default insertion point based on the direction
+            },
+
+
+        });
+        // $('.taskRow').sortable('disabled', true);
+    }
 
     /// Tasks Drag
 </script>

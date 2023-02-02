@@ -12,11 +12,12 @@ use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ProjectStoreRequest;
 use App\Traits\LastProjectTrait;
-use SebastianBergmann\LinesOfCode\Counter;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\ProjectStoreRequest;
+use SebastianBergmann\LinesOfCode\Counter;
 
 class ProjectController extends Controller
 {
@@ -38,7 +39,7 @@ class ProjectController extends Controller
         //     Alert::success('Success!', 'Project Created Successfully');
         // }
         $data['last']  = $this->getLastProject();
-        return view('Admin.table', ['project_details' => $project_details ,'data' => $data]);
+        return view('Admin.table', ['project_details' => $project_details, 'data' => $data]);
     }
 
     public function Create()
@@ -140,7 +141,7 @@ class ProjectController extends Controller
 
         $status = explode(',', $ProjectDetail->STATUS);
         $data['last']  = $this->getLastProject();
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status , 'data' => $data]);
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data]);
     }
 
     public function Save(Request $request)
@@ -256,7 +257,7 @@ class ProjectController extends Controller
     {
         $project_details = ProjectDetial::all();
         $data['last']  = $this->getLastProject();
-        return view('Admin.approve', ['project_details' => $project_details,'data' => $data]);
+        return view('Admin.approve', ['project_details' => $project_details, 'data' => $data]);
     }
 
     public function Done($id)
@@ -376,12 +377,13 @@ class ProjectController extends Controller
             $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        $tasks = $project_detail->tasks->toArray();
+        
 
+        $tasks = $project_detail->tasks->toArray();
 
         $tasks = json_encode($tasks);
         $data['last']  = $this->getLastProject();
-        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail,'data' => $data]);
+        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)

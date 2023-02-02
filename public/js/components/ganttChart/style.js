@@ -131,11 +131,15 @@ export function cssStyles() {
         outline: 0.5px solid #e9eaeb;
     }
 
+
+
     .gantt-time-period-project-weeks {
+
+        max-width: 100%;
         display: grid;
         grid-auto-flow: column;
-        // grid-template-columns: 22.6%;
         grid-auto-columns: minmax(22.6%, 1fr);
+
         background: #f3f3f3;
         text-align: center;
         height: ${CELL_HEIGHT}px;
