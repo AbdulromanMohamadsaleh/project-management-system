@@ -67,8 +67,12 @@ class HolydayController extends Controller
         // return redirect()->back()->with("success", "Add Holyday Successfully");
     }
 
-    public function Delete($id)
+    public function Delete($id, Request $request)
     {
+        if ($request->year < now()->year) {
+            return redirect()->back();
+        }
+
         $Holydays = Holyday::where('HOLYDAY_ID', $id)->delete();
 
 
@@ -77,6 +81,10 @@ class HolydayController extends Controller
 
     public function Update(Request $request, $id)
     {
+        if ($request->year < now()->year) {
+            return redirect()->back();
+        }
+
         $Holyday = Holyday::where('HOLYDAY_ID', $id)->first();
 
         $request->validate([

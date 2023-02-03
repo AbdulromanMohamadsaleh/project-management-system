@@ -40,6 +40,9 @@ class ProjectDetial extends Model
     // {
     //     return $this->hasManyThrough(ProjectTask::class, ProjectActivity::class, 'DETAIL_ID', 'ACTIVITY_ID');
     // }
+
+    
+
     public function projectTeam()
     {
         return $this->belongstoMany(User::class, 'prj_project_team', 'DETAIL_ID', 'LOGIN_ID', 'DETAIL_ID', 'LOGIN_ID');
@@ -76,6 +79,4 @@ class ProjectDetial extends Model
             'ACTIVITY_ID' // Local key on ProjectActivity table...
         );
     }
-
-    
 }

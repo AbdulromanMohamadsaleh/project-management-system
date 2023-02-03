@@ -80,8 +80,7 @@
                             {{-- background: rgba(0, 0, 0, 0.1); --}}
                             <div class="accordion-item ">
                                 <h2 class="accordion-header " id="panelsStayOpen-heading{{ ++$countAct }}">
-                                    <button
-                                        class="bg-white text-dark  btn-outline-dark accordion-button collapsed"
+                                    <button class="bg-white text-dark  btn-outline-dark accordion-button collapsed"
                                         type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapse{{ $countAct }}"
                                         aria-expanded="false"
@@ -96,8 +95,7 @@
                                                 @if ($act->STATUS == 0)
                                                     {{-- <i class="bi bi-circle icon-1-5rem "></i> --}}
                                                 @else
-                                                    <i
-                                                        class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
+                                                    <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
                                                 @endif
                                             </div>
                                         </div>
@@ -158,7 +156,13 @@
             @endif
             <details class="panel">
                 <summary>Complete</summary>
-                <p><strong>Action:</strong> Activity complete all<br><br>
+                @if (!in_array('Completed', $status))
+                    <div class="icon done"></div>
+                    <p><strong> <i class="bi bi-x-circle-fill icon-red"></i> Project Not Completed yet.</strong> <br><br>
+                    @else
+                    <div class="icon done"></div>
+                    <p><strong><i class="bi bi-check-circle-fill icon-green "></i> Project Completed.</strong> <br><br>
+                @endif
             </details>
         </li>
 

@@ -29,6 +29,7 @@
                             <input type="date" name="edit_create_date_holyday" value="{{ $Holyday->HOLYDAY_DATE }}"
                                 class="form-control" id="target">
                         </div>
+                        <input name="year" type="number" value="{{ $Holyday->year }}" hidden>
                         {{-- <input type="text" value="{{ $Holyday->HOLYDAY_ID }}"> --}}
                         <button id="submitCreateHolyDay" type="buttom" name="submit"
                             class="btn btn-success">SAVE</button>

@@ -5,7 +5,7 @@
             icon: 'success',
             title: '{{ session()->get('success') }}',
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
             timerProgressBar: true,
         })
     </script>
@@ -17,7 +17,7 @@
             icon: 'error',
             title: '{{ session()->get('error') }}',
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
             timerProgressBar: true,
         })
     </script>
