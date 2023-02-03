@@ -152,6 +152,9 @@ Route::group(
         Route::post('/edittask/{id}', [TaskController::class, 'EditTask'])->name('task.edit');
         Route::post('/delatetask/{id}', [TaskController::class, 'DelateTask'])->name('task.delete');
         // Ajax
+        Route::post('/saveTaskyOrder', [TaskController::class, 'SaveOrder'])->name('task.saveOrder');
+
+
     }
 
 );

@@ -185,4 +185,30 @@ class TaskController extends Controller
 
         return redirect()->back()->with("success", "Delete task Successfully");
     }
+
+    public function SaveOrder(Request $request)
+    {
+        // $request->validate([
+        //     'create_holyday_name' => 'required|min:2|max:50',
+        //     'create_date_holyday' => 'required|date', // after:now
+        // ]);
+
+        $tasks = json_decode($request->data);
+        
+        foreach ($tasks as $act) {
+
+            $Task = ProjectTask::where('TASK_ID', $act->taskId)->first();
+
+            // Getting values from the blade template form
+            $Task->TASK_ORDER = $act->order;
+            // $Holyday->CATEGORY_ID = $id;
+            $Task->timestamps = false;
+            $Task->save();
+        }
+        return response()->json([
+            "success" => "Task Updated Successfully", 'status' => 'success',
+            'response_code' => 200,
+            // 'data' => $Holyday->toJson()
+        ]);
+    }
 }

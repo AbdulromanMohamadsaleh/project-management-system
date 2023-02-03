@@ -167,7 +167,7 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
 
     function createMonthsRow(startMonth, numMonths) {
         containerTimePeriods.style.gridTemplateColumns = `repeat(${numMonths}, 1fr)`;
-
+        let numWeeks = diff_weeks(project.DATE_START, project.DATE_END);
         let month = new Date(startMonth);
 
         for (let i = 0; i < numMonths; i++) {

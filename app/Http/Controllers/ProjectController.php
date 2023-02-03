@@ -64,7 +64,9 @@ class ProjectController extends Controller
     public function Show($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
-            $q->orderBy('ACTIVITY_ORDER')->with('tasks')->orderBy('created_at', 'ASC')->get();
+            $q->orderBy('ACTIVITY_ORDER')->with('tasks', function ($q) {
+                $q->orderBy('TASK_ORDER')->orderBy('created_at', 'ASC')->get();
+            })->orderBy('created_at', 'ASC')->get();
         })->first();
 
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
@@ -377,7 +379,7 @@ class ProjectController extends Controller
             $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        
+
 
         $tasks = $project_detail->tasks->toArray();
 

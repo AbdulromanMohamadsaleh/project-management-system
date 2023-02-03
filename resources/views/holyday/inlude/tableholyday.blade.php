@@ -1,5 +1,6 @@
 <div id="refresher">
     <table class="table" id="filterTable">
+
         <thead>
             <tr>
                 <th style="text-align: center;" scope="col">Holyday Name</th>

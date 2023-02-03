@@ -66,7 +66,7 @@
                     Gantt Chart</a>
             </li>
         </ul>
-        @include('project.show.include.sort')
+        {{-- @include('project.show.include.sort') --}}
 
         {{-- @include('testChart.index') --}}
     </div>

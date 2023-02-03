@@ -328,7 +328,7 @@
 
         </tbody>
     </table> --}}
-    <div class="row refresher " style="overflow: auto">
+    <div class="mt-4 row refresher " style="overflow: auto">
         <table class="tasklists" style="width: -webkit-fill-available;" class="mt-3 nestedTable">
             <thead>
                 <tr>
@@ -379,7 +379,8 @@
                                     {{-- <span data-activityId="{{ $act->ACTIVITY_ID }}" hidden id="projectId"></span> --}}
 
                                 </td>
-                                <td><b class="order">{{ $act->ACTIVITY_ORDER }}.</b></td>
+                                <td><b class="order"
+                                        id="act-order-{{ $act->ACTIVITY_ID }}">{{ $act->ACTIVITY_ORDER }}.</b></td>
                                 <td>{{ $act->ACTIVITY_NAME }}</td>
                                 <td>{{ ConvertDaysToWeek($sum) }}</td>
                                 @php
@@ -441,8 +442,9 @@
                                             data-activityId="{{ $act->ACTIVITY_ID }}"></i>
 
                                     </td>
-                                    <td class="spacer">
-                                        {{ $act->ACTIVITY_ORDER . '.' . $o++ }}
+                                    <td class="spacer order-task">
+                                        {{ $act->ACTIVITY_ORDER }}.<span class="orderNumber"
+                                            data-task-id-for-order="{{ $task->TASK_ID }}">{{ $o++ }}</span>
                                     </td>
                                     <td>{{ $task->TASK_NAME }} </td>
                                     <td>{{ $task->DAY }} Days</td>
@@ -571,7 +573,7 @@
         })
 
         if (!currentRow[0].classList.contains(".fa-angle-double-down")) {
-            console.log("hhhh")
+
             currentRow[0].classList.add('fa-angle-double-down');
             currentRow[0].classList.remove('fa-angle-double-right');
         }
@@ -595,11 +597,23 @@
         });
     }
 
+    function updateOrderV2(ui) {
+        let rowTaskId = ui.item.context.id;
+
+        $('#' + rowTaskId + ' .orderNumber').each(function(index) {
+
+            $(this).html(`${index + 1}`)
+            // $(this).data('data-activityOrder',index + 1);
+        })
+    }
+
     function SotredList() {
         $("#myList").sortable({
             update: function(event, ui) {
                 updateOrder();
+
                 var itemEl = event.item
+
                 var tt = ui.item.context
                 activityOrders = document.querySelectorAll('[class = "order"]');
                 activityIds = document.querySelectorAll('[id = "activityId"]');
@@ -659,6 +673,7 @@
 
                 setTimeout(() => {
                     $(".showMore").click(ToggleTableArror);
+                    $(document).ready(SotredListV2);
                     $(document).ready(SotredList);
                     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
                     $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
@@ -696,23 +711,26 @@
     function SotredListV2() {
         $(".tasklists").sortable({
             update: function(event, ui) {
-                // updateOrder();
 
-                // var itemEl = event.item
-                // var tt = ui.item.context
-                // activityOrders = document.querySelectorAll('[class = "order"]');
-                // activityIds = document.querySelectorAll('[id = "activityId"]');
-                // let activitys = [];
-                // activityOrders.forEach((element, index) => {
-                //     let taskId = activityIds[index];
-                //     let ttt = {
-                //         taskId: taskId.dataset.activityid,
-                //         order: element.innerHTML
-                //     }
+                updateOrderV2(ui);
 
-                //     activitys.push(ttt)
-                // });
-                // ajaxSaveActivityOrder(activitys)
+                let rowTaskId = ui.item.context.id;
+                let taskOrdersSpan = $('#' + rowTaskId + ' .orderNumber ')
+                let tasksOrder = [];
+                $('#' + rowTaskId + ' .orderNumber ').each(function(index) {
+                    let ttt = {
+                        taskId: taskOrdersSpan[index].getAttribute('data-task-id-for-order'),
+                        order: taskOrdersSpan[index].innerHTML
+                    }
+
+                    tasksOrder.push(ttt)
+                    // console.log()
+                    // console.log)
+                    // $(this).data('data-activityOrder',index + 1);
+                })
+                // console.log(tasksOrder)
+
+                ajaxSaveTaskOrder(tasksOrder)
 
             },
             draggable: ".tsk-order",
@@ -723,7 +741,7 @@
             items: 'tr.tasksOrder',
             connectWith: '.tsk-order',
             move: function( /**Event*/ evt, /**Event*/ originalEvent) {
-                console.log("hhh");
+                console.log("gggg");
                 // Example: https://jsbin.com/nawahef/edit?js,output
                 // console.log(evt.dragged); // dragged HTMLElement
                 // evt.draggedRect; // DOMRect {left, top, right, bottom}
@@ -744,5 +762,68 @@
         // $('.taskRow').sortable('disabled', true);
     }
 
+    function ajaxSaveTaskOrder(dataOrder) {
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+
+        let dddd = JSON.stringify(dataOrder)
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            // processData: false,
+            // contentType: false,
+            dataType: "json",
+            url: "{{ route('task.saveOrder') }}",
+            data: {
+                "_method": 'POST',
+                "_token": token,
+                'data': dddd,
+            },
+            success: function(response) {
+
+                // $('.refresher').load(location.href + ' .refresher')
+
+                setTimeout(() => {
+                    $(".showMore").click(ToggleTableArror);
+                    $(document).ready(SotredListV2);
+                    $(document).ready(SotredList);
+                    $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
+                    $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
+                    $('.show-alert-delete-box').click(function(event) {
+                        var form = $(this).closest("form");
+                        var name = $(this).data("name");
+                        event.preventDefault();
+                        swal({
+                            title: "Are you sure you want to delete this record?",
+                            text: "If you delete this, it will be gone forever.",
+                            icon: "warning",
+                            type: "warning",
+                            buttons: ["Cancel", "Yes!"],
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((willDelete) => {
+                            if (willDelete) {
+                                form.submit();
+                            }
+                        });
+                    });
+                }, 1000);
+
+
+            },
+
+            error: function(error) {
+                console.log(error)
+            }
+        });
+
+    }
     /// Tasks Drag
 </script>
