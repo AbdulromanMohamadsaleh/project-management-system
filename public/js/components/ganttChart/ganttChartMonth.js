@@ -102,11 +102,11 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
 
         createMonthsRow(startMonth, numMonths);
         createDaysRow(startMonth, numMonths);
-        createDaysOfTheWeekRow(startMonth, numMonths);
-        createProjectWeekRow(startMonth, numMonths,tasks,ProjectWeekCounter);
+        // createDaysOfTheWeekRow(startMonth, numMonths);
+        // createProjectWeekRow(startMonth, numMonths,tasks,ProjectWeekCounter);
 
-        createTaskRowsTimePeriods(startMonth, numMonths);
-        addTaskDurations();
+        // createTaskRowsTimePeriods(startMonth, numMonths);
+        // addTaskDurations();
     }
 
     createGrid(tasks[0].start,lastTaskEndDate);
@@ -360,9 +360,9 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
 
 
     // re-create Grid if year / month selection changes
-    fromSelectYear.addEventListener("change", createGrid);
-    fromSelectMonth.addEventListener("change", createGrid);
-    toSelectYear.addEventListener("change", createGrid);
-    toSelectMonth.addEventListener("change", createGrid);
+    // fromSelectYear.addEventListener("change", createGrid);
+    // fromSelectMonth.addEventListener("change", createGrid);
+    // toSelectYear.addEventListener("change", createGrid);
+    // toSelectMonth.addEventListener("change", createGrid);
 
 }

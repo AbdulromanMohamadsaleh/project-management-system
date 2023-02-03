@@ -518,8 +518,33 @@
 <script>
     function ToggleTableArror() {
         // var actId = $(this).parent().parent().nextAll('#actId');
+        // let showMoreArror = $('.showMore');
+        // let trRow = $('.taskRow');
+
+        // trRow.each((index) => {
+        //     if (!trRow[index].classList.contains(".display-none")) {
+        //         trRow[index].classList.add('display-none');
+        //         showMoreArror.each((index2) => {
+        //             if (!showMoreArror[index2].classList.contains(".fa-angle-double-right")) {
+        //                 showMoreArror[index2].classList.add('fa-angle-double-right');
+        //                 showMoreArror[index2].classList.remove('fa-angle-double-down');
+        //             }
+        //         })
+        //     }
+        // })
+
         var actId = $(this).data("id");
         var tr = $(this).parent().parent().nextAll('#showTasks' + actId);
+        // console.log($(this).hasClass('fa-angle-double-down'))
+        // if ($(this).hasClass('fa-angle-double-down')) {
+        //     $(this).add('fa-angle-double-right')
+        //     if (tr.is(".display-none")) {
+        //         tr.removeClass('display-none');
+        //     } else {
+        //         tr.addClass('display-none');
+        //     }
+        // }
+
         $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
         if (tr.is(".display-none")) {
             tr.removeClass('display-none');
@@ -790,11 +815,12 @@
                 // $('.refresher').load(location.href + ' .refresher')
 
                 setTimeout(() => {
-                    $(".showMore").click(ToggleTableArror);
+                    // $(".showMore").click(ToggleTableArror);
                     $(document).ready(SotredListV2);
                     $(document).ready(SotredList);
                     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
                     $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
+
                     $('.show-alert-delete-box').click(function(event) {
                         var form = $(this).closest("form");
                         var name = $(this).data("name");
