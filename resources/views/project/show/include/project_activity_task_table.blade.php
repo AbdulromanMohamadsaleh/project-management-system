@@ -188,26 +188,21 @@
         <div class="col">
             <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
             </b><br>
-            <b><span class="{{ $project_detail->BUDGET < $project_detail->TotalBudget ? 'text-danger' : '' }}">Total
-                    Budget =
-                    {{ $project_detail->TotalBudget }}฿</span>
-            </b>
-            <b class="ms-3">
-                @if ($project_detail->BUDGET < $project_detail->TotalBudget)
-                    <span class="text-danger">Budget Exceed:
-                        {{ $project_detail->TotalBudget - $project_detail->BUDGET }}฿</span>
-                @else
-                    <span class="text-success">Budget Remainning:
-                        {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿</span>
-                @endif
+            <b>Project Budget = {{$project_detail->BUDGET}}฿</b><br>
+            <b> Budget activity remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
+            </b> <br>
+            <b> Budget paid = 0฿
+            </b><br>
+            <b> Budget payment remaining = 0฿
             </b>
         </div>
-        <div class="col-1">
-            @include('edit_activity_task.add_activity_task')
-        </div>
-
-
     </div>
+    <div class="row justify-content-end">
+        <div class="col-1 ">
+        @include('edit_activity_task.add_activity_task')
+        </div>
+    </div>
+
 
 
     {{-- <table>
