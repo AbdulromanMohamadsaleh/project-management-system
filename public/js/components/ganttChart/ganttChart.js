@@ -92,8 +92,8 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
         // parseInt(toSelectYear.value),
         // parseInt(toSelectMonth.value)
         // );
-        const numMonths = monthDiff(startMonth, endMonth) + 1;
-        console.log(endMonth)
+        const numMonths = monthDiff(startMonth, project.DATE_END) + 1;
+        // console.log(endMonth)
         // clear first each time it is changed
         containerTasks.innerHTML = "";
         containerTimePeriods.innerHTML = "";
@@ -247,7 +247,7 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
 
         const  numDays = getDiffNumberOfDays(project.DATE_START, project.DATE_END);
        let numWeeks = diff_weeks(project.DATE_START, project.DATE_END);
-       console.log(numWeeks)
+    //    console.log(numWeeks)
         // numDays = dayDiff(tasks[0].start,tasks[tasks.length-1].end)
             // console.log(tasks)
         let dayCounter =0;
@@ -266,7 +266,7 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
                      console.log(ProjectWeekCounter)
                      dayEl.appendChild(dayElSpan);
                 timePeriodEl.appendChild(dayEl);
-                    if(numWeeks == ProjectWeekCounter)
+                    if(numWeeks < ProjectWeekCounter)
                         return;
                 }
 
