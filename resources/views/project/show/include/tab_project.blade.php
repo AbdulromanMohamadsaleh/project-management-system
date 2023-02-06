@@ -30,24 +30,24 @@
 <div class="tab-content" id="nav-tabContent">
 
 
-    <div  class="tab-pane fade show active" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
+    <div  class="tab-pane fade show active mt-3" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
         tabindex="0">
         @include('project.show.include.project_activity_task_table')
     </div>
 
 
-    <div class="tab-pane fade  " id="nav-edit-project" role="tabpanel" aria-labelledby="nav-edit-project-tab"
+    <div class="tab-pane fade mt-3 " id="nav-edit-project" role="tabpanel" aria-labelledby="nav-edit-project-tab"
         tabindex="0">
     </div>
 
 
 
-    <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
+    <div class="tab-pane fade mt-3" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab" tabindex="0">
         @include('timeline.show.include.showtimeline')
     </div>
 
 
-    <div class="tab-pane fade" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
+    <div class="tab-pane fade mt-3" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
         {{-- @include('project.show.activity_gantt_chart') --}}
         {{-- @include('project.show.task_timeline') --}}
         {{-- <ul class="nav nav-pills nav-fill mt-4">

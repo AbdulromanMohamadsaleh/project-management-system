@@ -184,11 +184,11 @@
 
 
 <div class="col mt-4">
-    <div class="row">
+    <div class="row card p-3">
         <div class="col">
             <b>Total Date = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
             </b><br>
-            <b>Project Budget = {{$project_detail->BUDGET}}฿</b><br>
+            <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
             <b> Budget activity remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
             </b> <br>
             <b> Budget paid = 0฿
@@ -197,11 +197,13 @@
             </b>
         </div>
     </div>
-    <div class="row justify-content-end">
-        <div class="col-1 ">
-        @include('edit_activity_task.add_activity_task')
+    @if (!in_array('Completed', $status))
+        <div class="row justify-content-end">
+            <div class="col-1 ">
+                @include('edit_activity_task.add_activity_task')
+            </div>
         </div>
-    </div>
+    @endif
 
 
 
@@ -337,7 +339,9 @@
                     <th class="">Activity</th>
                     <th class="">Duration</th>
                     <th>Start Date</th>
+
                     <th>Action</th>
+
                     <th class="">Status</th>
                     <th>Quality Work</th>
                 </tr>
@@ -382,11 +386,16 @@
                                     if ($act->START_DATE) {
                                         $result = explode(' ', $act->START_DATE);
                                     }
+
                                 @endphp
                                 <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                                 <td>
-                                    @include('edit_activity_task.modal_edit_activity')
-                                    @include('edit_activity_task.delate_activity')
+                                    @if (!in_array('Completed', $status))
+                                        @include('edit_activity_task.modal_edit_activity')
+                                        @include('edit_activity_task.delate_activity')
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                                 <td>
                                     @if ($act->STATUS == 1)
@@ -458,13 +467,17 @@
                                         @endif
                                     </td>
                                     <td>
+
                                         @include('Admin.button_startdate_complatedate.button')
                                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                                         @endif
                                         @include('modal_budget_note.modal_budget')
                                         @include('modal_budget_note.modal_note')
                                         @include('edit_activity_task.edit_activity_task')
-                                        @include('edit_activity_task.delate_task')
+                                        @if (!in_array('Completed', $status))
+                                            @include('edit_activity_task.delate_task')
+                                        @endif
+
                                     </td>
                                     <td>
                                         @if ($task->STATUS == 1)
@@ -513,8 +526,33 @@
 <script>
     function ToggleTableArror() {
         // var actId = $(this).parent().parent().nextAll('#actId');
+        // let showMoreArror = $('.showMore');
+        // let trRow = $('.taskRow');
+
+        // trRow.each((index) => {
+        //     if (!trRow[index].classList.contains(".display-none")) {
+        //         trRow[index].classList.add('display-none');
+        //         showMoreArror.each((index2) => {
+        //             if (!showMoreArror[index2].classList.contains(".fa-angle-double-right")) {
+        //                 showMoreArror[index2].classList.add('fa-angle-double-right');
+        //                 showMoreArror[index2].classList.remove('fa-angle-double-down');
+        //             }
+        //         })
+        //     }
+        // })
+
         var actId = $(this).data("id");
         var tr = $(this).parent().parent().nextAll('#showTasks' + actId);
+        // console.log($(this).hasClass('fa-angle-double-down'))
+        // if ($(this).hasClass('fa-angle-double-down')) {
+        //     $(this).add('fa-angle-double-right')
+        //     if (tr.is(".display-none")) {
+        //         tr.removeClass('display-none');
+        //     } else {
+        //         tr.addClass('display-none');
+        //     }
+        // }
+
         $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
         if (tr.is(".display-none")) {
             tr.removeClass('display-none');
@@ -785,11 +823,12 @@
                 // $('.refresher').load(location.href + ' .refresher')
 
                 setTimeout(() => {
-                    $(".showMore").click(ToggleTableArror);
+                    // $(".showMore").click(ToggleTableArror);
                     $(document).ready(SotredListV2);
                     $(document).ready(SotredList);
                     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
                     $(".glyphicon-move-tasks").mousedown(ToggleAllTableArrorAnHideTasksRowV2)
+
                     $('.show-alert-delete-box').click(function(event) {
                         var form = $(this).closest("form");
                         var name = $(this).data("name");

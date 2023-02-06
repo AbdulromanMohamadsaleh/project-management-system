@@ -162,7 +162,7 @@
                                             <div class="row p-2 px-5 ">
                                                 <div style="text-align: left"
                                                     class="mb-3 form-check form-check-inline">
-                                                    <input  class="form-check-input" name="isIncludeHolyday"
+                                                    <input class="form-check-input" name="isIncludeHolyday"
                                                         type="radio" id="yes" value="yes">
                                                     <label class="form-check-label ms-2" for="yes">Yes</label>
                                                 </div>
@@ -215,8 +215,8 @@
                                     </div>
                                     <div class="col-md-6 mb-sm-5">
                                         <label class="label-left fw-bold mb-2" for="objectve">Objective</label>
-                                        <textarea style="white-space: pre-wrap;" class="form-control @error('objectve') is-invalid @enderror" rows="5" id="objectve" name="objectve"
-                                            value="{{ old('objectve') }}"></textarea>
+                                        <textarea style="white-space: pre-wrap;" class="form-control @error('objectve') is-invalid @enderror" rows="5"
+                                            id="objectve" name="objectve" value="{{ old('objectve') }}"></textarea>
                                         @error('objectve')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -357,10 +357,7 @@
                             <div id="alert"
                                 class="d-none alert alert-danger d-flex align-items-center justify-content-center"
                                 role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-3"></i>
-                                <div class="text-center">
-                                    The number of project days exceeded the set date.
-                                </div>
+
                             </div>
 
                             <!-- step three -->

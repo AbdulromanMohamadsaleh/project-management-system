@@ -15,7 +15,7 @@
                     <td style="text-align:left">{{ $Holyday->HOLYDAY_NAME }}</td>
                     <td style="text-align:center">{{ $Holyday->HOLYDAY_DATE }}</td>
                     </center>
-                    <td class="project-actions text-right">
+                    <td {{ $Holyday->year >= now()->year ? '' : 'hidden' }} class="project-actions text-right">
                         @include('holyday.inlude.editholyda')
                         @include('holyday.inlude.deleteholyday')
                     </td>
