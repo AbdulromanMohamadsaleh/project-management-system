@@ -385,7 +385,7 @@ class ProjectController extends Controller
 
         $tasks = json_encode($tasks);
         $data['last']  = $this->getLastProject();
-        return view('testChart.index', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);
+        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)
