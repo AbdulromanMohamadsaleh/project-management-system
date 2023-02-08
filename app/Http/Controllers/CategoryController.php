@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Traits\LastProjectTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    use LastProjectTrait;
     public function Index()
     {
         $Category = Category::all();
-        return view('Admin.category', ['Category' => $Category]);
+        $route = Route::current();
+        $name = $route->getName();
+
+        $data['last']  = $this->getLastProject();
+        return view('Admin.category', ['Category' => $Category,'routename'=>$name,'data'=>$data]);
     }
     public function Create()
     {

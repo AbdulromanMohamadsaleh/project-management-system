@@ -139,10 +139,10 @@
                     </div>
                     <select class="form-select" name="Position" aria-label="Default select example">
                         <option selected>--Position--</option>
-                        <option value="Employee">Employee</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Project manager">Project manager</option>
-                        <option value="Manager">Manager</option>
+                        <option value="0">Employee</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Project manager</option>
+                        <option value="3">Manager</option>
                     </select>
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn mt-3">

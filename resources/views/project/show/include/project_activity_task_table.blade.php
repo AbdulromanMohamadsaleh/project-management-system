@@ -197,6 +197,7 @@
             </b>
         </div>
     </div>
+    <br>
     @if (!in_array('Completed', $status))
         <div class="row justify-content-end">
             <div class="col-1 ">
@@ -204,6 +205,7 @@
             </div>
         </div>
     @endif
+
 
 
 

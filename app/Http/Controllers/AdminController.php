@@ -10,6 +10,7 @@ use App\Models\ProjectDetial;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 class AdminController extends Controller
 {
@@ -40,8 +41,10 @@ class AdminController extends Controller
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
         $data['last']  = ProjectDetial::latest('DETAIL_ID')->limit(5)->get();
+        $route = Route::current();
+        $name = $route->getName();
 
-        return view('Admin.index', ['data' => $data]);
+        return view('Admin.index', ['data' => $data,'routename'=>$name]);
     }
 
     public function handle(Request $request, Closure $next)

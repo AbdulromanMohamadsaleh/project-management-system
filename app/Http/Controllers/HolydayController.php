@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Holyday;
 use Illuminate\Http\Request;
 use App\Traits\LastProjectTrait;
+use Illuminate\Support\Facades\Route;
 
 class HolydayController extends Controller
 {
@@ -25,8 +26,9 @@ class HolydayController extends Controller
         $data['years'] = $years;
 
         $data['last']  = $this->getLastProject();
-
-        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data,'routename'=>$name]);
     }
     public function Create()
     {
