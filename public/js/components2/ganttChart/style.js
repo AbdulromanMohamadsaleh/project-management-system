@@ -132,6 +132,22 @@ export function cssStyles() {
         max-width: 930px;
     }
 
+       .gantt-time-period-week-counter {
+        display: grid;
+        grid-auto-flow: column;
+        // grid-auto-columns: minmax(50px, 1fr);
+        width:50px;
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid ${outlineColor};
+        max-width: 930px;
+        background: #95A5A6;
+    }
+
+    .gantt-time-period-week-counter span{
+        color:white;
+        margin:auto;
+    }
     .gantt-time-period-month {
         display: grid;
         grid-auto-flow: column;
@@ -141,7 +157,14 @@ export function cssStyles() {
         height: ${CELL_HEIGHT}px;
         outline: 0.5px solid ${outlineColor};
     }
-
+    .gantt-time-period-month span {
+        display: grid;
+        grid-auto-flow: column;
+         max-width: 250px;
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid ${outlineColor};
+    }
 
 
     .gantt-time-period-weeks {
@@ -183,6 +206,14 @@ export function cssStyles() {
     .gantt-time-period-cell-container {
       grid-column: 1/-1;
       display: grid;
+    }
+
+    .gantt-time-period-cell-container .gantt-time-period{
+        width:250px;
+    }
+
+    .gantt-time-period-cell-container .gantt-time-period .gantt-time-period-cell{
+        width: 50px;
     }
 
     .gantt-time-period-cell {

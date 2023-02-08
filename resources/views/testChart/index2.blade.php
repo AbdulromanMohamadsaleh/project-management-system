@@ -9,11 +9,10 @@
         const tasks = @php echo $tasks @endphp;
         const project = @php echo $project @endphp
     </script>
-    <script src="{{ asset('js/script.js') }}" type="module" defer></script>
+    <script src="{{ asset('js/script2.js') }}" type="module" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet" />
-    <title>Creating a Gantt Chart component with Vanilla JavaScript</title>
 </head>
 
 
@@ -33,7 +32,6 @@
     <div class="content">
         <!-- Navbar Start -->
         @include('include.navbar')<br>
-
 
         <div class="p-5 ">
             <!-- Recent Sales Start -->
