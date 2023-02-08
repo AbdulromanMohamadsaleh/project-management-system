@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Phattarachai\LineNotify\Facade\Line;
 use App\Models\User;
 // use App\Models\Login;
@@ -31,12 +32,11 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        if(Auth::user()->POSITION == 'Project Manager'){
-            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+        if (Auth::user()->POSITION == 'Project Manager') {
+            $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
-
-        }else{
+        } else {
             $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $data['last']  = $this->getLastProject();
 
 
-        return view('Admin.table', ['project_details' => $project_details, 'data' => $data,'routename'=>$name]);
+        return view('Admin.table', ['project_details' => $project_details, 'data' => $data, 'routename' => $name]);
     }
 
     public function Create()
@@ -85,7 +85,7 @@ class ProjectController extends Controller
             'team' => $team,
             'Holydays' => $Holydays,
             'Categories' => $Categories,
-            'data' => $data, 'routename'=>$name
+            'data' => $data, 'routename' => $name
         ]);
     }
 
@@ -279,7 +279,7 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
-        Line::send(''.''. "ปิง");
+        Line::send('' . '' . "ปิง");
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -323,6 +323,9 @@ class ProjectController extends Controller
         // });
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
+        $route = Route::current();
+        $name = $route->getName();
+
 
         $data['last']  = $this->getLastProject();
         return view('Admin.edit', [
@@ -333,6 +336,7 @@ class ProjectController extends Controller
             'Categories' => $Categories,
             'projectTeams' => $projectTeams,
             'data' => $data,
+            'routename' => $name
         ]);
     }
 

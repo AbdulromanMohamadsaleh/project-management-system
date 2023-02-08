@@ -1,5 +1,6 @@
 var TotalDaysToComplateProject = 0;
-
+const OldProjectNameInput = document.getElementById("projectName").value.trim()
+console.log("OldProjectNameInput: " + OldProjectNameInput)
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -58,8 +59,9 @@ function validateForm() {
     // This function deals with validation of the form fields
     let ProjectNameInput = document.getElementById("projectName").value.trim()
 
-    if(ProjectNameInput.length < 255 && ProjectNameInput.length > 1 )
+    if(ProjectNameInput.length < 255 && ProjectNameInput.length > 1 && OldProjectNameInput != ProjectNameInput ){
         CheckIsProjectNameExist();
+    }
 
     // Check if user pass the total duration of the project when enter task duration
 
@@ -118,7 +120,7 @@ function validateForm() {
     if (valid) {
     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
     }
-   
+
     return valid; // return the valid status
 }
 
@@ -219,7 +221,19 @@ let projectNameY = document.getElementById('projectName');
 let feedbackProjectName = document.getElementById('feedbackProjectName');
 let IsProjectNameValid = true;
 
-projectNameY.addEventListener('input', CheckIsProjectNameExist);
+projectNameY.addEventListener('input', (e)=>{
+
+    if(e.target.value.length < 255 && e.target.value.length > 1 && OldProjectNameInput != e.target.value ){
+        console.log("OldProjectNameInput: " + OldProjectNameInput +" / " + "Neewe Name: " + e.target.value )
+        CheckIsProjectNameExist();
+    }else if(feedbackProjectName.classList.contains('invv') && projectNameY.classList.contains('is-invalid')){
+                feedbackProjectName.classList.remove('invv')
+                projectNameY.classList.remove('is-invalid')
+                feedbackProjectName.innerHTML = ""
+                // feedbackProjectName.style.color="green"
+                IsProjectNameValid = true;
+    }
+});
 
 function CheckIsProjectNameExist(e) {
 
