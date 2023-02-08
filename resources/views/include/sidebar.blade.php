@@ -28,7 +28,7 @@
                 @break
 
                 @case('Employee')
-                    <a href="{{ route('employee.dashboard') }}" class="nav-item nav-link active"><i
+                    <a href="{{ route('employee.dashboard') }}" class="nav-item nav-link {{$routename=='employee.dashboard'?'active':''}}"><i
                             class="fa fa-dashboard"></i></i>Dashboard
                     </a>
                 @break
@@ -60,9 +60,9 @@
             @if (Auth::user()->POSITION == 'Employee' ||
                     Auth::user()->POSITION == 'Project Manager' ||
                     Auth::user()->POSITION == 'Admin')
-                <a href="{{ route('create') }}" class="nav-item nav-link"><i class='fas fa-save'></i></i>Create
+                <a href="{{ route('create') }}" class="nav-item nav-link {{$routename=='create'?'active':''}}"><i class='fas fa-save'></i></i>Create
                     Project</a>
-                <a href="{{ route('table') }}" class="nav-item nav-link"><i class='fas fa-database'></i></i>
+                <a href="{{ route('table') }}" class="nav-item nav-link {{$routename=='table'?'active':''}}"><i class='fas fa-database'></i></i>
                     Projects</a>
             @endif
             @if (Auth::user()->POSITION == 'Manager')

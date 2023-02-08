@@ -11,6 +11,7 @@ use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ProjectManagerController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -51,10 +52,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventB
 Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
 
 ###########################  Project Manager  ###########################
-Route::group(['prefix' => 'projectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
+Route::group(['prefix' => 'ProjectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [ProjectManagerController::class, 'index'])->name('projectManager.dashboard');
-    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-    Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
+    // Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    // Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
 });
 
 ###########################  Manager  ###########################

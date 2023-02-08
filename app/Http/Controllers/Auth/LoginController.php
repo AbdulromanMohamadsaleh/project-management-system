@@ -68,7 +68,7 @@ class LoginController extends Controller
             if (Auth::user()->IS_ACTIVE == 1) {
                 if (auth()->user()->POSITION == 'Admin') {
                     return redirect()->route('admin.dashboard');
-                } elseif (auth()->user()->POSITION == 'ProjectManager') {
+                } elseif (auth()->user()->POSITION == 'Project Manager') {
                     return redirect()->route('projectManager.dashboard');
                 } elseif (auth()->user()->POSITION == 'Manager') {
                     return redirect()->route('manager.dashboard');

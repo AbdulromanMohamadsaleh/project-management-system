@@ -12,6 +12,7 @@ use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -22,14 +23,18 @@ class UserController extends Controller
         $data = $this->GetDashboardCardSummary();
 
         $data['last']  = $this->getLastProject();
-        return view('user.dashbord', ['data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('user.dashbord', ['data' => $data ,'routename'=>$name]);
     }
 
     public function Profile()
     {
         $profile = User::first();
         $data['last']  = $this->getLastProject();
-        return view('Admin.profile', ['profile' => $profile ,'data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('Admin.profile', ['profile' => $profile ,'data' => $data ,'routename'=>$name]);
     }
 
     public function Register()

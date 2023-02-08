@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectDetial;
 use App\Models\ProjectTrack;
+use App\Traits\LastProjectTrait;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
 {
+    use LastProjectTrait;
     public function index()
     {
 
@@ -37,6 +39,8 @@ class ManagerController extends Controller
         })->map->sum('BUDGET')->toJson();
 
         // dd($data['BarChartDataSumBudget']);
+        $data['last']  = $this->getLastProject();
+
 
         return view('manager.dashbord', ['data' => $data]);
     }

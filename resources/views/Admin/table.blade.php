@@ -19,6 +19,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                 </div>
                 <div class="table-responsive">
+
                     @include('table_project.table_project')
                 </div>
             </div>

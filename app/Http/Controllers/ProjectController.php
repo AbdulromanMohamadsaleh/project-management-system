@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ProjectStoreRequest;
+use Illuminate\Support\Facades\Route;
 use SebastianBergmann\LinesOfCode\Counter;
 
 class ProjectController extends Controller
@@ -30,16 +31,26 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
-            $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
-        }])->get();
+        if(Auth::user()->POSITION == 'Project Manager'){
+            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+                $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
+            }])->get();
+
+        }else{
+            $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+                $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
+            }])->get();
+        }
+
 
         // if (session('success')) {
         //     // Alert::toast('Toast Message', 'Success');
         //     Alert::success('Success!', 'Project Created Successfully');
         // }
+        $route = Route::current();
+        $name = $route->getName();
         $data['last']  = $this->getLastProject();
-        return view('Admin.table', ['project_details' => $project_details, 'data' => $data]);
+        return view('Admin.table', ['project_details' => $project_details, 'data' => $data,'routename'=>$name]);
     }
 
     public function Create()
@@ -48,7 +59,10 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
+        $route = Route::current();
+        $name = $route->getName();
+
 
         $team = User::all();
         $data['last']  = $this->getLastProject();
@@ -57,7 +71,7 @@ class ProjectController extends Controller
             'team' => $team,
             'Holydays' => $Holydays,
             'Categories' => $Categories,
-            'data' => $data
+            'data' => $data, 'routename'=>$name
         ]);
     }
 
