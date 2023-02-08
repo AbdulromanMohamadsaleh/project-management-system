@@ -253,3 +253,46 @@ function Numbreings() {
         // console.log(numberingTask)
     });
 }
+
+
+
+function ValidateProjectDuration(){
+
+
+
+    let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
+
+    let totalDurationUserInput = 0;
+
+    taskDurationUserInput.forEach(d=>{
+        if(d.value==""){
+            totalDurationUserInput = parseInt(totalDurationUserInput);
+        }else{
+            totalDurationUserInput = parseInt(totalDurationUserInput) + parseInt(d.value);
+        }
+    })
+
+    // console.log(TotalDaysToComplateProject);
+    let errorMessage = ` <i class="bi bi-exclamation-triangle-fill me-3"></i>
+                                <div class="text-center">
+                                    The number of project days entered <b>${totalDurationUserInput}</b> are exceeded the set days <b>${TotalDaysToComplateProject}</b><br>you need to derease <b>${totalDurationUserInput-TotalDaysToComplateProject}</b> day.
+                                </div>`;
+
+    let errorContainer = document.getElementById("alert");
+
+    if(TotalDaysToComplateProject < totalDurationUserInput){
+        if(errorContainer.classList.contains('d-none')){
+            errorContainer.classList.remove('d-none')
+        }
+        errorContainer.innerHTML=errorMessage;
+        return false;
+    }else{
+        if(!errorContainer.classList.contains('d-none')){
+            errorContainer.classList.add('d-none')
+        }
+    }
+
+
+
+    return true;
+}

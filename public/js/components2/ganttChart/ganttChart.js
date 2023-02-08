@@ -112,7 +112,7 @@ export function GanttChart(ganttChartElement, tasks, project,lastTaskEndDate,fir
         addTaskDurations();
     }
 
-    createGrid(project.DATE_START,project.DATE_END);
+    createGrid(project.DATE_START,lastTaskEndDate);
 
     ganttChartElement.appendChild(contentFragment);
 
@@ -453,8 +453,41 @@ if((weekCounter2)==4){
                         currMonth,
                         i
                     );
+                    let j = i+6
+                    let formattedDateEnd ;
+                    if(j>numDays){
+                        j = j-numDays;
+                        let tempYear
+                        if(currYear==12){
+                            currYear=1;
+                            tempYear = currYear+1;
+                             formattedDateEnd = createFormattedDateFromStr(
+                            tempYear,
+                            currMonth,
+                            j
+                        );
+                        }else{
+
+                             formattedDateEnd = createFormattedDateFromStr(
+                                currYear,
+                                currMonth+1,
+                                j
+                            );
+                        }
+                    }else{
+                         formattedDateEnd = createFormattedDateFromStr(
+                            currYear,
+                            currMonth,
+                            j
+                        );
+                    }
+                    // j = j>numDays ? j-numDays : j;
+
+
                     dayEl.dataset.task = task.id;
                     dayEl.dataset.date = formattedDate;
+                    dayEl.dataset.endPeriod = formattedDateEnd;
+
                     timePeriodEl.appendChild(dayEl);
 
             };
@@ -465,6 +498,8 @@ if((weekCounter2)==4){
             let dayEl = document.createElement("div");
                  dayEl.className = "gantt-time-period-cell";
                 dayElSpan.innerHTML = " ";
+                dayEl.dataset.task = task.id;
+                dayEl.dataset.span = 'continue';
                 dayEl.appendChild(dayElSpan);
                 timePeriodEl.appendChild(dayEl);
         }
@@ -474,35 +509,99 @@ if((weekCounter2)==4){
     }
 
     function addTaskDurations() {
+        // console.log(taskDuration)
         tasks.forEach((taskDuration) => {
         const dateStr = createFormattedDateFromDate(taskDuration.start);
+        const dateEnd = createFormattedDateFromDate(taskDuration.end);
         // find gantt-time-period-cell start position
-        const startCell = containerTimePeriods.querySelector(
-            `div[data-task="${taskDuration.id}"][data-date="${dateStr}"]`
-        );
 
+        let cells = containerTimePeriods.querySelectorAll(
+            `div[data-task="${taskDuration.id}"]`
+        );
+        // console.log(cells)
+        let StartPeriodTask;
+
+        for(let h = 0;h<cells.length;h++){
+            if (dateStr > cells[h].dataset.date && dateStr < cells[h].dataset.endPeriod) {
+            StartPeriodTask = cells[h].dataset.date;
+                break;
+            }
+        }
+        // cells.forEach(element => {
+        // });
+
+        const startCell = containerTimePeriods.querySelector(
+            `div[data-task="${taskDuration.id}"][data-date="${StartPeriodTask}"]`
+        );
         if (startCell) {
+                    // console.log(startCell)
+
             // taskDuration bar is a child of start date position of specific task
-            createTaskDurationEl(taskDuration, startCell);
+            createTaskDurationEl(taskDuration, startCell,cells,dateStr,dateEnd);
         }
         });
     }
 
-    function createTaskDurationEl(taskDuration, startCell) {
+    function createTaskDurationEl(taskDuration, startCell,cells,dateStr,dateEnd) {
         const dayElContainer = containerTimePeriods.querySelector(
         ".gantt-time-period-cell-container"
         );
         const taskDurationEl = document.createElement("div");
         taskDurationEl.classList.add("taskDuration");
         taskDurationEl.id = taskDuration.id;
+            // console.log(dateEnd)
+            let weekSpanCounter=1;
+            const weeks = diff_weeks(taskDuration.start, taskDuration.end);
+            // if(weeks==1)
+            //     weekSpanCounter=0;
+        // while(dateStr > cells[h].dataset.date && dateStr < cells[h].dataset.endPeriod){
+        // let cellNumber=0;
+        // while(cells[cellNumber].dataset.endPeriod <= dateEnd && cells[cellNumber].dataset.date >= dateStr){
+        //     cellNumber++;
+        //     console.log(cells[cellNumber].dataset.date,dateEnd)
+        //     // console.log(cellNumber,cells[cellNumber])
+        //     weekSpanCounter++;
+        //     if(cells[cellNumber+1].dataset.span =='continue'){
+        //         cellNumber+=1;
+        //         weekSpanCounter++;
+        //     }
 
-        const days = dayDiff(taskDuration.start, taskDuration.end);
-        taskDurationEl.style.width = `calc(${days} * 100%)`;
+        // }
+
+            for(let h = 0;h<cells.length;h++){
+                // console.log((cells[cells.length-1]))
+                if(cells[h].dataset.endPeriod > dateEnd){
+                    console.log(cells[h].dataset.endPeriod)
+                    break;
+                }
+
+                if(cells[h].dataset.span =='continue'){
+                    weekSpanCounter++;
+                }
+
+                if ((cells[h].dataset.date >= dateStr  && cells[h].dataset.endPeriod <= dateEnd)) {
+
+                    weekSpanCounter++;
+                }
+        }
+        //   if(weekSpanCounter == 1 || weeks == 0){
+        //     weekSpanCounter=0;
+        // }
+        weekSpanCounter++
+        if(weekSpanCounter==2&&weeks==0)
+            weekSpanCounter=1;
+
+        console.log("weekSpanCounter: " + weekSpanCounter,"weeks: "+weeks);
+        // console.log(weekSpanCounter)
+        //  console.log("=========================")
+        // console.log(taskDuration.id+" "+weeks)
+
+        taskDurationEl.style.width = `calc(${weekSpanCounter} * 100%)`;
 
         // append at start pos
         startCell.appendChild(taskDurationEl);
 
-        return days;
+        return weekSpanCounter;
     }
 
 
@@ -512,4 +611,11 @@ if((weekCounter2)==4){
     toSelectYear.addEventListener("change", createGrid);
     toSelectMonth.addEventListener("change", createGrid);
 
+}
+
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
 }

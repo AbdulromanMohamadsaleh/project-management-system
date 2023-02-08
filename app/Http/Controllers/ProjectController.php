@@ -382,7 +382,7 @@ class ProjectController extends Controller
 
 
         $tasks = $project_detail->tasks->toArray();
-
+        // dd($tasks);
         $tasks = json_encode($tasks);
         $data['last']  = $this->getLastProject();
         return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);
