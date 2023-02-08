@@ -46,7 +46,9 @@ class UserController extends Controller
     {
         $User = User::all();
         $data['last']  = $this->getLastProject();
-        return view('Admin.createuser', ['login' => $User,'data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('Admin.createuser', ['login' => $User,'data' => $data,'routename'=>$name]);
     }
     public function Login()
     {

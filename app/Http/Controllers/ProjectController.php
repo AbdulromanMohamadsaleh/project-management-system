@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Phattarachai\LineNotify\Facade\Line;
 use App\Models\User;
 // use App\Models\Login;
 use App\Models\Holyday;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ProjectStoreRequest;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\LinesOfCode\Counter;
+
 
 class ProjectController extends Controller
 {
@@ -49,7 +49,20 @@ class ProjectController extends Controller
         // }
         $route = Route::current();
         $name = $route->getName();
+        // $leavedetail= LaveDetailJob::where('detail_job_id',$Lavejob->detail_job_id)->with('Department')->with('LeaveTpye')->first();
+        // $tpyeleave = $leavedetail->LeaveTpye->type_lave_name;
+        // $department = $leavedetail->Department->department_name;
+        // $name = Auth::user()->name;
+        // $sMessage = "รายละเอียดการลา\n";
+        //         $sMessage .= "ชื่อผู้ลา:"."$name"."\n";
+        //         $sMessage .= "แผนก: "."$department"."\n";
+        //         $sMessage .= "ประเภทการลา: "."$tpyeleave"."\n";
+        //         $sMessage .= "วันที่เริ่มต้นลา:"." $request->sartdate"."\n";
+        //         $sMessage .= "วันที่สิ้นสุดการลา:"." $request->enddate"."\n";
+        //         $sMessage .= "สถานะ: "."รออนุมัติ"."\n";
         $data['last']  = $this->getLastProject();
+
+
         return view('Admin.table', ['project_details' => $project_details, 'data' => $data,'routename'=>$name]);
     }
 
@@ -65,6 +78,7 @@ class ProjectController extends Controller
 
 
         $team = User::all();
+
         $data['last']  = $this->getLastProject();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
@@ -265,7 +279,7 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
-
+        Line::send(''.''. "ปิง");
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
