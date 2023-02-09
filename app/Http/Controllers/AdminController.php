@@ -41,10 +41,9 @@ class AdminController extends Controller
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
         $data['last']  = ProjectDetial::latest('DETAIL_ID')->limit(5)->get();
-        $route = Route::current();
-        $name = $route->getName();
+        $routeName = $this->getRouteName();
 
-        return view('Admin.index', ['data' => $data,'routename'=>$name]);
+        return view('Admin.index', ['data' => $data,'routename'=> $routeName]);
     }
 
     public function handle(Request $request, Closure $next)

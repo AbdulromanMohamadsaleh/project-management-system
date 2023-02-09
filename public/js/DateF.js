@@ -27,7 +27,15 @@ const isIncludeWeekend = document.querySelectorAll('input[name="isIncludeWeekend
 const DurationP = document.querySelector('#Duration');
 DurationP.addEventListener('input', updateEndDate);
 
-var projectDurationFormat = '';
+function getDurationFormat(radios){
+    for (var i = 0, max = radios.length; i < max; i++) {
+    if(radios[i].checked){
+        return radios[i].value;
+    }
+}
+}
+
+var projectDurationFormat = getDurationFormat(radios);
 
 for (var i = 0, max = radios.length; i < max; i++) {
     radios[i].onclick = function(e) {
@@ -39,6 +47,7 @@ for (var i = 0, max = radios.length; i < max; i++) {
 }
 
 function updateEndDate(e) {
+
     amount = e.target.value;
 
     if (amount == '')

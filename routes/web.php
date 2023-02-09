@@ -24,6 +24,13 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['auth', 'PreventBackHistory', 'guest']], function () {
+
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+});
+
 
 Route::get('/test', function () {
     return view('testChart.index');
@@ -157,8 +164,6 @@ Route::group(
         Route::post('/delatetask/{id}', [TaskController::class, 'DelateTask'])->name('task.delete');
         // Ajax
         Route::post('/saveTaskyOrder', [TaskController::class, 'SaveOrder'])->name('task.saveOrder');
-
-
     }
 
 );

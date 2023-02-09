@@ -23,18 +23,16 @@ class UserController extends Controller
         $data = $this->GetDashboardCardSummary();
 
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('user.dashbord', ['data' => $data ,'routename'=>$name]);
+        $routeName = $this->getRouteName();
+        return view('user.dashbord', ['data' => $data ,'routename'=> $routeName]);
     }
 
     public function Profile()
     {
         $profile = User::first();
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('Admin.profile', ['profile' => $profile ,'data' => $data ,'routename'=>$name]);
+        $routeName = $this->getRouteName();
+        return view('Admin.profile', ['profile' => $profile ,'data' => $data ,'routename'=> $routeName]);
     }
 
     public function Register()
@@ -46,9 +44,9 @@ class UserController extends Controller
     {
         $User = User::all();
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('Admin.createuser', ['login' => $User,'data' => $data,'routename'=>$name]);
+        $routeName = $this->getRouteName();
+
+        return view('Admin.createuser', ['login' => $User,'data' => $data,'routename'=> $routeName]);
     }
     public function Login()
     {

@@ -16,9 +16,8 @@ class ProjectManagerController extends Controller
         $data = $this->GetDashboardCardSummary();
 
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('projectManager.dashbord', ['data' => $data , 'routename'=>$name]);
+        $routeName = $this->getRouteName();
+        return view('projectManager.dashbord', ['data' => $data , 'routename'=> $routeName]);
     }
     public function Profile()
     {

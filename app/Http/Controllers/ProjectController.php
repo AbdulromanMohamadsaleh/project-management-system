@@ -43,13 +43,27 @@ class ProjectController extends Controller
             }])->get();
         }
 
-        $route = Route::current();
-        $name = $route->getName();
 
+        // if (session('success')) {
+        //     // Alert::toast('Toast Message', 'Success');
+        //     Alert::success('Success!', 'Project Created Successfully');
+        // }
+        $routeName = $this->getRouteName();
+        // $leavedetail= LaveDetailJob::where('detail_job_id',$Lavejob->detail_job_id)->with('Department')->with('LeaveTpye')->first();
+        // $tpyeleave = $leavedetail->LeaveTpye->type_lave_name;
+        // $department = $leavedetail->Department->department_name;
+        // $name = Auth::user()->name;
+        // $sMessage = "รายละเอียดการลา\n";
+        //         $sMessage .= "ชื่อผู้ลา:"."$name"."\n";
+        //         $sMessage .= "แผนก: "."$department"."\n";
+        //         $sMessage .= "ประเภทการลา: "."$tpyeleave"."\n";
+        //         $sMessage .= "วันที่เริ่มต้นลา:"." $request->sartdate"."\n";
+        //         $sMessage .= "วันที่สิ้นสุดการลา:"." $request->enddate"."\n";
+        //         $sMessage .= "สถานะ: "."รออนุมัติ"."\n";
         $data['last']  = $this->getLastProject();
 
 
-        return view('Admin.table', ['project_details' => $project_details, 'data' => $data, 'routename' => $name]);
+        return view('Admin.table', ['project_details' => $project_details, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function Create()
@@ -59,9 +73,8 @@ class ProjectController extends Controller
         $Categories = Category::all();
 
         $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
-        $route = Route::current();
-        $name = $route->getName();
 
+        $routeName = $this->getRouteName();
 
         $team = User::all();
 
@@ -71,7 +84,7 @@ class ProjectController extends Controller
             'team' => $team,
             'Holydays' => $Holydays,
             'Categories' => $Categories,
-            'data' => $data, 'routename' => $name
+            'data' => $data, 'routename' => $routeName
         ]);
     }
 
@@ -122,20 +135,20 @@ class ProjectController extends Controller
 
         $Holydays = Holyday::all()->toJson();
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
 
         // $tasks = json_encode($tasks);
 
+        $routeName = $this->getRouteName();
         return view('Admin.show', [
             'project_detail' => $project_detail,
             'Holydays' => $Holydays,
             'status' => $status,
             'TeamsName' => $project_detail->projectTeam,
             'ProjectTrack' => $ProjectTrack,
-            'data' => $data,'routename'=>$name
+            'data' => $data,
             // 'tasks' => $tasks,
-            // 'project' => $project
+            // 'project' => $project,
+            'routename' => $routeName,
         ]);
 
         // return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status, 'TeamsName' => $project_detail->projectTeam, 'ProjectTrack' => $ProjectTrack]);
@@ -152,9 +165,8 @@ class ProjectController extends Controller
 
         $status = explode(',', $ProjectDetail->STATUS);
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data,'routename'=>$name]);
+        $routeName = $this->getRouteName();
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data,'routename'=> $routeName]);
     }
 
     public function Save(Request $request)
@@ -329,8 +341,7 @@ Line::send(''.''. $sMessage);
 
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
-        $route = Route::current();
-        $name = $route->getName();
+        $routeName = $this->getRouteName();
 
 
         $data['last']  = $this->getLastProject();
@@ -342,7 +353,7 @@ Line::send(''.''. $sMessage);
             'Categories' => $Categories,
             'projectTeams' => $projectTeams,
             'data' => $data,
-            'routename' => $name
+            'routename' => $routeName
         ]);
     }
 
@@ -402,7 +413,9 @@ Line::send(''.''. $sMessage);
         // dd($tasks);
         $tasks = json_encode($tasks);
         $data['last']  = $this->getLastProject();
-        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);
+
+        $routeName = $this->getRouteName();
+        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data, 'routename'=> $routeName]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)
