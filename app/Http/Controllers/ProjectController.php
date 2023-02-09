@@ -43,24 +43,9 @@ class ProjectController extends Controller
             }])->get();
         }
 
-
-        // if (session('success')) {
-        //     // Alert::toast('Toast Message', 'Success');
-        //     Alert::success('Success!', 'Project Created Successfully');
-        // }
         $route = Route::current();
         $name = $route->getName();
-        // $leavedetail= LaveDetailJob::where('detail_job_id',$Lavejob->detail_job_id)->with('Department')->with('LeaveTpye')->first();
-        // $tpyeleave = $leavedetail->LeaveTpye->type_lave_name;
-        // $department = $leavedetail->Department->department_name;
-        // $name = Auth::user()->name;
-        // $sMessage = "รายละเอียดการลา\n";
-        //         $sMessage .= "ชื่อผู้ลา:"."$name"."\n";
-        //         $sMessage .= "แผนก: "."$department"."\n";
-        //         $sMessage .= "ประเภทการลา: "."$tpyeleave"."\n";
-        //         $sMessage .= "วันที่เริ่มต้นลา:"." $request->sartdate"."\n";
-        //         $sMessage .= "วันที่สิ้นสุดการลา:"." $request->enddate"."\n";
-        //         $sMessage .= "สถานะ: "."รออนุมัติ"."\n";
+
         $data['last']  = $this->getLastProject();
 
 
@@ -136,14 +121,6 @@ class ProjectController extends Controller
 
 
         $Holydays = Holyday::all()->toJson();
-
-
-
-        // $project = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
-        //     $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
-        // })->first();
-
-        // $tasks = $project->tasks->toArray();
         $data['last']  = $this->getLastProject();
         $route = Route::current();
         $name = $route->getName();
@@ -340,9 +317,7 @@ Line::send(''.''. $sMessage);
 
         $team = User::all();
 
-        // $subset = $ProjectDetial->projectTeam->map(function ($projectTeam) {
-        //     return $projectTeam->only(['LOGIN_ID']);
-        // });
+
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
         $route = Route::current();
@@ -394,19 +369,6 @@ Line::send(''.''. $sMessage);
 
     public function ValidateProjectName(Request $request)
     {
-        // $request->validate([
-        //     'projectName' => 'required|unique:prj_detail,NAME_PROJECT',
-        //     'reason' => 'string|min:10',
-        //     'objectve' => 'string|min:10',
-        //     'location' => 'string',
-        //     'target' => 'string|min:10',
-        //     'expectedRresults' => 'string|min:10',
-        //     'projectStart' => 'date',
-        //     'projectEnd' => 'date|after:projectStart',
-        //     'category' => 'exists:prj_category,CATEGORY_ID',
-        //     'projectManager' => 'exists:prj_project_login,LOGIN_ID',
-        // ]);
-
         $ProjectName = ProjectDetial::where('NAME_PROJECT', $request->projectName)->get();
 
         if (count($ProjectName) > 0) {
@@ -421,14 +383,6 @@ Line::send(''.''. $sMessage);
 
     public function GanttChart($id)
     {
-        // $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
-        //     $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
-        // })->first();
-
-        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
-
-        // $status = explode(',', $ProjectDetail->STATUS);
-
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
             $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
         })->first();
@@ -447,16 +401,4 @@ Line::send(''.''. $sMessage);
         $newdate = explode(" ", $date);
         return str_replace("-", "/", $newdate[0]);
     }
-    // public function ValidateProjectAJAX(ProjectStoreRequest $request)
-    // {
-
-    // }
-
-
-
-
-
-
-    // Custom Functions
-
 }
