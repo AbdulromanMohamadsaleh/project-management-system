@@ -314,9 +314,9 @@ class ProjectController extends Controller
         $ProjectEnd = $ProjectDetail->DATE_END;
         $sMessage = "Approved\n";
         $sMessage .= "ID_Project:"."$id"."\n";
-        $sMessage .= "NameProject: "." $nameProject;"."\n";
+        $sMessage .= "NameProject: "." $nameProject"."\n";
         $sMessage .= "NameRecord:"."$name"."\n";
-        $sMessage .= "ProjectStart: "."$ProjectStart;"."\n";
+        $sMessage .= "ProjectStart: "."$ProjectStart"."\n";
         $sMessage .= "ProjectEnd:"." $ProjectEnd"."\n";
         $sMessage .= "Approve by:". Auth::user()->NAME."\n";
         $sMessage .= "Status: "."Approved"."\n";
