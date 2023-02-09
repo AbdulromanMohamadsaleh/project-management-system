@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Phattarachai\LineNotify\Facade\Line;
 use App\Models\User;
 // use App\Models\Login;
@@ -32,13 +33,10 @@ class ProjectController extends Controller
     public function Table()
     {
         if(Auth::user()->POSITION == 'Project Manager'){
-            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orwhere('RECORD_CREATOR',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
-        // }elseif(Auth::user()->POSITION == 'Employee'){
-        //         $project_details = ProjectDetial::where('Employee',Auth::user()->LOGIN_ID)->orwhere('RECORD_CREATOR',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
-        //             $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
-        //         }])->get();
+
         }else{
             $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
@@ -66,7 +64,7 @@ class ProjectController extends Controller
         $data['last']  = $this->getLastProject();
 
 
-        return view('Admin.table', ['project_details' => $project_details, 'data' => $data,'routename'=>$name]);
+        return view('Admin.table', ['project_details' => $project_details, 'data' => $data, 'routename' => $name]);
     }
 
     public function Create()
@@ -88,7 +86,7 @@ class ProjectController extends Controller
             'team' => $team,
             'Holydays' => $Holydays,
             'Categories' => $Categories,
-            'data' => $data, 'routename'=>$name
+            'data' => $data, 'routename' => $name
         ]);
     }
 
@@ -287,15 +285,7 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
-        $name = Auth::user()->LOGIN_ID;
-        $sMessage = "Detailproject\n";
-                $sMessage .= "ID_Project:"."$detail_id"."\n";
-                $sMessage .= "NameProject: "." $request->projectName;"."\n";
-                $sMessage .= "NameRecord:"."$name"."\n";
-                $sMessage .= "ProjectStart: "."$request->projectStart;"."\n";
-                $sMessage .= "ProjectEnd:"." $request->projectEnd"."\n";
-                $sMessage .= "Status: "."New Release,workingOn"."\n";
-        Line::send(''.''. $sMessage);
+        Line::send(''.''. "ปิง");
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -355,6 +345,9 @@ Line::send(''.''. $sMessage);
         // });
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
 
+        $route = Route::current();
+        $name = $route->getName();
+
 
         $data['last']  = $this->getLastProject();
         return view('Admin.edit', [
@@ -365,6 +358,7 @@ Line::send(''.''. $sMessage);
             'Categories' => $Categories,
             'projectTeams' => $projectTeams,
             'data' => $data,
+            'routename' => $name
         ]);
     }
 
@@ -442,7 +436,7 @@ Line::send(''.''. $sMessage);
 
 
         $tasks = $project_detail->tasks->toArray();
-
+        // dd($tasks);
         $tasks = json_encode($tasks);
         $data['last']  = $this->getLastProject();
         return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data]);

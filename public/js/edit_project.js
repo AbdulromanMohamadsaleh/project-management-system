@@ -1,5 +1,6 @@
 var TotalDaysToComplateProject = 0;
-
+const OldProjectNameInput = document.getElementById("projectName").value.trim()
+console.log("OldProjectNameInput: " + OldProjectNameInput)
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -43,7 +44,6 @@ function nextPrev(n) {
     if (currentTab >= x.length) {
     // ... the form gets submitted:
     document.getElementById("signUpForm").submit();
-    x[currentTab].style.display="block"
     return false;
     }
     // Otherwise, display the correct tab:
@@ -59,14 +59,12 @@ function validateForm() {
     // This function deals with validation of the form fields
     let ProjectNameInput = document.getElementById("projectName").value.trim()
 
-    if(ProjectNameInput.length < 255 && ProjectNameInput.length > 1 )
+    if(ProjectNameInput.length < 255 && ProjectNameInput.length > 1 && OldProjectNameInput != ProjectNameInput ){
         CheckIsProjectNameExist();
+    }
 
     // Check if user pass the total duration of the project when enter task duration
-    let validateTotalDurationTask= true;
-    if(currentTab >= x.length-1){
-        validateTotalDurationTask = ValidateProjectDuration();
-    }
+
 
 
     // A loop that checks every input field in the current tab:
@@ -113,30 +111,16 @@ function validateForm() {
         }
     }
     // If the valid status is true, mark the step as finished and valid:
-    // console.log(IsProjectNameValid,valid,validateTotalDurationTask)
-    valid = IsProjectNameValid && valid && validateTotalDurationTask && textLenght;
+    valid = IsProjectNameValid && valid  && textLenght;
 
-    // This is for make the duration task red if its in valid
-    let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
-    if(!validateTotalDurationTask){
-        taskDurationUserInput.forEach((inp)=>{
-            inp.className += " invalid is-invalid";
-        })
-    }else{
-        taskDurationUserInput.forEach((inp)=>{
-        if(inp.classList.contains('is-invalid')){
-            inp.classList.remove("invalid");
-            inp.classList.remove("is-invalid");
-            }
-        })
-    }
+
 
 
 
     if (valid) {
     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
     }
-    console.log(valid)
+
     return valid; // return the valid status
 }
 
@@ -237,7 +221,19 @@ let projectNameY = document.getElementById('projectName');
 let feedbackProjectName = document.getElementById('feedbackProjectName');
 let IsProjectNameValid = true;
 
-projectNameY.addEventListener('input', CheckIsProjectNameExist);
+projectNameY.addEventListener('input', (e)=>{
+
+    if(e.target.value.length < 255 && e.target.value.length > 1 && OldProjectNameInput != e.target.value ){
+        console.log("OldProjectNameInput: " + OldProjectNameInput +" / " + "Neewe Name: " + e.target.value )
+        CheckIsProjectNameExist();
+    }else if(feedbackProjectName.classList.contains('invv') && projectNameY.classList.contains('is-invalid')){
+                feedbackProjectName.classList.remove('invv')
+                projectNameY.classList.remove('is-invalid')
+                feedbackProjectName.innerHTML = ""
+                // feedbackProjectName.style.color="green"
+                IsProjectNameValid = true;
+    }
+});
 
 function CheckIsProjectNameExist(e) {
 
@@ -273,46 +269,3 @@ function CheckIsProjectNameExist(e) {
         });
 
 }
-
-
-// function ValidateProjectDuration(){
-
-
-
-//     let taskDurationUserInput = document.querySelectorAll('[id = "taskDuration"]');
-
-//     let totalDurationUserInput = 0;
-
-//     taskDurationUserInput.forEach(d=>{
-//         if(d.value==""){
-//             totalDurationUserInput = parseInt(totalDurationUserInput);
-//         }else{
-//             totalDurationUserInput = parseInt(totalDurationUserInput) + parseInt(d.value);
-//         }
-//     })
-
-//     // console.log(TotalDaysToComplateProject);
-//     let errorMessage = ` <i class="bi bi-exclamation-triangle-fill me-3"></i>
-//                                 <div class="text-center">
-//                                     The number of project days entered <b>${totalDurationUserInput}</b> are exceeded the set days <b>${TotalDaysToComplateProject}</b><br>you need to derease <b>${totalDurationUserInput-TotalDaysToComplateProject}</b> day.
-//                                 </div>`;
-
-//     let errorContainer = document.getElementById("alert");
-
-//     if(TotalDaysToComplateProject < totalDurationUserInput){
-//         if(errorContainer.classList.contains('d-none')){
-//             errorContainer.classList.remove('d-none')
-//         }
-//         errorContainer.innerHTML=errorMessage;
-//         return false;
-//     }else{
-//         if(!errorContainer.classList.contains('d-none')){
-//             errorContainer.classList.add('d-none')
-//         }
-//     }
-
-
-
-//     return true;
-// }
-
