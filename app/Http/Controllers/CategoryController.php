@@ -14,11 +14,10 @@ class CategoryController extends Controller
     public function Index()
     {
         $Category = Category::all();
-        $route = Route::current();
-        $name = $route->getName();
+        $routeName = $this->getRouteName();
 
         $data['last']  = $this->getLastProject();
-        return view('Admin.category', ['Category' => $Category,'routename'=>$name,'data'=>$data]);
+        return view('Admin.category', ['Category' => $Category,'routename'=> $routeName,'data'=>$data]);
     }
     public function Create()
     {

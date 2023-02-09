@@ -26,9 +26,8 @@ class HolydayController extends Controller
         $data['years'] = $years;
 
         $data['last']  = $this->getLastProject();
-        $route = Route::current();
-        $name = $route->getName();
-        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data,'routename'=>$name]);
+        $routeName = $this->getRouteName();
+        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data,'routename'=> $routeName]);
     }
     public function Create()
     {
