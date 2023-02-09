@@ -6,6 +6,7 @@ use App\Models\ProjectDetial;
 use App\Models\ProjectTrack;
 use App\Traits\LastProjectTrait;
 use Illuminate\Http\Request;
+use Phattarachai\LineNotify\Facade\Line;
 
 class ManagerController extends Controller
 {

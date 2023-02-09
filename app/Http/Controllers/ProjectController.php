@@ -32,10 +32,13 @@ class ProjectController extends Controller
     public function Table()
     {
         if(Auth::user()->POSITION == 'Project Manager'){
-            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orwhere('RECORD_CREATOR',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
-
+        // }elseif(Auth::user()->POSITION == 'Employee'){
+        //         $project_details = ProjectDetial::where('Employee',Auth::user()->LOGIN_ID)->orwhere('RECORD_CREATOR',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+        //             $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
+        //         }])->get();
         }else{
             $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
@@ -144,6 +147,9 @@ class ProjectController extends Controller
 
         // $tasks = $project->tasks->toArray();
         $data['last']  = $this->getLastProject();
+        $route = Route::current();
+        $name = $route->getName();
+
         // $tasks = json_encode($tasks);
 
         return view('Admin.show', [
@@ -152,7 +158,7 @@ class ProjectController extends Controller
             'status' => $status,
             'TeamsName' => $project_detail->projectTeam,
             'ProjectTrack' => $ProjectTrack,
-            'data' => $data,
+            'data' => $data,'routename'=>$name
             // 'tasks' => $tasks,
             // 'project' => $project
         ]);
@@ -171,7 +177,9 @@ class ProjectController extends Controller
 
         $status = explode(',', $ProjectDetail->STATUS);
         $data['last']  = $this->getLastProject();
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data,'routename'=>$name]);
     }
 
     public function Save(Request $request)
@@ -279,7 +287,15 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
-        Line::send(''.''. "ปิง");
+        $name = Auth::user()->LOGIN_ID;
+        $sMessage = "Detailproject\n";
+                $sMessage .= "ID_Project:"."$detail_id"."\n";
+                $sMessage .= "NameProject: "." $request->projectName;"."\n";
+                $sMessage .= "NameRecord:"."$name"."\n";
+                $sMessage .= "ProjectStart: "."$request->projectStart;"."\n";
+                $sMessage .= "ProjectEnd:"." $request->projectEnd"."\n";
+                $sMessage .= "Status: "."New Release,workingOn"."\n";
+        Line::send(''.''. $sMessage);
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -300,6 +316,22 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
 
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+        $nameProject =  $ProjectDetail->NAME_PROJECT;
+
+        $name = $ProjectDetail->ProjectCreator->NAME;
+        $ProjectStart = $ProjectDetail->DATE_START;
+        $ProjectEnd = $ProjectDetail->DATE_END;
+        $sMessage = "Approved\n";
+        $sMessage .= "ID_Project:"."$id"."\n";
+        $sMessage .= "NameProject: "." $nameProject;"."\n";
+        $sMessage .= "NameRecord:"."$name"."\n";
+        $sMessage .= "ProjectStart: "."$ProjectStart;"."\n";
+        $sMessage .= "ProjectEnd:"." $ProjectEnd"."\n";
+        $sMessage .= "Approve by:". Auth::user()->NAME."\n";
+        $sMessage .= "Status: "."Approved"."\n";
+Line::send(''.''. $sMessage);
+
 
         return redirect()->back()->with("success", "Project Appreoved Successfully");;
     }

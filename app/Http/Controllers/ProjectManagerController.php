@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Traits\LastProjectTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class ProjectManagerController extends Controller
 {
@@ -15,7 +16,9 @@ class ProjectManagerController extends Controller
         $data = $this->GetDashboardCardSummary();
 
         $data['last']  = $this->getLastProject();
-        return view('projectManager.dashbord', ['data' => $data]);
+        $route = Route::current();
+        $name = $route->getName();
+        return view('projectManager.dashbord', ['data' => $data , 'routename'=>$name]);
     }
     public function Profile()
     {

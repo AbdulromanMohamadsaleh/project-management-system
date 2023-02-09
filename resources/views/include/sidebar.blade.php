@@ -34,13 +34,13 @@
                 @break
 
                 @case('Project Manager')
-                    <a href="{{ route('projectManager.dashboard') }}" class="nav-item nav-link active"><i
+                    <a href="{{ route('projectManager.dashboard') }}" class="nav-item nav-link {{$routename=='projectManager.dashboard'?'active':''}}"><i
                             class="fa fa-dashboard"></i></i>Dashboard
                     </a>
                 @break
 
                 @case('Manager')
-                    <a href="{{ route('manager.dashboard') }}" class="nav-item nav-link active"><i
+                    <a href="{{ route('manager.dashboard') }}" class="nav-item nav-link "><i
                             class="fa fa-dashboard"></i></i>Dashboard
                     </a>
                 @break
