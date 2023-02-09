@@ -262,6 +262,15 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
+        $name = Auth::user()->LOGIN_ID;
+        $sMessage = "Detail\n";
+        $sMessage .= "ID_Project:"."$detail_id"."\n";
+        $sMessage .= "NameProject: "." $request->projectName"."\n";
+        $sMessage .= "NameRecord:"."$name"."\n";
+        $sMessage .= "ProjectStart: "."$request->projectStart"."\n";
+        $sMessage .= "ProjectEnd:"." $request->projectEnd"."\n";
+        $sMessage .= "Approve by:". Auth::user()->NAME."\n";
+        $sMessage .= "Status: "."Approved"."\n";
         Line::send(''.''. "ปิง");
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
