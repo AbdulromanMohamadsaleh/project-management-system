@@ -103,6 +103,7 @@ class ProjectController extends Controller
         // dd($project_detail->activity);
         $sum = 0;
         $totalBudget = 0;
+        $paidBudget=0;
         foreach ($project_detail->activity as $act) {
 
             // dd(intval(date('m', strtotime($act->START_DATE))));
@@ -123,10 +124,14 @@ class ProjectController extends Controller
             foreach ($act->tasks as $task) {
                 $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
+                if($task->STATUS_PAYMENT==1){
+                    $paidBudget+=$task->TASK_BUDGET;
+                }
             }
         }
 
 
+        $project_detail->paidBudget = $paidBudget;
         $project_detail->TotalDays = $sum;
         $project_detail->TotalBudget = $totalBudget;
         $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();

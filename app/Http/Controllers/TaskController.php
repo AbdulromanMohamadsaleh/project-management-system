@@ -194,7 +194,7 @@ class TaskController extends Controller
         // ]);
 
         $tasks = json_decode($request->data);
-        
+
         foreach ($tasks as $act) {
 
             $Task = ProjectTask::where('TASK_ID', $act->taskId)->first();
@@ -210,5 +210,19 @@ class TaskController extends Controller
             'response_code' => 200,
             // 'data' => $Holyday->toJson()
         ]);
+    }
+
+    public function Payment($id)
+
+    {
+        if (Auth::user()->POSITION !== "Employee" && Auth::user()->POSITION !== "Project Manager" ) {
+            return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
+            die();
+        }
+
+
+        $tasks = ProjectTask::where('TASK_ID', $id)->update(['STATUS_PAYMENT' => 1, 'DATE_PAYMENT' => date("Y-m-d") , 'USER_PAYMENT' =>  Auth::user()->LOGIN_ID ]);
+
+        return redirect()->back()->with("success", "Payment Successfully");;
     }
 }

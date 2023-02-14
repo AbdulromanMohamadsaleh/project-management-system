@@ -191,9 +191,9 @@
             <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
             <b> Budget activity remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
             </b> <br>
-            <b> Budget paid = 0฿
+            <b> Budget paid = {{$project_detail->paidBudget}}฿
             </b><br>
-            <b> Budget payment remaining = 0฿
+            <b> Budget payment remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
             </b>
         </div>
     </div>
@@ -398,7 +398,30 @@
 
 
 </div>
-
+<script>
+    $('.show-alert-delete-box1').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to active  this payment?",
+            text: "If you payment this, it will be gone forever.",
+            icon: "success",
+            type: "success",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 
 <script>
     function ToggleTableArror() {
