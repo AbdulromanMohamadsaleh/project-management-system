@@ -83,7 +83,7 @@
                 <span class="login100-form-title p-b-26">
                     LOGIN
                 </span>
-                <img src="{{asset("images/logo.png")}}" style="width: 100%" alt="">
+                <img src="{{asset('images/logo/logo-06.png')}}" style="width: 100%" alt="">
                 <span class="login100-form-title p-b-48">
                     <i class="zmdi zmdi-font"></i>
                 </span>

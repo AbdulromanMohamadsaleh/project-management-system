@@ -132,6 +132,41 @@ export function cssStyles() {
         max-width: 930px;
     }
 
+       .gantt-time-period-week-counter {
+        display: grid;
+        grid-auto-flow: column;
+        // grid-auto-columns: minmax(50px, 1fr);
+        width:50px;
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid ${outlineColor};
+        max-width: 930px;
+        background: #95A5A6;
+    }
+
+      .gantt-time-period-week-counter-for-day {
+        display: grid;
+        grid-auto-flow: column;
+
+        width:210px;
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid ${outlineColor};
+
+        background: #95A5A6;
+    }
+
+    .for-day .week-counter-label-for-day {
+        background: #95A5A6;
+        z-index: 1000;
+        color:white;
+    }
+
+
+    .gantt-time-period-week-counter span{
+        color:white;
+        margin:auto;
+    }
     .gantt-time-period-month {
         display: grid;
         grid-auto-flow: column;
@@ -141,7 +176,18 @@ export function cssStyles() {
         height: ${CELL_HEIGHT}px;
         outline: 0.5px solid ${outlineColor};
     }
+    .gantt-time-period-month span {
+        display: grid;
+        grid-auto-flow: column;
 
+        text-align: center;
+        height: ${CELL_HEIGHT}px;
+        outline: 0.5px solid ${outlineColor};
+    }
+
+    .for-week .gantt-time-period-month span{
+        max-width: 250px;
+    }
 
 
     .gantt-time-period-weeks {
@@ -185,6 +231,18 @@ export function cssStyles() {
       display: grid;
     }
 
+    .for-week .gantt-time-period-cell-container .gantt-time-period{
+        width:250px;
+    }
+
+    .gantt-time-period-cell-container .gantt-time-period .for-weeks.gantt-time-period-cell{
+        width: 50px;
+    }
+
+    .gantt-time-period-cell-container .gantt-time-period .gantt-time-period-cell-for-day{
+        width: 30px;
+    }
+
     .gantt-time-period-cell {
       position: relative;
       display: flex;
@@ -210,7 +268,7 @@ export function cssStyles() {
     background: linear-gradient(90deg, #e5e5e5 0%, rgb(50 50 50) 100%);
     border-radius: 5px;
       box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
-      cursor: move;
+      cursor: pointer;
     }
 
 

@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ProjectStoreRequest;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
-
+use DateTime;
 
 class ProjectController extends Controller
 {
@@ -32,12 +33,11 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        if(Auth::user()->POSITION == 'Project Manager'){
-            $project_details = ProjectDetial::where('PROJECT_MANAGER',Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
+        if (Auth::user()->POSITION == 'Project Manager') {
+            $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
-
-        }else{
+        } else {
             $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
                 $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
             }])->get();
@@ -166,7 +166,7 @@ class ProjectController extends Controller
         $status = explode(',', $ProjectDetail->STATUS);
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data,'routename'=> $routeName]);
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function Save(Request $request)
@@ -274,16 +274,15 @@ class ProjectController extends Controller
 
             // $ProjectActivity->save();
         }
-        $name = Auth::user()->LOGIN_ID;
+        $name = $ProjectDetial->ProjectCreator->NAME;
         $sMessage = "Detail\n";
-        $sMessage .= "ID_Project:"."$detail_id"."\n";
-        $sMessage .= "NameProject: "." $request->projectName"."\n";
-        $sMessage .= "NameRecord:"."$name"."\n";
-        $sMessage .= "ProjectStart: "."$request->projectStart"."\n";
-        $sMessage .= "ProjectEnd:"." $request->projectEnd"."\n";
-        $sMessage .= "Approve by:". Auth::user()->NAME."\n";
-        $sMessage .= "Status: "."Approved"."\n";
-        Line::send(''.''. "ปิง");
+        $sMessage .= "ID_Project:" . "$detail_id" . "\n";
+        $sMessage .= "NameProject: " . " $request->projectName" . "\n";
+        $sMessage .= "NameRecord:" . "$name" . "\n";
+        $sMessage .= "ProjectStart: " . "$request->projectStart" . "\n";
+        $sMessage .= "ProjectEnd:" . " $request->projectEnd" . "\n";
+        $sMessage .= "Status: " . "New Release" . "\n";
+        Line::send('' . '' . $sMessage);
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -307,18 +306,25 @@ class ProjectController extends Controller
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
         $nameProject =  $ProjectDetail->NAME_PROJECT;
 
+        $dateApprove = new DateTime();
         $name = $ProjectDetail->ProjectCreator->NAME;
-        $ProjectStart = $ProjectDetail->DATE_START;
-        $ProjectEnd = $ProjectDetail->DATE_END;
+
+        $ProjectStart = strtotime($ProjectDetail->DATE_START);
+        $ProjectStart = date('d-m-Y', $ProjectStart);
+
+        $ProjectEnd = strtotime($ProjectDetail->DATE_END);
+        $ProjectEnd = date('d-m-Y', $ProjectEnd);
+
         $sMessage = "Approved\n";
-        $sMessage .= "ID_Project:"."$id"."\n";
-        $sMessage .= "NameProject: "." $nameProject"."\n";
-        $sMessage .= "NameRecord:"."$name"."\n";
-        $sMessage .= "ProjectStart: "."$ProjectStart"."\n";
-        $sMessage .= "ProjectEnd:"." $ProjectEnd"."\n";
-        $sMessage .= "Approve by:". Auth::user()->NAME."\n";
-        $sMessage .= "Status: "."Approved"."\n";
-Line::send(''.''. $sMessage);
+        $sMessage .= "ID_Project:" . "$id" . "\n";
+        $sMessage .= "NameProject: " . " $nameProject" . "\n";
+        $sMessage .= "NameRecord:" . "$name" . "\n";
+        $sMessage .= "ProjectStart: " . " $ProjectStart " . "\n";
+        $sMessage .= "ProjectEnd:" . " $ProjectEnd" . "\n";
+        $sMessage .= "Approve by:" . Auth::user()->NAME . "\n";
+        $sMessage .= "Approve Date:" .  $dateApprove->format('d-m-Y') . "\n";
+        $sMessage .= "Status: " . "Approved" . "\n";
+        Line::send('' . '' . $sMessage);
 
 
         return redirect()->back()->with("success", "Project Appreoved Successfully");;
@@ -415,7 +421,7 @@ Line::send(''.''. $sMessage);
         $data['last']  = $this->getLastProject();
 
         $routeName = $this->getRouteName();
-        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data, 'routename'=> $routeName]);
+        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)

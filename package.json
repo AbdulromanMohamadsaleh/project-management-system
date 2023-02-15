@@ -20,6 +20,7 @@
         "frappe-gantt": "^0.6.1",
         "frappe-gantt-extended": "^0.7.0",
         "jquery": "^3.6.2",
+        "jspdf": "^2.5.1",
         "sortablejs": "^1.15.0"
     }
 }

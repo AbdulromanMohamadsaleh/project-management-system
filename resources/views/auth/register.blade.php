@@ -85,7 +85,7 @@
                 <p class="login100-form-title p-b-26">
                     Register
                 </p>
-                <img src="{{ asset('images/logo.png') }}" style="width: 100%" alt="">
+                <img src="{{asset('images/logo/logo-06.png')}}" style="width: 100%" alt="">
 
                 <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                     @csrf

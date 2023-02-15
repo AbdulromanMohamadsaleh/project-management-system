@@ -8,13 +8,14 @@ export function createHtmlContentFragment() {
 
     <div id="gantt-container">
 
-        <div class="title">
-            <h1> Gantt Tracker</h1>
-        </div>
+
+        <div>
+
+
 
         <div id="gantt-grid-container">
-            <div id="gantt-grid-container__tasks"></div>
-            <div id="gantt-grid-container__time"></div>
+            <div  id="gantt-grid-container__tasks"></div>
+            <div class="gantt-grid-container-width" id="gantt-grid-container__time"></div>
         </div>
 
         <div id="add-forms-container">
