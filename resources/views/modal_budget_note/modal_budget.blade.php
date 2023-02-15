@@ -1,5 +1,5 @@
 <button data-toggle="tooltip"
-                        title='budget' type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        title='budget' type="button" class="btn {{$task->STATUS_PAYMENT == 1?"btn-success":"btn-primary"}} " data-bs-toggle="modal"
                             data-bs-target="#myModal-{{ $task->TASK_ID }}">
                             <i class='fas fa-money-check-alt'></i>
                         </button>

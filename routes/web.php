@@ -96,6 +96,7 @@ Route::group(
         Route::get('/gantt_Chart/{id}', [ProjectController::class, 'GanttChart'])->name('ganttChart');
 
         Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
+
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
@@ -164,6 +165,7 @@ Route::group(
         Route::post('/delatetask/{id}', [TaskController::class, 'DelateTask'])->name('task.delete');
         // Ajax
         Route::post('/saveTaskyOrder', [TaskController::class, 'SaveOrder'])->name('task.saveOrder');
+        Route::get('/payment/{id}', [TaskController::class, 'Payment'])->name('payment');
     }
 
 );
