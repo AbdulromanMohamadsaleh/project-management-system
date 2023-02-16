@@ -198,7 +198,7 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
             }
         }
         if((weekCounte-1)==4){
-                  const dayElSpan = document.createElement("span");
+                const dayElSpan = document.createElement("span");
             let dayEl = document.createElement("div");
                 dayEl.className = "gantt-time-period";
                 dayElSpan.innerHTML = 0;
@@ -212,6 +212,7 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
 
      //  For Weeks
     function createProjectWeeksRow(startMonth, numMonths,startDate,endDate) {
+
 
         let month = new Date(startMonth);
         let flagStartWeek = false;
@@ -247,8 +248,14 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
 
             // console.log(b)
             // if(dayOfTheWeek=='M'){
-           if((startDate.getFullYear() === b.getFullYear()) && (startDate.getMonth() === b.getMonth()) && (startDate.getDate() === b.getDate())){
-                flagStartWeek=true;
+            if((startDate.getFullYear() === b.getFullYear()) && (startDate.getMonth() === b.getMonth()) && (startDate.getDate() === b.getDate())){
+            // console.log(startDate.getDate(), b.getDate())
+            flagStartWeek=true;
+            if(Count7Days!=7){
+                if(timePeriodEl.hasChildNodes()){
+                    timePeriodEl.lastChild.remove()
+                }
+            }
                 const dayElSpan = document.createElement("span");
                 let dayEl = document.createElement("div");
                 dayEl.className = "gantt-time-period-week-counter";
@@ -261,32 +268,34 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
                 weekCounteInAmonthPrinted++;
                 // weekCounter2++
                 continue;
-           }
+            }
 
-           if(weekCounte>TotalProjectWeeks){
+            if(weekCounte > TotalProjectWeeks){
+                break;
+            }
 
-            break;
-           }
             //  console.log(flagStartWeek , Count7Days )
-            if(flagStartWeek && Count7Days===7 ){
+            if( flagStartWeek && Count7Days === 7 ){
                 //  weekCounter2++;
+
                 weekCounteInAmonthPrinted++;
                 const dayElSpan = document.createElement("span");
-                    let dayEl = document.createElement("div");
-                    dayEl.className = "gantt-time-period-week-counter";
+                let dayEl = document.createElement("div");
+                dayEl.className = "gantt-time-period-week-counter";
                         // console.log("numWeeks:",numWeeks)
 
-                    dayElSpan.innerHTML = weekCounte;
-                    dayEl.appendChild(dayElSpan);
-                    timePeriodEl.appendChild(dayEl);
-                     timePeriodEl.style.width = `50px`;
-                    weekCounte++;
+                dayElSpan.innerHTML = weekCounte;
+                dayEl.appendChild(dayElSpan);
+                timePeriodEl.appendChild(dayEl);
+                timePeriodEl.style.width = `50px`;
+                weekCounte++;
                     let endB = new Date(month.getFullYear(),month.getMonth(), i);
                     // if(endDate.getTime()==endB.getTime() || numWeeks<weekCounte){
                     //     return;
                     // }
             }else if(Count7Days===7){
             // weekCounter2++;
+                console.log("Day "+b.getDate())
                 weekCounteInAmonthPrinted++;
                 const dayElSpan = document.createElement("span");
                     let dayEl = document.createElement("div");
@@ -301,13 +310,10 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
             if(Count7Days===7)
                 Count7Days=0;
 
-                /// Test
-                // if(weekCounter2 == 4){
-                //     console.log("Number of days "+i);
-                // }
+
             }
             console.log("Month: " + i +" number of weeks: " + weekCounter2,"Week Printed: "+ weekCounteInAmonthPrinted)
-            if(weekCounter2==4 && weekCounteInAmonthPrinted ==5 && flagStartWeek){
+            if(weekCounter2 == 4 && weekCounteInAmonthPrinted == 5 && flagStartWeek){
                 timePeriodEl.lastChild.remove()
                 let dayEl = document.createElement("div");
                 const dayElSpan = document.createElement("span");
@@ -563,6 +569,7 @@ console.log("week"+weekCounte)
             const taskRowElInput = document.createElement("input");
             taskRowElInput.readOnly= true;
             taskRowElInput.style.fontWeight="bold"
+
             if(i==0)
                 taskRowElInput.value='Year'
             else if(i==1)
@@ -589,7 +596,6 @@ console.log("week"+weekCounte)
         taskRowElInput.readOnly= true;
         taskRowEl.appendChild(taskRowElInput);
         taskRowElInput.value = task.name;
-
         taskOptionsHTMLStrArr.push(
             `<option value="${task.id}">${task.name}</option>`
         );
@@ -766,8 +772,9 @@ console.log("week"+weekCounte)
 
     //  For Days
     function createTaskDurationElForDays(taskDuration, startCell) {
-        // console.log(taskDuration)
-        if(taskDuration.start==taskDuration.end){
+
+        if(taskDuration.start==taskDuration.end || getDiffNumberOfDays(taskDuration.start,taskDuration.end)==0){
+
             let weekSpanCounter=1;
         const taskDurationEl = document.createElement("div");
         taskDurationEl.classList.add("taskDuration");
@@ -824,7 +831,6 @@ console.log("week"+weekCounte)
                 let b = new Date(month.getFullYear(),month.getMonth(), i);
                 let dayEl = document.createElement("div");
                 dayEl.className = "gantt-time-period";
-
                 const dayOfTheWeek = getDayOfWeek(currYear, currMonth - 1, i - 1);
                 const dayElSpan = document.createElement("span");
 

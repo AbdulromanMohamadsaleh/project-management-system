@@ -113,7 +113,6 @@ class TaskController extends Controller
     }
 
 
-
     public function ActivityTimeline($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
@@ -122,7 +121,6 @@ class TaskController extends Controller
 
         return view('project.show.activity_gantt_chart', ['project_detail' => $project_detail]);
     }
-
 
     public function Timeline($id)
     {
@@ -213,7 +211,6 @@ class TaskController extends Controller
     }
 
     public function Payment($id)
-
     {
         if (Auth::user()->POSITION !== "Employee" && Auth::user()->POSITION !== "Project Manager" ) {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
@@ -225,4 +222,6 @@ class TaskController extends Controller
 
         return redirect()->back()->with("success", "Payment Successfully");;
     }
+
+
 }

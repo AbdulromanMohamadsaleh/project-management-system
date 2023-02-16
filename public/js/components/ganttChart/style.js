@@ -263,7 +263,7 @@ export function cssStyles() {
 
     .taskDuration {
       position: absolute;
-      height: ${CELL_HEIGHT}px;
+      height: 30px;
       z-index: 1;
     background: linear-gradient(90deg, #e5e5e5 0%, rgb(50 50 50) 100%);
     border-radius: 5px;

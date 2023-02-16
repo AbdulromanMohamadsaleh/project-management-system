@@ -191,7 +191,7 @@
             <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
             <b> Budget activity remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
             </b> <br>
-            <b> Budget paid = {{$project_detail->paidBudget}}฿
+            <b> Budget paid = {{ $project_detail->paidBudget }}฿
             </b><br>
             <b> Budget payment remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
             </b>
@@ -236,7 +236,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-
+                            
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -268,7 +268,7 @@
                                     if ($act->START_DATE) {
                                         $result = explode(' ', $act->START_DATE);
                                     }
-
+                                    
                                 @endphp
                                 <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                                 <td>
@@ -345,17 +345,25 @@
 
                                             {{ $result[0] }}
                                         @else
-                                            -
+                                            <form style="display: inline-block" method="GET"
+                                                action="{{ route('task.start', $task->TASK_ID) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="GET">
+                                                <button style="color:white" type="submit"
+                                                    class="btn  btn-warning  show-alert-delete-box "
+                                                    data-toggle="tooltip" title='Start Stask'><i
+                                                        class="bi bi-clock-history"></i></button>
+                                            </form>
                                         @endif
                                     </td>
                                     <td>
 
-                                        @include('Admin.button_startdate_complatedate.button')
                                         @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
                                         @endif
                                         @include('modal_budget_note.modal_budget')
                                         @include('modal_budget_note.modal_note')
                                         @include('edit_activity_task.edit_activity_task')
+                                        @include('Admin.button_startdate_complatedate.button')
                                         @if (!in_array('Completed', $status))
                                             @include('edit_activity_task.delate_task')
                                         @endif
@@ -364,14 +372,16 @@
                                     <td>
                                         @if ($task->STATUS == 1)
                                             @php
+                                                $resultEndDate = explode(' ', $task->COPLATE_TIME);
                                                 $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                             @endphp
+
                                             <div class="me-3">
                                                 <div>
                                                     {{ $TASK_TRACKER[0] }}
                                                 </div>
                                                 <div>
-                                                    {{ $TASK_TRACKER[1] }}
+                                                    {{ $resultEndDate[0] }}
                                                 </div>
                                             </div>
                                         @endif

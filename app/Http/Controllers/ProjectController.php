@@ -103,7 +103,7 @@ class ProjectController extends Controller
         // dd($project_detail->activity);
         $sum = 0;
         $totalBudget = 0;
-        $paidBudget=0;
+        $paidBudget = 0;
         foreach ($project_detail->activity as $act) {
 
             // dd(intval(date('m', strtotime($act->START_DATE))));
@@ -124,8 +124,8 @@ class ProjectController extends Controller
             foreach ($act->tasks as $task) {
                 $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
-                if($task->STATUS_PAYMENT==1){
-                    $paidBudget+=$task->TASK_BUDGET;
+                if ($task->STATUS_PAYMENT == 1) {
+                    $paidBudget += $task->TASK_BUDGET;
                 }
             }
         }
@@ -411,13 +411,11 @@ class ProjectController extends Controller
 
 
 
-
     public function GanttChart($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
             $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
         })->first();
-
 
 
         $tasks = $project_detail->tasks->toArray();

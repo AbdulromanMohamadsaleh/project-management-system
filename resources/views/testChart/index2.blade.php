@@ -26,41 +26,73 @@
 
 <script>
     function createPDFDay() {
+        var element = document.getElementById('print-day');
+        // const invoice = this.document.getElementById(div == null ? "generalDiv" : div);
+        // console.log($(window).width() + "px");
+        // element.style.width = $(window).width() + "px";
+        // var contentWidth = document.getElementById("YourImageOrContent").offsetWidth;
+        // var contentHeight = document.getElementById("YourImageOrContent").offsetHeight;
+        // window.resizeTo(contentWidth, contentHeight);
+        let widthChart = document.querySelector('.for-day .gantt-grid-container-width');
+        widthChart.style.overflowX = "visible"
+        // console.log($('.for-week .gantt-grid-container-width').width() + "px")
 
-        // var element = document.getElementById('print-day');
-        // html2pdf(element, {
-        //     margin: 4,
-        //     padding: 5,
-        //     filename: 'DayTimeLine.pdf',
-        //     image: {
-        //         type: 'jpeg',
-        //         quality: 1
-        //     },
-        //     html2canvas: {
-        //         scale: 2,
+        let widthToPrint = $('.for-day .gantt-grid-container-width').width() + 300;
 
-        //         // dpi: 300,
-        //         letterRendering: true,
-        //         width: 2000,
-        //         height: 2000,
-        //         logging: true
-        //     },
-        //     jsPDF: {
-        //         unit: 'mm',
-        //         format: 'A4',
-        //         orientation: 'L',
-        //         compress: true,
 
-        //     },
-        //     class: createPDFDay
-        // });
+        if (widthToPrint <= 1950) {
+            var opt = {
+                margin: 1,
+                filename: 'DayTimeline' + '.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 1,
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'L'
+                }
+            };
+        } else {
+            var opt = {
+                margin: 1,
+                filename: 'DayTimeline' + '.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 1,
+                    width: widthToPrint
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'L'
+                }
+            };
+        }
+
+        html2pdf().from(element).set(opt).save();
+
+        setTimeout(function() {
+            widthChart.style.overflowX = "auto";
+
+        }, 5000)
+
+
+
     };
 
     function createPDFWeek() {
 
         var element = document.getElementById('print-week');
         // const invoice = this.document.getElementById(div == null ? "generalDiv" : div);
-        console.log($(window).width() + "px");
+        // console.log($(window).width() + "px");
         // element.style.width = $(window).width() + "px";
         // var contentWidth = document.getElementById("YourImageOrContent").offsetWidth;
         // var contentHeight = document.getElementById("YourImageOrContent").offsetHeight;
@@ -69,54 +101,35 @@
         widthChart.style.overflowX = "visible"
         // console.log($('.for-week .gantt-grid-container-width').width() + "px")
 
-        let widthToPrint = $('.for-week .gantt-grid-container-width').width();
+        let widthToPrint = $('.for-week .gantt-grid-container-width').width() + 50;
 
+        console.log(widthToPrint)
         var opt = {
             margin: 1,
-            filename: 'weekTime' + '.pdf',
+            filename: 'weekTimeline' + '.pdf',
             image: {
                 type: 'jpeg',
-                quality: 1
+                quality: 1,
             },
             html2canvas: {
                 scale: 1,
-                width: widthToPrint
+                width: widthToPrint,
             },
             jsPDF: {
                 unit: 'in',
-                format: 'A4',
-                orientation: 'L'
+                format: 'A3',
+                orientation: 'L',
             }
         };
+
+
         html2pdf().from(element).set(opt).save();
 
-//  widthChart.style.overflowX = "auto"
-        // html2pdf(element, {
-        //     margin: 4,
-        //     padding: 5,
-        //     filename: 'weekTimeLine.pdf',
-        //     image: {
-        //         type: 'jpeg',
-        //         quality: 1
-        //     },
-        //     html2canvas: {
-        //         scale: 2,
+        setTimeout(function() {
+            widthChart.style.overflowX = "auto"
 
-        //         dpi: 300,
-        //         // letterRendering: true,
-        //         // width: 2000,
-        //         // height: 2000,
-        //         logging: true
-        //     },
-        //     jsPDF: {
-        //         unit: 'in',
-        //         format: 'A4',
-        //         orientation: 'L',
-        //         // compress: true,
+        }, 5000)
 
-        //     },
-        //     class: createPDFWeek
-        // });
     };
 </script>
 <style>
@@ -186,18 +199,18 @@
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Week" type="button"
                         role="tab" aria-controls="Week" aria-selected="false">Week</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                {{-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
                         type="button" role="tab" aria-controls="contact-tab-pane"
                         aria-selected="false">Month</button>
-                </li>
+                </li> --}}
 
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="Day" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
+
                     <div id="print-day">
-                        Day
                         <div class="for-day" role="gantt-chart-day">
                         </div>
                     </div>
@@ -205,22 +218,21 @@
                     </button>
                 </div>
                 <div class="tab-pane fade" id="Week" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    <div class="test-color">
+                    </div>
                     <div id="print-week">
-                        <div class="test-color">
-                            Week
-                        </div>
                         <div class="for-week" role="gantt-chart-week">
                         </div>
                     </div>
                     <button class="btn btn-primary" class="html2PdfConverter" onclick="createPDFWeek()">html to PDF
                     </button>
 
-                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+                    {{-- <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
                         tabindex="0">
                         Month
                         <div class="for-month" role="gantt-chart-month">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
 
