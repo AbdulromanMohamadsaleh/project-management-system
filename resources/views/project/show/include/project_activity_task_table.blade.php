@@ -189,11 +189,11 @@
             <b>Total Date To Complete Activities = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
             </b><br>
             <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
-            <b> Budget activity remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
+            <b> Budget activity remaining = {{ $project_detail->BudgetActivityNotPaid }}฿
             </b> <br>
             <b> Budget paid = {{ $project_detail->paidBudget }}฿
             </b><br>
-            <b> Budget payment remaining = {{ $project_detail->BUDGET - $project_detail->TotalBudget }}฿
+            <b> Budget payment remaining = {{ $project_detail->BUDGET - $project_detail->paidBudget }}฿
             </b>
         </div>
     </div>
@@ -338,22 +338,26 @@
                                         @php
                                             $result = [0];
                                         @endphp
-                                        @if ($task->START_DATE)
-                                            @php
-                                                $result = explode(' ', $task->START_DATE);
-                                            @endphp
+                                        @if ($project_detail->IS_APPROVE == 1)
+                                            @if ($task->START_DATE)
+                                                @php
+                                                    $result = explode(' ', $task->START_DATE);
+                                                @endphp
 
-                                            {{ $result[0] }}
+                                                {{ $result[0] }}
+                                            @else
+                                                <form style="display: inline-block" method="GET"
+                                                    action="{{ route('task.start', $task->TASK_ID) }}">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="GET">
+                                                    <button style="color:white" type="submit"
+                                                        class="btn  btn-warning  show-alert-delete-box "
+                                                        data-toggle="tooltip" title='Start Stask'><i
+                                                            class="bi bi-clock-history"></i></button>
+                                                </form>
+                                            @endif
                                         @else
-                                            <form style="display: inline-block" method="GET"
-                                                action="{{ route('task.start', $task->TASK_ID) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="GET">
-                                                <button style="color:white" type="submit"
-                                                    class="btn  btn-warning  show-alert-delete-box "
-                                                    data-toggle="tooltip" title='Start Stask'><i
-                                                        class="bi bi-clock-history"></i></button>
-                                            </form>
+                                            -
                                         @endif
                                     </td>
                                     <td>

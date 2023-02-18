@@ -11,7 +11,7 @@
                                                 title='Complete'><i class='fas fa-check-circle'></i></button>
                                         </form>
                                     @else
-                                        
+
                                     @endif
                                 @else
                                     <a class="btn btn-success" data-toggle="tooltip" title="Completed"><i

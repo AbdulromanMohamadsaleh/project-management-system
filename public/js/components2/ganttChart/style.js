@@ -1,8 +1,34 @@
 export function cssStyles() {
-  const CELL_HEIGHT = 40;
+  const CELL_HEIGHT = 49;
   const outlineColor = "#e9eaeb";
 
   return `
+
+.taskDuration.done-task::before{
+    font-family: 'FontAwesome';
+    content: "\\f00c";
+    color: green;
+    padding: 0 6px 0 0;
+    position: absolute;
+    font-size:1.3rem;
+}
+.taskDuration.done-task::before,.taskDuration.proggress-task::before{
+    right: -29px;
+    top: -1px;
+}
+
+
+
+.taskDuration.proggress-task::before{
+    content: "\\f017";
+    font-family: 'FontAwesome';
+    color: #ffc109;
+    padding: 0 6px 0 0;
+    position: absolute;
+    font-size:1.3rem;
+}
+
+
     * {
         box-sizing: border-box;
         margin: 0;
@@ -68,8 +94,9 @@ export function cssStyles() {
 
     #gantt-grid-container {
         display: grid;
-        grid-template-columns: 150px 1fr;
+        grid-template-columns: auto 1fr;
         outline: 2px solid ${outlineColor};
+
     }
 
     #gantt-grid-container, #settings > fieldset,
@@ -99,7 +126,7 @@ export function cssStyles() {
     }
 
     .gantt-task-row input {
-      width: 127px;
+      width: fit-content;
       border: none;
       outline: none;
       background: none;
@@ -119,7 +146,7 @@ export function cssStyles() {
     }
 
     #gantt-grid-container__tasks .gantt-task-row {
-      padding: 2px 0;
+      padding: 2px 2px;
     }
 
     .gantt-time-period {
@@ -179,10 +206,16 @@ export function cssStyles() {
     .gantt-time-period-month span {
         display: grid;
         grid-auto-flow: column;
-
         text-align: center;
         height: ${CELL_HEIGHT}px;
         outline: 0.5px solid ${outlineColor};
+
+        background: rgb(247, 247, 247);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .for-week .gantt-time-period-month span{
