@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReportController;
 // use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HolydayController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ProjectManagerController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware' => ['auth', 'PreventBackHistory', 'guest']], function () {
 
     Route::get('/', function () {
@@ -35,9 +37,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory', 'guest']], function
 Route::get('/test', function () {
     return view('testChart.index');
 });
-Route::get('/report', function () {
-    return view('report.report');
-});
+
 
 Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
     Auth::routes();
@@ -117,6 +117,19 @@ Route::group(
 );
 
 // url: "{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}",
+
+
+###########################  Report  ###########################
+
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
+        Route::get('/report', [ReportController::class, 'Show'])->name('report.report');
+
+    }
+);
+
+
 
 ###########################  Category  ###########################
 Route::group(

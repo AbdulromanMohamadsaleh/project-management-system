@@ -104,7 +104,7 @@ CREATE TABLE `prj_activity_task` (
   `STATUS` tinyint(1) NOT NULL DEFAULT 0,
   `TASK_BUDGET` int(10) NOT NULL DEFAULT 0,
   `TASK_NOTE` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `COPLATE_TIME` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `COPLETE_TIME` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `START_DATE` timestamp NULL DEFAULT NULL,
   `TASK_TRACKER` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `TASK_ORDER` tinyint(4) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `prj_activity_task` (
 -- Dumping data for table `prj_activity_task`
 --
 
-INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `STATUS`, `TASK_BUDGET`, `TASK_NOTE`, `COPLATE_TIME`, `START_DATE`, `TASK_TRACKER`, `TASK_ORDER`, `created_at`, `updated_at`) VALUES
+INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `STATUS`, `TASK_BUDGET`, `TASK_NOTE`, `COPLETE_TIME`, `START_DATE`, `TASK_TRACKER`, `TASK_ORDER`, `created_at`, `updated_at`) VALUES
 ('TASK0007', 'Design Login', 'ACT0004', 2, 1, 400, NULL, '2023-01-31 15:09:32', '2023-01-10 17:00:00', 'Ahmed,23/01/18', 0, '2023-01-18 09:10:14', '2023-01-18 09:41:46'),
 ('TASK0008', 'Design Dashboard', 'ACT0004', 3, 1, 0, NULL, '2023-01-19 02:59:52', '2023-01-08 17:00:00', 'Ahmed,23/01/18', 0, '2023-01-18 09:10:14', '2023-01-18 10:02:33'),
 ('TASK0009', 'Design Home Page', 'ACT0004', 2, 1, 0, NULL, '2023-02-07 17:18:01', '2023-01-31 17:00:00', 'Ahmed,23/01/18', 0, '2023-01-18 09:10:14', '2023-01-18 10:02:45'),

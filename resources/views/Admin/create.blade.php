@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="inputState" class="label-left fw-bold mb-2">Include
-                                                Holydays</label>
+                                                Holidays</label>
                                             <div class="row p-2 px-5 ">
                                                 <div style="text-align: left"
                                                     class="mb-3 form-check form-check-inline">

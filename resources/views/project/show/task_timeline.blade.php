@@ -39,15 +39,15 @@
                 $counter = 0;
                 foreach ($tasks as $task) {
                     // date('d', strtotime($act->START_DATE)
-                    if ($task->START_DATE && $task->COPLATE_TIME) {
+                    if ($task->START_DATE && $task->COPLETE_TIME) {
                         $counter++;
                         $Syear = intval(date('Y', strtotime($task->START_DATE)));
                         $Smonth = intval(date('m', strtotime($task->START_DATE)));
                         $Sday = intval(date('d', strtotime($task->START_DATE)));
 
-                        $Eyear = intval(date('Y', strtotime($task->COPLATE_TIME)));
-                        $Emonth = intval(date('m', strtotime($task->COPLATE_TIME)));
-                        $Eday = intval(date('d', strtotime($task->COPLATE_TIME)));
+                        $Eyear = intval(date('Y', strtotime($task->COPLETE_TIME)));
+                        $Emonth = intval(date('m', strtotime($task->COPLETE_TIME)));
+                        $Eday = intval(date('d', strtotime($task->COPLETE_TIME)));
 
                         echo "['" .
                             $task->activity->ACTIVITY_NAME .
@@ -78,7 +78,7 @@
             // timeline: {colorByRowLabel: true},
 
             timeline: {
-                
+
                 colorByRowLabel: true,
                 rowLabelStyle: {
                     fontName: 'Helvetica',

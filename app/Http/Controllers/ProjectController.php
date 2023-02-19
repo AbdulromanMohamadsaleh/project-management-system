@@ -25,6 +25,7 @@ use DateTime;
 class ProjectController extends Controller
 {
     use LastProjectTrait;
+
     public function Index()
     {
 
@@ -209,7 +210,26 @@ class ProjectController extends Controller
         $ProjectDetial->RECORD_CREATOR = Auth::user()->LOGIN_ID;
         $ProjectDetial->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetial->BUDGET = $request->budget;
-        $ProjectDetial->TOTAL_DATE = $request->projectDuration . " " . $request->projectDurationFormat;
+        $ProjectDetial->TOTAL_DATE = $request->projectDuration;
+
+        // if ($request->projectDurationFormat == "day")
+        //     $ProjectDetial->DURATION_TYPE = 0;
+        // else if ($request->projectDurationFormat == "week")
+        //     $ProjectDetial->DURATION_TYPE = 1;
+
+        // if ($request->isIncludeHolyday == "no")
+        //     $ProjectDetial->INC_HOLIDAY = 0;
+        // else if ($request->isIncludeHolyday == "yes")
+        //     $ProjectDetial->INC_HOLIDAY = 1;
+
+        // if ($request->isIncludeWeekend == "no")
+        //     $ProjectDetial->INC_WEEKEND = 0;
+        // else if ($request->isIncludeWeekend == "yes")
+        //     $ProjectDetial->INC_WEEKEND = 1;
+
+        $this->CheckRadioButton($request, $ProjectDetial);
+
+
 
         //$ProjectDetial->DATE_SAVE = $request->projectDuration;
         $ProjectDetial->save();
@@ -390,7 +410,10 @@ class ProjectController extends Controller
 
         $ProjectDetail->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetail->BUDGET = $request->budget;
-        $ProjectDetail->TOTAL_DATE = $request->projectDuration . " " . $request->projectDurationFormat;
+        $ProjectDetail->TOTAL_DATE = $request->projectDuration ;
+
+
+        $this->CheckRadioButton($request, $ProjectDetail);
 
         $ProjectDetail->save();
 
@@ -418,7 +441,7 @@ class ProjectController extends Controller
     public function GanttChart($id)
     {
         // $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
-        //     $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
+        //     $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLETE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
         // })->first();
         // $tasks = $project_detail->tasks->toArray();
 
@@ -426,7 +449,7 @@ class ProjectController extends Controller
         $project_detail2 = ProjectDetial::select(['DETAIL_ID', 'NAME_PROJECT', 'BUDGET', 'DATE_START', 'DATE_END', 'STATUS'])->where('DETAIL_ID', $id)->with('activity', function ($q) {
             $q->select('ACTIVITY_ID', 'ACTIVITY_NAME', 'prj_project_activity.START_DATE', 'END_DATE', 'DETAIL_ID', 'ACTIVITY_ORDER')
                 ->with('tasks', function ($q2) {
-                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLATE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->whereNotNull('START_DATE')->whereNotNull('COPLATE_TIME')->orderBy('TASK_ORDER')->get();
+                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLETE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->whereNotNull('START_DATE')->whereNotNull('COPLETE_TIME')->orderBy('TASK_ORDER')->get();
                 })->orderBy('ACTIVITY_ORDER')->get();
         })->first();
 
@@ -456,5 +479,24 @@ class ProjectController extends Controller
     {
         $newdate = explode(" ", $date);
         return str_replace("-", "/", $newdate[0]);
+    }
+
+
+    public function CheckRadioButton($request, $ProjectDetial)
+    {
+        if ($request->projectDurationFormat == "day")
+            $ProjectDetial->DURATION_TYPE = 0;
+        else if ($request->projectDurationFormat == "week")
+            $ProjectDetial->DURATION_TYPE = 1;
+
+        if ($request->isIncludeHolyday == "no")
+            $ProjectDetial->INC_HOLIDAY = 0;
+        else if ($request->isIncludeHolyday == "yes")
+            $ProjectDetial->INC_HOLIDAY = 1;
+
+        if ($request->isIncludeWeekend == "no")
+            $ProjectDetial->INC_WEEKEND = 0;
+        else if ($request->isIncludeWeekend == "yes")
+            $ProjectDetial->INC_WEEKEND = 1;
     }
 }

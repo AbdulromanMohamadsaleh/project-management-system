@@ -236,7 +236,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-                            
+
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -268,7 +268,7 @@
                                     if ($act->START_DATE) {
                                         $result = explode(' ', $act->START_DATE);
                                     }
-                                    
+
                                 @endphp
                                 <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                                 <td>
@@ -337,11 +337,13 @@
                                     <td>
                                         @php
                                             $result = [0];
+                                            $EndDate = [0];
                                         @endphp
                                         @if ($project_detail->IS_APPROVE == 1)
                                             @if ($task->START_DATE)
                                                 @php
                                                     $result = explode(' ', $task->START_DATE);
+                                                    $EndDate = explode(' ', $task->COPLETE_TIME);
                                                 @endphp
 
                                                 {{ $result[0] }}
@@ -376,7 +378,7 @@
                                     <td>
                                         @if ($task->STATUS == 1)
                                             @php
-                                                $resultEndDate = explode(' ', $task->COPLATE_TIME);
+                                                $resultEndDate = explode(' ', $task->COPLETE_TIME);
                                                 $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                             @endphp
 

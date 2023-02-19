@@ -275,3 +275,234 @@
         content: none;
     }
 </style>
+
+
+<!-- script Get End Date -->
+<script>
+    let editStartDateInputs = document.querySelectorAll('input[name="edit_satart_date"]');
+    let ExpectedEndDateInputs = document.querySelectorAll('input[name="Expected_End_Date"]');
+    let dayInputs = document.querySelectorAll('input[name="day"]');
+
+
+    let includeHoliday = <?php echo $project_detail->INC_HOLIDAY; ?>;
+    let IncludeWeekend = <?php echo $project_detail->INC_WEEKEND; ?>;
+    var HolyDays = JSON.parse(document.querySelector("#HolyDays").value);
+
+    HolyDaysDate = HolyDays.map(h => h.HOLYDAY_DATE);
+
+    editStartDateInputs.forEach((element, index) => {
+
+        element.addEventListener("change", function() {
+            // console.log(ExpectedEndDateInputs[index], includeHoliday, includeWeekEnd, dayInputs[index]
+            //     .value);
+            // console.log( convertToHtmlDateFormat(updateEndDateGeneral(
+            //     dayInputs[index].value, this.value,
+            //     IncludeWeekend, includeHoliday)))
+
+
+            let result = updateEndDateGeneral(dayInputs[index].value, this.value, IncludeWeekend,
+                includeHoliday);
+
+
+            ExpectedEndDateInputs[index].value = convertToHtmlDateFormat(result);
+        });
+
+
+    });
+
+    dayInputs.forEach((element, index) => {
+
+        element.addEventListener("input", function() {
+            // console.log(ExpectedEndDateInputs[index], includeHoliday, includeWeekEnd, dayInputs[index]
+            //     .value);
+            // console.log( convertToHtmlDateFormat(updateEndDateGeneral(
+            //     dayInputs[index].value, this.value,
+            //     IncludeWeekend, includeHoliday)))
+            // console.log(editStartDateInputs[index])
+            if (editStartDateInputs[index] != null) {
+                let result = updateEndDateGeneral(this.value, editStartDateInputs[index].value, IncludeWeekend,
+                    includeHoliday);
+
+                ExpectedEndDateInputs[index].value = convertToHtmlDateFormat(result);
+            }
+        });
+
+
+    });
+
+
+    function updateEndDateGeneral(a, startDate, IncludeWeekend, includeHoliday) {
+
+        if (a == 0)
+            return removePublicHolyday(HolyDays, startDate, startDate);
+
+        let amount = a;
+
+        if (amount > 1)
+            amount = amount - 1;
+
+        if (amount == '')
+            amount = 0;
+
+        let projectEnd;
+
+        projectEnd = addDays(startDate, parseInt(amount), IncludeWeekend)
+
+        if (includeHoliday) {
+
+            projectEnd = removePublicHolyday(HolyDays, startDate, projectEnd);
+
+        }
+
+        return projectEnd;
+
+
+    }
+
+    function addDays(date, days, IncludeWeekend) {
+        TotalDaysToComplateProject = days;
+
+        if (days > 10000 || days == 0 || days == "")
+            return new Date();
+
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+
+        rWorkingDays = 0;
+        // document.querySelector('input[name="isIncludeWeekend"]:checked').value;
+        // IncludeWeekend = document.querySelector("input[type='radio'][name=isIncludeWeekend]:checked").value;
+        if (IncludeWeekend == 0) {
+            rWorkingDays = workingDays(date, result);
+            // if number of working days != Number User enter days
+            while (rWorkingDays != days) {
+                result.setDate(result.getDate() + (days - rWorkingDays));
+                rWorkingDays = workingDays(date, result);
+                if (rWorkingDays > days) {
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+
+    // function addWeeks(date, weeks) {
+    //     day = 7 * weeks;
+    //     TotalDaysToComplateProject = day;
+    //     if (day > 10000 || day == 0 || day == "")
+    //         return new Date();
+
+    //     let result = new Date(date);
+    //     result.setDate(result.getDate() + day);
+
+    //     IncludeWeekend = document.querySelector("input[type='radio'][name=isIncludeWeekend]:checked").value;
+    //     if (IncludeWeekend == "no") {
+    //         rWorkingDays = 0;
+    //         rWorkingDays = workingDays(date, result);
+    //         // if number of working days != Number User enter days
+    //         while (rWorkingDays != day) {
+    //             result.setDate(result.getDate() + (day - rWorkingDays));
+    //             rWorkingDays = workingDays(date, result);
+    //             if (rWorkingDays > day) {
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    function pad(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString();
+    }
+
+    function convertToHtmlDateFormat(result) {
+        let months = result.getMonth() + 1;
+        newDate = '';
+        newDate += result.getFullYear() + '-';
+
+        if (result.getMonth() < 10) {
+            newDate += pad(months) + '-'
+
+        } else {
+            newDate += months + '-';
+        }
+
+        if (result.getDate() < 10) {
+            newDate += pad(result.getDate())
+        } else {
+            newDate += result.getDate()
+        }
+
+        return newDate;
+    }
+
+    function workingDays(fromDate, toDate) {
+        fromDate = new Date(fromDate);
+        toDate = new Date(toDate);
+
+        // ensure that the argument is a valid and past date
+        if (!fromDate || isNaN(fromDate) || toDate < fromDate) {
+            return -1;
+        }
+
+        // clone date to avoid messing up original date and time
+        var frD = new Date(fromDate.getTime()),
+            toD = new Date(toDate.getTime()),
+            numOfWorkingDays = 1;
+
+        // reset time portion
+        frD.setHours(0, 0, 0, 0);
+        toD.setHours(0, 0, 0, 0);
+
+        while (frD < toD) {
+            frD.setDate(frD.getDate() + 1);
+            var day = frD.getDay();
+            if (day != 0 && day != 6) {
+                numOfWorkingDays++;
+            }
+        }
+        return numOfWorkingDays - 1;
+    };
+
+
+    function isWeekEnd(date) {
+        var dayOfWeek = date.getDay();
+        return (dayOfWeek === 6) || (dayOfWeek === 0); // 6 = Saturday, 0 = Sunday
+    }
+
+    function removePublicHolyday(HolyDaysDate, startDate, endDate) {
+        // chick if holy days include in the duration
+
+        for (i = 0; i < HolyDaysDate.length; i++) {
+            if (checkDateIsInclude(startDate, endDate, HolyDaysDate[i])) {
+                var endDate = new Date(endDate);
+                endDate.setDate(endDate.getDate() + 1);
+
+                while (isWeekEnd(endDate)) {
+                    endDate.setDate(endDate.getDate() + 1);
+                }
+            }
+
+        }
+
+        return new Date(endDate)
+
+
+    }
+
+
+    function checkDateIsInclude(from, to, check) {
+
+        var fDate, lDate, cDate;
+        fDate = Date.parse(from);
+        lDate = Date.parse(to);
+        cDate = Date.parse(check);
+
+        if ((cDate <= lDate && cDate >= fDate)) {
+            return true;
+        }
+        return false;
+    }
+</script>

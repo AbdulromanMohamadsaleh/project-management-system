@@ -781,7 +781,7 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
 
     //  For Days
     function createTaskDurationElForDays(taskDuration, startCell) {
-
+        
         if(taskDuration.start==taskDuration.end || getDiffNumberOfDays(taskDuration.start,taskDuration.end)==0){
 
             let weekSpanCounter=1;
@@ -793,6 +793,7 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
 
         // append at start pos
         startCell.appendChild(taskDurationEl);
+
         return
         }
 
@@ -805,6 +806,7 @@ export function GanttChart(ChartType,ganttChartElement, tasks, project,lastTaskE
         const days = dayDiff(taskDuration.start, taskDuration.end);
         let add = days*0.036;
     // console.log("Add: "+add);
+
         taskDurationEl.style.width = `calc(${days-1+add} * 100%)`;
 
         // append at start pos

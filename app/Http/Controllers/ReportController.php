@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\LastProjectTrait;
 
 class ReportController extends Controller
 {
-    public function report()
-    {
+    use LastProjectTrait;
 
-        return view('report.report');
+    public function Show()
+    {
+        $routeName = $this->getRouteName();
+        $data['last']  = $this->getLastProject();
+        return view('report.report', ['routename' => $routeName, 'data' => $data]);
     }
 }
