@@ -85,6 +85,7 @@
                 let yearChart = BarData.map(x => x[0]);
                 let projectChart = BarData.map(x => x[1]);
 
+
                 console.log(BudgetData)
                 // let budgetChart = BudgetData.map(x => x[1]);
                 new Chart(

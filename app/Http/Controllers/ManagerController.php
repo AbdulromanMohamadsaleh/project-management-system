@@ -41,7 +41,7 @@ class ManagerController extends Controller
 
         // dd($data['BarChartDataSumBudget']);
         $data['last']  = $this->getLastProject();
-
+        $data['totalbudget'] = ProjectDetial::where('IS_APPROVE', 1)->sum ('BUDGET');
 
         return view('manager.dashbord', ['data' => $data]);
     }

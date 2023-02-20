@@ -69,7 +69,7 @@
     @break
 
     @case('Manager')
-        <div class="col-md-4 col-sm-4">
+        <div class="col col-sm-4 col-md-3">
             <div class="wrimagecard wrimagecard-topimage">
                 <a data-bs-toggle="modal" data-bs-target="#modal">
                     <div class="wrimagecard-topimage_header" style="background-color:rgba(187, 120, 36, 0.1) ">
@@ -82,9 +82,23 @@
                     </div>
                 </a>
             </div>
-            @include('Admin.modal_view.modal_project_panding_approve')
         </div>
-        <div class="col-md-4 col-sm-4">
+        <div class="col col-sm-3 col-md-3">
+        <div class="wrimagecard wrimagecard-topimage">
+            <a data-bs-toggle="modal" data-bs-target="#modal">
+                <div class="wrimagecard-topimage_header" style="background-color:rgba(79, 36, 187, 0.1) ">
+
+                    <center><i class="fa fa-money" style="color:#093382;font-size:70px;"></i></center>
+                </div>
+                <div class="wrimagecard-topimage_title">
+                    <h4>Total Budget
+                        <div class="badge text-bg-primary">{{  $data['totalbudget'] }} Baht</div>
+                    </h4>
+                </div>
+            </a>
+        </div>
+        </div>
+        <div class="col col-sm-3 col-md-3">
             <div class="wrimagecard wrimagecard-topimage">
                 <a data-bs-toggle="modal" data-bs-target="#modal3">
                     <div class="wrimagecard-topimage_header" style="background-color:rgb(255 219 191 / 62%)">
@@ -99,7 +113,7 @@
                 @include('Admin.modal_view.modal_projectprogress')
             </div>
         </div>
-        <div class="col-md-4 col-sm-4">
+        <div class="col col-sm-3 col-md-3">
             <div class="wrimagecard wrimagecard-topimage">
                 <a data-bs-toggle="modal" data-bs-target="#modal2">
                     <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
