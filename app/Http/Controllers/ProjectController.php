@@ -103,7 +103,8 @@ class ProjectController extends Controller
         // dd($project_detail->activity);
         $sum = 0;
         $totalBudget = 0;
-        $paidBudget=0;
+        $paidBudget = 0;
+        $BudgetActivityNotPaid = 0;
         foreach ($project_detail->activity as $act) {
 
             // dd(intval(date('m', strtotime($act->START_DATE))));
@@ -124,13 +125,16 @@ class ProjectController extends Controller
             foreach ($act->tasks as $task) {
                 $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
-                if($task->STATUS_PAYMENT==1){
-                    $paidBudget+=$task->TASK_BUDGET;
+                if ($task->STATUS_PAYMENT == 1) {
+                    $paidBudget += $task->TASK_BUDGET;
+                }
+                if ($task->STATUS_PAYMENT == 0) {
+                    $BudgetActivityNotPaid += $task->TASK_BUDGET;
                 }
             }
         }
 
-
+        $project_detail->BudgetActivityNotPaid = $BudgetActivityNotPaid;
         $project_detail->paidBudget = $paidBudget;
         $project_detail->TotalDays = $sum;
         $project_detail->TotalBudget = $totalBudget;
@@ -287,7 +291,7 @@ class ProjectController extends Controller
         $sMessage .= "ProjectStart: " . "$request->projectStart" . "\n";
         $sMessage .= "ProjectEnd:" . " $request->projectEnd" . "\n";
         $sMessage .= "Status: " . "New Release" . "\n";
-        Line::send('' . '' . $sMessage);
+        // Line::send('' . '' . $sMessage);
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -329,7 +333,7 @@ class ProjectController extends Controller
         $sMessage .= "Approve by:" . Auth::user()->NAME . "\n";
         $sMessage .= "Approve Date:" .  $dateApprove->format('d-m-Y') . "\n";
         $sMessage .= "Status: " . "Approved" . "\n";
-        Line::send('' . '' . $sMessage);
+        // Line::send('' . '' . $sMessage);
 
 
         return redirect()->back()->with("success", "Project Appreoved Successfully");;
@@ -411,22 +415,41 @@ class ProjectController extends Controller
 
 
 
-
     public function GanttChart($id)
     {
-        $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
-            $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
+        // $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('tasks', function ($q) {
+        //     $q->select(['TASK_ID as id', 'TASK_NAME as name', 'prj_activity_task.START_DATE as start', 'COPLATE_TIME as end', 'prj_activity_task.created_at'])->orderBy('created_at', 'ASC')->get();
+        // })->first();
+        // $tasks = $project_detail->tasks->toArray();
+
+        #####  Update  #####
+        $project_detail2 = ProjectDetial::select(['DETAIL_ID', 'NAME_PROJECT', 'BUDGET', 'DATE_START', 'DATE_END', 'STATUS'])->where('DETAIL_ID', $id)->with('activity', function ($q) {
+            $q->select('ACTIVITY_ID', 'ACTIVITY_NAME', 'prj_project_activity.START_DATE', 'END_DATE', 'DETAIL_ID', 'ACTIVITY_ORDER')
+                ->with('tasks', function ($q2) {
+                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLATE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->whereNotNull('START_DATE')->whereNotNull('COPLATE_TIME')->orderBy('TASK_ORDER')->get();
+                })->orderBy('ACTIVITY_ORDER')->get();
         })->first();
 
 
 
-        $tasks = $project_detail->tasks->toArray();
+
+
+
+
+        // dd(($project_detail['tasks']));
+
+        $tasks = $project_detail2->tasks->toArray();
+
         // dd($tasks);
+
+        $project_detail2 = json_encode($project_detail2->toArray());
         $tasks = json_encode($tasks);
+
         $data['last']  = $this->getLastProject();
 
         $routeName = $this->getRouteName();
-        return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail, 'data' => $data, 'routename' => $routeName]);
+        // return view('testChart.index2', ['tasks' => $tasks, 'project' => $project_detail2, 'data' => $data, 'routename' => $routeName]);
+        return view('testChart.index', ['project' => $project_detail2, 'tasks' => $tasks, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function ConvertTimestampToDateStringFormate($date)

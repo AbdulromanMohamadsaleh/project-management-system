@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-        const tasks = @php echo $tasks @endphp;
-        const project = @php echo $project @endphp;
+        var project = @php echo $project @endphp;
+        let tasks = @php echo $tasks @endphp;
     </script>
-    <script src="{{ asset('js/gantt_chart_script.js') }}" type="module" defer></script>
+    <script src="{{ asset('js/gantt_chart_scriptv2.js') }}" type="module" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet" />
@@ -38,7 +38,7 @@
         // console.log($('.for-week .gantt-grid-container-width').width() + "px")
 
         let widthToPrint = $('.for-day .gantt-grid-container-width').width() + 300;
-
+        let heightToPrint = $('#print-day').height() + 300;
 
         if (widthToPrint <= 1950) {
             var opt = {
@@ -46,10 +46,10 @@
                 filename: 'DayTimeline' + '.pdf',
                 image: {
                     type: 'jpeg',
-                    quality: 1
+                    quality: 3
                 },
                 html2canvas: {
-                    scale: 1,
+                    scale: 2,
                 },
                 jsPDF: {
                     unit: 'in',
@@ -63,11 +63,12 @@
                 filename: 'DayTimeline' + '.pdf',
                 image: {
                     type: 'jpeg',
-                    quality: 1
+                    quality: 3
                 },
                 html2canvas: {
-                    scale: 1,
-                    width: widthToPrint
+                    scale: 2,
+                    width: widthToPrint,
+                    height: heightToPrint,
                 },
                 jsPDF: {
                     unit: 'in',
@@ -102,23 +103,25 @@
         // console.log($('.for-week .gantt-grid-container-width').width() + "px")
 
         let widthToPrint = $('.for-week .gantt-grid-container-width').width() + 200;
-
+        let heightToPrint = $('#print-week').height() + 300;
+        console.log("Hight: " + heightToPrint)
         console.log("Width: " + widthToPrint)
         var opt = {
             margin: 1,
             filename: 'weekTimeline' + '.pdf',
             image: {
                 type: 'jpeg',
-                quality: 1,
+                quality: 4,
             },
             html2canvas: {
-                scale: 1,
+                scale: 3,
                 width: widthToPrint,
+                height: heightToPrint,
             },
             jsPDF: {
                 unit: 'in',
-                format: 'A4',
-                orientation: 'L',
+                format: 'A3',
+                orientation: 'P',
             }
         };
 
@@ -173,7 +176,8 @@
         <div class="p-5 ">
             <!-- Recent Sales Start -->
             <div class="title">
-                <h1> Gantt Tracker</h1>
+                <h1 id="chartTitle"> </h1>
+
             </div>
             {{-- <div class="ms-3 ">
                 <input type="radio" class="btn-check" name="options" id="ChartType" autocomplete="off" value="Day">
@@ -206,7 +210,7 @@
                 </li> --}}
 
             </ul>
-            <div class="tab-content" id="myTabContent">
+            <div class="tab-content mt-4" id="myTabContent">
                 <div class="tab-pane fade show active" id="Day" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
 

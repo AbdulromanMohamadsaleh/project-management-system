@@ -275,7 +275,7 @@ function ValidateProjectDuration(){
     // console.log(TotalDaysToComplateProject);
     let errorMessage = ` <i class="bi bi-exclamation-triangle-fill me-3"></i>
                                 <div class="text-center">
-                                    The number of project days entered <b>${totalDurationUserInput}</b> are exceeded the set days <b>${TotalDaysToComplateProject}</b><br>you need to derease <b>${totalDurationUserInput-TotalDaysToComplateProject}</b> day.
+                                    Days entered <b>(${totalDurationUserInput})</b> exceeded set days <b>(${TotalDaysToComplateProject})</b>, need to decrease <b>(${totalDurationUserInput-TotalDaysToComplateProject})</b> day.
                                 </div>`;
 
     let errorContainer = document.getElementById("alert");
