@@ -29,8 +29,8 @@
 
 <div class="tab-content" id="nav-tabContent">
 
-
-    <div  class="tab-pane fade show active mt-3" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
+    <input type="text" hidden id="HolyDays" value="{{ $Holydays }}">
+    <div class="tab-pane fade show active mt-3" id="nav-show-project" role="tabpanel" aria-labelledby="nav-show-tab"
         tabindex="0">
         @include('project.show.include.project_activity_task_table')
     </div>

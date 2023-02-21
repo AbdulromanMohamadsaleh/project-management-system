@@ -17,7 +17,7 @@ class TaskController extends Controller
     {
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->STATUS = 1;
-        $Task->COPLATE_TIME = date("Y/m/d");
+        $Task->COPLETE_TIME = date("Y/m/d");
         $Task->TASK_TRACKER =  Auth::user()->NAME . "," . date("y/m/d");
         $Task->save();
 
@@ -163,8 +163,9 @@ class TaskController extends Controller
 
         $Task->TASK_NAME = $request->task;
         $Task->DAY = $request->day;
-
+        $Task->DAY = $request->day;
         $Task->START_DATE = $request->edit_satart_date;
+        $Task->COPLETE_TIME = $request->Expected_End_Date;
 
         $Task->save();
 
@@ -212,16 +213,14 @@ class TaskController extends Controller
 
     public function Payment($id)
     {
-        if (Auth::user()->POSITION !== "Employee" && Auth::user()->POSITION !== "Project Manager" ) {
+        if (Auth::user()->POSITION !== "Employee" && Auth::user()->POSITION !== "Project Manager") {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }
 
 
-        $tasks = ProjectTask::where('TASK_ID', $id)->update(['STATUS_PAYMENT' => 1, 'DATE_PAYMENT' => date("Y-m-d") , 'USER_PAYMENT' =>  Auth::user()->LOGIN_ID ]);
+        $tasks = ProjectTask::where('TASK_ID', $id)->update(['STATUS_PAYMENT' => 1, 'DATE_PAYMENT' => date("Y-m-d"), 'USER_PAYMENT' =>  Auth::user()->LOGIN_ID]);
 
         return redirect()->back()->with("success", "Payment Successfully");;
     }
-
-
 }

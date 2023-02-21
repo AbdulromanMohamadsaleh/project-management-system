@@ -104,7 +104,7 @@ CREATE TABLE `prj_activity_task` (
   `STATUS` tinyint(1) NOT NULL DEFAULT 0,
   `TASK_BUDGET` int(10) NOT NULL DEFAULT 0,
   `TASK_NOTE` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `COPLATE_TIME` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `COPLETE_TIME` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `TASK_TRACKER` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -114,7 +114,7 @@ CREATE TABLE `prj_activity_task` (
 -- Dumping data for table `prj_activity_task`
 --
 
-INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `STATUS`, `TASK_BUDGET`, `TASK_NOTE`, `COPLATE_TIME`, `TASK_TRACKER`, `created_at`, `updated_at`) VALUES
+INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `STATUS`, `TASK_BUDGET`, `TASK_NOTE`, `COPLETE_TIME`, `TASK_TRACKER`, `created_at`, `updated_at`) VALUES
 ('TASK0001', 'Magee Roach', 'ACT0001', 58, 0, 0, NULL, '2023-01-11 04:11:05', NULL, '2023-01-10 21:11:05', '2023-01-10 21:11:05'),
 ('TASK0002', 'Jackson Smith', 'ACT0001', 79, 0, 0, NULL, '2023-01-11 04:11:05', NULL, '2023-01-10 21:11:05', '2023-01-10 21:11:05'),
 ('TASK0003', 'Quintessa Wooten', 'ACT0001', 9, 0, 0, NULL, '2023-01-11 04:11:05', NULL, '2023-01-10 21:11:05', '2023-01-10 21:11:05'),

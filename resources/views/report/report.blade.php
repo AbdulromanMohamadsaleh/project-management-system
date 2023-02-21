@@ -9,51 +9,64 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
-@include('include.header')
-<body>
-    @include('include.sidebar')
-    <br>
-    <div class="container">
-        <form id="search-form" action="" method="POST" enctype="multipart/form-data">
-            <div class="row" id="search">
-                <div class="form-group col-9">
-                    <input class="form-control" type="text" placeholder="Search" />
-                </div>
-                <div class="form-group col-3">
-                    <button type="submit" class="btn btn-block btn-primary">Search</button>
-                </div>
-            </div>
-        </form>
-        <form>
-            <div class="row" id="filter">
-                <div class="form-group col-sm-3 col-xs-6">
-                    <select data-filter="make" class="filter-make filter form-control">
-                        <option value="">Select Make</option>
-                        <option value="">Show All</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 col-xs-6">
-                    <select data-filter="model" class="filter-model filter form-control">
-                        <option value="">Select Model</option>
-                        <option value="">Show All</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 col-xs-6">
-                    <select data-filter="type" class="filter-type filter form-control">
-                        <option value="">Select Type</option>
-                        <option value="">Show All</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 col-xs-6">
-                    <select data-filter="price" class="filter-price filter form-control">
-                        <option value="">Select Price Range</option>
-                        <option value="">Show All</option>
-                    </select>
-                </div>
-            </div>
-        </form>
-        <div class="row" id="products">
 
+<body>
+    @include('include.header')
+    <script></script>
+
+
+    <!-- Sidebar Start -->
+    @include('include.sidebar')
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        @include('include.navbar')<br>
+
+        <div class="container">
+            <form id="search-form" action="" method="POST" enctype="multipart/form-data">
+                <div class="row" id="search">
+                    <div class="form-group col-9">
+                        <input class="form-control" type="text" placeholder="Search" />
+                    </div>
+                    <div class="form-group col-3">
+                        <button type="submit" class="btn btn-block btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+            <form>
+                <div class="row" id="filter">
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="make" class="filter-make filter form-control">
+                            <option value="">Select Make</option>
+                            <option value="">Show All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="model" class="filter-model filter form-control">
+                            <option value="">Select Model</option>
+                            <option value="">Show All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="type" class="filter-type filter form-control">
+                            <option value="">Select Type</option>
+                            <option value="">Show All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="price" class="filter-price filter form-control">
+                            <option value="">Select Price Range</option>
+                            <option value="">Show All</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="row" id="products">
+
+            </div>
         </div>
     </div>
 </body>

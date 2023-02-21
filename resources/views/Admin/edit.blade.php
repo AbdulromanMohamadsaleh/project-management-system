@@ -118,7 +118,7 @@
                                         <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
-                                                <input required {{ $result[1] == 'day' ? 'checked' : '' }}
+                                                <input required {{ $project_detail->DURATION_TYPE == 0 ? 'checked' : '' }}
                                                     class="form-check-input" name="projectDurationFormat" type="radio"
                                                     id="day" value="day">
                                                 <label checked class="form-check-label" for="day">Day</label>
@@ -126,7 +126,7 @@
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDurationFormat"
                                                     type="radio" id="week"
-                                                    {{ $result[1] == 'week' ? 'checked' : '' }} value="week">
+                                                    {{ $project_detail->DURATION_TYPE == 1 ? 'checked' : '' }} value="week">
                                                 <label class="form-check-label" for="week">Week</label>
                                             </div>
 
@@ -147,12 +147,14 @@
                                             <div class="row p-2 px-5 ">
                                                 <div style="text-align: left" class="mb-3 form-check form-check-inline">
                                                     <input class="form-check-input" name="isIncludeWeekend"
-                                                        type="radio" id="yes" value="yes">
+                                                        type="radio" id="yes" value="yes"
+                                                        {{ $project_detail->INC_WEEKEND == 1 ? 'checked' : '' }} >
                                                     <label class="form-check-label ms-2" for="yes">Yes</label>
                                                 </div>
                                                 <div style="text-align: left" class="form-check form-check-inline">
-                                                    <input checked class="form-check-input" name="isIncludeWeekend"
-                                                        type="radio" id="no" value="no">
+                                                    <input  class="form-check-input" name="isIncludeWeekend"
+                                                        type="radio" id="no" value="no"
+                                                        {{ $project_detail->INC_WEEKEND == 0 ? 'checked' : '' }} >
                                                     <label class="form-check-label ms-2" for="no">No</label>
                                                 </div>
                                             </div>
@@ -164,12 +166,14 @@
                                                 <div style="text-align: left"
                                                     class="mb-3 form-check form-check-inline">
                                                     <input class="form-check-input" name="isIncludeHolyday"
-                                                        type="radio" id="yes" value="yes">
+                                                        type="radio" id="yes" value="yes"
+                                                        {{ $project_detail->INC_HOLIDAY == 1 ? 'checked' : '' }}>
                                                     <label class="form-check-label ms-2" for="yes">Yes</label>
                                                 </div>
                                                 <div style="text-align: left" class="form-check form-check-inline">
                                                     <input class="form-check-input" name="isIncludeHolyday"
-                                                        type="radio" id="no" value="no">
+                                                        type="radio" id="no" value="no"
+                                                        {{ $project_detail->INC_HOLIDAY == 0 ? 'checked' : '' }}>
                                                     <label class="form-check-label ms-2" for="no">No</label>
                                                 </div>
                                             </div>

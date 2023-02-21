@@ -102,7 +102,7 @@
         widthChart.style.overflowX = "visible";
         // console.log($('.for-week .gantt-grid-container-width').width() + "px")
 
-        let widthToPrint = $('.for-week .gantt-grid-container-width').width() + 200;
+        let widthToPrint = $('.for-week .gantt-grid-container-width').width() + 300;
         let heightToPrint = $('#print-week').height() + 300;
         console.log("Hight: " + heightToPrint)
         console.log("Width: " + widthToPrint)
