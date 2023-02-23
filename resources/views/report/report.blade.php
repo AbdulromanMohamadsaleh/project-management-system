@@ -10,6 +10,63 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
 
+<style>
+    /* .general-stat-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+    } */
+
+
+    .general-stat-icon {
+
+        transition: all .1s ease-in-out;
+    }
+
+    .stat-group i {
+        font-size: 60px;
+    }
+
+    .stat-group {
+        transition: all .3s ease-in-out;
+    }
+
+    .stat-group:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-group:hover .general-stat-icon {
+        /* filter: invert(50%) sepia(11%) saturate(2483%) hue-rotate(80deg) brightness(95%) contrast(87%); */
+    }
+
+    @media only screen and (min-width: 992px) {
+        .general-stat-icon {
+            height: 60px;
+        }
+    }
+
+    /* .stat-group:not(:last-child):after {
+        content: "";
+        width: 2px;
+        height: 75px;
+        background: #eee;
+    } */
+
+    @media only screen and (max-width: 576px) {
+        .general-stat-grid {
+            grid-template-columns: 1fr;
+            grid-row-gap: 30px;
+        }
+
+        .general-stat-icon {
+            height: 100px;
+        }
+
+        .stat-group:not(:last-child):after {
+            content: none;
+        }
+    }
+</style>
+
 <body>
     @include('include.header')
     <script></script>
@@ -39,31 +96,72 @@
             <form>
                 <div class="row" id="filter">
                     <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="make" class="filter-make filter form-control">
-                            <option value="">Select Make</option>
-                            <option value="">Show All</option>
+                        <select data-filter="name" class="filter-name filter form-control">
+                            <option value="">Select Name</option>
+                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
                     <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="model" class="filter-model filter form-control">
-                            <option value="">Select Model</option>
-                            <option value="">Show All</option>
+                        <select data-filter="year" class="filter-year filter form-control">
+                            <option value="">Select Year</option>
+                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
                     <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="type" class="filter-type filter form-control">
-                            <option value="">Select Type</option>
-                            <option value="">Show All</option>
+                        <select data-filter="status" class="filter-status filter form-control">
+                            <option value="">Select Status</option>
+                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
                     <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="price" class="filter-price filter form-control">
-                            <option value="">Select Price Range</option>
-                            <option value="">Show All</option>
+                        <select data-filter="category" class="filter-category filter form-control">
+                            <option value="">Select Category</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="projetManager" class="filter-projetManager filter form-control">
+                            <option value="">Select Project Manager</option>
+                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
                 </div>
             </form>
+
+            {{-- Summary --}}
+            <div class="mb-5 general-stat-grid  shadow p-4 general-stats  row">
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#A04000" class="fas fa-database general-stat-icon me-3"></i>
+
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-project">540</h1>
+                        <h6 class="my-0">All Project</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-complete">145</h1>
+                        <h6 class="my-0">Completed</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-progress">184</h1>
+                        <h6 class="my-0">In Progress</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-budget">130</h1>
+                        <h6 class="my-0">Budget</h6>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="row" id="products">
 
             </div>
@@ -90,104 +188,121 @@
     }
 </style>
 <script>
-    var data = [{
-            "make": "Gibson",
-            "model": "Les Paul",
-            "type": "Electric",
-            "price": "$3,000",
-            "image": "http://www.sweetwater.com/images/items/120/LPST5HTHDCH-medium.jpg?9782bd"
-        },
-        {
-            "make": "Gibson",
-            "model": "SG",
-            "type": "Electric",
-            "price": "$1,500",
-            "image": "http://www.sweetwater.com/images/items/120/SGSEBCH-medium.jpg?e69cfe"
-        },
-        {
-            "make": "Fender",
-            "model": "Telecaster",
-            "type": "Electric",
-            "price": "$2,000",
-            "image": "http://www.sweetwater.com/images/items/120/TelePLMPHB-medium.jpg?28e48b"
-        },
-        {
-            "make": "Fender",
-            "model": "Stratocaster",
-            "type": "Electric",
-            "price": "$2,000",
-            "image": "http://www.sweetwater.com/images/items/120/StratAMM3SB2-medium.jpg?dfd0a9"
-        },
-        {
-            "make": "Gretsch",
-            "model": "White Falcon",
-            "type": "Electric",
-            "price": "$5,000",
-            "image": "http://www.sweetwater.com/images/items/120/G613655GE-medium.jpg?9bfb0e"
-        },
-        {
-            "make": "Paul Reed Smith",
-            "model": "Custom 24",
-            "type": "Electric",
-            "price": "$5,000",
-            "image": "http://www.sweetwater.com/images/items/120/HBII10BGWB-medium.jpg?982763"
-        },
-        {
-            "make": "Gibson",
-            "model": "Hummingbird",
-            "type": "Acoustic",
-            "price": "$2,500",
-            "image": "http://www.sweetwater.com/images/items/120/SSHBHCNP-medium.jpg?11fbea"
+    document.addEventListener('DOMContentLoaded', function() {
+        var data = @php echo $project_detail @endphp;
+
+        var products = "",
+            names = "",
+            years = "",
+            statusAll = "",
+            projetManagers = "",
+            categories = "";
+
+
+        // console.log(data);
+
+        // const d = new Date(projectData[0].DATE_END);
+        // console.log(d.getFullYear())
+
+
+
+
+        let totalProject = 0;
+        let totalCompletedProject = 0;
+        let totalInProjressProject = 0;
+        let totalBudget = 0;
+
+
+        for (var i = 0; i < data.length; i++) {
+
+            let b = new Date(data[i].created_at);
+            console.log(b.getFullYear())
+
+            var name = data[i].NAME_PROJECT,
+                year = b.getFullYear(),
+                budget = data[i].BUDGET,
+                status = data[i].STATUS,
+                category = data[i].category.NAME_CATEGORY,
+                // rawPrice = price.replace("$", ""),
+                // rawPrice = parseInt(rawPrice.replace(",", "")),
+                // rawPrice = parseInt(rawPrice.replace(",", "")),
+                projetManager = data[i].project_manager.NAME,
+                project_creator = data[i].project_creator.NAME;
+
+            totalBudget += parseInt(budget);
+            //create product cards all
+            products += "<div class='projets col-sm-4 product' data-name='" + name + "' data-year='" +
+                year + "' data-all='" + "all" + "' data-status='" +
+                status + "' data-category = '" + category + "' data-projetManager='" + projetManager +
+                "' data-budget='" + budget +
+                "' ><div class='product-inner text-center'>Name: " + name + "<br />Created at: " + year +
+                "<br />Status: " + status + "<br />Category: " +
+                category + "<br />Budget: " +
+                budget + "<br />projet Manager: " +
+                projetManager +
+                "</div></div>";
+
+
+
+            // //create dropdown of models
+            // if (models.indexOf("<option value='" + model + "'>" + model + "</option>") == -1) {
+            //     models += "<option value='" + model + "'>" + model + "</option>";
+            // }
+
+            // //create dropdown of types
+            // if (types.indexOf("<option value='" + type + "'>" + type + "</option>") == -1) {
+            //     types += "<option value='" + type + "'>" + type + "</option>";
+            // }
+
+
+            if (years.indexOf("<option value='" + year + "'>" + year + "</option>") == -1) {
+                years += "<option value='" + year + "'>" + year + "</option>";
+            }
+
+            if (names.indexOf("<option value='" + name + "'>" + name + "</option>") == -1) {
+                names += "<option value='" + name + "'>" + name + "</option>";
+            }
+
+            if (statusAll.indexOf("<option value='" + status + "'>" + status + "</option>") == -1) {
+                statusAll += "<option value='" + status + "'>" + status + "</option>";
+            }
+
+            if (categories.indexOf("<option value='" + category + "'>" + category + "</option>") == -1) {
+                categories += "<option value='" + category + "'>" + category + "</option>";
+            }
+
+            if (projetManagers.indexOf("<option value='" + projetManager + "'>" + projetManager +
+                    "</option>") == -1) {
+                projetManagers += "<option value='" + projetManager + "'>" + projetManager + "</option>";
+            }
         }
-    ];
-
-    var products = "",
-        makes = "",
-        models = "",
-        types = "";
-
-    for (var i = 0; i < data.length; i++) {
-        var make = data[i].make,
-            model = data[i].model,
-            type = data[i].type,
-            price = data[i].price,
-            rawPrice = price.replace("$", ""),
-            rawPrice = parseInt(rawPrice.replace(",", "")),
-            image = data[i].image;
-
-        //create product cards
-        products += "<div class='col-sm-4 product' data-make='" + make + "' data-model='" + model + "' data-type='" +
-            type + "' data-price='" + rawPrice + "'><div class='product-inner text-center'><img src='" + image +
-            "'><br />Make: " + make + "<br />Model: " + model + "<br />Type: " + type + "<br />Price: " + price +
-            "</div></div>";
 
         //create dropdown of makes
-        if (makes.indexOf("<option value='" + make + "'>" + make + "</option>") == -1) {
-            makes += "<option value='" + make + "'>" + make + "</option>";
-        }
 
-        //create dropdown of models
-        if (models.indexOf("<option value='" + model + "'>" + model + "</option>") == -1) {
-            models += "<option value='" + model + "'>" + model + "</option>";
-        }
 
-        //create dropdown of types
-        if (types.indexOf("<option value='" + type + "'>" + type + "</option>") == -1) {
-            types += "<option value='" + type + "'>" + type + "</option>";
-        }
-    }
+        console.log(totalBudget)
 
-    $("#products").html(products);
-    $(".filter-make").append(makes);
-    $(".filter-model").append(models);
-    $(".filter-type").append(types);
+        $("#products").html(products);
+        $(".filter-year").append(years);
+        $(".filter-name").append(names);
+        $(".filter-status").append(statusAll);
+        $(".filter-category").append(categories);
+        $(".filter-projetManager").append(projetManagers);
+
+    }, false);
+
 
     var filtersObject = {};
 
     //on filter change
     $(".filter").on("change", function() {
+
         var filterName = $(this).data("filter"),
             filterVal = $(this).val();
+
+
+        // if (filterVal == 'all')
+        //     filterName = filterVal
 
         if (filterVal == "") {
             delete filtersObject[filterName];
@@ -198,16 +313,23 @@
         var filters = "";
 
         for (var key in filtersObject) {
+
             if (filtersObject.hasOwnProperty(key)) {
                 filters += "[data-" + key + "='" + filtersObject[key] + "']";
             }
         }
 
+        console.log(filters)
         if (filters == "") {
             $(".product").show();
+            getProjectSummary($(".product").show());
+
         } else {
             $(".product").hide();
             $(".product").hide().filter(filters).show();
+
+            let filtredData = $(".product").filter(filters);
+            getProjectSummary(filtredData);
         }
     });
 
@@ -227,4 +349,27 @@
             }
         });
     });
+
+    function getProjectSummary(filtredData) {
+        let projectsData = filtredData;
+
+        let totalBudgetFild = document.getElementById("total-budget");
+        let totalProjectFild = document.getElementById("total-project");
+        let totalCompleteFild = document.getElementById("total-complete");
+        let totalProgresstFild = document.getElementById("total-progress");
+
+        let totalBudget = 0;
+        for (var i = 0; i < projectsData.length; i++) {
+
+
+            totalBudget += parseInt(projectsData[i].dataset.budget);
+
+
+        }
+
+        totalBudgetFild.innerHTML = totalBudget;
+        totalProjectFild.innerHTML = projectsData.length;
+        // totalCompleteFild.innerHTML =
+        //     totalProgresstFild.innerHTML =
+    }
 </script>

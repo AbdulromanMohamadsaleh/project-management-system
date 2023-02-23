@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProjectDetial extends Model
 {
@@ -24,11 +25,12 @@ class ProjectDetial extends Model
         'RECORD_CREATOR',
         'PROPONEN_NAME',
         'IS_APPROVE',
-        'PROJECT_MANAGER'
+        'PROJECT_MANAGER',
+        'created_at',
     ];
 
     protected $hidden = [
-        'created_at',
+        // 'created_at',
         'updated_at',
     ];
 
@@ -41,7 +43,7 @@ class ProjectDetial extends Model
     //     return $this->hasManyThrough(ProjectTask::class, ProjectActivity::class, 'DETAIL_ID', 'ACTIVITY_ID');
     // }
 
-    
+
 
     public function projectTeam()
     {
@@ -62,6 +64,13 @@ class ProjectDetial extends Model
     {
         return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
     }
+
+    public function Category()
+    {
+        return $this->belongsto(Category::class, 'CATEGORY_ID', 'CATEGORY_ID');
+    }
+
+
 
     public function ProjectCreator()
     {

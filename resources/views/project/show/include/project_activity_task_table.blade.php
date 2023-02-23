@@ -348,7 +348,7 @@
 
                                                 {{ $result[0] }}
                                             @else
-                                                <form style="display: inline-block" method="GET"
+                                                {{-- <form style="display: inline-block" method="GET"
                                                     action="{{ route('task.start', $task->TASK_ID) }}">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="GET">
@@ -356,7 +356,7 @@
                                                         class="btn  btn-warning  show-alert-delete-box "
                                                         data-toggle="tooltip" title='Start Stask'><i
                                                             class="bi bi-clock-history"></i></button>
-                                                </form>
+                                                </form> --}}
                                             @endif
                                         @else
                                             -
