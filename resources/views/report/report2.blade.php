@@ -65,126 +65,8 @@
             content: none;
         }
     }
-</style>
-
-<body>
-    @include('include.header')
-    <script></script>
 
 
-    <!-- Sidebar Start -->
-    @include('include.sidebar')
-    <!-- Sidebar End -->
-
-
-    <!-- Content Start -->
-    <div class="content">
-        <!-- Navbar Start -->
-        @include('include.navbar')<br>
-
-        <div class="container">
-            <form id="search-form" action="" method="POST" enctype="multipart/form-data">
-                <div class="row" id="search">
-                    <div class="form-group col-9">
-                        <input class="form-control" type="text" placeholder="Search" />
-                    </div>
-                    <div class="form-group col-3">
-                        <button type="submit" class="btn btn-block btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
-            <form>
-                <div class="row" id="filter">
-                    <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="name" class="filter-name filter form-control">
-                            <option value="">Select Name</option>
-                            {{-- <option value="all">Show All</option> --}}
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="year" class="filter-year filter form-control">
-                            <option value="">Select Year</option>
-                            {{-- <option value="all">Show All</option> --}}
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="status" class="filter-status filter form-control">
-                            <option value="">Select Status</option>
-                            {{-- <option value="all">Show All</option> --}}
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="category" class="filter-category filter form-control">
-                            <option value="">Select Category</option>
-                            {{-- <option value="all">Show All</option> --}}
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="projectManager" class="filter-projectManager filter form-control">
-                            <option value="">Select Project Manager</option>
-                            {{-- <option value="all">Show All</option> --}}
-                        </select>
-                    </div>
-                </div>
-            </form>
-
-            {{-- Summary --}}
-            <div class="mb-5 general-stat-grid  shadow p-4 general-stats  row">
-                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                    <i style="color:#A04000" class="fas fa-database general-stat-icon me-3"></i>
-
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-project">540</h1>
-                        <h6 class="my-0">All Project</h6>
-                    </div>
-                </div>
-                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                    <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-complete">145</h1>
-                        <h6 class="my-0">Completed</h6>
-                    </div>
-                </div>
-                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                    <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-progress">184</h1>
-                        <h6 class="my-0">In Progress</h6>
-                    </div>
-                </div>
-                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                    <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-budget">130</h1>
-                        <h6 class="my-0">Budget2</h6>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="exampl" class="table cell-border " style="width:100%">
-                        <thead class="TableHead">
-                            <tr>
-                                <th>Name</th>
-                                <th>Year</th>
-                                <th></th>
-                                <th>Status</th>
-                                <th>Category</th>
-                                <th>Budget</th>
-                                <th>Project Manager</th>
-                            </tr>
-                        </thead>
-                        <tbody id="products">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-</body>
-<style>
     .TableHead {
         box-sizing: border-box;
         width: 1302.49px;
@@ -295,6 +177,135 @@
     }
 </style>
 
+<body>
+    @include('include.header')
+    <script></script>
+
+
+    <!-- Sidebar Start -->
+    @include('include.sidebar')
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        @include('include.navbar')<br>
+
+        <div class="container">
+            <form id="search-form" action="" method="POST" enctype="multipart/form-data">
+                <div class="row" id="search">
+                    <div class="form-group col-9">
+                        <input class="form-control" type="text" placeholder="Search" />
+                    </div>
+                    <div class="form-group col-3">
+                        <button type="submit" class="btn btn-block btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+            <form>
+                <div class="row" id="filter">
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="name" class="filter-name filter form-control">
+                            <option value="">Select Name</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="year" class="filter-year filter form-control">
+                            <option value="">Select Year</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="status" class="filter-status filter form-control">
+                            <option value="">Select Status</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="category" class="filter-category filter form-control">
+                            <option value="">Select Category</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 col-xs-6">
+                        <select data-filter="projectManager" class="filter-projectManager filter form-control">
+                            <option value="">Select Project Manager</option>
+                            {{-- <option value="all">Show All</option> --}}
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            {{-- Summary --}}
+            <div class="mb-5 general-stat-grid  shadow p-4 general-stats justify-content-center row">
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#A04000" class="fas fa-database general-stat-icon me-3"></i>
+
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-project">540</h1>
+                        <h6 class="my-0">All Project</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-complete">145</h1>
+                        <h6 class="my-0">Completed</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-progress">184</h1>
+                        <h6 class="my-0">In Progress</h6>
+                    </div>
+                </div>
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-budget">130</h1>
+                        <h6 class="my-0">Budget</h6>
+                    </div>
+                </div>
+
+                <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                    <i style="color: #27AE60" class="bi bi-layers general-stat-icon me-3"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="my-0 font-weight-bold" id="total-newRelease">130</h1>
+                        <h6 class="my-0">New Release</h6>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="exampl" class="table cell-border " style="width:100%">
+                        <thead class="TableHead">
+                            <tr>
+                                <th>Name</th>
+                                <th>Year</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th>Category</th>
+                                <th>Budget</th>
+                                <th>Project Manager</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+<style>
+
+</style>
+
 {{-- DataTable Script --}}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -313,19 +324,11 @@
             categories = "";
 
 
-        // console.log(data);
-
-        // const d = new Date(projectData[0].DATE_END);
-        // console.log(d.getFullYear())
-
-
-
-
         let totalProject = 0;
         let totalCompletedProject = 0;
         let totalInProjressProject = 0;
         let totalBudget = 0;
-
+        let totalNewRelease = 0;
 
         for (var i = 0; i < data.length; i++) {
 
@@ -396,9 +399,6 @@
 
         //create dropdown of makes
 
-
-        console.log(totalBudget)
-
         $("#products").html(products);
         console.log(data)
         getProjectSummary2(data)
@@ -441,7 +441,7 @@
         // console.log(filters)
         if (filters == "") {
             $(".product").show();
-            getProjectSummary($(".product").show());
+            getProjectSummaryFiltred($(".product"));
 
         } else {
             $(".product").hide();
@@ -455,7 +455,14 @@
     //on search form submit
     $("#search-form").submit(function(e) {
         e.preventDefault();
+        let results = [];
         var query = $("#search-form input").val().toLowerCase();
+
+        if (query == "") {
+            $(".product").show();
+            getProjectSummaryFiltred($(".product"))
+            return;
+        }
 
         $(".product").hide();
         $(".product").each(function() {
@@ -471,18 +478,26 @@
             if (name.indexOf(query) > -1 || status.indexOf(query) > -1 || year.indexOf(query) > -1 ||
                 projetManager.indexOf(query) > -1 || category.indexOf(query) > -1 || budget.indexOf(
                     query) > -1) {
+                results.push($(this));
                 $(this).show();
             }
         });
+        let filtredData = results.map(element => {
+            return element[0];
+        });
+
+        getProjectSummaryFiltred(filtredData)
+
+
     });
 
     function getProjectSummaryFiltred(filtredData) {
         let projectsData = filtredData;
-
         let totalBudgetFild = document.getElementById("total-budget");
         let totalProjectFild = document.getElementById("total-project");
         let totalCompleteFild = document.getElementById("total-complete");
         let totalProgresstFild = document.getElementById("total-progress");
+        let totalNewReleaseFild = document.getElementById("total-newRelease");
 
         let totalBudget = 0;
         let totalComplete = 0;
@@ -513,6 +528,7 @@
         totalProjectFild.innerHTML = projectsData.length;
         totalCompleteFild.innerHTML = totalComplete;
         totalProgresstFild.innerHTML = totalInPronggress;
+        totalNewReleaseFild.innerHTML = totalNew;
     }
 
     function getProjectSummary2(filtredData) {
@@ -522,6 +538,7 @@
         let totalProjectFild = document.getElementById("total-project");
         let totalCompleteFild = document.getElementById("total-complete");
         let totalProgresstFild = document.getElementById("total-progress");
+        let totalNewReleaseFild = document.getElementById("total-newRelease");
 
         let totalBudget = 0;
         let totalComplete = 0;
@@ -531,16 +548,13 @@
 
         for (var i = 0; i < projectsData.length; i++) {
 
-
-
-
-            if (projectsData[i].STATUS == "In Progress") {
+            if (projectsData[i].STATUS == 2) {
                 totalInPronggress++
-            } else if (projectsData[i].STATUS == "Complete") {
+            } else if (projectsData[i].STATUS == 3) {
                 totalComplete++;
-            } else if (projectsData[i].STATUS == "New Release") {
+            } else if (projectsData[i].STATUS == 0) {
                 totalNew++;
-            } else if (projectsData[i].STATUS == "Approved") {
+            } else if (projectsData[i].STATUS == 1) {
                 totalApproved++;
             }
 
@@ -553,10 +567,9 @@
         totalProjectFild.innerHTML = projectsData.length;
         totalCompleteFild.innerHTML = totalComplete;
         totalProgresstFild.innerHTML = totalInPronggress;
-        // totalCompleteFild.innerHTML =
-        //     totalProgresstFild.innerHTML =
+        totalNewReleaseFild.innerHTML = totalNew;
     }
-   
+
     $(document).ready(function() {
         $('#exampl').DataTable({
             "bPaginate": false,

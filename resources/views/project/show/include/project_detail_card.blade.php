@@ -11,13 +11,13 @@
                                     </dt>
                                     <dd>{{ $project_detail->DETAIL_ID }}</dd>
 
-                                    <dt><b class="border-bottom border-primary">Record Name</b></dt>
-                                    <dd>{{ $project_detail->ProjectCreator->NAME }}</dd>
-                                    <dt><b class="border-bottom border-primary">Record Date</b></dt>
-                                    <dd>{{ $project_detail->created_at->format('d/m/Y') }}</dd>
                                     <dt><b class="border-bottom border-primary">Project Name</b>
                                     </dt>
                                     <dd>{{ $project_detail->NAME_PROJECT }}</dd>
+                                    <dt><b class="border-bottom border-primary">Record Name</b></dt>
+                                    <dd>{{ $project_detail->ProjectCreator->NAME }}</dd>
+                                    <dt><b class="border-bottom border-primary">Created Date</b></dt>
+                                    <dd>{{ $project_detail->created_at->format('d/m/Y') }}</dd>
                                     <dt><b class="border-bottom text-break border-primary">Resons</b>
                                     </dt>
                                     <dd>{!! nl2br($project_detail->REASONS) !!}</dd>
@@ -54,14 +54,15 @@
                                 <dd>{!! nl2br($project_detail->RESULT) !!}</dd>
                                 <dl>
                                     <dt><b class="border-bottom border-primary">Start Date</b></dt>
-                                    <dd>{{ $project_detail->DATE_START }}</dd>
+                                    <dd>{{ date('d/m/Y', strtotime($project_detail->DATE_START)) }}</dd>
                                     <dt><b class="border-bottom border-primary">End Date</b></dt>
-                                    <dd>{{ $project_detail->DATE_END }}</dd>
+                                    <dd>{{ date('d/m/Y', strtotime($project_detail->DATE_END)) }}</dd>
                                     <dt><b class="border-bottom border-primary">Total Date</b></dt>
-                                    <dd>{{ $project_detail->TOTAL_DATE }}</dd>
+                                    <dd>{{ $project_detail->TOTAL_DATE }}
+                                        {{ $project_detail->DURATION_TYPE == 0 ? 'Days' : 'Weeks' }}</dd>
                                 </dl>
                                 <dt><b class="border-bottom border-primary">Budget</b></dt>
-                                <dd>{{ $project_detail->BUDGET }}</dd>
+                                <dd>{{ $project_detail->BUDGET }}&#3647</dd>
                                 <dt><b class="border-bottom border-primary">Project Manager</b></dt>
                                 <dd>{{ $project_detail->ProjectManager->NAME }}</dd>
 

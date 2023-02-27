@@ -3,6 +3,12 @@
     <i class="bi bi-pencil"></i>
 </button>
 
+@if ($task->START_DATE)
+    @php
+        $result = explode(' ', $task->START_DATE);
+        $EndDate = explode(' ', $task->COPLETE_TIME);
+    @endphp
+@endif
 <!-- Modal -->
 <div class="modal fade" id="modaltask-{{ $task->TASK_ID }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -40,6 +46,12 @@
                                     id="Expected_End_Date">
                             </div>
                         </div>
+                        <div id="alert"
+                            class="alert-error d-none alert alert-danger d-flex align-items-center justify-content-center"
+                            role="alert">
+
+                        </div>
+
                         <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
                     </div>
                 </form>

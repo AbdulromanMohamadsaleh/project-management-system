@@ -108,17 +108,18 @@
                                     </div>
                                 </div>
 
-
+                                {{--
                                 @php
                                     $result = explode(' ', $project_detail->TOTAL_DATE);
-                                @endphp
+                                @endphp --}}
                                 {{-- Project Duration Format / Project Days --}}
                                 <div class="row mb-5 mb-sm-0">
                                     <div class="col-md-6 mb-sm-5">
                                         <label for="inputState" class="label-left fw-bold mb-2">Duration</label>
                                         <div class="row p-2  ">
                                             <div class="label-left col form-check form-check-inline">
-                                                <input required {{ $project_detail->DURATION_TYPE == 0 ? 'checked' : '' }}
+                                                <input required
+                                                    {{ $project_detail->DURATION_TYPE == 0 ? 'checked' : '' }}
                                                     class="form-check-input" name="projectDurationFormat" type="radio"
                                                     id="day" value="day">
                                                 <label checked class="form-check-label" for="day">Day</label>
@@ -126,13 +127,14 @@
                                             <div class="label-left col form-check form-check-inline">
                                                 <input class="form-check-input" name="projectDurationFormat"
                                                     type="radio" id="week"
-                                                    {{ $project_detail->DURATION_TYPE == 1 ? 'checked' : '' }} value="week">
+                                                    {{ $project_detail->DURATION_TYPE == 1 ? 'checked' : '' }}
+                                                    value="week">
                                                 <label class="form-check-label" for="week">Week</label>
                                             </div>
 
                                             <input required type="number" min='0' max='10000000'
                                                 class="form-control mt-3" id="Duration" name="projectDuration"
-                                                value="{{ $result[0] }}">
+                                                value="{{ $project_detail->TOTAL_DATE }}">
                                         </div>
                                         {{-- <div class="row"> --}}
                                         {{-- <label class="label-left fw-bold mb-2" for="projectEnd">Duration <span
@@ -148,13 +150,13 @@
                                                 <div style="text-align: left" class="mb-3 form-check form-check-inline">
                                                     <input class="form-check-input" name="isIncludeWeekend"
                                                         type="radio" id="yes" value="yes"
-                                                        {{ $project_detail->INC_WEEKEND == 1 ? 'checked' : '' }} >
+                                                        {{ $project_detail->INC_WEEKEND == 1 ? 'checked' : '' }}>
                                                     <label class="form-check-label ms-2" for="yes">Yes</label>
                                                 </div>
                                                 <div style="text-align: left" class="form-check form-check-inline">
-                                                    <input  class="form-check-input" name="isIncludeWeekend"
+                                                    <input class="form-check-input" name="isIncludeWeekend"
                                                         type="radio" id="no" value="no"
-                                                        {{ $project_detail->INC_WEEKEND == 0 ? 'checked' : '' }} >
+                                                        {{ $project_detail->INC_WEEKEND == 0 ? 'checked' : '' }}>
                                                     <label class="form-check-label ms-2" for="no">No</label>
                                                 </div>
                                             </div>

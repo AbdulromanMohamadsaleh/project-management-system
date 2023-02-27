@@ -69,7 +69,7 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
 
-        $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
 
         $routeName = $this->getRouteName();
 
@@ -224,7 +224,7 @@ class ProjectController extends Controller
         // else if ($request->isIncludeWeekend == "yes")
         //     $ProjectDetial->INC_WEEKEND = 1;
 
-        $this->CheckRadioButton($request, $ProjectDetial);
+        $this->getProjectDurationFormat($request, $ProjectDetial);
 
 
 
@@ -394,6 +394,9 @@ class ProjectController extends Controller
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
 
+        if (!$ProjectDetail) {
+            return redirect()->back();
+        }
         $ProjectDetail->NAME_PROJECT = $request->projectName;
         $ProjectDetail->REASONS = $request->reason;
         $ProjectDetail->OBJECTIVE = $request->objectve;
@@ -410,7 +413,7 @@ class ProjectController extends Controller
         $ProjectDetail->TOTAL_DATE = $request->projectDuration;
 
 
-        $this->CheckRadioButton($request, $ProjectDetail);
+        $this->getProjectDurationFormat($request, $ProjectDetail);
 
         $ProjectDetail->save();
 
@@ -418,7 +421,7 @@ class ProjectController extends Controller
 
         $ProjectDetial->projectTeam()->sync($request->projectTeam);
 
-        return redirect()->back()->with("success", "Project Edited Successfully");
+        return redirect()->route('show', $id)->with("success", "Project Edited Successfully");
     }
 
 
@@ -446,13 +449,9 @@ class ProjectController extends Controller
         $project_detail2 = ProjectDetial::select(['DETAIL_ID', 'NAME_PROJECT', 'BUDGET', 'DATE_START', 'DATE_END', 'STATUS'])->where('DETAIL_ID', $id)->with('activity', function ($q) {
             $q->select('ACTIVITY_ID', 'ACTIVITY_NAME', 'prj_project_activity.START_DATE', 'END_DATE', 'DETAIL_ID', 'ACTIVITY_ORDER')
                 ->with('tasks', function ($q2) {
-                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLETE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->whereNotNull('START_DATE')->whereNotNull('COPLETE_TIME')->orderBy('TASK_ORDER')->get();
+                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLETE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->where('COPLETE_TIME', 'IS NOT', null)->orderBy('TASK_ORDER')->get();
                 })->orderBy('ACTIVITY_ORDER')->get();
         })->first();
-
-
-
-
 
 
 
@@ -479,7 +478,7 @@ class ProjectController extends Controller
     }
 
 
-    public function CheckRadioButton($request, $ProjectDetial)
+    public function getProjectDurationFormat($request, $ProjectDetial)
     {
         if ($request->projectDurationFormat == "day")
             $ProjectDetial->DURATION_TYPE = 0;

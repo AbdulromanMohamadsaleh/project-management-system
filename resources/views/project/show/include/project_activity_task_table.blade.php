@@ -182,11 +182,14 @@
     }
 </style>
 
+<input hidden value="{{ $project_detail->DATE_END ? $project_detail->DATE_END : ' ' }}" type="date" class="form-control"
+    id="Project_End_Date">
 
 <div class="col mt-4">
     <div class="row card p-3">
         <div class="col">
             <b>Total Date To Complete Activities = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
+                ({{ $project_detail->TotalDays }} Days)
             </b><br>
             <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
             <b> Budget activity remaining = {{ $project_detail->BudgetActivityNotPaid }}฿
@@ -264,13 +267,13 @@
                                         id="act-order-{{ $act->ACTIVITY_ID }}">{{ $act->ACTIVITY_ORDER }}.</b></td>
                                 <td>{{ $act->ACTIVITY_NAME }}</td>
                                 <td>{{ ConvertDaysToWeek($sum) }}</td>
-                                @php
+                                {{-- @php
                                     if ($act->START_DATE) {
                                         $result = explode(' ', $act->START_DATE);
                                     }
-                                    
-                                @endphp
-                                <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
+
+                                @endphp --}}
+                                <td>{{ $act->START_DATE ? date('d/m/Y', strtotime($act->START_DATE)) : '-' }}</td>
                                 <td>
                                     @if ($project_detail->STATUS != 3)
                                         @include('edit_activity_task.modal_edit_activity')
@@ -346,7 +349,7 @@
                                                     $EndDate = explode(' ', $task->COPLETE_TIME);
                                                 @endphp
 
-                                                {{ $result[0] }}
+                                                {{ date('d/m/Y', strtotime($task->START_DATE)) }}
                                             @else
                                                 {{-- <form style="display: inline-block" method="GET"
                                                     action="{{ route('task.start', $task->TASK_ID) }}">

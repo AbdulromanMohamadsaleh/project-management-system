@@ -9,7 +9,7 @@
 
 
 @php
-
+    
     function ConvertDaysToWeek($days)
     {
         $weeks = intval($days / 7);
@@ -26,7 +26,7 @@
             if ($weeks) {
                 $result = $result . ' and ';
             }
-
+    
             if ($days == 1) {
                 $result = $result . $days . ' day';
             } else {
@@ -281,6 +281,11 @@
 <script>
     let editStartDateInputs = document.querySelectorAll('input[name="edit_satart_date"]');
     let ExpectedEndDateInputs = document.querySelectorAll('input[name="Expected_End_Date"]');
+    let ProjectEndDateValue = document.getElementById('Project_End_Date').value;
+
+    let errorEditTaskContainer = document.querySelectorAll('.alert-error');
+
+
     let dayInputs = document.querySelectorAll('input[name="day"]');
 
 
@@ -303,8 +308,27 @@
             let result = updateEndDateGeneral(dayInputs[index].value, this.value, IncludeWeekend,
                 includeHoliday);
 
+            let endDateTask = new Date(result);
+            let endDateProject = new Date(ProjectEndDateValue);
+            let errorMessage = ` <i class="bi bi-exclamation-triangle-fill me-3"></i>
+                                <div class="text-center">
+                                    <p>Task End Date (${convertToHtmlDateFormat(result)}) <br>Exceed Project End Date (${ProjectEndDateValue}).</p>
+                                </div>`;
 
-            ExpectedEndDateInputs[index].value = convertToHtmlDateFormat(result);
+
+
+            if (endDateTask < endDateProject) {
+                ExpectedEndDateInputs[index].value = convertToHtmlDateFormat(result);
+                if (!errorEditTaskContainer[index].classList.contains('d-none')) {
+                    errorEditTaskContainer[index].classList.add('d-none')
+                }
+            } else {
+                if (errorEditTaskContainer[index].classList.contains('d-none')) {
+                    errorEditTaskContainer[index].classList.remove('d-none')
+                }
+                errorEditTaskContainer[index].innerHTML = errorMessage;
+            }
+
         });
 
 
@@ -320,7 +344,8 @@
             //     IncludeWeekend, includeHoliday)))
             // console.log(editStartDateInputs[index])
             if (editStartDateInputs[index] != null) {
-                let result = updateEndDateGeneral(this.value, editStartDateInputs[index].value, IncludeWeekend,
+                let result = updateEndDateGeneral(this.value, editStartDateInputs[index].value,
+                    IncludeWeekend,
                     includeHoliday);
 
                 ExpectedEndDateInputs[index].value = convertToHtmlDateFormat(result);

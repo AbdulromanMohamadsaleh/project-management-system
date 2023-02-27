@@ -20,6 +20,7 @@
         })
         let ChartType = "Week";
 
+        console.log(tasks)
 
         // JSON.parse()
 

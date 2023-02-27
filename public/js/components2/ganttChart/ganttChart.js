@@ -671,11 +671,13 @@ export function GanttChart(ChartType,ganttChartElement, project) {
             let StartPeriodTask;
 
             for(let h = 0;h<cells.length;h++){
-                // console.log(dateStr)
+                // console.log(dateStr >= cells[h].dataset.date && dateStr <= cells[h].dataset.endPeriod)
+
                 if (dateStr >= cells[h].dataset.date && dateStr <= cells[h].dataset.endPeriod) {
                 StartPeriodTask = cells[h].dataset.date;
                     break;
                 }
+
             }
             // cells.forEach(element => {
             // });
@@ -684,9 +686,10 @@ export function GanttChart(ChartType,ganttChartElement, project) {
                 `div[data-task="${taskDuration.TASK_ID}"][data-date="${StartPeriodTask}"]`
             );
 
+                            // console.log(StartPeriodTask);
+
             if (startCell) {
                         // console.log(startCell)
-
 
                 // taskDuration bar is a child of start date position of specific task
                 createTaskDurationElForWeeks(taskDuration, startCell,cells,dateStr,dateEnd,color[a].act);
