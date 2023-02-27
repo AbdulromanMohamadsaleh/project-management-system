@@ -17,7 +17,6 @@ class TaskController extends Controller
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->STATUS = 1;
         $Task->COPLETE_TIME = date("Y/m/d");
-        // $Task->TASK_TRACKER =  Auth::user()->NAME . "," . date("y/m/d");
         $Task->COMPLETED_BY =  Auth::user()->LOGIN_ID;
 
         $Task->save();

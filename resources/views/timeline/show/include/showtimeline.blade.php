@@ -118,7 +118,6 @@
                                                         <i class="bi bi-x-circle-fill icon-red"></i>
                                                     @else
                                                         @php
-                                                            // $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                                         @endphp
                                                         <div class="me-3">
                                                             <div>

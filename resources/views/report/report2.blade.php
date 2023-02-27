@@ -1,21 +1,4 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-</script>
-
 <style>
-    /* .general-stat-grid {
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
-    } */
-
 
     .general-stat-icon {
 
@@ -34,9 +17,7 @@
         transform: translateY(-5px);
     }
 
-    .stat-group:hover .general-stat-icon {
-        /* filter: invert(50%) sepia(11%) saturate(2483%) hue-rotate(80deg) brightness(95%) contrast(87%); */
-    }
+
 
     @media only screen and (min-width: 992px) {
         .general-stat-icon {
@@ -44,12 +25,6 @@
         }
     }
 
-    /* .stat-group:not(:last-child):after {
-        content: "";
-        width: 2px;
-        height: 75px;
-        background: #eee;
-    } */
 
     @media only screen and (max-width: 576px) {
         .general-stat-grid {
@@ -91,21 +66,13 @@
         border-left: 1px solid #dddddd;
     }
 
-    /* tbody:before {
-        content: "@";
-        display: block;
-        line-height: 10px;
-        text-indent: -99999px;
-    } */
 
 
     .firstRow {
         box-sizing: border-box;
 
         height: 55px;
-        /* width: 1302.49px;
-        left: 309.54px;
-        top: 404.06px; */
+
         background: #FFFFFF;
         border-width: 1px 1px 1px 1px !important;
         border-style: solid !important;
@@ -193,46 +160,41 @@
         @include('include.navbar')<br>
 
         <div class="container">
-            <form id="search-form" action="" method="POST" enctype="multipart/form-data">
+            <form id="search-form  " action="" method="POST" enctype="multipart/form-data">
                 <div class="row" id="search">
                     <div class="form-group col-9">
                         <input class="form-control" type="text" placeholder="Search" />
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col-3 d-grid">
                         <button type="submit" class="btn btn-block btn-primary">Search</button>
                     </div>
                 </div>
             </form>
-            <form>
+            <form class="mt-4">
                 <div class="row" id="filter">
-                    <div class="form-group col-sm-3 col-xs-6">
+                    <div class="form-group col-sm-3 col-xs-6 mb-3">
                         <select data-filter="name" class="filter-name filter form-control">
                             <option value="">Select Name</option>
-                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
-                    <div class="form-group col-sm-3 col-xs-6">
+                    <div class="form-group col-sm-3 col-xs-6  mb-3">
                         <select data-filter="year" class="filter-year filter form-control">
                             <option value="">Select Year</option>
-                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
-                    <div class="form-group col-sm-3 col-xs-6">
+                    <div class="form-group col-sm-3 col-xs-6  mb-3">
                         <select data-filter="status" class="filter-status filter form-control">
                             <option value="">Select Status</option>
-                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
-                    <div class="form-group col-sm-3 col-xs-6">
+                    <div class="form-group col-sm-3 col-xs-6  mb-3">
                         <select data-filter="category" class="filter-category filter form-control">
                             <option value="">Select Category</option>
-                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
-                    <div class="form-group col-sm-3 col-xs-6">
+                    <div class="form-group col-sm-3 col-xs-6  mb-3">
                         <select data-filter="projectManager" class="filter-projectManager filter form-control">
                             <option value="">Select Project Manager</option>
-                            {{-- <option value="all">Show All</option> --}}
                         </select>
                     </div>
                 </div>
@@ -244,37 +206,37 @@
                     <i style="color:#A04000" class="fas fa-database general-stat-icon me-3"></i>
 
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-project">540</h1>
-                        <h6 class="my-0">All Project</h6>
+                        <h1 class="my-0 fw-bold" id="total-project">540</h1>
+                        <h6 class="my-0 fw-semibold">All Project</h6>
                     </div>
                 </div>
                 <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                     <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-complete">145</h1>
-                        <h6 class="my-0">Completed</h6>
+                        <h1 class="my-0 fw-bold" id="total-complete">145</h1>
+                        <h6 class="my-0 fw-semibold">Completed</h6>
                     </div>
                 </div>
                 <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                     <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-progress">184</h1>
-                        <h6 class="my-0">In Progress</h6>
+                        <h1 class="my-0 fw-bold" id="total-progress">184</h1>
+                        <h6 class="my-0 fw-semibold">In Progress</h6>
                     </div>
                 </div>
                 <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                     <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-budget">130</h1>
-                        <h6 class="my-0">Budget</h6>
+                        <h1 class="my-0 fw-bold" id="total-budget">130</h1>
+                        <h6 class="my-0 fw-semibold">Budget</h6>
                     </div>
                 </div>
 
                 <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                     <i style="color: #27AE60" class="bi bi-layers general-stat-icon me-3"></i>
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="my-0 font-weight-bold" id="total-newRelease">130</h1>
-                        <h6 class="my-0">New Release</h6>
+                        <h1 class="my-0 fw-bold" id="total-newRelease">130</h1>
+                        <h6 class="my-0 fw-semibold">New Release</h6>
                     </div>
                 </div>
             </div>
@@ -333,7 +295,6 @@
         for (var i = 0; i < data.length; i++) {
 
             let b = new Date(data[i].created_at);
-            console.log(b.getFullYear())
 
             var name = data[i].NAME_PROJECT,
                 year = b.getFullYear(),
@@ -400,7 +361,6 @@
         //create dropdown of makes
 
         $("#products").html(products);
-        console.log(data)
         getProjectSummary2(data)
         $(".filter-year").append(years);
         $(".filter-name").append(names);
@@ -418,10 +378,6 @@
 
         var filterName = $(this).data("filter"),
             filterVal = $(this).val();
-
-
-        // if (filterVal == 'all')
-        //     filterName = filterVal
 
         if (filterVal == "") {
             delete filtersObject[filterName];
@@ -493,6 +449,7 @@
 
     function getProjectSummaryFiltred(filtredData) {
         let projectsData = filtredData;
+
         let totalBudgetFild = document.getElementById("total-budget");
         let totalProjectFild = document.getElementById("total-project");
         let totalCompleteFild = document.getElementById("total-complete");
@@ -506,8 +463,6 @@
         let totalNew = 0;
 
         for (var i = 0; i < projectsData.length; i++) {
-
-
             if (projectsData[i].dataset.status == "In Progress") {
                 totalInPronggress++
             } else if (projectsData[i].dataset.status == "Complete") {
@@ -548,15 +503,16 @@
 
         for (var i = 0; i < projectsData.length; i++) {
 
-            if (projectsData[i].STATUS == 2) {
+            if (projectsData[i].STATUS == 2 || projectsData[i].STATUS == 1) {
                 totalInPronggress++
             } else if (projectsData[i].STATUS == 3) {
                 totalComplete++;
             } else if (projectsData[i].STATUS == 0) {
                 totalNew++;
-            } else if (projectsData[i].STATUS == 1) {
-                totalApproved++;
             }
+            // else if (projectsData[i].STATUS == 1) {
+            //     totalApproved++;
+            // }
 
             totalBudget += parseInt(projectsData[i].BUDGET);
 

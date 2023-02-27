@@ -239,7 +239,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-                            
+
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -382,7 +382,6 @@
                                         @if ($task->STATUS == 1)
                                             @php
                                                 // $resultEndDate = explode(' ', $task->COPLETE_TIME);
-                                                // $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                             @endphp
 
                                             <div class="me-3">

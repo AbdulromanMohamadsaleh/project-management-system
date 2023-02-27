@@ -93,18 +93,13 @@ class ProjectController extends Controller
             })->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
 
-        // $status = explode(',', $ProjectTrack->TRACKER);
-
-        // dd($project_detail->activity);
         $sum = 0;
         $totalBudget = 0;
         $paidBudget = 0;
         $BudgetActivityNotPaid = 0;
         foreach ($project_detail->activity as $act) {
 
-            // dd(intval(date('m', strtotime($act->START_DATE))));
 
             $Syear = intval(date('Y', strtotime($act->START_DATE)));
             $Smonth = intval(date('m', strtotime($act->START_DATE)));
@@ -115,10 +110,8 @@ class ProjectController extends Controller
                 $Eyear = intval(date('Y', strtotime($act->END_DATE)));
                 $Emonth = intval(date('m', strtotime($act->END_DATE)));
                 $Eday = intval(date('d', strtotime($act->END_DATE)));
-                // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             }
 
-            // dd($Syear, $Smonth, $Sday, $Eyear, $Emonth, $Eday);
             foreach ($act->tasks as $task) {
                 $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
@@ -135,30 +128,19 @@ class ProjectController extends Controller
         $project_detail->paidBudget = $paidBudget;
         $project_detail->TotalDays = $sum;
         $project_detail->TotalBudget = $totalBudget;
-        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
-        // $status = explode(',', $project_detail->STATUS);
-        // $status =  $project_detail->STATUS;
 
         $Holydays = Holyday::all()->toJson();
         $data['last']  = $this->getLastProject();
 
-        // $tasks = json_encode($tasks);
-
+    
         $routeName = $this->getRouteName();
         return view('Admin.show', [
             'project_detail' => $project_detail,
             'Holydays' => $Holydays,
-            // 'status' => $status,
             'TeamsName' => $project_detail->projectTeam,
-            // 'ProjectTrack' => $ProjectTrack,
             'data' => $data,
-            // 'tasks' => $tasks,
-            // 'project' => $project,
             'routename' => $routeName,
         ]);
-
-        // return view('Admin.show', ['project_detail' => $project_detail, 'status' => $status, 'TeamsName' => $project_detail->projectTeam, 'ProjectTrack' => $ProjectTrack]);
-
     }
 
     public function Timeline($id)
