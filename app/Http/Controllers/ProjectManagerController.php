@@ -99,7 +99,7 @@ class ProjectManagerController extends Controller
     public function GetDashboardCardSummary()
     {
         $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
-            $q->where('IS_APPROVE', 1)->with('track')->get();
+            $q->where('IS_APPROVE', 1)->get();
         })->first();
 
 
@@ -114,7 +114,7 @@ class ProjectManagerController extends Controller
 
         // Comleted Projects the User On it
         $userInCompletedProjects = $user->projects->filter(function ($project) {
-            return $project->track->STATUS === 3;
+            return $project->STATUS === 3;
         });
 
         $data['userInCompletedProjects'] = $userInCompletedProjects->count();
@@ -122,7 +122,7 @@ class ProjectManagerController extends Controller
 
         // In Proggress Projects the User On it
         $userInProggressProjects = $user->projects->filter(function ($project) {
-            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+            return $project->STATUS === 2 || $project->STATUS === 1;
         });
 
         $data['userInProggressProjects'] = $userInProggressProjects->count();

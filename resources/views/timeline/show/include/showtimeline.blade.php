@@ -1,22 +1,22 @@
 <div class="container col-md-11">
     <h1>Project Timeline</h1>
     <h1>{{ $project_detail->NAME_PROJECT }}</h1>
-    @php
-        $end = end($status);
-        $countStatus = count($status);
-    @endphp
+    {{-- @php
+        $end = end($project_detail->STATUS);
+        $countStatus = count($project_detail->STATUS);
+    @endphp --}}
     <ul class="timeline mt-5">
 
         <li class="timeline">
-            @if (in_array('New Release', $status))
-                <div class="icon done"></div>
+            <div class="icon done"></div>
+            {{-- @if ($project_detail->STATUS > 0)
             @else
-                @if ($end == 'workingOn')
+                @if ($project_detail->STATUS == 0)
                     <div class="icon layer-plus"></div>
                 @else
-                    <div class="icon working"></div>
                 @endif
-            @endif
+                <div class="icon working"></div>
+            @endif --}}
             <details class="panel">
                 <summary>New Release</summary>
 
@@ -30,10 +30,10 @@
 
         <li class="timeline">
             {{-- <div class="icon working"></div> --}}
-            @if (in_array('Approved', $status))
+            @if ($project_detail->STATUS >= 1)
                 <div class="icon done"></div>
             @else
-                @if ($end == 'workingOn' && $countStatus == 2)
+                @if ($project_detail->STATUS == 1 - 1)
                     <div class="icon layer-plus"></div>
                 @else
                     <div class="icon working"></div>
@@ -41,12 +41,9 @@
             @endif
             <details class="panel">
                 @if ($project_detail->IS_APPROVE == 1)
-                    @php
-                        $approveData = explode(',', $ProjectTrack->APPROVED_BY);
-                    @endphp
                     <summary>Approve</summary>
-                    <p><strong>Approved By: </strong> {{ $approveData[0] }}
-                    <p><strong>Approved Date: </strong> {{ $approveData[1] }}
+                    <p><strong>Approved By: </strong> {{ $project_detail->Approver->NAME }}
+                    <p><strong>Approved Date: </strong> {{ date('d/m/Y', strtotime($project_detail->APPROVED_DATE)) }}
                     @else
                         <summary>Approve</summary>
                     <p>Waiting To Approve</p>
@@ -55,17 +52,17 @@
         </li>
 
         <li class="timeline">
-            @if (in_array('Progress', $status))
-                @if ($countStatus == 4 && !in_array('Completed', $status))
-                    <div class="icon layer-plus"></div>
-                @else
+            @if ($project_detail->STATUS >= 2)
+                @if ($project_detail->STATUS == 3)
                     <div class="icon done"></div>
+                @else
+                    <div class="icon layer-plus"></div>
                 @endif
             @else
-                @if ($end == 'workingOn' && $countStatus == 3)
-                    <div class="icon layer-plus"></div>
-                @else
+                @if ($project_detail->STATUS < 1)
                     <div class="icon working"></div>
+                @else
+                    <div class="icon layer-plus"></div>
                 @endif
             @endif
             <details class="panel">
@@ -121,14 +118,14 @@
                                                         <i class="bi bi-x-circle-fill icon-red"></i>
                                                     @else
                                                         @php
-                                                            $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                                                            // $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                                         @endphp
                                                         <div class="me-3">
                                                             <div>
-                                                                {{ $TASK_TRACKER[0] }}
+                                                                {{ $task->CompleteBy->NAME }}
                                                             </div>
                                                             <div>
-                                                                {{ $TASK_TRACKER[1] }}
+                                                                {{ date('d/m/Y', strtotime($task->COPLETE_TIME)) }}
                                                             </div>
                                                         </div>
                                                         <i class="bi bi-check-circle-fill icon-green "></i>
@@ -145,20 +142,21 @@
         </li>
 
         <li class="timeline">
-            @if (in_array('Completed', $status))
+            @if ($project_detail->STATUS == 3)
                 <div class="icon done"></div>
             @else
-                @if ($end == 'workingOn' && $countStatus == 5)
-                    <div class="icon layer-plus"></div>
-                @else
+                @if ($project_detail->STATUS <= 2)
                     <div class="icon working"></div>
+                @else
+                    <div class="icon layer-plus"></div>
                 @endif
             @endif
             <details class="panel">
                 <summary>Complete</summary>
-                @if (!in_array('Completed', $status))
+                @if ($project_detail->STATUS < 3)
                     <div class="icon done"></div>
-                    <p><strong> <i class="bi bi-x-circle-fill icon-red"></i> Project Not Completed yet.</strong> <br><br>
+                    <p><strong> <i class="bi bi-x-circle-fill icon-red"></i> Project Not Completed yet.</strong>
+                        <br><br>
                     @else
                     <div class="icon done"></div>
                     <p><strong><i class="bi bi-check-circle-fill icon-green "></i> Project Completed.</strong> <br><br>

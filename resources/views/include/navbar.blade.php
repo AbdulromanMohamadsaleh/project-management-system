@@ -57,10 +57,10 @@
                 <span class="d-none d-lg-inline-flex">Notificatin</span>
             </a>
        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-            @foreach ( $data['last'] as $lastproject  )
+            @foreach ( $data['last'] as $lastproject )
                 <a href="#" class="dropdown-item">
                     <h6 class="fw-normal mb-0">{{$lastproject->NAME_PROJECT}}</h6>
-                    <small>{{$lastproject->track->APPROVED_BY}}</small>
+                    <small></small>
                 </a>
                 <hr class="dropdown-divider">
             @endforeach

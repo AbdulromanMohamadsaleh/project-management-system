@@ -9,7 +9,6 @@ use App\Models\Holyday;
 use App\Models\Category;
 use App\Models\ProjectTask;
 use App\Models\ProjectTeam;
-use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
@@ -35,14 +34,11 @@ class ProjectController extends Controller
     public function Table()
     {
         if (Auth::user()->POSITION == 'Project Manager') {
-            $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
-                $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
-            }])->get();
+            $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->get();
         } else {
-            $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->with(['track' => function ($q) {
-                $q->select('PROJECT_ID', 'PROJECT_PERCENTAGE');
-            }])->get();
+            $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->get();
         }
+
 
 
         // if (session('success')) {
@@ -97,9 +93,9 @@ class ProjectController extends Controller
             })->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
 
-        $status = explode(',', $ProjectTrack->TRACKER);
+        // $status = explode(',', $ProjectTrack->TRACKER);
 
         // dd($project_detail->activity);
         $sum = 0;
@@ -139,9 +135,9 @@ class ProjectController extends Controller
         $project_detail->paidBudget = $paidBudget;
         $project_detail->TotalDays = $sum;
         $project_detail->TotalBudget = $totalBudget;
-        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
-        $status = explode(',', $project_detail->STATUS);
-
+        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+        // $status = explode(',', $project_detail->STATUS);
+        // $status =  $project_detail->STATUS;
 
         $Holydays = Holyday::all()->toJson();
         $data['last']  = $this->getLastProject();
@@ -152,9 +148,9 @@ class ProjectController extends Controller
         return view('Admin.show', [
             'project_detail' => $project_detail,
             'Holydays' => $Holydays,
-            'status' => $status,
+            // 'status' => $status,
             'TeamsName' => $project_detail->projectTeam,
-            'ProjectTrack' => $ProjectTrack,
+            // 'ProjectTrack' => $ProjectTrack,
             'data' => $data,
             // 'tasks' => $tasks,
             // 'project' => $project,
@@ -167,16 +163,17 @@ class ProjectController extends Controller
 
     public function Timeline($id)
     {
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->with('Approver')->with('activity', function ($q) {
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
+        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->first();
 
-        $status = explode(',', $ProjectDetail->STATUS);
+        // $status = $ProjectDetail->STATUS;
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'ProjectTrack' => $ProjectTrack, 'status' => $status, 'data' => $data, 'routename' => $routeName]);
+        // ProjectTrack' => $ProjectTrack, 'status' => $status
+        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function Save(Request $request)
@@ -204,7 +201,7 @@ class ProjectController extends Controller
 
         $ProjectDetial->DATE_START = $request->projectStart;
         $ProjectDetial->DATE_END = $request->projectEnd;
-        $ProjectDetial->STATUS = "New Release,workingOn";
+        $ProjectDetial->STATUS = 0;
         $ProjectDetial->CATEGORY_ID = $request->category;
 
         $ProjectDetial->RECORD_CREATOR = Auth::user()->LOGIN_ID;
@@ -240,19 +237,19 @@ class ProjectController extends Controller
 
 
         // Create Project Tracker Table
-        $ProjectTrack = new ProjectTrack();
-        $trackCounter = ProjectTrack::count();
-        $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + 1));
+        // $ProjectTrack = new ProjectTrack();
+        // $trackCounter = ProjectTrack::count();
+        // $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + 1));
 
-        $counterId4 = 1;
-        while (ProjectTrack::where('PROJECT_TRACK_ID', $track_id)->first()) {
-            $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + ++$counterId4));
-        }
-        $ProjectTrack->PROJECT_TRACK_ID = $track_id;
-        $ProjectTrack->PROJECT_ID = $detail_id;
-        $ProjectTrack->STATUS = 0;
-        $ProjectTrack->timestamps = false;
-        $ProjectTrack->save();
+        // $counterId4 = 1;
+        // while (ProjectTrack::where('PROJECT_TRACK_ID', $track_id)->first()) {
+        //     $track_id = "PTR" . sprintf("%04d", ($trackCounter == 0 || $trackCounter == '' ? 1 : $trackCounter + ++$counterId4));
+        // }
+        // $ProjectTrack->PROJECT_TRACK_ID = $track_id;
+        // $ProjectTrack->PROJECT_ID = $detail_id;
+        // $ProjectTrack->STATUS = 0;
+        // $ProjectTrack->timestamps = false;
+        // $ProjectTrack->save();
 
 
 
@@ -329,9 +326,9 @@ class ProjectController extends Controller
             die();
         }
 
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 'New Release,Approved,workingOn']);
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->LOGIN_ID, 'APPROVED_DATE' => date("y/m/d")]);
 
-        $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
+        // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $id)->update(['TRACKER' => 'New Release,Approved,workingOn', 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->NAME . "," . date("y/m/d")]);
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
         $nameProject =  $ProjectDetail->NAME_PROJECT;
 
@@ -410,7 +407,7 @@ class ProjectController extends Controller
 
         $ProjectDetail->PROJECT_MANAGER = $request->projectManager;
         $ProjectDetail->BUDGET = $request->budget;
-        $ProjectDetail->TOTAL_DATE = $request->projectDuration ;
+        $ProjectDetail->TOTAL_DATE = $request->projectDuration;
 
 
         $this->CheckRadioButton($request, $ProjectDetail);
@@ -419,7 +416,7 @@ class ProjectController extends Controller
 
         $ProjectDetial = ProjectDetial::where('DETAIL_ID', $ProjectDetail->DETAIL_ID)->first();
 
-        $ProjectDetial->projectTeam()->attach($request->projectTeam);
+        $ProjectDetial->projectTeam()->sync($request->projectTeam);
 
         return redirect()->back()->with("success", "Project Edited Successfully");
     }

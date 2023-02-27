@@ -198,7 +198,7 @@
         </div>
     </div>
     <br>
-    @if (!in_array('Completed', $status))
+    @if ($project_detail->STATUS != 3)
         <div class="row justify-content-end">
             <div class="col-1 ">
                 @include('edit_activity_task.add_activity_task')
@@ -236,7 +236,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-
+                            
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -268,11 +268,11 @@
                                     if ($act->START_DATE) {
                                         $result = explode(' ', $act->START_DATE);
                                     }
-
+                                    
                                 @endphp
                                 <td>{{ $act->START_DATE ? $result[0] : '-' }}</td>
                                 <td>
-                                    @if (!in_array('Completed', $status))
+                                    @if ($project_detail->STATUS != 3)
                                         @include('edit_activity_task.modal_edit_activity')
                                         @include('edit_activity_task.delate_activity')
                                     @else
@@ -370,7 +370,7 @@
                                         @include('modal_budget_note.modal_note')
                                         @include('edit_activity_task.edit_activity_task')
                                         @include('Admin.button_startdate_complatedate.button')
-                                        @if (!in_array('Completed', $status))
+                                        @if (!$project_detail->STATUS == 3)
                                             @include('edit_activity_task.delate_task')
                                         @endif
 
@@ -378,16 +378,16 @@
                                     <td>
                                         @if ($task->STATUS == 1)
                                             @php
-                                                $resultEndDate = explode(' ', $task->COPLETE_TIME);
-                                                $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
+                                                // $resultEndDate = explode(' ', $task->COPLETE_TIME);
+                                                // $TASK_TRACKER = explode(',', $task->TASK_TRACKER);
                                             @endphp
 
                                             <div class="me-3">
                                                 <div>
-                                                    {{ $TASK_TRACKER[0] }}
+                                                    {{ $task->CompleteBy->NAME }}
                                                 </div>
                                                 <div>
-                                                    {{ $resultEndDate[0] }}
+                                                    {{ date('d/m/Y', strtotime($task->COPLETE_TIME)) }}
                                                 </div>
                                             </div>
                                         @endif

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectDetial;
-use App\Models\ProjectTrack;
 use App\Traits\LastProjectTrait;
 use Illuminate\Http\Request;
 use Phattarachai\LineNotify\Facade\Line;
@@ -14,16 +13,18 @@ class ManagerController extends Controller
     public function index()
     {
 
-        $projects = ProjectDetial::where('IS_APPROVE', 1)->with('ProjectCreator')->get();
+        $projects = ProjectDetial::where('IS_APPROVE', 1)->with('Approver')->with('ProjectCreator')->get();
         $data['totalInProggressProjectData'] = $projects->filter(function ($project) {
-            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+            return $project->STATUS === 2 || $project->STATUS === 1;
         });
 
         $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
-        $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
+        // $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
+
+        $data['totalInCompleteProjectData'] = ProjectDetial::where('PROJECT_PERCENTAGE', 100)->get();
 
         $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
-            return $user->project;
+            return $user;
         });
 
 
@@ -41,7 +42,7 @@ class ManagerController extends Controller
 
         // dd($data['BarChartDataSumBudget']);
         $data['last']  = $this->getLastProject();
-        $data['totalbudget'] = ProjectDetial::where('IS_APPROVE', 1)->sum ('BUDGET');
+        $data['totalbudget'] = ProjectDetial::where('IS_APPROVE', 1)->sum('BUDGET');
 
         return view('manager.dashbord', ['data' => $data]);
     }

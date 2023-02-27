@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
-        return view('user.dashbord', ['data' => $data ,'routename'=> $routeName]);
+        return view('user.dashbord', ['data' => $data, 'routename' => $routeName]);
     }
 
     public function Profile()
@@ -32,7 +32,7 @@ class UserController extends Controller
         $profile = User::first();
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
-        return view('Admin.profile', ['profile' => $profile ,'data' => $data ,'routename'=> $routeName]);
+        return view('Admin.profile', ['profile' => $profile, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function Register()
@@ -46,7 +46,7 @@ class UserController extends Controller
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
 
-        return view('Admin.createuser', ['login' => $User,'data' => $data,'routename'=> $routeName]);
+        return view('Admin.createuser', ['login' => $User, 'data' => $data, 'routename' => $routeName]);
     }
     public function Login()
     {
@@ -110,7 +110,7 @@ class UserController extends Controller
     public function GetDashboardCardSummary()
     {
         $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
-            $q->where('IS_APPROVE', 1)->with('track')->get();
+            $q->where('IS_APPROVE', 1)->with('Approver')->get();
         })->first();
 
 
@@ -128,7 +128,7 @@ class UserController extends Controller
 
         // Comleted Projects the User On it
         $userInCompletedProjects = $user->projects->filter(function ($project) {
-            return $project->track->STATUS === 3;
+            return $project->STATUS === 3;
         });
 
         $data['userInCompletedProjects'] = $userInCompletedProjects->count();
@@ -136,7 +136,7 @@ class UserController extends Controller
 
         // In Proggress Projects the User On it
         $userInProggressProjects = $user->projects->filter(function ($project) {
-            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+            return $project->STATUS === 2 || $project->STATUS === 1;
         });
 
         $data['userInProggressProjects'] = $userInProggressProjects->count();

@@ -421,64 +421,7 @@
 <script src="{{ asset('js/DateF.js') }}"></script>
 
 <script>
-    // let projectNameY = document.getElementById('projectName');
-    // let feedbackProjectName = document.getElementById('feedbackProjectName');
 
-    // projectNameY.addEventListener('input', CheckIsProjectNameExist);
-
-    // function CheckIsProjectNameExist(e) {
-
-    //     // console.log(this.value)
-
-    //     // (A) GET FORM DATA
-    //     // var data = new FormData();
-    //     // data.append("projectName", document.getElementById("projectName").value);
-
-    //     let pp = document.getElementById("projectName").value.trim()
-
-    //     if (!pp) {
-    //         return;
-    //     }
-
-    //     let urll = `http://127.0.0.1:8000/check-project-name/${pp}`
-    //     // (B) INIT FETCH POST
-
-
-    //     fetch(urll)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.status == 0) {
-    //                 feedbackProjectName.classList.add('invv')
-    //                 projectNameY.classList.add('is-invalid')
-    //                 feedbackProjectName.innerHTML = data.msg
-
-    //             } else {
-    //                 feedbackProjectName.classList.remove('invv')
-    //                 projectNameY.classList.remove('is-invalid')
-    //                 feedbackProjectName.innerHTML = data.msg
-    //                 feedbackProjectName.style.color="green"
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-
-    // }
-
-    // activityBorder = document.querySelectorAll('[id = "ActivityBorder"]'),
-    //     numberings = document.querySelectorAll('[id = "numbering"]'),
-    //     btnAddNewActivity = document.getElementById('btnAddNewActivity');
-    // newRow = document.getElementById('newrow');
-
-    // btnAddNewActivity.addEventListener('click', () => {
-    //     activityBorder = document.querySelectorAll('[id = "ActivityBorder"]'),
-    //         activityBorder.forEach((act, ind) => {
-    //             numberings = document.querySelectorAll('[id = "numbering"]'),
-    //                 numberings[ind].innerHTML = ind + 1;
-    //         });
-
-
-    // });
 </script>
 
 </html>
