@@ -120,7 +120,7 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-3 col-xs-6">
-                        <select data-filter="projetManager" class="filter-projetManager filter form-control">
+                        <select data-filter="projectManager" class="filter-projectManager filter form-control">
                             <option value="">Select Project Manager</option>
                             {{-- <option value="all">Show All</option> --}}
                         </select>
@@ -156,37 +156,149 @@
                     <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h1 class="my-0 font-weight-bold" id="total-budget">130</h1>
-                        <h6 class="my-0">Budget</h6>
+                        <h6 class="my-0">Budget2</h6>
                     </div>
                 </div>
             </div>
 
 
-            <div class="row" id="products">
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="exampl" class="table cell-border " style="width:100%">
+                        <thead class="TableHead">
+                            <tr>
+                                <th>Name</th>
+                                <th>Year</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th>Category</th>
+                                <th>Budget</th>
+                                <th>Project Manager</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </body>
-
 <style>
-    body {
-        padding-top: 30px;
+    .TableHead {
+        box-sizing: border-box;
+        width: 1302.49px;
+        height: 50px;
+        background: #F9F9F9;
+        border: 1px solid #DDE0E2;
+        border-style: solid !important;
+        border-width: thin !important;
     }
 
-    .product {
-        margin-bottom: 30px;
+    .TableHead tr {
+        padding: 50px !important;
     }
 
-    .product-inner {
-        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-        padding: 10px;
+    th {
+        border-top: 1px solid #dddddd;
+        border-bottom: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
     }
 
-    .product img {
-        margin-bottom: 10px;
+    th:first-child {
+        border-left: 1px solid #dddddd;
+    }
+
+    /* tbody:before {
+        content: "@";
+        display: block;
+        line-height: 10px;
+        text-indent: -99999px;
+    } */
+
+
+    .firstRow {
+        box-sizing: border-box;
+
+        height: 55px;
+        /* width: 1302.49px;
+        left: 309.54px;
+        top: 404.06px; */
+        background: #FFFFFF;
+        border-width: 1px 1px 1px 1px !important;
+        border-style: solid !important;
+        border-color: #DDE0E2 !important;
+    }
+
+
+    h1 {
+        font-size: 42px;
+        color: #2c3e50;
+    }
+
+    input[type="checkbox"] {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        -webkit-appearance: none;
+        border-radius: 20px;
+        outline: none;
+        transition: .4s;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
+    input:checked[type="checkbox"] {
+        background: green;
+    }
+
+    input[type="checkbox"]::before {
+        z-index: 2;
+        position: absolute;
+        content: "";
+        left: 0;
+        width: 30px;
+        height: 30px;
+        background: #8E9AA0;
+        border-radius: 50%;
+        transform: scale(1.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: .4s;
+    }
+
+    input:checked[type="checkbox"]::before {
+        left: 50px;
+        background: #FFFFFF;
+    }
+
+    .toggle {
+        position: relative;
+        display: inline;
+    }
+
+    label {
+        position: absolute;
+        color: #fff;
+        font-weight: 600;
+        pointer-events: none;
+    }
+
+    .onbtn {
+        bottom: 0px;
+        left: 11px;
+    }
+
+    .ofbtn {
+        bottom: 0px;
+        right: 8px;
+        color: #8E9AA0;
     }
 </style>
+
+{{-- DataTable Script --}}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -197,6 +309,7 @@
             years = "",
             statusAll = "",
             projetManagers = "",
+            projectCreator = "",
             categories = "";
 
 
@@ -224,33 +337,38 @@
                 budget = data[i].BUDGET,
                 category = data[i].category.NAME_CATEGORY,
                 projetManager = data[i].project_manager.NAME,
-                project_creator = data[i].project_creator.NAME;
+                projectCreator = data[i].project_creator.NAME;
 
             var status;
+            var statusColor;
 
             if (data[i].STATUS == 2) {
                 status = "In Progress";
+                statusColor = "text-bg-warning";
             } else if (data[i].STATUS == 3) {
                 status = "Complete";
+                statusColor = "text-bg-success";
             } else if (data[i].STATUS == 0) {
                 status = "New Release";
+                statusColor = "text-bg-secondary";
             } else if (data[i].STATUS == 1) {
-                status = "New Release";
+                status = "In Progress";
+                statusColor = "text-bg-warning";
             }
 
 
             totalBudget += parseInt(budget);
             //create product cards all
-            products += "<div class='projets col-sm-4 product' data-name='" + name + "' data-year='" +
+            products += " <tr class='firstRow projets col-sm-4 product' data-name='" + name + "' data-year='" +
                 year + "' data-all='" + "all" + "' data-status='" +
-                status + "' data-category = '" + category + "' data-projetManager='" + projetManager +
+                status + "' data-category = '" + category + "' data-projectManager='" + projetManager +
                 "' data-budget='" + budget +
-                "' ><div class='product-inner text-center'>Name: " + name + "<br />Created at: " + year +
-                "<br />Status: " + status + "<br />Category: " +
-                category + "<br />Budget: " +
-                budget + "<br />projet Manager: " +
+                "' ><div class='product-inner text-center'><td>" + name + "</td><td>" + year +
+                "<td/><td><span class='badge rounded-pill " + statusColor + "'>" + status + "</span></td><td>" +
+                category + "</td><td>" +
+                budget + "&#3647</td><td>" +
                 projetManager +
-                "</div></div>";
+                "</td></div></tr>";
 
 
 
@@ -288,7 +406,7 @@
         $(".filter-name").append(names);
         $(".filter-status").append(statusAll);
         $(".filter-category").append(categories);
-        $(".filter-projetManager").append(projetManagers);
+        $(".filter-projectManager").append(projetManagers);
 
     }, false);
 
@@ -341,11 +459,18 @@
 
         $(".product").hide();
         $(".product").each(function() {
-            var make = $(this).data("make").toLowerCase(),
-                model = $(this).data("model").toLowerCase(),
-                type = $(this).data("type").toLowerCase();
+            var name = $(this).data("name").toLowerCase(),
+                status = $(this).data("status").toLowerCase(),
+                year = $(this).data("year"),
+                projetManager = $(this).data("projectmanager"),
+                category = $(this).data("category").toLowerCase(),
+                budget = toString($(this).data("budget"));
 
-            if (make.indexOf(query) > -1 || model.indexOf(query) > -1 || type.indexOf(query) > -1) {
+
+            year = year.toString();
+            if (name.indexOf(query) > -1 || status.indexOf(query) > -1 || year.indexOf(query) > -1 ||
+                projetManager.indexOf(query) > -1 || category.indexOf(query) > -1 || budget.indexOf(
+                    query) > -1) {
                 $(this).show();
             }
         });
@@ -431,4 +556,14 @@
         // totalCompleteFild.innerHTML =
         //     totalProgresstFild.innerHTML =
     }
+   
+    $(document).ready(function() {
+        $('#exampl').DataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": false
+        });
+    });
 </script>

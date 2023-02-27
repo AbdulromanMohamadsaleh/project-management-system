@@ -35,7 +35,7 @@
 
                             <div class=" mb-sm-5 col-6 ">
                                 <label class="label-left fw-bold mb-2" for="Expected_End_Date">Expected End Date</label>
-                                <input value="{{ $task->COPLETE_TIME ? $EndDate[0] : ' ' }}" type="date"
+                                <input readonly value="{{ $task->COPLETE_TIME ? $EndDate[0] : ' ' }}" type="date"
                                     name="Expected_End_Date" class="Expected_End_Date form-control"
                                     id="Expected_End_Date">
                             </div>

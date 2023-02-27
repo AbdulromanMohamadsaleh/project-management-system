@@ -19,6 +19,8 @@ class ProjectTask extends Model
         'ACTIVITY_ID',
         'DAY',
         'STATUS',
+        'COMPLETED_BY',
+
     ];
 
     protected $hidden = [
@@ -32,5 +34,9 @@ class ProjectTask extends Model
     {
         return $this->belongsTo(ProjectActivity::class, 'ACTIVITY_ID', 'ACTIVITY_ID');
     }
-    
+
+    public function CompleteBy()
+    {
+        return $this->belongsto(User::class, 'COMPLETED_BY', 'LOGIN_ID');
+    }
 }

@@ -27,6 +27,8 @@ class ProjectDetial extends Model
         'IS_APPROVE',
         'PROJECT_MANAGER',
         'created_at',
+        'PROJECT_PERCENTAGE',
+        'APPROVED_BY'
     ];
 
     protected $hidden = [
@@ -60,10 +62,10 @@ class ProjectDetial extends Model
         return $this->belongsto(User::class, 'PROJECT_MANAGER', 'LOGIN_ID');
     }
 
-    public function track()
-    {
-        return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
-    }
+    // public function track()
+    // {
+    //     return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
+    // }
 
     public function Category()
     {
@@ -75,6 +77,11 @@ class ProjectDetial extends Model
     public function ProjectCreator()
     {
         return $this->belongsto(User::class, 'RECORD_CREATOR', 'LOGIN_ID');
+    }
+
+    public function Approver()
+    {
+        return $this->belongsto(User::class, 'APPROVED_BY', 'LOGIN_ID');
     }
 
     public function tasks()

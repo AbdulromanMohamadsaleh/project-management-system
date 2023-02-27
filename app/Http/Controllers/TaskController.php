@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\ProjectTask;
-use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use App\Models\ProjectActivity;
@@ -18,7 +17,9 @@ class TaskController extends Controller
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->STATUS = 1;
         $Task->COPLETE_TIME = date("Y/m/d");
-        $Task->TASK_TRACKER =  Auth::user()->NAME . "," . date("y/m/d");
+        // $Task->TASK_TRACKER =  Auth::user()->NAME . "," . date("y/m/d");
+        $Task->COMPLETED_BY =  Auth::user()->LOGIN_ID;
+
         $Task->save();
 
         $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
@@ -56,19 +57,20 @@ class TaskController extends Controller
         // $totalTaskOfTheProject->tasks->count();
         // dd($totalTaskOfTheProject);
         $precentage = floor(($totalCompleteTaskOfTheProject * 100) / $totalTaskOfTheProject);
-        $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+        // $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
 
-        $ProjectDetialg->PROJECT_PERCENTAGE = $precentage;
-        $ProjectDetialg->save();
+        $Project->PROJECT_PERCENTAGE = $precentage;
+        $Project->save();
 
         if ($precentage == "100") {
-            $Project->STATUS = "New Release,Approved,Progress,Completed";
+            $Project->STATUS = 3;
+            $Project->COMPLETE_DATE = date("y/m/d");
             $Project->save();
 
-            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,Completed';
-            $ProjectTrack->STATUS = 3;
-            $ProjectTrack->save();
+            // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+            // $ProjectTrack->TRACKER = 'New Release,Approved,Progress,Completed';
+            // $ProjectTrack->STATUS = 3;
+            // $ProjectTrack->save();
         }
 
         if ($completeTasksCounter == $totalTasks) {
@@ -99,13 +101,13 @@ class TaskController extends Controller
             $Task->activity->START_DATE = date("Y/m/d");
             $Task->activity->save();
 
-            $Project->STATUS = "New Release,Approved,Progress,workingOn";
+            $Project->STATUS = 2;
             $Project->save();
 
-            $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-            $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
-            $ProjectTrack->STATUS = 2;
-            $ProjectTrack->save();
+            // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
+            // $ProjectTrack->TRACKER = 'New Release,Approved,Progress,workingOn';
+            // $ProjectTrack->STATUS = 2;
+            // $ProjectTrack->save();
         }
 
         $Task->save();
@@ -141,6 +143,7 @@ class TaskController extends Controller
         $Task->save();
         return redirect()->back()->with("success", "Add Budget Successfully");
     }
+
     public function SaveNote(request $request, $id)
     {
 
@@ -150,6 +153,7 @@ class TaskController extends Controller
         $Task->save();
         return redirect()->back()->with("success", "Add Note Successfully");
     }
+
     public function EditTask(Request $request, $id)
     {
         $Task = ProjectTask::where('TASK_ID', $id)->first();
@@ -169,14 +173,9 @@ class TaskController extends Controller
 
         $Task->save();
 
-        // return response()->json([
-        //     "success" => "Holyday Edited Successfully", 'status' => 'success',
-        //     'response_code' => 200,
-        // ]);
-
-
         return redirect()->back()->with("success", "Edit Task and Day Successfully");
     }
+
     public function DelateTask($id)
     {
         $Task = ProjectTask::where('TASK_ID', $id)->delete();

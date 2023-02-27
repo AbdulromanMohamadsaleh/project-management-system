@@ -1,26 +1,27 @@
 @php
-                                            $status = explode(',', $project_detail->STATUS);
-                                            $result = end($status);
-                                            if ($result == 'workingOn') {
-                                                $result = $status[count($status) - 2];
-                                            }
-                                        @endphp
-                                        <span
-                                            @switch($result)
-                                                @case('New Release')
-                                                    <span class="badge rounded-pill text-bg-secondary"  >{{ $result }}</span>
-                                                    @break
+    // $status = explode(',', $project_detail->STATUS);
+    // $result = end($status);
+    // if ($result == 'workingOn') {
+    //     $result = $status[count($status) - 2];
+    // }
+@endphp
+<span @switch($project_detail->STATUS)
+        @case(0)
+            <span class="badge rounded-pill text-bg-secondary">New Release</span>
+        @break
 
-                                                @case('Approved')
-                                                    <span class="badge rounded-pill text-bg-warning"  >{{ $result }}</span>
-                                                    @break
+        @case(1)
+            <span class="badge rounded-pill text-bg-warning">Approved</span>
+        @break
 
-                                                @case('Progress')
-                                                    <span style="background-color: orange" class="badge rounded-pill "  >{{ $result }}</span>
-                                                    @break
-                                                @case('Completed')
-                                                    <span class="badge rounded-pill text-bg-success"  >{{ $result }}</span>
-                                                    @break
-                                                @default
-                                                    {{-- <span class="badge rounded-pill 'text-bg-secondary'"  >{{ $status }}</span> --}}
-                                            @endswitch
+        @case(2)
+            <span style="background-color: orange" class="badge rounded-pill ">Progress</span>
+        @break
+
+        @case(3)
+            <span class="badge rounded-pill text-bg-success">Completed</span>
+        @break
+
+        @default
+            {{-- <span class="badge rounded-pill 'text-bg-secondary'"  >{{ $status }}</span> --}}
+    @endswitch

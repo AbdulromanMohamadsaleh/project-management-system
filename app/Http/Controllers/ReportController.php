@@ -25,6 +25,6 @@ class ReportController extends Controller
             $project_detail2 = (json_encode($project_detail2));
             // dd($project_detail2);
 
-        return view('report.report', ['routename' => $routeName, 'data' => $data, 'project_detail' => $project_detail2]);
+        return view('report.report2', ['routename' => $routeName, 'data' => $data, 'project_detail' => $project_detail2]);
     }
 }

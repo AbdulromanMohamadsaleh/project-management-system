@@ -62,12 +62,7 @@
                                                 aria-label="Example with label" style="width: 0%;" aria-valuenow="25"
                                                 aria-valuemin="0" aria-valuemax="100">0%</div>
                                         </div>
-                                        {{-- <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 50%"
-                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <center>
-                                            <p>50%</p> --}}
+
                                     </td>
                                     </center>
                                     <td>

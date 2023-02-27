@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Closure;
 use App\Models\User;
-use App\Models\ProjectTrack;
 use Illuminate\Http\Request;
 use App\Models\ProjectDetial;
 use Illuminate\Auth\Events\Login;
@@ -19,16 +18,20 @@ class AdminController extends Controller
     {
         $data['totalUsersData'] = User::all();
 
-        $projects = ProjectDetial::where('IS_APPROVE', 1)->with('ProjectCreator')->get();
+        $projects = ProjectDetial::where('IS_APPROVE', 1)->with('Approver')->with('ProjectCreator')->get();
         $data['totalInProggressProjectData'] = $projects->filter(function ($project) {
-            return $project->track->STATUS === 2 || $project->track->STATUS === 1;
+            return $project->STATUS === 2 || $project->STATUS === 1;
         });
 
         $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
-        $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
+        // $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
+
+        $data['totalInCompleteProjectData'] = ProjectDetial::where('PROJECT_PERCENTAGE', "=", 100)->get();
+
+        // dd($data['totalInCompleteProjectData']);
 
         $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
-            return $user->project;
+            return $user;
         });
 
 
@@ -37,13 +40,14 @@ class AdminController extends Controller
         $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
         $data['totalInCompleteProject'] = count($data['totalInCompleteProjectData']);
 
+
         $data['BarChartData'] = ProjectDetial::all()->groupBy(function ($item, $key) {
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
         $data['last']  = ProjectDetial::latest('DETAIL_ID')->limit(5)->get();
         $routeName = $this->getRouteName();
 
-        return view('Admin.index', ['data' => $data,'routename'=> $routeName]);
+        return view('Admin.index', ['data' => $data, 'routename' => $routeName]);
     }
 
     public function handle(Request $request, Closure $next)
