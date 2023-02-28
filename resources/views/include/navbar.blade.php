@@ -52,7 +52,7 @@
             </div>
         </div> --}}
         <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i style="position: relative;" class="fa fa-bell me-lg-2"><span
                         style="position: absolute; top: 1px; right: -3px;"
                         class="badge rounded-pill badge-notification bg-danger">{{ count($data['last']) }}</span></i>
