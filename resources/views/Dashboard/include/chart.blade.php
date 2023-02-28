@@ -53,11 +53,8 @@
                                 label: 'My First Dataset',
                                 data: [PendingProject, ProggressProject, doneProject],
                                 backgroundColor: [
-                                    // '#CACFD2',
                                     'rgba(201, 203, 207 , 0.8)',
-                                    // '#F4D03F',
                                     'rgba(255, 205, 86 , 0.8)',
-                                    // '#1ABC9C',
                                     'rgba(75, 192, 192 , 0.8)',
                                 ],
                                 hoverOffset: 4
@@ -87,7 +84,6 @@
 
 
                 console.log(BudgetData)
-                // let budgetChart = BudgetData.map(x => x[1]);
                 new Chart(
                     document.getElementById('bar-chart'), {
                         type: 'bar',
@@ -106,12 +102,7 @@
                                         'rgba(201, 203, 207, 0.6)'
                                     ],
                                 },
-                                // {
-                                //     label: 'Budget',
-                                //     data: BudgetData,
-                                //     fill: false,
-                                //     backgroundColor: 'rgba(201, 203, 207, 0.6)',
-                                // }
+
                             ]
                         }
                     }
@@ -138,11 +129,8 @@
                                 label: 'My First Dataset',
                                 data: [PendingProject, ProggressProject, doneProject],
                                 backgroundColor: [
-                                    // '#CACFD2',
                                     'rgba(201, 203, 207 , 0.8)',
-                                    // '#F4D03F',
                                     'rgba(255, 205, 86 , 0.8)',
-                                    // '#1ABC9C',
                                     'rgba(75, 192, 192 , 0.8)',
                                 ],
                                 hoverOffset: 4
@@ -205,11 +193,8 @@
                                 label: 'My First Dataset',
                                 data: [doneProject, ProggressProject],
                                 backgroundColor: [
-                                    // '#00bfa0',
                                     'rgba(75, 192, 192 , 0.8)',
-                                    // '#ef9b20',
                                     'rgba(255, 205, 86 , 0.8)',
-
                                 ],
                                 hoverOffset: 4
                             }]

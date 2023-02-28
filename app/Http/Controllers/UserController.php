@@ -21,7 +21,6 @@ class UserController extends Controller
     public function index()
     {
         $data = $this->GetDashboardCardSummary();
-
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
         return view('user.dashbord', ['data' => $data, 'routename' => $routeName]);
@@ -48,20 +47,20 @@ class UserController extends Controller
 
         return view('Admin.createuser', ['login' => $User, 'data' => $data, 'routename' => $routeName]);
     }
+
     public function Login()
     {
         return view('auth.login');
     }
+
     public function Save(request $request)
     {
         $userCounter = User::count();
         $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + 1));
-
         $counterId4 = 1;
         while (User::where('LOGIN_ID', $user_id)->first()) {
             $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
         }
-
 
         $user = new User();
         $user->LOGIN_ID = $user_id;
@@ -69,13 +68,12 @@ class UserController extends Controller
         $user->EMAIL = $request->email;
         $user->POSITION = 'Employee';
         $user->password = Hash::make($request->password);
-        // $user->password = $request->password;
-
 
         if ($user->save()) {
             return redirect()->back();
         }
     }
+
     public function Update(Request $request, $id)
     {
         $request->validate([
@@ -94,14 +92,12 @@ class UserController extends Controller
         $user->TELEPHONE = $request->phone;
         $user->DEPARTMENT = $request->Department;
         if ($request->img) {
-
             $imageName = time() . '.' . $request->img->extension();
             $file_path = app_path() . '/images' . $user->IMG;
             $request->img->move(public_path('images'), $imageName);
             $user->IMG = $imageName;
         }
 
-        // $user->CATEGORY_ID = $id;
         $user->timestamps = false;
         $user->update();
         return redirect()->back();
@@ -113,17 +109,12 @@ class UserController extends Controller
             $q->where('IS_APPROVE', 1)->with('Approver')->get();
         })->first();
 
-
         $data['BarChartData'] = $user->projects->groupBy(function ($item, $key) {
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->count()->toJson();
 
-
-
-
         // Projects the User On it
         $data['userInProjects'] = $user->projects->count();
-
         $data['userInProjectsData'] = $user->projects;
 
         // Comleted Projects the User On it

@@ -21,7 +21,6 @@ class ReportController extends Controller
             ->with('Category')
             ->get();
 
-
             $project_detail2 = (json_encode($project_detail2));
 
         return view('report.report2', ['routename' => $routeName, 'data' => $data, 'project_detail' => $project_detail2]);

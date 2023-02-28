@@ -1,27 +1,16 @@
 <div class="container col-md-11">
     <h1>Project Timeline</h1>
     <h1>{{ $project_detail->NAME_PROJECT }}</h1>
-    {{-- @php
-        $end = end($project_detail->STATUS);
-        $countStatus = count($project_detail->STATUS);
-    @endphp --}}
+
     <ul class="timeline mt-5">
 
         <li class="timeline">
             <div class="icon done"></div>
-            {{-- @if ($project_detail->STATUS > 0)
-            @else
-                @if ($project_detail->STATUS == 0)
-                    <div class="icon layer-plus"></div>
-                @else
-                @endif
-                <div class="icon working"></div>
-            @endif --}}
+
             <details class="panel">
                 <summary>New Release</summary>
 
                 <p>CREATED AT: </strong>{{ $project_detail->created_at->format('m/d/Y') }}
-                    {{-- <p><strong>Created at:</i></strong> {{ $project_detail->created_at->format('m/d/Y') }} --}}
                 <p><strong>NAME: </strong> {{ $project_detail->NAME_PROJECT }}
                 <p><strong>TARGET: </strong> {{ $project_detail->TARGET }}
                 <p><strong>BUDGET: </strong> {{ $project_detail->BUDGET }}
@@ -29,7 +18,6 @@
         </li>
 
         <li class="timeline">
-            {{-- <div class="icon working"></div> --}}
             @if ($project_detail->STATUS >= 1)
                 <div class="icon done"></div>
             @else
@@ -74,7 +62,6 @@
 
                     @foreach ($project_detail->activity as $act)
                         <div class="accordion " id="accordionPanelsStayOpenExample">
-                            {{-- background: rgba(0, 0, 0, 0.1); --}}
                             <div class="accordion-item ">
                                 <h2 class="accordion-header " id="panelsStayOpen-heading{{ ++$countAct }}">
                                     <button class="bg-white text-dark  btn-outline-dark accordion-button collapsed"
@@ -90,7 +77,6 @@
                                             <div>
 
                                                 @if ($act->STATUS == 0)
-                                                    {{-- <i class="bi bi-circle icon-1-5rem "></i> --}}
                                                 @else
                                                     <i class="bi bi-check-circle-fill icon-1-5rem icon-dark-green"></i>
                                                 @endif
@@ -162,13 +148,6 @@
                 @endif
             </details>
         </li>
-
-        {{-- <li class="timeline">
-            <div class="icon working"></div>
-            <details class="panel">
-                <summary>Compate</summary>
-            </details>
-        </li> --}}
 
     </ul>
 </div>

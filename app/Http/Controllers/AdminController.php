@@ -24,22 +24,15 @@ class AdminController extends Controller
         });
 
         $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
-        // $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
-
         $data['totalInCompleteProjectData'] = ProjectDetial::where('PROJECT_PERCENTAGE', "=", 100)->get();
-
-        // dd($data['totalInCompleteProjectData']);
-
         $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
             return $user;
         });
-
 
         $data['totalUsers'] = count($data['totalUsersData']);
         $data['totalPendingProject'] = count($data['totalPendingProjectData']);
         $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
         $data['totalInCompleteProject'] = count($data['totalInCompleteProjectData']);
-
 
         $data['BarChartData'] = ProjectDetial::all()->groupBy(function ($item, $key) {
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
@@ -58,13 +51,13 @@ class AdminController extends Controller
             return redirect()->route('login');
         }
     }
+
     public function Approve($id)
     {
-
         $Login = User::where('LOGIN_ID', $id)->update(['IS_ACTIVE' => 1]);
-
         return redirect()->back();
     }
+
     public function Saveuser(request $request)
     {
         $userCounter = User::count();
@@ -75,7 +68,6 @@ class AdminController extends Controller
             $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
         }
 
-
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:prj_project_login'],
@@ -83,8 +75,6 @@ class AdminController extends Controller
             'agency' => ['required'],
             'position' => ['required'],
         ]);
-
-
 
         $user = new User();
         $user->LOGIN_ID = $user_id;
@@ -94,7 +84,6 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->AGENCY = $request->agency;
         $user->POSITION = $request->position;
-        // $user->password = $request->password;
         $user->save();
         return redirect()->back()->with("success", "Edit Category Successfully");
     }

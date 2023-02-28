@@ -11,6 +11,7 @@ class Category extends Model
     protected $primaryKey = 'CATEGORY_ID';
     protected $keyType = 'string';
     protected $table = 'prj_category';
+    
     protected $fillable = [
         'CATEGORY_ID',
         'NAME_CATEGORY',

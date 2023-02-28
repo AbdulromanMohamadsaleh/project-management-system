@@ -18,14 +18,10 @@ class TaskController extends Controller
         $Task->STATUS = 1;
         $Task->COPLETE_TIME = date("Y/m/d");
         $Task->COMPLETED_BY =  Auth::user()->LOGIN_ID;
-
         $Task->save();
 
         $completeTasksCounter = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->where('STATUS', 1)->get()->count();
         $totalTasks = ProjectTask::where('ACTIVITY_ID', $Task->activity->ACTIVITY_ID)->count();
-
-
-
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
         if (($completeTasksCounter - 1) == 0) {
@@ -47,12 +43,7 @@ class TaskController extends Controller
         }
 
         $totalTaskOfTheProject = $totalTaskOfTheProject->tasks->count();
-
-        // $totalTaskOfTheProject->tasks->count();
-        // dd($totalTaskOfTheProject);
         $precentage = floor(($totalCompleteTaskOfTheProject * 100) / $totalTaskOfTheProject);
-        // $ProjectDetialg = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-
         $Project->PROJECT_PERCENTAGE = $precentage;
         $Project->save();
 
@@ -60,11 +51,6 @@ class TaskController extends Controller
             $Project->STATUS = 3;
             $Project->COMPLETE_DATE = date("y/m/d");
             $Project->save();
-
-            // $ProjectTrack = ProjectTrack::where('PROJECT_ID', $Task->activity->DETAIL_ID)->first();
-            // $ProjectTrack->TRACKER = 'New Release,Approved,Progress,Completed';
-            // $ProjectTrack->STATUS = 3;
-            // $ProjectTrack->save();
         }
 
         if ($completeTasksCounter == $totalTasks) {
@@ -76,15 +62,11 @@ class TaskController extends Controller
             $Task->activity->save();
         }
 
-
-
-
         return redirect()->back();
     }
 
     public function Start($id)
     {
-
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->START_DATE = date("Y/m/d");
         $Task->timestamps = false;
@@ -103,7 +85,6 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-
     public function ActivityTimeline($id)
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
@@ -119,13 +100,11 @@ class TaskController extends Controller
             $q->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        // return view('project.show.task_timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
         return view('project.show.timeline', ['tasks' => $project_detail->tasks, 'project' => $project_detail]);
     }
 
     public function SaveBudget(request $request, $id)
     {
-
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->TASK_BUDGET = $request->budget;
         $Task->timestamps = false;
@@ -135,7 +114,6 @@ class TaskController extends Controller
 
     public function SaveNote(request $request, $id)
     {
-
         $Task = ProjectTask::where('TASK_ID', $id)->first();
         $Task->TASK_NOTE = $request->note;
         $Task->timestamps = false;
@@ -146,12 +124,10 @@ class TaskController extends Controller
     public function EditTask(Request $request, $id)
     {
         $Task = ProjectTask::where('TASK_ID', $id)->first();
-        // dd($request->all());
         $request->validate([
             'task' => 'required',
             'day' => 'required',
             'edit_satart_date' => 'required',
-            // after:now
         ]);
 
         $Task->TASK_NAME = $request->task;
@@ -185,18 +161,11 @@ class TaskController extends Controller
     public function DelateTask($id)
     {
         $Task = ProjectTask::where('TASK_ID', $id)->delete();
-
-
         return redirect()->back()->with("success", "Delete task Successfully");
     }
 
     public function SaveOrder(Request $request)
     {
-        // $request->validate([
-        //     'create_holyday_name' => 'required|min:2|max:50',
-        //     'create_date_holyday' => 'required|date', // after:now
-        // ]);
-
         $tasks = json_decode($request->data);
 
         foreach ($tasks as $act) {
@@ -205,14 +174,12 @@ class TaskController extends Controller
 
             // Getting values from the blade template form
             $Task->TASK_ORDER = $act->order;
-            // $Holyday->CATEGORY_ID = $id;
             $Task->timestamps = false;
             $Task->save();
         }
         return response()->json([
             "success" => "Task Updated Successfully", 'status' => 'success',
             'response_code' => 200,
-            // 'data' => $Holyday->toJson()
         ]);
     }
 
@@ -222,7 +189,6 @@ class TaskController extends Controller
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }
-
 
         $tasks = ProjectTask::where('TASK_ID', $id)->update(['STATUS_PAYMENT' => 1, 'DATE_PAYMENT' => date("Y-m-d"), 'USER_PAYMENT' =>  Auth::user()->LOGIN_ID]);
 

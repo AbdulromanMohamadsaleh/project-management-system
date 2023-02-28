@@ -92,12 +92,12 @@
     /* // Responsive Design */
     @media only screen and (max-width: 767px) {
 
-        /* // uses the data label as header */
+
         td:nth-of-type(n):before {
             content: attr(data-label);
         }
 
-        /* // zebra striping */
+
         tr {
 
             &:nth-child(6n+1),
@@ -106,20 +106,7 @@
             }
         }
 
-        /* // hides elements on mobile */
-        /* .hideOnMobile {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            display: none;
-        }
 
-        .nestedTable .spacer,
-        tr .spacer {
-            display: none;
-        } */
-
-        /* // changes table layout */
         .nestedTable {
 
             table,
@@ -131,7 +118,6 @@
                 display: block;
             }
 
-            /* // hide table headers */
             thead tr {
                 position: absolute;
                 top: -9999px;
@@ -140,16 +126,13 @@
             }
 
             td {
-                /* // behaves  like a "row" */
                 border: none;
                 border-bottom: 1px solid $l3-color;
                 position: relative;
                 padding-left: 50%;
 
                 &:before {
-                    /* // now like a table header */
                     position: absolute;
-                    /* // top/left values mimic padding */
                     left: 6px;
                     width: 45%;
                     white-space: nowrap;
@@ -239,14 +222,14 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-
+                            
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
                         @endphp
                         {{-- Start Act 1 --}}
                         {{-- Start Act Info --}}
-                        {{-- <input id="actId" type="text" value="{{ $act->ACTIVITY_ORDER }}" hidden> --}}
+
                         <div class="act-order">
 
                             <tr class="act-rows">
@@ -260,19 +243,13 @@
 
                                     <span hidden data-activityId="{{ $act->ACTIVITY_ID }}" id="activityId"></span>
 
-                                    {{-- <span data-activityId="{{ $act->ACTIVITY_ID }}" hidden id="projectId"></span> --}}
 
                                 </td>
                                 <td><b class="order"
                                         id="act-order-{{ $act->ACTIVITY_ID }}">{{ $act->ACTIVITY_ORDER }}.</b></td>
                                 <td>{{ $act->ACTIVITY_NAME }}</td>
                                 <td>{{ ConvertDaysToWeek($sum) }}</td>
-                                {{-- @php
-                                    if ($act->START_DATE) {
-                                        $result = explode(' ', $act->START_DATE);
-                                    }
 
-                                @endphp --}}
                                 <td>{{ $act->START_DATE ? date('d/m/Y', strtotime($act->START_DATE)) : '-' }}</td>
                                 <td>
                                     @if ($project_detail->STATUS != 3)
@@ -380,10 +357,6 @@
                                     </td>
                                     <td>
                                         @if ($task->STATUS == 1)
-                                            @php
-                                                // $resultEndDate = explode(' ', $task->COPLETE_TIME);
-                                            @endphp
-
                                             <div class="me-3">
                                                 <div>
                                                     {{ $task->CompleteBy->NAME }}
@@ -441,12 +414,13 @@
     });
 </script>
 
+
+
 <script>
     function ToggleTableArror() {
 
         var actId = $(this).data("id");
         var tr = $(this).parent().parent().nextAll('#showTasks' + actId);
-
 
         $(this).toggleClass('fa-angle-double-right fa-angle-double-down')
         if (tr.is(".display-none")) {
@@ -469,7 +443,6 @@
                         showMoreArror[index].classList.remove('fa-angle-double-down');
                     }
                 })
-                // $(this).toggleClass('fa-angle-double-right ')
             }
         })
     }
@@ -493,7 +466,6 @@
                     }
                 })
 
-                // $(this).toggleClass('fa-angle-double-right ')
             }
 
 
@@ -506,7 +478,6 @@
             currentRow[0].classList.remove('fa-angle-double-right');
         }
     }
-
 
     $(".showMore").click(ToggleTableArror)
 
@@ -521,7 +492,6 @@
     function updateOrder() {
         $('#myList  .order').each(function(index) {
             $(this).html(`${index + 1}`)
-            // $(this).data('data-activityOrder',index + 1);
         });
     }
 
@@ -531,7 +501,6 @@
         $('#' + rowTaskId + ' .orderNumber').each(function(index) {
 
             $(this).html(`${index + 1}`)
-            // $(this).data('data-activityOrder',index + 1);
         })
     }
 
@@ -569,7 +538,6 @@
 
 
         });
-        // $('.taskRow').sortable('disabled', true);
     }
 
     function ajaxSaveActivityOrder(dataOrder) {
@@ -586,8 +554,7 @@
         var token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type: 'POST',
-            // processData: false,
-            // contentType: false,
+
             dataType: "json",
             url: "{{ route('activity.saveOrder') }}",
             data: {
@@ -652,11 +619,9 @@
                     }
 
                     tasksOrder.push(ttt)
-                    // console.log()
-                    // console.log)
-                    // $(this).data('data-activityOrder',index + 1);
+
                 })
-                // console.log(tasksOrder)
+
 
                 ajaxSaveTaskOrder(tasksOrder)
 
@@ -669,25 +634,11 @@
             items: 'tr.tasksOrder',
             connectWith: '.tsk-order',
             move: function( /**Event*/ evt, /**Event*/ originalEvent) {
-                console.log("gggg");
-                // Example: https://jsbin.com/nawahef/edit?js,output
-                // console.log(evt.dragged); // dragged HTMLElement
-                // evt.draggedRect; // DOMRect {left, top, right, bottom}
-                // evt.related; // HTMLElement on which have guided
-                // evt.relatedRect; // DOMRect
-                // evt
-                //     .willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
-                // originalEvent.clientY; // mouse position
-                // return false; — for cancel
-                // return -1; — insert before target
-                // return 1; — insert after target
-                // return true; — keep default insertion point based on the direction
-                // return void; — keep default insertion point based on the direction
+
             },
 
 
         });
-        // $('.taskRow').sortable('disabled', true);
     }
 
     function ajaxSaveTaskOrder(dataOrder) {
@@ -704,8 +655,7 @@
         var token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type: 'POST',
-            // processData: false,
-            // contentType: false,
+
             dataType: "json",
             url: "{{ route('task.saveOrder') }}",
             data: {
@@ -715,10 +665,8 @@
             },
             success: function(response) {
 
-                // $('.refresher').load(location.href + ' .refresher')
 
                 setTimeout(() => {
-                    // $(".showMore").click(ToggleTableArror);
                     $(document).ready(SotredListV2);
                     $(document).ready(SotredList);
                     $(".glyphicon-move").mousedown(ToggleAllTableArrorAnHideTasksRow)
@@ -748,11 +696,8 @@
 
             },
 
-            error: function(error) {
-                console.log(error)
-            }
+            error: function(error) {}
         });
 
     }
-    /// Tasks Drag
 </script>

@@ -27,8 +27,9 @@ class HolydayController extends Controller
 
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
-        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data,'routename'=> $routeName]);
+        return view('Admin.dateholyday', ['holydays' => $Holydays, 'data' => $data, 'routename' => $routeName]);
     }
+
     public function Create()
     {
         return view('Admin.addholyday');
@@ -36,7 +37,6 @@ class HolydayController extends Controller
 
     public function Save(Request $request)
     {
-
         $request->validate([
             'create_holyday_name' => 'required|min:2|max:50',
             'create_date_holyday' => 'required|date', // after:now
@@ -58,14 +58,12 @@ class HolydayController extends Controller
         $Holydays->timestamps = false;
         $Holydays->save();
 
-
         $Holyday = Holyday::all();
         return response()->json([
             "success" => "Holyday Added Successfully", 'status' => 'success',
             'response_code' => 200,
             'data' => $Holyday->toJson()
         ]);
-        // return redirect()->back()->with("success", "Add Holyday Successfully");
     }
 
     public function Delete($id, Request $request)
@@ -75,8 +73,6 @@ class HolydayController extends Controller
         }
 
         $Holydays = Holyday::where('HOLYDAY_ID', $id)->delete();
-
-
         return redirect()->back()->with("success", "Delete Holyday Successfully");
     }
 
@@ -93,19 +89,11 @@ class HolydayController extends Controller
             'edit_create_date_holyday' => 'required|date', // after:now
         ]);
 
-
-        // Getting values from the blade template form
         $Holyday->HOLYDAY_NAME = $request->edit_holyday_name;
         $Holyday->HOLYDAY_DATE = $request->edit_create_date_holyday;
-        // $Holyday->CATEGORY_ID = $id;
+
         $Holyday->timestamps = false;
         $Holyday->update();
-
-        // return response()->json([
-        //     "success" => "Holyday Edited Successfully", 'status' => 'success',
-        //     'response_code' => 200,
-        // ]);
-
 
         return redirect()->back()->with("success", "Edit Holyday Successfully");
     }

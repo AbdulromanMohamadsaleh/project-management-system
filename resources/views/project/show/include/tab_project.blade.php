@@ -1,11 +1,3 @@
-{{-- <div class="card">
-    <div class="card-body">
-        <button type="button" class="btn btn-danger me-2"> <i class="fas fa-pencil-alt" style="font-size: 25;"></i>
-            <button type="button" class="btn btn-primary"><i class="bi bi-alarm" style="font-size: 25;"></i></button>
-            <button type="button" class="btn btn-primary"><i class="bi bi-list-task"></i></button>
-    </div>
-</div> --}}
-
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -48,27 +40,15 @@
 
 
     <div class="tab-pane fade mt-3" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab" tabindex="0">
-        {{-- @include('project.show.activity_gantt_chart') --}}
-        {{-- @include('project.show.task_timeline') --}}
-        {{-- <ul class="nav nav-pills nav-fill mt-4">
-            <li class="nav-item my-2">
-                <a class="btn btn-primary" target="_blank"
-                href="{{ route('activity.timeline', $project_detail->DETAIL_ID) }}">Activity
-                Timeline</a>
-            </li>
 
-
-        </ul> --}}
         <ul class="nav nav-pills nav-fill mt-4">
             <li class="nav-item my-2">
                 <a class=" btn btn-primary" target="_blank"
-                    href="{{ route('ganttChart', $project_detail->DETAIL_ID) }}">Task
+                    href="{{ route('ganttChart', $project_detail->DETAIL_ID) }}">
                     Gantt Chart</a>
             </li>
         </ul>
-        {{-- @include('project.show.include.sort') --}}
 
-        {{-- @include('testChart.index') --}}
     </div>
 
 </div>

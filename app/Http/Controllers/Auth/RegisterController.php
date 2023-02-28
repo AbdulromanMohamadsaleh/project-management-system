@@ -99,8 +99,6 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->password);
         $user->AGENCY = $request->Agency;
         $user->POSITION = $request->Position;
-        // $user->password = $request->password;
-
 
         if ($user->save()) {
 
