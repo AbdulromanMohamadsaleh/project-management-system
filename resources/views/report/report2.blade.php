@@ -193,28 +193,28 @@
                 <i style="color:#A04000" class="fas fa-database general-stat-icon me-3"></i>
 
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-project">540</h1>
+                    <h1 class="my-0 fw-bold" id="total-project">0</h1>
                     <h6 class="my-0 fw-semibold">All Project</h6>
                 </div>
             </div>
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                 <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-complete">145</h1>
+                    <h1 class="my-0 fw-bold" id="total-complete">0</h1>
                     <h6 class="my-0 fw-semibold">Completed</h6>
                 </div>
             </div>
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                 <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-progress">184</h1>
+                    <h1 class="my-0 fw-bold" id="total-progress">0</h1>
                     <h6 class="my-0 fw-semibold">In Progress</h6>
                 </div>
             </div>
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                 <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-budget">130</h1>
+                    <h1 class="my-0 fw-bold" id="total-budget">0</h1>
                     <h6 class="my-0 fw-semibold">Budget</h6>
                 </div>
             </div>
@@ -222,7 +222,7 @@
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                 <i style="color: #27AE60" class="bi bi-layers general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-newRelease">130</h1>
+                    <h1 class="my-0 fw-bold" id="total-newRelease">0</h1>
                     <h6 class="my-0 fw-semibold">New Release</h6>
                 </div>
             </div>

@@ -35,6 +35,12 @@ class ProjectController extends Controller
     {
         if (Auth::user()->POSITION == 'Project Manager') {
             $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->get();
+        } else if (Auth::user()->POSITION == 'Employee') {
+            $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
+                $q->where('IS_APPROVE', 1)->with('Approver')->get();
+            })->first();
+
+            $project_details = $user->projects;
         } else {
             $project_details = ProjectDetial::orderBy('DETAIL_ID', 'DESC')->get();
         }
@@ -49,7 +55,7 @@ class ProjectController extends Controller
     {
         $Holydays = Holyday::all()->toJson();
         $Categories = Category::all();
-        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
         $routeName = $this->getRouteName();
         $team = User::all();
 

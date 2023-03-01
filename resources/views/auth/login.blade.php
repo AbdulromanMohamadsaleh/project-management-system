@@ -1,4 +1,3 @@
-
 @include('include.header')
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <div class="limiter">
@@ -12,7 +11,7 @@
                 <span class="login100-form-title p-b-26">
                     LOGIN
                 </span>
-                <img src="{{asset('images/logo/logo-06.png')}}" style="width: 100%" alt="">
+                <img src="{{ asset('images/logo/logo-06.png') }}" style="width: 100%" alt="">
                 <span class="login100-form-title p-b-48">
                     <i class="zmdi zmdi-font"></i>
                 </span>
@@ -42,7 +41,7 @@
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn ">
-                        <div class="login100-form-bgbtn " ></div>
+                        <div class="login100-form-bgbtn "></div>
                         <button type="submit" class="login100-form-btn">
                             Login
                         </button>
@@ -68,6 +67,13 @@
 
             <div class="mt-1">
                 <b>Email: manager@manager.com </b>
+                <br>
+                <b>Password: 012345678 </b>
+            </div>
+
+
+            <div class="mt-1">
+                <b>Email: projectmanager@projectmanager.com </b>
                 <br>
                 <b>Password: 012345678 </b>
             </div>
