@@ -33,9 +33,7 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        if (Auth::user()->POSITION == 'Project Manager') {
-            $project_details = ProjectDetial::where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->orderBy('DETAIL_ID', 'DESC')->get();
-        } else if (Auth::user()->POSITION == 'Employee') {
+        if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager') {
             $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
                 $q->where('IS_APPROVE', 1)->with('Approver')->get();
             })->first();
@@ -136,6 +134,14 @@ class ProjectController extends Controller
 
     public function Save(Request $request)
     {
+        $projectTeam = $request->projectTeam;
+        if ($projectTeam) {
+            if (!in_array($request->projectManager, $projectTeam)) {
+
+                array_push($projectTeam, $request->projectManager);
+            }
+        }
+
         $ProjectDetial = new ProjectDetial();
         $projectCounter = ProjectDetial::count();
         $detail_id = date('y') . sprintf("%04d", ($projectCounter == 0 || $projectCounter == '' ? 1 : $projectCounter + 1));
@@ -165,7 +171,7 @@ class ProjectController extends Controller
 
         $ProjectDetial->save();
         $ProjectDetial = ProjectDetial::where('DETAIL_ID', $detail_id)->first();
-        $ProjectDetial->projectTeam()->attach($request->projectTeam);
+        $ProjectDetial->projectTeam()->attach($projectTeam);
 
         // Save Activity & Tasks
         $activityName = $request->activityName;
