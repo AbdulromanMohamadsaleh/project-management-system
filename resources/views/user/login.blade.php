@@ -1,4 +1,4 @@
-<body>
+{{-- <body>
 
     <div class="limiter">
         <div class="container-login100">
@@ -14,7 +14,7 @@
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
                         <input class="input100" type="text" name="email">
-                        <span class="focus-input100" data-placeholder="Email"></span>
+                        <span class="focus-input100" data-placeholder="Emailddddd"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -49,4 +49,4 @@
     </div>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
-</body>
+</body> --}}

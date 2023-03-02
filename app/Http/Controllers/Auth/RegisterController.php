@@ -104,6 +104,7 @@ class RegisterController extends Controller
 
             return redirect('login');
         } else {
+            dd("ffsfsfs");
             return redirect()->back()->with('error', 'Failed to register');
         }
     }

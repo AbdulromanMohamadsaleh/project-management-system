@@ -82,8 +82,8 @@ class LoginController extends Controller
                 return redirect()->route('login')->with('errorNotActive', 'User Not Active');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Email and password are wrong');
+            Session::flash('errorMassage', "Email or password are wrong");
+            return redirect()->route('login');
         }
     }
-
 }

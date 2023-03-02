@@ -100,7 +100,22 @@ class UserController extends Controller
 
         $user->timestamps = false;
         $user->update();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Update Successfully");
+    }
+
+    public function UpdatePosition(Request $request, $id)
+    {
+
+        if (Auth::user()->POSITION != 'Admin')
+            return redirect()->back()->with("error", "Dont Have Access");
+
+        $user = User::where('LOGIN_ID', $id)->first();
+        // Getting values from the blade template form
+        $user->POSITION = $request->position;
+
+        $user->timestamps = false;
+        $user->update();
+        return redirect()->back()->with("success", "Update Successfully");
     }
 
     public function GetDashboardCardSummary()

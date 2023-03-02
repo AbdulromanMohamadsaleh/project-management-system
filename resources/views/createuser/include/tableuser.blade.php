@@ -23,19 +23,19 @@
                 <td>{{ $logins->TELEPHONE }}</td>
                 <td>{{ $logins->AGENCY }}</td>
                 <td>{{ $logins->POSITION }}
+
                 <td>
+                    @include('profile.include.editUser')
                     @if ($logins->IS_ACTIVE == 0)
-                    <form style="display: inline-block" method="POST"
+                        <form style="display: inline-block" method="POST"
                             action="{{ route('activeuser', $logins->LOGIN_ID) }}">
                             @csrf
                             <input name="_method" type="hidden" value="POST">
-                            <button type="submit"
-                                class="btn  btn-success  show-alert-delete-box "
+                            <button type="submit" class="btn  btn-success  show-alert-delete-box "
                                 data-toggle="tooltip" title='ACTIVE'><i class='fas fa-check-circle'></i></button>
-                     </form>
-                     @else
-                <span class="badge bg-success">Active</span>
-
+                        </form>
+                    @else
+                        <span class="badge bg-success">Active</span>
                     @endif
 
                 </td>

@@ -16,27 +16,38 @@
                     <i class="zmdi zmdi-font"></i>
                 </span>
 
-                <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                    <input class="input100" type="text" name="email">
-                    <span class="focus-input100" data-placeholder="Email"></span>
+                <div class="wrap-input100 validate-input">
+                    <span class="span-form" data-placeholder="Email">Email</span>
+                    <input class="input100 mb-2" type="text" name="email">
                     @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    @if (Session::has('errorMassage'))
+                        <span class="text-danger" role="alert">
+                            <strong>{{ Session::get('errorMassage') }}</strong>
+                        </span>
+                    @endif
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
                     <span class="btn-show-pass">
                         <i class="zmdi zmdi-eye"></i>
                     </span>
-                    <input class="input100" type="password" name="password">
-                    <span class="focus-input100" data-placeholder="Password"></span>
+                    <span class="span-form" data-placeholder="Email">Password</span>
+                    <input class="input100 mb-2" type="password" name="password">
+
                     @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    @if (Session::has('errorMassage'))
+                        <span class="text-danger" role="alert">
+                            <strong>{{ Session::get('errorMassage') }}</strong>
+                        </span>
+                    @endif
                 </div>
 
                 <div class="container-login100-form-btn">

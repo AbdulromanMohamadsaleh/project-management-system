@@ -100,9 +100,9 @@ font-family: 'Inter', sans-serif;
     border: none;
   }
 
-  textarea:focus, input:focus {
+  /* textarea:focus, input:focus {
     border-color: transparent !important;
-  }
+  } */
 
   input:focus::-webkit-input-placeholder { color:transparent; }
   input:focus:-moz-placeholder { color:transparent; }
@@ -225,13 +225,16 @@ font-family: 'Inter', sans-serif;
   .wrap-input100 {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #adadad;
-    margin-bottom: 37px;
+    /* border: 2px solid #adadad; */
+    margin-top: 37px;
+
   }
 
   .input100 {
     font-family: 'Inter', sans-serif;
-
+     border: 2px solid #adadad78;
+     border-radius: 5px;
+    padding: 10px;
     /* font-family: Poppins-Regular; */
     font-size: 15px;
     color: #555555;
@@ -241,7 +244,7 @@ font-family: 'Inter', sans-serif;
     width: 100%;
     height: 45px;
     background: transparent;
-    padding: 0 5px;
+
   }
 
   /*---------------------------------------------*/
@@ -501,5 +504,13 @@ font-family: 'Inter', sans-serif;
     }
   }
 
+
+
+.span-form{
+    font-family: Poppins-Regular;
+    color: #999999;
+    font-size: 1rem;
+    margin-top: 15px;
+}
 
 

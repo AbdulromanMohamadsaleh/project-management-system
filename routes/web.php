@@ -140,6 +140,7 @@ Route::group(
     ['middleware' => ['auth']],
     function () {
         Route::post('/editprofile/{id}', [UserController::class, 'Update'])->name('editprofile');
+        Route::post('/editPosition/{id}', [UserController::class, 'UpdatePosition'])->name('user.UpdatePosition');
     }
 );
 

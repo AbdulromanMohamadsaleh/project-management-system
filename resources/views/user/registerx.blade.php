@@ -1,4 +1,4 @@
-<body>
+{{-- <body>
 
     <div class="limiter">
         <div class="container-login100">
@@ -54,4 +54,4 @@
     </div>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
-</body>
+</body> --}}

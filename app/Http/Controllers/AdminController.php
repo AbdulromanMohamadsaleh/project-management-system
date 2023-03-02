@@ -55,7 +55,7 @@ class AdminController extends Controller
     public function Approve($id)
     {
         $Login = User::where('LOGIN_ID', $id)->update(['IS_ACTIVE' => 1]);
-        return redirect()->back();
+        return redirect()->back()->with("success", "Active Successfully");
     }
 
     public function Saveuser(request $request)
