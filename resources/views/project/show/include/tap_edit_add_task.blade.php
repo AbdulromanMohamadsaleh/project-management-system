@@ -1,10 +1,8 @@
-{{-- <script src="{{ asset('js/create_project.js') }}"></script> --}}
 <form class="needs-validation" novalidate id="signUpForm" method="post" action="{{ route('save') }}">
     @csrf
     <p class="text-center mb-4 mt-3">edit Activity</p>
     <div class="row col-12" firstActivity id="activity-1">
         <div class="mb-3 col-10">
-            {{-- <label for="">1</label> --}}
             @foreach ($project_detail->activity as $act)
                 <div class="input-group mb-3">
                     <span class=" me-3 mt-2 fs-5" id="numbering">1</span>

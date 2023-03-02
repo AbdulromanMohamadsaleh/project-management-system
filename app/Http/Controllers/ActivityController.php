@@ -19,34 +19,21 @@ class ActivityController extends Controller
             'activity' => 'required', // after:now
         ]);
 
-
-        // Getting values from the blade template form
         $ProjectActivity->ACTIVITY_NAME = $request->activity;
-        // $Holyday->CATEGORY_ID = $id;
         $ProjectActivity->timestamps = false;
         $ProjectActivity->update();
 
-        // return response()->json([
-        //     "success" => "Holyday Edited Successfully", 'status' => 'success',
-        //     'response_code' => 200,
-        // ]);
-
-
         return redirect()->back()->with("success", "Edit Activity Successfully");
     }
+
     public function DelateActivity($id, $project)
     {
-
         $ProjectActivity = ProjectActivity::where('ACTIVITY_ID', $id)->first();
-
-        //
         $ProjectActivityForReorder = ProjectActivity::where('DETAIL_ID', $project)->where('ACTIVITY_ORDER', '>', $ProjectActivity->ACTIVITY_ORDER)->orderBy('ACTIVITY_ORDER', 'ASC')->get();
-
 
         if ($ProjectActivityForReorder) {
             $i = 0;
             foreach ($ProjectActivityForReorder as $Project) {
-
                 $Project->ACTIVITY_ORDER = $ProjectActivity->ACTIVITY_ORDER + $i++;
                 $Project->save();
             }
@@ -56,6 +43,7 @@ class ActivityController extends Controller
 
         return redirect()->back()->with("success", "Delete activity Successfully");
     }
+
     public function Create()
     {
         $Holydays = Holyday::all()->toJson();
@@ -63,28 +51,19 @@ class ActivityController extends Controller
             'Holydays' => $Holydays,
         ]);
     }
+
     public function Save(Request $request, $id)
     {
-
         $project = ProjectDetial::where('DETAIL_ID', $id)->first();
         if (!$project)
             return redirect()->back();
-        // $validated = $request->validated();
 
-
-        // Create Project Tracker Table
-        // Save Activity & Tasks
         $activityName = $request->activityName;
         $taskName = $request->taskName;
         $taskCounter = $request->taskCounter;
         $taskDuration = $request->taskDuration;
-
         $counterForTask = 0;
-
-
-
         $ActivityCounter = ProjectActivity::count();
-
         $ActivityId = "ACT" . sprintf("%04d", ($ActivityCounter == 0 || $ActivityCounter == '' ? 1 : $ActivityCounter + 1));
 
         $counterId2 = 1;
@@ -117,36 +96,24 @@ class ActivityController extends Controller
             $ProjectTask->save();
         }
 
-        // $ProjectActivity->save();
-
-
         return redirect()->back()->with("success", "Activity Added Successfully");
     }
 
-
     public function SaveOrder(Request $request)
     {
-        // $request->validate([
-        //     'create_holyday_name' => 'required|min:2|max:50',
-        //     'create_date_holyday' => 'required|date', // after:now
-        // ]);
-
         $activities = json_decode($request->dd);
 
         foreach ($activities as $act) {
 
             $ProjectActivity = ProjectActivity::where('ACTIVITY_ID', $act->taskId)->first();
-
-            // Getting values from the blade template form
             $ProjectActivity->ACTIVITY_ORDER = $act->order;
-            // $Holyday->CATEGORY_ID = $id;
             $ProjectActivity->timestamps = false;
             $ProjectActivity->update();
         }
         return response()->json([
             "success" => "Holyday Added Successfully", 'status' => 'success',
             'response_code' => 200,
-            // 'data' => $Holyday->toJson()
+
         ]);
     }
 }

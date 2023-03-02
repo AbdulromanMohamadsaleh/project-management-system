@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectActivity extends Model
 {
     use HasFactory;
+    protected $table = 'prj_project_activity';
     protected $primaryKey = 'ACTIVITY_ID';
     protected $keyType = 'string';
 
     protected $fillable = [
         'ACTIVITY_ID',
-
     ];
-
-
-    protected $table = 'prj_project_activity';
-    // protected $primary = 'DETAIL_ID';
 
     public function tasks()
     {

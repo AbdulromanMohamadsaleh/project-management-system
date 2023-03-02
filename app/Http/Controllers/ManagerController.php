@@ -10,6 +10,7 @@ use Phattarachai\LineNotify\Facade\Line;
 class ManagerController extends Controller
 {
     use LastProjectTrait;
+    
     public function index()
     {
 
@@ -19,14 +20,10 @@ class ManagerController extends Controller
         });
 
         $data['totalPendingProjectData'] = ProjectDetial::where('IS_APPROVE', 0)->with('ProjectCreator')->get();
-        // $data['totalInCompleteProjectData'] = ProjectTrack::where('PROJECT_PERCENTAGE', 100)->with('project')->get();
-
         $data['totalInCompleteProjectData'] = ProjectDetial::where('PROJECT_PERCENTAGE', 100)->get();
-
         $data['totalInCompleteProjectData'] = $data['totalInCompleteProjectData']->map(function ($user) {
             return $user;
         });
-
 
         $data['totalPendingProject'] = count($data['totalPendingProjectData']);
         $data['totalInProggressProject'] = count($data['totalInProggressProjectData']);
@@ -40,7 +37,6 @@ class ManagerController extends Controller
             return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at'])->format('Y');
         })->map->sum('BUDGET')->toJson();
 
-        // dd($data['BarChartDataSumBudget']);
         $data['last']  = $this->getLastProject();
         $data['totalbudget'] = ProjectDetial::where('IS_APPROVE', 1)->sum('BUDGET');
 

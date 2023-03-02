@@ -21,7 +21,6 @@
                     @csrf
                     <div class="row justify-content-center col-12" firstActivity id="activity-1">
                         <div class="mb-3 col-10">
-                            {{-- <label for="">1</label> --}}
                             <div class="input-group mb-3">
                                 <span class=" me-3 mt-2 fs-5" id="numbering">{{ $activitiesCounter }}</span>
                                 <input class="form-control form-control-lg mb-3" name="activityName" type="text"
@@ -56,16 +55,9 @@
 
                             </div>
                         </div>
-                        {{-- <div class="col-1  ">
-                            <button type="button" onclick="Numbreings()" id="btnAddNewActivity"
-                                class="btn btn-success add-task"title="New Activity">+</button>
-                        </div> --}}
+
                         <input type="number" name="activityOrder" value="{{ $activitiesCounter }}" hidden>
                     </div>
-                    {{-- <input id="HolyDays" hidden type="text" value="{{ $Holydays }}" placeholder="Address"
-                        name="address"> --}}
-                    {{-- <input id="Project_ID" hidden type="text" value="{{ $project_detail->DETAIL_ID }}"
-                        placeholder="Address" name="address"> --}}
 
                     <div class="mt-4 d-flex justify-content-center">
                         <div class="col-4 row form-footer">

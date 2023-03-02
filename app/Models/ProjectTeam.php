@@ -12,8 +12,6 @@ class ProjectTeam extends Model
     use HasFactory;
     protected $table = 'prj_project_team';
     protected $fillable = [
-        // 'ID_NAME',
-        // 'RELATED_NAME',
         'DETAIL_ID',
     ];
 

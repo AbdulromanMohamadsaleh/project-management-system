@@ -1,10 +1,4 @@
-@php
-    // $status = explode(',', $project_detail->STATUS);
-    // $result = end($status);
-    // if ($result == 'workingOn') {
-    //     $result = $status[count($status) - 2];
-    // }
-@endphp
+
 <span @switch($project_detail->STATUS)
         @case(0)
             <span class="badge rounded-pill text-bg-secondary">New Release</span>

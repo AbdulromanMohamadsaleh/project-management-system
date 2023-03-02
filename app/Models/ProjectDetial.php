@@ -32,19 +32,10 @@ class ProjectDetial extends Model
     ];
 
     protected $hidden = [
-        // 'created_at',
         'updated_at',
     ];
 
     public $timestapm = false;
-
-
-
-    // public function tasks()
-    // {
-    //     return $this->hasManyThrough(ProjectTask::class, ProjectActivity::class, 'DETAIL_ID', 'ACTIVITY_ID');
-    // }
-
 
 
     public function projectTeam()
@@ -62,17 +53,10 @@ class ProjectDetial extends Model
         return $this->belongsto(User::class, 'PROJECT_MANAGER', 'LOGIN_ID');
     }
 
-    // public function track()
-    // {
-    //     return $this->hasOne(ProjectTrack::class, 'PROJECT_ID', 'DETAIL_ID');
-    // }
-
     public function Category()
     {
         return $this->belongsto(Category::class, 'CATEGORY_ID', 'CATEGORY_ID');
     }
-
-
 
     public function ProjectCreator()
     {

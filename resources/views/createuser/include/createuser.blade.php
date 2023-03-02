@@ -35,12 +35,7 @@
                             </span>
                         @enderror
                         </div>
-                        {{-- <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="projectName">Confirm Password
-                                </label>
-                            <input type="text" name="holyday_name" class="form-control"
-                                id="projectName">
-                        </div> --}}
+
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">Name
                             </label>

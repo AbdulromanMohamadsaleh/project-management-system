@@ -5,8 +5,6 @@
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
             data-bs-target="#nav-home-{{ $task->TASK_ID }}" type="button" role="tab" aria-controls="nav-home"
             aria-selected="true" data-toggle="tooltip" title='Edit'><i class="bi bi-pencil"></i></button>
-
-
         <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
             data-bs-target="#nav-contact-{{ $task->TASK_ID }}" type="button" role="tab" aria-controls="nav-contact"
             aria-selected="false" data-toggle="tooltip" title='Show'><i class="bi bi-eye"></i></button>
@@ -15,9 +13,6 @@
             data-bs-target="#nav-paybudget-{{ $task->TASK_ID }}" type="button" role="tab"
             aria-controls="nav-paybudget" aria-selected="false" data-toggle="tooltip" title='Show'><i
                 class="material-icons">payment</i></button>
-
-
-
     </div>
 </nav>
 

@@ -24,28 +24,12 @@
                                     <dt><b class="border-bottom border-primary">Objective</b></dt>
                                     <dd>{!! nl2br($project_detail->OBJECTIVE) !!}</dd>
 
-
-
-                                    {{-- <dt><b class="border-bottom border-primary">Record Date</b>
-                                                            </dt>
-                                                            <dd>{{ $project_detail->DATE_SAVE }}</dd>
-                                                            <dt><b class="border-bottom border-primary">Project Name</b>
-                                                            </dt> --}}
-                                    {{-- <b class="border-bottom text-break border-primary">Resons</b>
-                                    </dt>
-                                    <dd>{{ $project_detail->REASONS }}</dd>
-                                    <dt> --}}
                                 </div>
                             </dl>
                         </div>
                         <div class="col-sm-6">
                             <dl>
 
-                                {{-- <dt><b class="border-bottom border-primary">Objective</b>
-                                </dt>
-                                <dd>
-                                    {!! nl2br($project_detail->OBJECTIVE) !!}
-                                </dd> --}}
                                 <dt><b class="border-bottom border-primary">Target</b></dt>
                                 <dd>{{ $project_detail->TARGET }}</dd>
                                 <dt><b class="border-bottom border-primary">Location</b></dt>

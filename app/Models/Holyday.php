@@ -10,8 +10,8 @@ class Holyday extends Model
     use HasFactory;
     protected $primaryKey = 'HOLYDAY_ID';
     protected $keyType = 'string';
-    
     protected $table = 'prj_holyday_date';
+    
     protected $fillable = [
         'HOLYDAY_ID',
         'HOLYDAY_NAME',

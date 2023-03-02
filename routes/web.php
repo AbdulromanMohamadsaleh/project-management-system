@@ -6,7 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
-// use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProjectController;
@@ -61,8 +61,6 @@ Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('acti
 ###########################  Project Manager  ###########################
 Route::group(['prefix' => 'ProjectManager', 'middleware' => ['auth', 'isProjectManager', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [ProjectManagerController::class, 'index'])->name('projectManager.dashboard');
-    // Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-    // Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
 });
 
 ###########################  Manager  ###########################
@@ -92,11 +90,9 @@ Route::group(
         Route::get('/show/{id}', [ProjectController::class, 'show'])->name('show');
         Route::get('/timeline/{id}', [ProjectController::class, 'Timeline'])->name('timeline');
         // Gantt Tracker
-
         Route::get('/gantt_Chart/{id}', [ProjectController::class, 'GanttChart'])->name('ganttChart');
 
         Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
-
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
@@ -116,16 +112,12 @@ Route::group(
     }
 );
 
-// url: "{{ route('holyday.update', $Holyday->HOLYDAY_ID) }}",
-
-
 ###########################  Report  ###########################
 
 Route::group(
     ['middleware' => ['auth']],
     function () {
         Route::get('/report', [ReportController::class, 'Show'])->name('report.report');
-
     }
 );
 
@@ -160,9 +152,6 @@ Route::group(
 );
 
 ###########################  User  ###########################
-// Route::get('/profile', [UserController::class, 'Profile'])->name('profile');
-// Route::get('/register', [UserController::class, 'Register'])->name('register');
-
 
 ###########################  TASK  ###########################
 Route::group(

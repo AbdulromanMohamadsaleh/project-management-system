@@ -57,28 +57,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function getAuthPassword()
-    // {
-    //     return $this->PASSWORD;
-    // }
-
-    // public function email()
-    // {
-    //     return 'EMAIL';
-    // }
-
-
-    // public function projects()
-    // {
-    //     return $this->hasManyThrough(
-    //         ProjectDetial::class,
-    //         ProjectTeam::class,
-    //         'TEAM_ID', // Foreign key on ProjectActivity table...
-    //         'DETAIL_ID', // Foreign key on tasks table...
-    //         'DETAIL_ID', // Local key on countries table...
-    //         'DETAIL_ID' // Local key on ProjectActivity table...
-    //     );
-    // }
 
     public function projects()
     {

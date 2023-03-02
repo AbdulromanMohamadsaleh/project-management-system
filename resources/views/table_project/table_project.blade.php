@@ -5,7 +5,6 @@
                 <th style="text-align: center;" scope="col">ID Project</th>
                 <th style="text-align: center;" scope="col">Name Porject</th>
                 <th style="text-align: center;" scope="col">Record Caretor</th>
-                {{-- <th style="text-align: center;" scope="col">Date Record</th> --}}
                 <th>Progress</th>
                 <th>Status</th>
                 <th style="text-align: center;" scope="col">Created at</th>

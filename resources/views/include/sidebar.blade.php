@@ -2,7 +2,6 @@
     <nav class="navbar bg-light navbar-light">
         <a href="index.html" class="navbar-brand mx-4 mb-3">
             <b style="text-align: " class="text-primary">
-                {{-- <i class="fa fa-hashtag me-2"></i> --}}
                 Project Managment
             </b>
         </a>
@@ -48,15 +47,6 @@
                 @default
             @endswitch
 
-            {{-- <div class="nav-item dropdown">
-                <a href="{{ route('create') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Save Project</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('login') }}" class="dropdown-item">login</a>
-                    <a href="typography.html" class="dropdown-item">Typography</a>
-                    <a href="element.html" class="dropdown-item">Other Elements</a>
-                </div>
-            </div> --}}
             @if (Auth::user()->POSITION == 'Employee' ||
                     Auth::user()->POSITION == 'Project Manager' ||
                     Auth::user()->POSITION == 'Admin')
@@ -87,13 +77,7 @@
                             aria-hidden="true"></i>Profile</a>
                 </div>
             </div>
-            {{-- <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="far fa-file-alt me-2"></i>Pages</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="signin.html" class="dropdown-item">Sign In</a>
-                </div>
-            </div> --}}
+
         </div>
     </nav>
 </div>
