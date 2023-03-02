@@ -10,7 +10,8 @@
                 <li class="nav-link m-3">
 
                     <img style="width:40px;height:40px" class="rounded-circle"
-                        src="{{ asset('images/') . '/' . Auth::user()->IMG }}" alt="User Image">
+                        src="{{ $TeamsName->IMG ? asset('images/') . '/' . $TeamsName->IMG : asset('images/') . '/' . 'profile/no_img.png' }}"
+                        alt="User Image">
                     <a style="text-decoration: none; color: black;" class="users-list-name"
                         href="javascript:void(0)">{{ $TeamsName->NAME }}</a>
                 </li>

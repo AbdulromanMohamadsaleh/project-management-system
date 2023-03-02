@@ -71,7 +71,8 @@
         </div>
         <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img class="rounded-circle me-lg-2" src="{{ asset('images/') . '/' . Auth::user()->IMG }}"
+                <img class="rounded-circle me-lg-2"
+                    src="{{ Auth::user()->IMG ? asset('images/') . '/' . Auth::user()->IMG : asset('images/') . '/' . 'profile/no_img.png' }}"
                     alt="" style="width: 40px; height: 40px;">
                 <span class="d-none d-lg-inline-flex">{{ Auth::user()->NAME }}</span>
             </a>

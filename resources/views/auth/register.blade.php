@@ -1,4 +1,3 @@
-
 <body>
 
     <div class="limiter">
@@ -7,7 +6,7 @@
                 <p class="login100-form-title p-b-26">
                     Register
                 </p>
-                <img src="{{asset('images/logo/logo-06.png')}}" style="width: 100%" alt="">
+                <img src="{{ asset('images/logo/logo-06.png') }}" style="width: 100%" alt="">
 
                 <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                     @csrf
@@ -52,13 +51,13 @@
                             </span>
                         @enderror
                     </div>
-                    <select class="form-select" name="Position" aria-label="Default select example">
+                    {{-- <select class="form-select" name="Position" aria-label="Default select example">
                         <option selected>--Position--</option>
                         <option value="0">Employee</option>
                         <option value="1">Admin</option>
                         <option value="2">Project manager</option>
                         <option value="3">Manager</option>
-                    </select>
+                    </select> --}}
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn mt-3">
                             <div class="login100-form-bgbtn "></div>
