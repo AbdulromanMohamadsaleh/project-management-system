@@ -109,7 +109,6 @@ function addNewActivityInput() {
         // Not Last Sibling
         if (document.querySelector(`#${activityID}`).nextSibling != null) {
             // Dont Move Add Button
-            console.log("Not Last Sibling")
 
         } else {
             if (activityCounter == 1) {
@@ -246,11 +245,10 @@ function Numbreings() {
 
         for (let i = 0; i < childrenTasks.length; i++) {
             let tableChild = childrenTasks[i];
-            // tableChild.getElementById("numberingTask").innerHTML = i+1
+
             tableChild.querySelector("#numberingTask").innerHTML = `${ind + 1}.${i+1}`
         }
-        // numberingTask = act.closest(".taskWrap").querySelectorAll('[id = "TaskBorder"]')
-        // console.log(numberingTask)
+
     });
 }
 
@@ -272,7 +270,7 @@ function ValidateProjectDuration(){
         }
     })
 
-    // console.log(TotalDaysToComplateProject);
+    
     let errorMessage = ` <i class="bi bi-exclamation-triangle-fill me-3"></i>
                                 <div class="text-center">
                                     Days entered <b>(${totalDurationUserInput})</b> exceeded set days <b>(${TotalDaysToComplateProject})</b>, need to decrease <b>(${totalDurationUserInput-TotalDaysToComplateProject})</b> day.

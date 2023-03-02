@@ -171,16 +171,18 @@
 <div class="col mt-4">
     <div class="row card p-3">
         <div class="col">
-            <b>Total Date To Complete Activities = {{ ConvertDaysToWeek($project_detail->TotalDays) }}
+            <p class="mb-1 fw-bold">Total Date To Complete Activities =
+                {{ ConvertDaysToWeek($project_detail->TotalDays) }}
                 ({{ $project_detail->TotalDays }} Days)
-            </b><br>
-            <b>Project Budget = {{ $project_detail->BUDGET }}฿</b><br>
-            <b> Budget activity remaining = {{ $project_detail->BudgetActivityNotPaid }}฿
-            </b> <br>
-            <b> Budget paid = {{ $project_detail->paidBudget }}฿
-            </b><br>
-            <b> Budget payment remaining = {{ $project_detail->BUDGET - $project_detail->paidBudget }}฿
-            </b>
+            </p>
+            <p class="mb-1 fw-bold ">Project Budget = {{ $project_detail->BUDGET }}฿</p>
+            <p class="mb-1 fw-bold"> Budget activity remaining = {{ $project_detail->BudgetActivityNotPaid }}฿
+            </p>
+            <p class="mb-1 fw-bold"> Budget paid = {{ $project_detail->paidBudget }}฿
+            </p>
+            <p class="mb-1 fw-bold"> Budget payment remaining =
+                {{ $project_detail->BUDGET - $project_detail->paidBudget }}฿
+            </p>
         </div>
     </div>
     <br>
@@ -232,7 +234,7 @@
 
                         <div class="act-order">
 
-                            <tr class="act-rows">
+                            <tr class="act-rows" style="height: 55px;background: ghostwhite;">
                                 <td style="border-right: 1px solid #ccc;">
                                     <i style="font-size: 1.3rem;" class="bi bi-list glyphicon-move mr-4"></i>
                                 </td>

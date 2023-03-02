@@ -7,7 +7,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Create Holyday</h4>
+                <h4 class="modal-title">Create Holiday</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -17,7 +17,7 @@
                     {{-- Project Name / Target --}}
                     <div class="row mb-5 mb-sm-0">
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="create_holyday_name">Holyday
+                            <label class="label-left fw-bold mb-2" for="create_holyday_name">Holiday
                                 Name</label>
                             <input type="text" name="create_holyday_name" class="form-control"
                                 id="create_holyday_name">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="create_date_holyday">Date
-                                Holyday</label>
+                                Holiday</label>
                             <input type="date" name="create_date_holyday" class="form-control"
                                 id="create_date_holyday">
                             <span class="  text-danger fw-bold" id="create_date_holyday_error">

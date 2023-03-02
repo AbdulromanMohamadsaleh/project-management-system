@@ -67,7 +67,7 @@
                 <div class="dropdown-menu bg-transparent border-0">
                     @if (Auth::user()->POSITION == 'Admin')
                         <a href="{{ route('dateholyday.Index') }}" class="dropdown-item ms-4  {{ $routename=='dateholyday.Index'?'active':'' }}"><i
-                                class="fa fa-calendar me-2"></i>Date Holyday</a>
+                                class="fa fa-calendar me-2"></i>Date Holiday</a>
                         <a href="{{ route('category') }}" class="dropdown-item ms-4 {{ $routename=='category'?'active':'' }}"><i class="fa fa-list-alt me-2"
                                 aria-hidden="true"></i>Category</a>
                         <a href="{{ route('createuser') }}" class="dropdown-item ms-4 {{ $routename=='createuser'?'active':'' }}"><i class="fa fa-user-plus me-2"

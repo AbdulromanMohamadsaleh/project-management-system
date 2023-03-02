@@ -20,11 +20,6 @@
         })
         let ChartType = "Week";
 
-        console.log(tasks)
-
-        // JSON.parse()
-
-
 
         project.DATE_END = new Date(project.DATE_END);
         project.DATE_START = new Date(project.DATE_START);
@@ -35,8 +30,6 @@
         const ganttChartWeek = document.querySelector("[role=gantt-chart-week]");
         new GanttChart("Week",ganttChartWeek,project);
 
-        // const ganttChartMonth = document.querySelector("[role=gantt-chart-month]");
-        // new GanttChart("Month",ganttChartMonth, tasks,project,lastTaskEndDate,firstTaskStartDate);
 
     });
 

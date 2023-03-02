@@ -277,7 +277,7 @@ class ProjectController extends Controller
     {
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
-        $projectManagers = User::where("POSITION", 3)->where("IS_ACTIVE", 1)->get();
+        $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
         $team = User::all();
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
         $routeName = $this->getRouteName();
@@ -325,7 +325,15 @@ class ProjectController extends Controller
 
         $ProjectDetial = ProjectDetial::where('DETAIL_ID', $ProjectDetail->DETAIL_ID)->first();
 
-        $ProjectDetial->projectTeam()->sync($request->projectTeam);
+        $projectTeam = $request->projectTeam;
+        if ($projectTeam) {
+            if (!in_array($request->projectManager, $projectTeam)) {
+
+                array_push($projectTeam, $request->projectManager);
+            }
+        }
+
+        $ProjectDetial->projectTeam()->sync($projectTeam);
 
         return redirect()->route('show', $id)->with("success", "Project Edited Successfully");
     }

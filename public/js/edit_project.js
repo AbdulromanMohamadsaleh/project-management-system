@@ -1,6 +1,5 @@
 var TotalDaysToComplateProject = 0;
 const OldProjectNameInput = document.getElementById("projectName").value.trim()
-console.log("OldProjectNameInput: " + OldProjectNameInput)
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -82,7 +81,6 @@ function validateForm() {
                     y[i].className += " invalid is-invalid";
                 }
                 // and set the current valid status to false
-                console.log(y[i].value);
                 valid = false;
             }else{
 
@@ -224,7 +222,6 @@ let IsProjectNameValid = true;
 projectNameY.addEventListener('input', (e)=>{
 
     if(e.target.value.length < 255 && e.target.value.length > 1 && OldProjectNameInput != e.target.value ){
-        console.log("OldProjectNameInput: " + OldProjectNameInput +" / " + "Neewe Name: " + e.target.value )
         CheckIsProjectNameExist();
     }else if(feedbackProjectName.classList.contains('invv') && projectNameY.classList.contains('is-invalid')){
                 feedbackProjectName.classList.remove('invv')
@@ -265,7 +262,6 @@ function CheckIsProjectNameExist(e) {
             }
         })
         .catch((error) => {
-            console.log(error);
         });
 
 }

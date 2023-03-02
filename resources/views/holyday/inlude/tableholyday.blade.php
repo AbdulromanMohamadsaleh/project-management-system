@@ -3,8 +3,8 @@
 
         <thead>
             <tr>
-                <th style="text-align: center;" scope="col">Holyday Name</th>
-                <th style="text-align: center;" scope="col">Date Holyday</th>
+                <th style="text-align: center;" scope="col">Holiday Name</th>
+                <th style="text-align: center;" scope="col">Date Holiday</th>
                 <th style="text-align: center;">Action</th>
 
             </tr>

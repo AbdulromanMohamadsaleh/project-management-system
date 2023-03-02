@@ -54,7 +54,7 @@
                             </a>
                         @endif
 
-                        @if ($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin')
+                        @if ($project_detail->IS_APPROVE == 0 )
                             <form style="display: inline-block" method="POST"
                                 action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
                                 @csrf

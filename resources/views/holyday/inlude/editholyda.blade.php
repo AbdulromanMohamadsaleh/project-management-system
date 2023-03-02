@@ -20,12 +20,12 @@
                     @csrf
                     <div class="row mb-5 mb-sm-0">
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="holyday_name">Holyday Name</label>
+                            <label class="label-left fw-bold mb-2" for="holyday_name">Holiday Name</label>
                             <input type="text" name="edit_holyday_name" class="form-control" id="holyday_name"
                                 value="{{ $Holyday->HOLYDAY_NAME }}">
                         </div>
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="target">Date Holyday</label>
+                            <label class="label-left fw-bold mb-2" for="target">Date Holiday</label>
                             <input type="date" name="edit_create_date_holyday" value="{{ $Holyday->HOLYDAY_DATE }}"
                                 class="form-control" id="target">
                         </div>

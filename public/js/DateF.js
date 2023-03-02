@@ -105,7 +105,6 @@ function updateEndDateForRadios(e) {
 
     if(e.target.value=="yes"){
 
-            // console.log(convertToHtmlDateFormat(removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value)))
             projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
         }
 
@@ -122,7 +121,6 @@ function updateEndDateForRadios(e) {
         projectEnd.valueAsDate = addDays(projectStart.value, parseInt(amount))
         if(e.target.value=="yes"){
 
-            // console.log(convertToHtmlDateFormat(removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value)))
             projectEnd.valueAsDate = removePublicHolyday(HolyDaysDate,projectStart.value,projectEnd.value);
         }
     }

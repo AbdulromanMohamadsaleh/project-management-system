@@ -71,6 +71,6 @@ class CategoryController extends Controller
             'category_name' => 'required|unique:prj_category,NAME_CATEGORY',
         ];
 
-        return dd(Validator::make($request->all(), $rules));
+        return(Validator::make($request->all(), $rules));
     }
 }

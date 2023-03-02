@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
+           <h1 class="fw-bold text-center fs-4">Holiday</h1>
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <div class="category-filter">
@@ -13,7 +14,7 @@
                         @endforeach
                     </select>
                 </div>
-                <h6 class="mb-0">Holyday</h6>
+                {{-- <h6 class="mb-0">Holiday</h6> --}}
                 @include('holyday.inlude.ceateholyday')
             </div>
             <div class="table-responsive">

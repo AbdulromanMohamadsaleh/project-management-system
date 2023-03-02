@@ -143,7 +143,6 @@
                 let projectChart = BarData.map(x => x[1]);
 
 
-                console.log(BudgetData)
                 new Chart(
                     document.getElementById('bar-chart'), {
                         type: 'bar',

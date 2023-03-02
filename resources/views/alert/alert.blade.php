@@ -11,7 +11,7 @@
     </script>
 @elseif (session()->has('error'))
     <script>
-        console.log("ff")
+        
         Swal.fire({
             position: 'center',
             icon: 'error',

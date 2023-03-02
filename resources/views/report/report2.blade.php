@@ -147,6 +147,7 @@
 
 @section('content')
     <div class="container p-5">
+        <h1 class="fw-bold text-center fs-4 mb-5">Report Projects</h1>
         <form id="search-form  " action="" method="POST" enctype="multipart/form-data">
             <div class="row" id="search">
                 <div class="form-group col-9">
@@ -382,7 +383,7 @@
                 }
             }
 
-            // console.log(filters)
+
             if (filters == "") {
                 $(".product").show();
                 getProjectSummaryFiltred($(".product"));

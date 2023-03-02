@@ -101,7 +101,7 @@
                                                 <div style="align-items: center;"
                                                     class="col-6 d-flex  justify-content-end  pe-4">
                                                     @if ($task->STATUS == 0)
-                                                        <i class="bi bi-x-circle-fill icon-red"></i>
+                                                        <i class="bi bi-clock-fill " style="color: #edb43a"></i>
                                                     @else
                                                         @php
                                                         @endphp

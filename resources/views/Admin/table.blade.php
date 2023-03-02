@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
+        <h1 class="fw-bold text-center fs-4">Projects</h1>
+
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
             </div>

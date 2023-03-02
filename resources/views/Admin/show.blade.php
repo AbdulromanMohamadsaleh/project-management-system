@@ -172,18 +172,17 @@
 
 @section('content')
     <div class="container-fluid p-5">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <dt><b class="border-bottom border-primary mt-1">View {{ $project_detail->NAME_PROJECT }} Project</b></dt>
-            </div>
+        <h1 class="fw-bold text-center fs-4 "> {{ $project_detail->NAME_PROJECT }} Project </h1>
+        <div class="row">
+
             <div class="col-sm-6">
             </div>
         </div>
     </div>
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-2">
         <!-- Recent Sales Start -->
         <div class="container mt-3 ">
-            <div class="row">
+            <div class="row mb-3">
                 @include('project.show.include.stepper_timeline')
             </div>
 

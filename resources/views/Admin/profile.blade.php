@@ -3,6 +3,7 @@
 @section('content')
     <br>
     <div class="container py-5">
+        <h1 class="fw-bold text-center fs-4 mb-4">Profile</h1>
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">

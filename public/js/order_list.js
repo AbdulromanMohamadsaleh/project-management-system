@@ -123,7 +123,7 @@
     $('#toggleSortable').click(function() {
     if ($("#myList").sortable("instance")) {
         $("#myList").sortable("destroy");
-        console.log("default")
+  
         $(this).addClass("active")
 
         $("ul#myList li").addClass("cs")
