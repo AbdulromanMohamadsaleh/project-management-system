@@ -1,6 +1,6 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
-        <a href="index.html" class="navbar-brand mx-4 mb-3">
+        <a  class="navbar-brand mx-4 mb-3">
             <b style="text-align: " class="text-primary">
                 Project Managment
             </b>

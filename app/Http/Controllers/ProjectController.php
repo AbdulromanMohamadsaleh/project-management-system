@@ -357,7 +357,7 @@ class ProjectController extends Controller
         $project_detail2 = ProjectDetial::select(['DETAIL_ID', 'NAME_PROJECT', 'BUDGET', 'DATE_START', 'DATE_END', 'STATUS'])->where('DETAIL_ID', $id)->with('activity', function ($q) {
             $q->select('ACTIVITY_ID', 'ACTIVITY_NAME', 'prj_project_activity.START_DATE', 'END_DATE', 'DETAIL_ID', 'ACTIVITY_ORDER')
                 ->with('tasks', function ($q2) {
-                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'COPLETE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->where('COPLETE_TIME', 'IS NOT', null)->orderBy('TASK_ORDER')->get();
+                    $q2->select('TASK_ID', 'TASK_NAME', 'START_DATE', 'prj_activity_task.END_DATE', 'COPLETE_TIME', 'TASK_ORDER', 'ACTIVITY_ID', "STATUS")->where('END_DATE', 'IS NOT', null)->orderBy('TASK_ORDER')->get();
                 })->orderBy('ACTIVITY_ORDER')->get();
         })->first();
 

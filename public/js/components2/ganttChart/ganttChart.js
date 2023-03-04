@@ -639,9 +639,9 @@ export function GanttChart(ChartType,ganttChartElement, project) {
 
             act.tasks.forEach((taskDuration) => {
             taskDuration.START_DATE =new Date(taskDuration.START_DATE);
-            taskDuration.COPLETE_TIME =new Date(taskDuration.COPLETE_TIME);
+            taskDuration.END_DATE =new Date(taskDuration.END_DATE);
             const dateStr = createFormattedDateFromDate(taskDuration.START_DATE);
-            const dateEnd = createFormattedDateFromDate(taskDuration.COPLETE_TIME);
+            const dateEnd = createFormattedDateFromDate(taskDuration.END_DATE);
             // find gantt-time-period-cell start position
 
 
@@ -700,7 +700,7 @@ export function GanttChart(ChartType,ganttChartElement, project) {
 
             let weekSpanCounter=1;
             let countContinue = 0;
-            const weeks = diff_weeks(taskDuration.START_DATE, taskDuration.COPLETE_TIME);
+            const weeks = diff_weeks(taskDuration.START_DATE, taskDuration.END_DATE);
 
             let FlagCountSpan = false
             for(let h = 0;h<cells.length;h++){
@@ -916,7 +916,7 @@ export function GanttChart(ChartType,ganttChartElement, project) {
             act.tasks.forEach((taskDuration) => {
 
             taskDuration.START_DATE =new Date(taskDuration.START_DATE.split(" ")[0]);
-            taskDuration.COPLETE_TIME =new Date(taskDuration.COPLETE_TIME.split(" ")[0]);
+            taskDuration.END_DATE =new Date(taskDuration.END_DATE.split(" ")[0]);
         const dateStr = createFormattedDateFromDate(taskDuration.START_DATE);
         // find gantt-time-period-cell start position
         const startCell = containerTimePeriods.querySelector(
@@ -939,7 +939,7 @@ export function GanttChart(ChartType,ganttChartElement, project) {
     //  For Days
     function createTaskDurationElForDays(taskDuration, startCell,color) {
 
-        if(taskDuration.START_DATE==taskDuration.COPLETE_TIME || getDiffNumberOfDays(taskDuration.START_DATE,taskDuration.COPLETE_TIME)==0){
+        if(taskDuration.START_DATE==taskDuration.END_DATE || getDiffNumberOfDays(taskDuration.START_DATE,taskDuration.END_DATE)==0){
 
             let weekSpanCounter=1;
         const taskDurationEl = document.createElement("div");
@@ -974,14 +974,14 @@ export function GanttChart(ChartType,ganttChartElement, project) {
         taskDurationEl.id = taskDuration.TASK_ID;
         taskDurationEl.style.background = color;
 
-        if(taskDuration.START_DATE> taskDuration.COPLETE_TIME){
+        if(taskDuration.START_DATE> taskDuration.END_DATE){
 
             let temp =taskDuration.START_DATE;
-            taskDuration.START_DATE = taskDuration.COPLETE_TIME;
-            taskDuration.COPLETE_TIME = temp
+            taskDuration.START_DATE = taskDuration.END_DATE;
+            taskDuration.END_DATE = temp
         }
 
-        const days = dayDiff(taskDuration.START_DATE, taskDuration.COPLETE_TIME);
+        const days = dayDiff(taskDuration.START_DATE, taskDuration.END_DATE);
 
         let add = days*0.036;
 
@@ -1054,7 +1054,7 @@ export function GanttChart(ChartType,ganttChartElement, project) {
             dayEl.appendChild(dayElSpan);
             timePeriodEl.appendChild(dayEl);
              if(numWeeks<weekCounter){
-                    
+
                     flagStartWeek=false;
 
                 }

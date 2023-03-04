@@ -132,7 +132,6 @@ class TaskController extends Controller
 
         $Task->TASK_NAME = $request->task;
         $Task->DAY = $request->day;
-        $Task->DAY = $request->day;
         $Task->START_DATE = $request->edit_satart_date;
 
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
@@ -149,8 +148,10 @@ class TaskController extends Controller
                 $Project->save();
             }
 
-            $Task->COPLETE_TIME = $request->Expected_End_Date;
+            // $Task->COPLETE_TIME = $request->Expected_End_Date;
+            $Task->END_DATE = $request->Expected_End_Date;
         }
+
 
 
         $Task->save();
