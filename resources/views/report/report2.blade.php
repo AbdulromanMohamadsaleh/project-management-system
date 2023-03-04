@@ -161,28 +161,43 @@
         <form class="mt-4">
             <div class="row" id="filter">
                 <div class="form-group col-sm-3 col-xs-6 mb-3">
+                    <span for="from" class="label-left form-label fw-bold" for="">From:</span>
+                    <input id="from" type="date" class="form-control">
+                </div>
+                <div class="form-group col-sm-3 col-xs-6 mb-3">
+                    <span for="to" class="label-left form-label fw-bold" for="">To:</span>
+                    <input id="to" type="date" class="form-control">
+                </div>
+
+                <div class="form-group col-sm-3 col-xs-6 mb-3">
                     <select data-filter="name" class="filter-name filter form-control">
-                        <option value="">Select Name</option>
+                        <option value="">All Name</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3 col-xs-6  mb-3">
                     <select data-filter="year" class="filter-year filter form-control">
-                        <option value="">Select Year</option>
+                        <option value="">All Start Year</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3 col-xs-6  mb-3">
                     <select data-filter="status" class="filter-status filter form-control">
-                        <option value="">Select Status</option>
+                        <option value="">All Status</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3 col-xs-6  mb-3">
                     <select data-filter="category" class="filter-category filter form-control">
-                        <option value="">Select Category</option>
+                        <option value="">All Category</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3 col-xs-6  mb-3">
                     <select data-filter="projectManager" class="filter-projectManager filter form-control">
-                        <option value="">Select Project Manager</option>
+                        <option value="">All Project Manager</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                    <select data-filter="end" class="filter-end filter form-control">
+                        <option value="">All End Year</option>
                     </select>
                 </div>
             </div>
@@ -237,8 +252,9 @@
                     <thead class="TableHead">
                         <tr>
                             <th>Name</th>
-                            <th>Year</th>
+                            <th>Start Year</th>
                             <th></th>
+                            <th>End Year</th>
                             <th>Status</th>
                             <th>Category</th>
                             <th>Budget</th>
@@ -266,9 +282,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             var data = @php echo $project_detail @endphp;
 
+            console.log(data);
+
             var products = "",
                 names = "",
                 years = "",
+                endYears = "",
                 statusAll = "",
                 projetManagers = "",
                 projectCreator = "",
@@ -283,10 +302,12 @@
 
             for (var i = 0; i < data.length; i++) {
 
-                let b = new Date(data[i].created_at);
+                let b = new Date(data[i].DATE_START);
+                let end = new Date(data[i].DATE_END);
 
                 var name = data[i].NAME_PROJECT,
                     year = b.getFullYear(),
+                    endYear = end.getFullYear(),
                     budget = data[i].BUDGET,
                     category = data[i].category.NAME_CATEGORY,
                     projetManager = data[i].project_manager.NAME,
@@ -313,11 +334,14 @@
                 totalBudget += parseInt(budget);
                 //create product cards all
                 products += " <tr class='firstRow projets col-sm-4 product' data-name='" + name + "' data-year='" +
-                    year + "' data-all='" + "all" + "' data-status='" +
-                    status + "' data-category = '" + category + "' data-projectManager='" + projetManager +
+                    year + "'" + "data-end='" + endYear + "'" + "data-date='" + data[i].DATE_START +
+                    "' data-all='" +
+                    "all" + "' data-status='" +
+                    status + "'data-category = '" + category + "' data-projectManager='" + projetManager +
                     "' data-budget='" + budget +
                     "' ><div class='product-inner text-center'><td>" + name + "</td><td>" + year +
-                    "<td/><td><span class='badge rounded-pill " + statusColor + "'>" + status + "</span></td><td>" +
+                    "<td/><td>" + endYear + "</td><td><span class='badge rounded-pill " + statusColor +
+                    "'>" + status + "</span></td><td>" +
                     category + "</td><td>" +
                     budget + "&#3647</td><td>" +
                     projetManager +
@@ -345,6 +369,11 @@
                         "</option>") == -1) {
                     projetManagers += "<option value='" + projetManager + "'>" + projetManager + "</option>";
                 }
+
+                if (endYears.indexOf("<option value='" + endYear + "'>" + endYear +
+                        "</option>") == -1) {
+                    endYears += "<option value='" + endYear + "'>" + endYear + "</option>";
+                }
             }
 
             //create dropdown of makes
@@ -356,6 +385,8 @@
             $(".filter-status").append(statusAll);
             $(".filter-category").append(categories);
             $(".filter-projectManager").append(projetManagers);
+            $(".filter-end").append(endYears);
+
 
         }, false);
 
@@ -377,22 +408,27 @@
             var filters = "";
 
             for (var key in filtersObject) {
-
                 if (filtersObject.hasOwnProperty(key)) {
                     filters += "[data-" + key + "='" + filtersObject[key] + "']";
                 }
             }
 
+            let fromValue = document.getElementById("from").value;
+            let toValue = document.getElementById("to").value;
 
             if (filters == "") {
-                $(".product").show();
-                getProjectSummaryFiltred($(".product"));
+                let filtredData = filterBetweenTwoDate($(".product"), fromValue, toValue);
+
+                $(".product").hide().filter(filtredData).show();
+                getProjectSummaryFiltred(filtredData);
 
             } else {
                 $(".product").hide();
-                $(".product").hide().filter(filters).show();
 
                 let filtredData = $(".product").filter(filters);
+
+                filtredData = filterBetweenTwoDate(filtredData, fromValue, toValue);
+                $(".product").hide().filter(filtredData).show();
                 getProjectSummaryFiltred(filtredData);
             }
         });
@@ -514,6 +550,95 @@
             totalProgresstFild.innerHTML = totalInPronggress;
             totalNewReleaseFild.innerHTML = totalNew;
         }
+
+
+        function filterBetweenTwoDate(data, from, to) {
+            if (from == "" && to == "")
+                return data;
+
+            // console.log(data)
+            let afterFilter = [];
+
+            for (var i = 0; i < data.length; i++) {
+                // console.log("Check: " + data[i].dataset.date,"From: "+ from,"To: "+ to);
+                // console.log(checkDateIsInclude(from, to, data[i].dataset.date))
+                if (checkDateIsInclude(from, to, data[i].dataset.date)) {
+                    console.log("here");
+                    afterFilter.push(data[i]);
+                }
+            }
+            // console.log(afterFilter)
+            return afterFilter;
+        }
+
+        function checkDateIsInclude(from, to, check) {
+            if (from == "") {
+                from = "1-12-1990";
+            } else if (to == "") {
+                to = "1-12-2999";
+            }
+            var fDate, lDate, cDate;
+            fDate = Date.parse(from);
+            lDate = Date.parse(to);
+            cDate = Date.parse(check);
+
+            if ((cDate <= lDate && cDate >= fDate)) {
+                return true;
+            }
+            return false;
+        }
+
+
+        let from = document.getElementById("from");
+        let to = document.getElementById("to");
+
+        from.addEventListener("change", (e) => {
+            let fromValue = e.target.value;
+            let toValue = document.getElementById("to").value;
+
+            let filterd;
+            var filterss = "";
+
+            for (var key in filtersObject) {
+                if (filtersObject.hasOwnProperty(key)) {
+                    filterss += "[data-" + key + "='" + filtersObject[key] + "']";
+                }
+            }
+
+            if (filterss == "") {
+                filterd = $(".product");
+            } else {
+                filterd = $(".product").filter(filterss);
+            }
+
+            let filters = filterBetweenTwoDate(filterd, fromValue, toValue);
+            $(".product").hide().filter(filters).show();
+        })
+
+        to.addEventListener("change", (e) => {
+            let toValue = e.target.value;
+            let FromValue = document.getElementById("from").value;
+
+            let filterd;
+            var filterss = "";
+
+            for (var key in filtersObject) {
+                if (filtersObject.hasOwnProperty(key)) {
+                    filterss += "[data-" + key + "='" + filtersObject[key] + "']";
+                }
+            }
+
+            if (filterss == "") {
+                filterd = $(".product");
+            } else {
+                filterd = $(".product").filter(filterss);
+            };
+
+            let filters = filterBetweenTwoDate(filterd, FromValue, toValue);
+            $(".product").hide().filter(filters).show();
+
+        })
+
 
         $(document).ready(function() {
             $('#exampl').DataTable({
