@@ -17,7 +17,7 @@
 
             @foreach ($project_details as $project_detail)
                 <tr style="text-align:left">
-                    <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
+                    <td scope="row"><b>{{ $project_detail->DETAIL_ID }}</b></td>
                     <td>{{ $project_detail->NAME_PROJECT }}</td>
                     <td>{{ $project_detail->ProjectCreator->NAME }}</td>
                     <td>

@@ -224,7 +224,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-                            
+
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -301,7 +301,7 @@
                             @foreach ($act->tasks as $task)
                                 <tr id="showTasks{{ $act->ACTIVITY_ID }}"
                                     class="tasksOrder taskRow display-none taskRow-{{ $act->ACTIVITY_ID }}"
-                                    style="background: #f9f9f9;">
+                                    style="background: rgb(253 253 253);">
 
                                     <td style="border-right: 1px solid #ccc;">
                                         <br>

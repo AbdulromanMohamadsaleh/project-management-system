@@ -295,7 +295,6 @@ class ProjectController extends Controller
         return redirect()->back()->with("success", "Project Canceled Successfully");;
     }
 
-
     public function Delete($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
@@ -325,7 +324,6 @@ class ProjectController extends Controller
             'routename' => $routeName
         ]);
     }
-
 
     public function Update(Request $request, $id)
     {
@@ -369,7 +367,6 @@ class ProjectController extends Controller
         return redirect()->route('show', $id)->with("success", "Project Edited Successfully");
     }
 
-
     public function ValidateProjectName(Request $request)
     {
         $ProjectName = ProjectDetial::where('NAME_PROJECT', $request->projectName)->get();
@@ -380,7 +377,6 @@ class ProjectController extends Controller
 
         return response()->json(['msg' => 'Vaild Name.', 'status' => 1]);
     }
-
 
     public function GanttChart($id)
     {
@@ -426,8 +422,8 @@ class ProjectController extends Controller
             $ProjectDetial->INC_WEEKEND = 1;
     }
 
-
     public function CancelAction($ProjectDetail)
     {
     }
+    
 }

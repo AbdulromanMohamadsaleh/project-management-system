@@ -143,6 +143,10 @@
         right: 8px;
         color: #8E9AA0;
     }
+
+    tr td {
+        vertical-align: middle;
+    }
 </style>
 
 @section('content')
@@ -373,7 +377,8 @@
                     "all" + "' data-status='" +
                     status + "'data-category = '" + category + "' data-projectManager='" + projetManager +
                     "' data-budget='" + budget +
-                    "' ><div class='product-inner text-center'><td>" + prjId + "</td><td>" + name + "</td><td>" +
+                    "' ><div class='product-inner text-center'><td><b>" + prjId + "</b></td><td>" + name +
+                    "</td><td>" +
                     data[i].DATE_START +
                     "<td/><td>" + data[i].DATE_END + "</td><td><span class='badge rounded-pill " + statusColor +
                     "'>" + status + "</span></td><td>" +

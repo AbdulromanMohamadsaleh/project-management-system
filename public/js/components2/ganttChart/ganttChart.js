@@ -684,14 +684,23 @@ export function GanttChart(ChartType,ganttChartElement, project) {
     //  For Weeks
     function createTaskDurationElForWeeks(taskDuration, startCell,cells,dateStr,dateEnd,color) {
 
-
         const dayElContainer = containerTimePeriods.querySelector(
         ".gantt-time-period-cell-container"
         );
         const taskDurationEl = document.createElement("div");
         taskDurationEl.classList.add("taskDuration");
         if(taskDuration.STATUS==1){
-             taskDurationEl.classList.add("done-task");
+            let resultDate = taskDuration.COPLETE_TIME.split(" ");
+            let completeDate =new Date(taskDuration.COPLETE_TIME.split(" ")[0]);
+            let endDate =new Date(taskDuration.END_DATE);
+
+            // console.log(completeDate > endDate,taskDuration)
+            taskDurationEl.classList.add("done-task");
+            taskDurationEl.classList.add("centerTaskDate");
+            taskDurationEl.innerHTML = `<p class="task-duration-complete text-end">(${resultDate[0].replaceAll("-", "/")})</p>`
+            if(completeDate > endDate){
+                taskDurationEl.classList.add("orange");
+            }
         }else{
             taskDurationEl.classList.add("proggress-task");
         }
@@ -946,7 +955,8 @@ export function GanttChart(ChartType,ganttChartElement, project) {
         taskDurationEl.classList.add("taskDuration");
         if(taskDuration.STATUS==1){
 
-             taskDurationEl.classList.add("done-task");
+            taskDurationEl.classList.add("done-task");
+            taskDurationEl.classList.add("done-date2");
 
         }else{
             taskDurationEl.classList.add("proggress-task");
@@ -967,7 +977,18 @@ export function GanttChart(ChartType,ganttChartElement, project) {
         const taskDurationEl = document.createElement("div");
         taskDurationEl.classList.add("taskDuration");
         if(taskDuration.STATUS==1){
-             taskDurationEl.classList.add("done-task");
+            taskDurationEl.classList.add("done-task");
+            let resultDate = taskDuration.COPLETE_TIME.split(" ");
+            let completeDate =new Date(taskDuration.COPLETE_TIME.split(" ")[0]);
+            let endDate =new Date(taskDuration.END_DATE);
+
+            // console.log(completeDate > endDate,taskDuration)
+            taskDurationEl.classList.add("done-task");
+            taskDurationEl.classList.add("centerTaskDate");
+            taskDurationEl.innerHTML = `<p class="task-duration-complete text-end">(${resultDate[0].replaceAll("-", "/")})</p>`
+            if(completeDate > endDate){
+                taskDurationEl.classList.add("orange");
+            }
         }else{
             taskDurationEl.classList.add("proggress-task");
         }
@@ -998,8 +1019,6 @@ export function GanttChart(ChartType,ganttChartElement, project) {
 
         let flagStartWeek = false;
         let numWeeks = diff_weeks(startDate, endDate);
-
-
 
         let month = new Date(startMonth);
         let weekCounter=1;

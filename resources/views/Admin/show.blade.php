@@ -14,7 +14,7 @@
     th {
         padding: 10px;
         border-bottom: 1px solid #ccc;
-        text-align: center;
+
         font-size: 18px;
     }
 
@@ -137,6 +137,11 @@
 
     .stepper-item:last-child::after {
         content: none;
+    }
+
+
+    .taskRow {
+        height: 90px;
     }
 </style>
 
