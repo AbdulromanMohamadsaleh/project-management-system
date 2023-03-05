@@ -17,7 +17,7 @@
 
             @foreach ($project_details as $project_detail)
                 <tr style="text-align:left">
-                    <th scope="row">{{ $project_detail->DETAIL_ID }}</th>
+                    <td scope="row"><b>{{ $project_detail->DETAIL_ID }}</b></td>
                     <td>{{ $project_detail->NAME_PROJECT }}</td>
                     <td>{{ $project_detail->ProjectCreator->NAME }}</td>
                     <td>
@@ -42,11 +42,13 @@
                             href="{{ route('show', $project_detail->DETAIL_ID) }}">
                             <i class="bi bi-eye" style="font-size: 25;"></i>
                         </a>
-                        <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="view project"
-                            href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
-                            <i class="bi bi-alarm" style="font-size: 25;"></i>
-                        </a>
-                        @if ($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin')
+                        @if ($project_detail->STATUS != 4)
+                            <a class="btn btn-primary btn-sm3" data-toggle="tooltip" title="Project Timeline"
+                                href="{{ route('timeline', $project_detail->DETAIL_ID) }}">
+                                <i class="bi bi-alarm" style="font-size: 25;"></i>
+                            </a>
+                        @endif
+                        @if (($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin') && $project_detail->STATUS != 4)
                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project"
                                 href="{{ route('update.project', $project_detail->DETAIL_ID) }}">
                                 <i class="fas fa-pencil-alt" style="font-size: 25;">
@@ -54,7 +56,7 @@
                             </a>
                         @endif
 
-                        @if ($project_detail->IS_APPROVE == 0 )
+                        @if ($project_detail->IS_APPROVE == 0)
                             <form style="display: inline-block" method="POST"
                                 action="{{ route('project.delete', $project_detail->DETAIL_ID) }}">
                                 @csrf

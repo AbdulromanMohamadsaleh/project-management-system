@@ -93,6 +93,7 @@ Route::group(
         Route::get('/gantt_Chart/{id}', [ProjectController::class, 'GanttChart'])->name('ganttChart');
 
         Route::get('/approve', [ProjectController::class, 'Approve'])->name('approve')->middleware('isManager');
+        Route::get('/cancel/{id}', [ProjectController::class, 'Cancel'])->name('project.cancel');
         Route::get('/done/{id}', [ProjectController::class, 'Done'])->name('project.aprove');
         Route::get('/dateholyday', [HolydayController::class, 'index'])->name('dateholyday.Index');
         Route::get('/profile', [UserController::class, 'Profile'])->name('profile');

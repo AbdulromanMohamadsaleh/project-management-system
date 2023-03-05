@@ -12,17 +12,40 @@ export function cssStyles() {
     position: absolute;
     font-size:1.3rem;
 }
+
+
+.taskDuration.done-task.orange::before{
+    font-family: 'FontAwesome';
+    content: "\\f00c";
+    color: #FAAB78;
+    padding: 0 6px 0 0;
+    position: absolute;
+    font-size:1.3rem;
+}
+
+
 .taskDuration.done-task::before,.taskDuration.proggress-task::before{
     right: -29px;
     top: -1px;
 }
 
+.task-duration-complete{
+       position: relative;
+    left: 125px;
+    font-weight: bold;
+    font-size: 0.83rem;
+    width: max-content;
+}
 
+.centerTaskDate{
+    display: flex;
+    justify-content: end;
+}
 
 .taskDuration.proggress-task::before{
     content: "\\f017";
     font-family: 'FontAwesome';
-    color: #ffc109;
+    color: #FEBE8C;
     padding: 0 6px 0 0;
     position: absolute;
     font-size:1.3rem;

@@ -186,7 +186,7 @@
         </div>
     </div>
     <br>
-    @if ($project_detail->STATUS != 3)
+    @if ($project_detail->STATUS != 3 && $project_detail->STATUS != 4)
         <div class="row justify-content-end">
             <div class="col-1 ">
                 @include('edit_activity_task.add_activity_task')
@@ -224,7 +224,7 @@
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
-                            
+
                             foreach ($act->tasks as $task) {
                                 $sum += intval($task->DAY);
                             }
@@ -232,11 +232,12 @@
                         {{-- Start Act 1 --}}
                         {{-- Start Act Info --}}
 
-                        <div class="act-order">
+                        <div class='act-order'>
 
                             <tr class="act-rows" style="height: 55px;background: ghostwhite;">
                                 <td style="border-right: 1px solid #ccc;">
-                                    <i style="font-size: 1.3rem;" class="bi bi-list glyphicon-move mr-4"></i>
+                                    <i style="font-size: 1.3rem;"
+                                        class="{{ $project_detail->STATUS != 3 && $project_detail->STATUS != 4 ? 'bi bi-list glyphicon-move' : 'bi bi-list' }} mr-4"></i>
                                 </td>
                                 <td style="font-size: 1.6rem;" class="spacer ">
 
@@ -254,7 +255,7 @@
 
                                 <td>{{ $act->START_DATE ? date('d/m/Y', strtotime($act->START_DATE)) : '-' }}</td>
                                 <td>
-                                    @if ($project_detail->STATUS != 3)
+                                    @if ($project_detail->STATUS != 3 && $project_detail->STATUS != 4)
                                         @include('edit_activity_task.modal_edit_activity')
                                         @include('edit_activity_task.delate_activity')
                                     @else
@@ -300,13 +301,14 @@
                             @foreach ($act->tasks as $task)
                                 <tr id="showTasks{{ $act->ACTIVITY_ID }}"
                                     class="tasksOrder taskRow display-none taskRow-{{ $act->ACTIVITY_ID }}"
-                                    style="background: #f9f9f9;">
+                                    style="background: rgb(253 253 253);">
 
                                     <td style="border-right: 1px solid #ccc;">
                                         <br>
                                     </td>
                                     <td class="spacer">
-                                        <i style="font-size: 1.3rem;" class="bi bi-list glyphicon-move-tasks mr-4"
+                                        <i style="font-size: 1.3rem;"
+                                            class="{{ $project_detail->STATUS != 3 && $project_detail->STATUS != 4 ? 'bi bi-list glyphicon-move-tasks' : 'bi bi-list' }} mr-4"
                                             data-activityId="{{ $act->ACTIVITY_ID }}"></i>
 
                                     </td>
@@ -346,16 +348,21 @@
                                     </td>
                                     <td>
 
-                                        @if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+                                        @if (
+                                            (Auth::user()->POSITION == 'Employee' ||
+                                                Auth::user()->POSITION == 'Project Manager' ||
+                                                Auth::user()->POSITION == 'Admin') &&
+                                                ($project_detail->STATUS != 4 && $project_detail->STATUS != 3))
+                                            @include('modal_budget_note.modal_budget')
+                                            @include('modal_budget_note.modal_note')
+                                            @include('edit_activity_task.edit_activity_task')
+                                            @include('Admin.button_startdate_complatedate.button')
+                                            @if (!$project_detail->STATUS == 3)
+                                                @include('edit_activity_task.delate_task')
+                                            @endif
+                                        @else
+                                            -
                                         @endif
-                                        @include('modal_budget_note.modal_budget')
-                                        @include('modal_budget_note.modal_note')
-                                        @include('edit_activity_task.edit_activity_task')
-                                        @include('Admin.button_startdate_complatedate.button')
-                                        @if (!$project_detail->STATUS == 3)
-                                            @include('edit_activity_task.delate_task')
-                                        @endif
-
                                     </td>
                                     <td>
                                         @if ($task->STATUS == 1)

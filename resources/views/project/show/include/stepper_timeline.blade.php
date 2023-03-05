@@ -1,4 +1,5 @@
 <div class="stepper-wrapper">
+
     <div class="stepper-item {{ $project_detail->STATUS >= 0 ? 'completed' : 'active' }}">
         <div class="step-counter">1</div>
         <div class="step-name">
@@ -39,4 +40,5 @@
             @endif
         </div>
     </div>
+
 </div>

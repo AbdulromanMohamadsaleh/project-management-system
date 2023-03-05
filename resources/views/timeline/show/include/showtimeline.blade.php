@@ -1,4 +1,7 @@
 <div class="container col-md-11">
+    @if($project_detail->STATUS==4)
+    
+    @endif
     <h1>Project Timeline</h1>
     <h1>{{ $project_detail->NAME_PROJECT }}</h1>
 

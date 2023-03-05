@@ -1,5 +1,5 @@
 @if ($act->STATUS == 0)
-    <form style="display: inline-block" method="POST"
+    <form style="display: inline" method="POST"
         action="{{ route('activity.delete', [$act->ACTIVITY_ID, $project_detail->DETAIL_ID]) }}">
         @csrf
         <input name="_method" type="hidden" value="POST">
