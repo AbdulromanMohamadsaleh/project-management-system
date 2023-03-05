@@ -694,7 +694,6 @@ export function GanttChart(ChartType,ganttChartElement, project) {
             let completeDate =new Date(taskDuration.COPLETE_TIME.split(" ")[0]);
             let endDate =new Date(taskDuration.END_DATE);
 
-            // console.log(completeDate > endDate,taskDuration)
             taskDurationEl.classList.add("done-task");
             taskDurationEl.classList.add("centerTaskDate");
             taskDurationEl.innerHTML = `<p class="task-duration-complete text-end">(${resultDate[0].replaceAll("-", "/")})</p>`
@@ -718,12 +717,11 @@ export function GanttChart(ChartType,ganttChartElement, project) {
                 }
 
                 if(cells[h].dataset.span =='continue' && FlagCountSpan){
-
                     weekSpanCounter++;
                     countContinue++;
                 }
 
-                if ((cells[h].dataset.date >= dateStr  && cells[h].dataset.endPeriod <= dateEnd)) {
+                if ((cells[h].dataset.date <= dateStr  && cells[h].dataset.endPeriod <= dateEnd)) {
                     FlagCountSpan = true;
                     weekSpanCounter++;
                 }
@@ -734,7 +732,7 @@ export function GanttChart(ChartType,ganttChartElement, project) {
             weekSpanCounter=1;
 
 
-
+     
         taskDurationEl.style.width = `calc(${weeks+1+countContinue} * 50px)`;
 
         // append at start pos
