@@ -4,7 +4,7 @@
         @break
 
         @case(1)
-            <span class="badge rounded-pill text-bg-warning">Approved</span>
+            <span class="badge rounded-pill text-bg-primary">Approved</span>
         @break
 
         @case(2)

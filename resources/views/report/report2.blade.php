@@ -250,10 +250,18 @@
             </div>
 
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                <i style="color: #27AE60" class="bi bi-layers general-stat-icon me-3"></i>
+                <i style="color: #dc3545" class="bi bi-x-circle general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-newRelease">0</h1>
-                    <h6 class="my-0 fw-semibold">Cancled</h6>
+                    <h1 class="my-0 fw-bold" id="total-Canceled">0</h1>
+                    <h6 class="my-0 fw-semibold">Canceled</h6>
+                </div>
+            </div>
+
+            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                <i style="color:#0d649e" class="bi bi-shield-check general-stat-icon me-3"></i>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="my-0 fw-bold" id="total-approved">0</h1>
+                    <h6 class="my-0 fw-semibold">Approved</h6>
                 </div>
             </div>
         </div>
@@ -314,6 +322,7 @@
             let totalInProjressProject = 0;
             let totalBudget = 0;
             let totalNewRelease = 0;
+            let totalCanceled = 0;
 
             for (var i = 0; i < data.length; i++) {
 
@@ -342,8 +351,11 @@
                     status = "New Release";
                     statusColor = "text-bg-secondary";
                 } else if (data[i].STATUS == 1) {
-                    status = "In Progress";
-                    statusColor = "text-bg-warning";
+                    status = "Approved";
+                    statusColor = "text-bg-primary";
+                } else if (data[i].STATUS == 4) {
+                    status = "Canceled";
+                    statusColor = "text-bg-danger";
                 }
 
 
@@ -533,12 +545,18 @@
             let totalCompleteFild = document.getElementById("total-complete");
             let totalProgresstFild = document.getElementById("total-progress");
             let totalNewReleaseFild = document.getElementById("total-newRelease");
+            let totalCanceledFild = document.getElementById("total-Canceled");
+            let totalApprovedFild = document.getElementById("total-approved");
+
+
+
 
             let totalBudget = 0;
             let totalComplete = 0;
             let totalInPronggress = 0;
             let totalApproved = 0;
             let totalNew = 0;
+            let totalCanceled = 0;
 
             for (var i = 0; i < projectsData.length; i++) {
                 if (projectsData[i].dataset.status == "In Progress") {
@@ -549,8 +567,13 @@
                     totalNew++;
                 } else if (projectsData[i].dataset.status == "Approved") {
                     totalApproved++;
+                } else if (projectsData[i].dataset.status == "Canceled") {
+                    totalCanceled++;
                 }
 
+                if (projectsData[i].dataset.status != "Canceled" && projectsData[i].dataset.status != "New Release") {
+                    totalApproved++;
+                }
 
                 totalBudget += parseInt(projectsData[i].dataset.budget);
 
@@ -562,7 +585,10 @@
             totalCompleteFild.innerHTML = totalComplete;
             totalProgresstFild.innerHTML = totalInPronggress;
             totalNewReleaseFild.innerHTML = totalNew;
+            totalCanceledFild.innerHTML = totalCanceled;
+            totalApprovedFild.innerHTML = totalApproved;
         }
+
 
         function getProjectSummary2(filtredData) {
             let projectsData = filtredData;
@@ -572,25 +598,29 @@
             let totalCompleteFild = document.getElementById("total-complete");
             let totalProgresstFild = document.getElementById("total-progress");
             let totalNewReleaseFild = document.getElementById("total-newRelease");
+            let totalCanceledFild = document.getElementById("total-Canceled");
+            let totalApprovedFild = document.getElementById("total-approved");
+
 
             let totalBudget = 0;
             let totalComplete = 0;
             let totalInPronggress = 0;
             let totalApproved = 0;
             let totalNew = 0;
-
+            let totalCanceled = 0;
             for (var i = 0; i < projectsData.length; i++) {
 
-                if (projectsData[i].STATUS == 2 || projectsData[i].STATUS == 1) {
+                if (projectsData[i].STATUS == 2) {
                     totalInPronggress++
                 } else if (projectsData[i].STATUS == 3) {
                     totalComplete++;
                 } else if (projectsData[i].STATUS == 0) {
                     totalNew++;
+                } else if (projectsData[i].STATUS == 4) {
+                    totalCanceled++;
+                } else if (projectsData[i].STATUS == 1) {
+                    totalApproved++;
                 }
-                // else if (projectsData[i].STATUS == 1) {
-                //     totalApproved++;
-                // }
 
                 totalBudget += parseInt(projectsData[i].BUDGET);
 
@@ -602,6 +632,8 @@
             totalCompleteFild.innerHTML = totalComplete;
             totalProgresstFild.innerHTML = totalInPronggress;
             totalNewReleaseFild.innerHTML = totalNew;
+            totalCanceledFild.innerHTML = totalCanceled;
+            totalApprovedFild.innerHTML = totalApproved;
         }
 
 
@@ -665,6 +697,7 @@
             }
 
             let filters = filterBetweenTwoDate(filterd, fromValue, toValue);
+            getProjectSummaryFiltred(filters)
             $(".product").hide().filter(filters).show();
         })
 
@@ -688,6 +721,7 @@
             };
 
             let filters = filterBetweenTwoDate(filterd, FromValue, toValue);
+            getProjectSummaryFiltred(filters)
             $(".product").hide().filter(filters).show();
 
         })

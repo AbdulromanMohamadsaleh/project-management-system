@@ -176,7 +176,7 @@
             <div style="height: 100px;" class="alert alert-danger d-flex align-items-center" role="alert">
                 <div class=" text-center" style="width: 100%;">
                     <i class="bi bi-exclamation-triangle-fill"></i>
-                    <span>The Project Has been <b>Cancled</b> You Can't Make any Action</span>
+                    <span>The Project Has been <b>Canceled</b> You Can't Make any Action</span>
                 </div>
             </div>
         @endif
