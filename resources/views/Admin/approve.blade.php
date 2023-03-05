@@ -53,7 +53,7 @@
                                         href="{{ route('show', $project_detail->DETAIL_ID) }}">
                                         <i class="bi bi-eye" style="font-size: 25;"></i>
                                     </a>
-                                    @if ($project_detail->IS_APPROVE == 0)
+                                    @if ($project_detail->IS_APPROVE == 0 && $project_detail->STATUS != 4)
                                         <form style="display: inline-block" method="GET"
                                             action="{{ route('project.aprove', $project_detail->DETAIL_ID) }}">
                                             @csrf
@@ -62,6 +62,15 @@
                                                 class="btn btn-xs btn-success btn-flat show-alert-delete-box "
                                                 data-toggle="tooltip" title='Approve'><i
                                                     class='fas fa-check-circle'></i></button>
+                                        </form>
+                                    @endif
+                                    @if ($project_detail->STATUS != 3 && $project_detail->STATUS != 4)
+                                        <form style="display: inline-block" method="get"
+                                            action="{{ route('project.cancel', $project_detail->DETAIL_ID) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="cancel">
+                                            <button type="submit" class="btn btn-danger  show-alert-delete-box "
+                                                data-toggle="tooltip" title='Cancel'><i class="bi bi-x-circle"></i></button>
                                         </form>
                                     @endif
                                 </td>

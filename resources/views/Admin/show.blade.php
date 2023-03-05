@@ -157,7 +157,7 @@
             if ($weeks) {
                 $result = $result . ' and ';
             }
-
+    
             if ($days == 1) {
                 $result = $result . $days . ' day';
             } else {
@@ -172,6 +172,14 @@
 
 @section('content')
     <div class="container-fluid p-5">
+        @if ($project_detail->STATUS == 4)
+            <div style="height: 100px;" class="alert alert-danger d-flex align-items-center" role="alert">
+                <div class=" text-center" style="width: 100%;">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span>The Project Has been <b>Cancled</b> You Can't Make any Action</span>
+                </div>
+            </div>
+        @endif
         <h1 class="fw-bold text-center fs-4 "> {{ $project_detail->NAME_PROJECT }} Project </h1>
         <div class="row">
 

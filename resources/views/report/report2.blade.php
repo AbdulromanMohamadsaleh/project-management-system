@@ -148,54 +148,60 @@
 @section('content')
     <div class="container p-5">
         <h1 class="fw-bold text-center fs-4 mb-5">Report Projects</h1>
-        <form id="search-form  " action="" method="POST" enctype="multipart/form-data">
+        <form id="search-form">
             <div class="row" id="search">
                 <div class="form-group col-9">
                     <input class="form-control" type="text" placeholder="Search" />
                 </div>
                 <div class="form-group col-3 d-grid">
-                    <button type="submit" class="btn btn-block btn-primary">Search</button>
+                    <button class="btn btn-block btn-primary">Search</button>
                 </div>
             </div>
         </form>
         <form class="mt-4">
             <div class="row" id="filter">
-                <div class="form-group col-sm-3 col-xs-6 mb-3">
+                <div class="form-group col-sm-3 col-xs-6 mb-4">
                     <span for="from" class="label-left form-label fw-bold" for="">From:</span>
                     <input id="from" type="date" class="form-control">
                 </div>
-                <div class="form-group col-sm-3 col-xs-6 mb-3">
+                <div class="form-group col-sm-3 col-xs-6 mb-4">
                     <span for="to" class="label-left form-label fw-bold" for="">To:</span>
                     <input id="to" type="date" class="form-control">
                 </div>
 
-                <div class="form-group col-sm-3 col-xs-6 mb-3">
+                <div class="form-group col-sm-3 col-xs-6 mb-4">
+                    <span class="label-left form-label fw-bold" for="">Name:</span>
                     <select data-filter="name" class="filter-name filter form-control">
                         <option value="">All Name</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">Start Year:</span>
                     <select data-filter="year" class="filter-year filter form-control">
                         <option value="">All Start Year</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">Start Status:</span>
                     <select data-filter="status" class="filter-status filter form-control">
                         <option value="">All Status</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">Category:</span>
                     <select data-filter="category" class="filter-category filter form-control">
                         <option value="">All Category</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">Project Manager:</span>
                     <select data-filter="projectManager" class="filter-projectManager filter form-control">
                         <option value="">All Project Manager</option>
                     </select>
                 </div>
 
-                <div class="form-group col-sm-3 col-xs-6  mb-3">
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">End Year:</span>
                     <select data-filter="end" class="filter-end filter form-control">
                         <option value="">All End Year</option>
                     </select>
@@ -242,6 +248,14 @@
                     <h6 class="my-0 fw-semibold">New Release</h6>
                 </div>
             </div>
+
+            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                <i style="color: #27AE60" class="bi bi-layers general-stat-icon me-3"></i>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="my-0 fw-bold" id="total-newRelease">0</h1>
+                    <h6 class="my-0 fw-semibold">Cancled</h6>
+                </div>
+            </div>
         </div>
 
 
@@ -251,10 +265,11 @@
                 <table id="exampl" class="table cell-border " style="width:100%">
                     <thead class="TableHead">
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
-                            <th>Start Year</th>
+                            <th>Start Date</th>
                             <th></th>
-                            <th>End Year</th>
+                            <th>End Date</th>
                             <th>Status</th>
                             <th>Category</th>
                             <th>Budget</th>
@@ -305,7 +320,8 @@
                 let b = new Date(data[i].DATE_START);
                 let end = new Date(data[i].DATE_END);
 
-                var name = data[i].NAME_PROJECT,
+                var prjId = data[i].DETAIL_ID,
+                    name = data[i].NAME_PROJECT,
                     year = b.getFullYear(),
                     endYear = end.getFullYear(),
                     budget = data[i].BUDGET,
@@ -333,14 +349,16 @@
 
                 totalBudget += parseInt(budget);
                 //create product cards all
-                products += " <tr class='firstRow projets col-sm-4 product' data-name='" + name + "' data-year='" +
+                products += " <tr class='firstRow projets col-sm-4 product' data-name='" + name + "' data-id='" +
+                    prjId + "' data-year='" +
                     year + "'" + "data-end='" + endYear + "'" + "data-date='" + data[i].DATE_START +
                     "' data-all='" +
                     "all" + "' data-status='" +
                     status + "'data-category = '" + category + "' data-projectManager='" + projetManager +
                     "' data-budget='" + budget +
-                    "' ><div class='product-inner text-center'><td>" + name + "</td><td>" + year +
-                    "<td/><td>" + endYear + "</td><td><span class='badge rounded-pill " + statusColor +
+                    "' ><div class='product-inner text-center'><td>" + prjId + "</td><td>" + name + "</td><td>" +
+                    data[i].DATE_START +
+                    "<td/><td>" + data[i].DATE_END + "</td><td><span class='badge rounded-pill " + statusColor +
                     "'>" + status + "</span></td><td>" +
                     category + "</td><td>" +
                     budget + "&#3647</td><td>" +
@@ -437,32 +455,67 @@
         $("#search-form").submit(function(e) {
             e.preventDefault();
             let results = [];
-            var query = $("#search-form input").val().toLowerCase();
+            var query = $("#search-form input").val().toLowerCase().trim();
+
+            let filterd;
+            var filterss = "";
+
+            let fromValue = document.getElementById("from").value;
+            let toValue = document.getElementById("to").value;
+
+            for (var key in filtersObject) {
+                if (filtersObject.hasOwnProperty(key)) {
+                    filterss += "[data-" + key + "='" + filtersObject[key] + "']";
+                }
+            }
+
+            if (filterss == "") {
+                filterd = $(".product");
+            } else {
+                filterd = $(".product").filter(filterss);
+            }
 
             if (query == "") {
-                $(".product").show();
-                getProjectSummaryFiltred($(".product"))
+                let filters = filterBetweenTwoDate(filterd, fromValue, toValue);
+                $(".product").hide().filter(filters).show();
+                getProjectSummaryFiltred(filters)
                 return;
             }
 
+
             $(".product").hide();
-            $(".product").each(function() {
+            filterd.each(function() {
                 var name = $(this).data("name").toLowerCase(),
+                    id = $(this).data("id").toString(),
                     status = $(this).data("status").toLowerCase(),
                     year = $(this).data("year"),
-                    projetManager = $(this).data("projectmanager"),
+                    projetManager = $(this).data("projectmanager").toLowerCase(),
                     category = $(this).data("category").toLowerCase(),
                     budget = toString($(this).data("budget"));
 
 
                 year = year.toString();
-                if (name.indexOf(query) > -1 || status.indexOf(query) > -1 || year.indexOf(query) > -1 ||
+                if (name.indexOf(query) > -1 || id.indexOf(query) > -1 || status.indexOf(query) > -1 || year
+                    .indexOf(query) > -1 ||
                     projetManager.indexOf(query) > -1 || category.indexOf(query) > -1 || budget.indexOf(
                         query) > -1) {
-                    results.push($(this));
-                    $(this).show();
+                    if (fromValue == "" && fromValue == "") {
+                        $(this).show();
+                        results.push($(this));
+                    } else {
+                        if (checkDateIsInclude(fromValue, toValue, $(this).data('date'))) {
+                            console.log("here")
+                            $(this).show();
+                            results.push($(this));
+                        }
+                    }
+
                 }
+
+
             });
+
+
             let filtredData = results.map(element => {
                 return element[0];
             });

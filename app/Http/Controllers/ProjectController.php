@@ -126,10 +126,15 @@ class ProjectController extends Controller
             $q->orderBy('ACTIVITY_ID')->with('tasks')->orderBy('created_at', 'ASC')->get();
         })->first();
 
-        $data['last']  = $this->getLastProject();
-        $routeName = $this->getRouteName();
+        if ($ProjectDetail->STATUS == 4) {
+            abort(404);
+        } else {
 
-        return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'data' => $data, 'routename' => $routeName]);
+            $data['last']  = $this->getLastProject();
+            $routeName = $this->getRouteName();
+
+            return view('Admin.timeline', ['project_detail' => $ProjectDetail, 'data' => $data, 'routename' => $routeName]);
+        }
     }
 
     public function Save(Request $request)
@@ -235,13 +240,15 @@ class ProjectController extends Controller
 
     public function Done($id)
     {
-        if (Auth::user()->POSITION !== "Manager") {
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+
+        if (Auth::user()->POSITION != "Manager" || $ProjectDetail->STATUS == 4) {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }
 
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['IS_APPROVE' => 1, 'STATUS' => 1, 'APPROVED_BY' => Auth::user()->LOGIN_ID, 'APPROVED_DATE' => date("y/m/d")]);
-        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+
         $nameProject =  $ProjectDetail->NAME_PROJECT;
 
         $dateApprove = new DateTime();
@@ -267,6 +274,28 @@ class ProjectController extends Controller
         return redirect()->back()->with("success", "Project Appreoved Successfully");;
     }
 
+    public function Cancel($id)
+    {
+        if (Auth::user()->POSITION != "Manager" && Auth::user()->POSITION != "Admin") {
+            return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
+            die();
+        }
+
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->update(['STATUS' => 4]);
+
+        $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
+        $nameProject =  $ProjectDetail->NAME_PROJECT;
+
+        $sMessage = "Approved\n";
+        $sMessage .= "ID_Project:" . "$id" . "\n";
+        $sMessage .= "NameProject: " . " $nameProject" . "\n";
+        $sMessage .= "Status: " . "Canceled" . "\n";
+        // Line::send('' . '' . $sMessage);
+
+        return redirect()->back()->with("success", "Project Canceled Successfully");;
+    }
+
+
     public function Delete($id)
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->delete();
@@ -275,6 +304,8 @@ class ProjectController extends Controller
 
     public function Edit(ProjectDetial $ProjectDetial)
     {
+
+
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
         $projectManagers = User::where("POSITION", 2)->where("IS_ACTIVE", 1)->get();
@@ -393,5 +424,10 @@ class ProjectController extends Controller
             $ProjectDetial->INC_WEEKEND = 0;
         else if ($request->isIncludeWeekend == "yes")
             $ProjectDetial->INC_WEEKEND = 1;
+    }
+
+
+    public function CancelAction($ProjectDetail)
+    {
     }
 }
