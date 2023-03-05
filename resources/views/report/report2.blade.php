@@ -175,12 +175,7 @@
                         <option value="">All Name</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">Start Year:</span>
-                    <select data-filter="year" class="filter-year filter form-control">
-                        <option value="">All Start Year</option>
-                    </select>
-                </div>
+
                 <div class="form-group col-sm-3 col-xs-6  mb-4">
                     <span class="label-left form-label fw-bold" for="">Start Status:</span>
                     <select data-filter="status" class="filter-status filter form-control">
@@ -197,6 +192,13 @@
                     <span class="label-left form-label fw-bold" for="">Project Manager:</span>
                     <select data-filter="projectManager" class="filter-projectManager filter form-control">
                         <option value="">All Project Manager</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-3 col-xs-6  mb-4">
+                    <span class="label-left form-label fw-bold" for="">Start Year:</span>
+                    <select data-filter="year" class="filter-year filter form-control">
+                        <option value="">All Start Year</option>
                     </select>
                 </div>
 
@@ -219,25 +221,12 @@
                     <h6 class="my-0 fw-semibold">All Project</h6>
                 </div>
             </div>
+
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
+                <i style="color:#0d649e" class="bi bi-shield-check general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-complete">0</h1>
-                    <h6 class="my-0 fw-semibold">Completed</h6>
-                </div>
-            </div>
-            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-progress">0</h1>
-                    <h6 class="my-0 fw-semibold">In Progress</h6>
-                </div>
-            </div>
-            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-budget">0</h1>
-                    <h6 class="my-0 fw-semibold">Budget</h6>
+                    <h1 class="my-0 fw-bold" id="total-approved">0</h1>
+                    <h6 class="my-0 fw-semibold">Approved</h6>
                 </div>
             </div>
 
@@ -250,6 +239,22 @@
             </div>
 
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                <i style="color:#F5B041" class="bi bi-clock-history general-stat-ico me-3"></i>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="my-0 fw-bold" id="total-progress">0</h1>
+                    <h6 class="my-0 fw-semibold">In Progress</h6>
+                </div>
+            </div>
+
+            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
+                <i style="color:#2E86C1" class="bi bi-check2-circle general-stat-icon me-3"></i>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="my-0 fw-bold" id="total-complete">0</h1>
+                    <h6 class="my-0 fw-semibold">Completed</h6>
+                </div>
+            </div>
+
+            <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
                 <i style="color: #dc3545" class="bi bi-x-circle general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <h1 class="my-0 fw-bold" id="total-Canceled">0</h1>
@@ -258,10 +263,10 @@
             </div>
 
             <div class="mb-md-4 col-sm-6 col-lg-3 stat-group d-flex justify-content-center align-items-center">
-                <i style="color:#0d649e" class="bi bi-shield-check general-stat-icon me-3"></i>
+                <i style="color: #27AE60" class="bi bi-cash-stack general-stat-icon me-3"></i>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="my-0 fw-bold" id="total-approved">0</h1>
-                    <h6 class="my-0 fw-semibold">Approved</h6>
+                    <h1 class="my-0 fw-bold" id="total-budget">0</h1>
+                    <h6 class="my-0 fw-semibold">Total Budget</h6>
                 </div>
             </div>
         </div>
@@ -569,10 +574,6 @@
                     totalApproved++;
                 } else if (projectsData[i].dataset.status == "Canceled") {
                     totalCanceled++;
-                }
-
-                if (projectsData[i].dataset.status != "Canceled" && projectsData[i].dataset.status != "New Release") {
-                    totalApproved++;
                 }
 
                 totalBudget += parseInt(projectsData[i].dataset.budget);
