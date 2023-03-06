@@ -100,19 +100,18 @@ class RegisterController extends Controller
 
         $user = new User();
         $user->LOGIN_ID = $user_id;
-        $user->NAME = $request->name;
         $user->EMAIL = $request->email;
-        $user->POSITION = 0;
+        $user->IS_ACTIVE = 0;
         $user->PRIV_ID  = "04";
         $user->password = Hash::make($request->password);
-        $user->AGENCY = $request->Agency;
+        $user->NAME = $request->name;
 
         if ($user->save()) {
             $profile = new Profile();
             $profile->PROF_ID = $PROF_id;
             $profile->LOGIN_ID = $user_id;
-            $profile->NAME = $request->name;
             $profile->POS_ID = "02";
+            $profile->AGENCY = $request->Agency;
             $profile->save();
 
             return redirect('login');
@@ -121,6 +120,4 @@ class RegisterController extends Controller
             return redirect()->back()->with('error', 'Failed to register');
         }
     }
-
-    
 }

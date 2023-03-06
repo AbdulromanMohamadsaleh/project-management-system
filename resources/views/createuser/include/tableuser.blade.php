@@ -18,11 +18,11 @@
                 <td>{{ $logins->LOGIN_ID }}</td>
                 <td>{{ $logins->EMAIL }}</td>
                 <td>{{ $logins->NAME }}</td>
-                <td>{{ $logins->NICKNAME }}</td>
-                <td>{{ $logins->CARD_ID }}</td>
-                <td>{{ $logins->TELEPHONE }}</td>
-                <td>{{ $logins->AGENCY }}</td>
-                <td>{{ $logins->POSITION }}
+                <td>{{ $logins->Profile->NICKNAME }}</td>
+                <td>{{ $logins->Profile->CARD_ID }}</td>
+                <td>{{ $logins->Profile->TELEPHONE }}</td>
+                <td>{{ $logins->Profile->AGENCY }}</td>
+                <td>{{ $logins->Profile->Position->POS_NAME }}
 
                 <td>
                     @include('profile.include.editUser')

@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 ###########################  Admin  ###########################
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    // Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::post('/saveuser', [AdminController::class, 'Saveuser'])->name('admin.saveuser');
 });

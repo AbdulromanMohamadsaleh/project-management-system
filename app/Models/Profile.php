@@ -12,6 +12,12 @@ class Profile extends Model
     protected $table = 'prj_profile';
     protected $primaryKey = 'PROF_ID';
     protected $keyType = 'string';
+
+    protected $fillable = [
+        'LOGIN_ID',
+
+    ];
+
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -22,5 +28,10 @@ class Profile extends Model
     public function Position()
     {
         return $this->belongsto(Position::class, 'POS_ID', 'POS_ID');
+    }
+
+    public function User()
+    {
+        return $this->belongsto(User::class, 'LOGIN_ID', 'LOGIN_ID');
     }
 }
