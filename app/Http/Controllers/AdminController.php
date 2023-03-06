@@ -65,7 +65,7 @@ class AdminController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:prj_project_login'],
             'password' => ['required', 'string', 'min:8'],
-            'agency' => ['required'],
+            // 'agency' => ['required'],
             'position' => ['required'],
         ]);
 
