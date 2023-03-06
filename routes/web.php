@@ -6,7 +6,6 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
-
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProjectController;

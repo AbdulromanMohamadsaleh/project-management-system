@@ -35,6 +35,7 @@ class ReportController extends Controller
 
     public function GetProjects()
     {
+        // dd(Auth::user()->Profile->Position->POS_NANE);
         if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager') {
             $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
                 $q->select(['prj_detail.DETAIL_ID', 'NAME_PROJECT', 'BUDGET', 'DATE_START', 'DATE_END', 'STATUS', 'CATEGORY_ID', 'PROJECT_MANAGER', 'RECORD_CREATOR', 'BUDGET', 'created_at'])

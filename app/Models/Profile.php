@@ -12,4 +12,10 @@ class Profile extends Model
     protected $table = 'prj_profile';
     protected $primaryKey = 'PROF_ID';
     protected $keyType = 'string';
+
+
+    public function Position()
+    {
+        return $this->belongsto(Position::class, 'POS_ID', 'POS_ID');
+    }
 }

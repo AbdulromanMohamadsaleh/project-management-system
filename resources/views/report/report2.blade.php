@@ -150,7 +150,7 @@
 </style>
 
 @section('content')
-    <div class="container p-5">
+    <div class="container p-5 pt-2">
         <h1 class="fw-bold text-center fs-4 mb-5">Report Projects</h1>
         <form id="search-form">
             <div class="row" id="search">
@@ -162,58 +162,69 @@
                 </div>
             </div>
         </form>
-        <form class="mt-4">
-            <div class="row" id="filter">
-                <div class="form-group col-sm-3 col-xs-6 mb-4">
-                    <span for="from" class="label-left form-label fw-bold" for="">From:</span>
-                    <input id="from" type="date" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-xs-6 mb-4">
-                    <span for="to" class="label-left form-label fw-bold" for="">To:</span>
-                    <input id="to" type="date" class="form-control">
-                </div>
+        <div class="d-flex mb-3 justify-content-end">
+            <button title="Filter" class="btn btn-light " type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i style="font-size: 1.6rem;" class="bi bi-sliders"></i>
+            </button>
+        </div>
+        <div class="collapse mb-4" id="collapseExample">
+            <div class="card card-body mt-1 mb-1">
+                <form class="mt-4">
+                    <div class="row" id="filter">
+                        <div class="form-group col-sm-3 col-xs-6 mb-4">
+                            <span for="from" class="label-left form-label fw-bold" for="">From:</span>
+                            <input id="from" type="date" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3 col-xs-6 mb-4">
+                            <span for="to" class="label-left form-label fw-bold" for="">To:</span>
+                            <input id="to" type="date" class="form-control">
+                        </div>
 
-                <div class="form-group col-sm-3 col-xs-6 mb-4">
-                    <span class="label-left form-label fw-bold" for="">Name:</span>
-                    <select data-filter="name" class="filter-name filter form-control">
-                        <option value="">All Name</option>
-                    </select>
-                </div>
+                        <div class="form-group col-sm-3 col-xs-6 mb-4">
+                            <span class="label-left form-label fw-bold" for="">Name:</span>
+                            <select data-filter="name" class="filter-name filter form-control">
+                                <option value="">All Name</option>
+                            </select>
+                        </div>
 
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">Start Status:</span>
-                    <select data-filter="status" class="filter-status filter form-control">
-                        <option value="">All Status</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">Category:</span>
-                    <select data-filter="category" class="filter-category filter form-control">
-                        <option value="">All Category</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">Project Manager:</span>
-                    <select data-filter="projectManager" class="filter-projectManager filter form-control">
-                        <option value="">All Project Manager</option>
-                    </select>
-                </div>
+                        <div class="form-group col-sm-3 col-xs-6  mb-4">
+                            <span class="label-left form-label fw-bold" for="">Start Status:</span>
+                            <select data-filter="status" class="filter-status filter form-control">
+                                <option value="">All Status</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3 col-xs-6  mb-4">
+                            <span class="label-left form-label fw-bold" for="">Category:</span>
+                            <select data-filter="category" class="filter-category filter form-control">
+                                <option value="">All Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3 col-xs-6  mb-4">
+                            <span class="label-left form-label fw-bold" for="">Project Manager:</span>
+                            <select data-filter="projectManager" class="filter-projectManager filter form-control">
+                                <option value="">All Project Manager</option>
+                            </select>
+                        </div>
 
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">Start Year:</span>
-                    <select data-filter="year" class="filter-year filter form-control">
-                        <option value="">All Start Year</option>
-                    </select>
-                </div>
+                        <div class="form-group col-sm-3 col-xs-6  mb-4">
+                            <span class="label-left form-label fw-bold" for="">Start Year:</span>
+                            <select data-filter="year" class="filter-year filter form-control">
+                                <option value="">All Start Year</option>
+                            </select>
+                        </div>
 
-                <div class="form-group col-sm-3 col-xs-6  mb-4">
-                    <span class="label-left form-label fw-bold" for="">End Year:</span>
-                    <select data-filter="end" class="filter-end filter form-control">
-                        <option value="">All End Year</option>
-                    </select>
-                </div>
+                        <div class="form-group col-sm-3 col-xs-6  mb-4">
+                            <span class="label-left form-label fw-bold" for="">End Year:</span>
+                            <select data-filter="end" class="filter-end filter form-control">
+                                <option value="">All End Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+
 
         {{-- Summary --}}
         <div class="mb-5 general-stat-grid  shadow p-2 general-stats justify-content-center row">
