@@ -15,11 +15,11 @@
             </div>
             <div class="ms-3">
                 <h6 class="mb-0">{{ Auth::user()->NAME }}</h6>
-                <span>{{ Auth::user()->POSITION }}</span>
+                <span>{{ Auth::user()->Profile->Position->POS_NAME }}</span>
             </div>
         </div>
         <div class="navbar-nav  nav w-100">
-            @switch(Auth::user()->POSITION)
+            @switch(Auth::user()->Privilege->PRI_NAME)
                 @case('Admin')
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link  {{$routename=='admin.dashboard'?'active':''}}"><i
                             class="fa fa-dashboard"></i></i>Dashboard
@@ -47,15 +47,15 @@
                 @default
             @endswitch
 
-            @if (Auth::user()->POSITION == 'Employee' ||
-                    Auth::user()->POSITION == 'Project Manager' ||
-                    Auth::user()->POSITION == 'Admin')
+            @if (Auth::user()->Privilege->PRI_NAME == 'Employee' ||
+                    Auth::user()->Privilege->PRI_NAME == 'Project Manager' ||
+                    Auth::user()->Privilege->PRI_NAME == 'Admin')
                 <a href="{{ route('create') }}" class="nav-item nav-link {{$routename=='create'?'active':''}}"><i class='fas fa-save'></i></i>Create
                     Project</a>
                 <a href="{{ route('table') }}" class="nav-item nav-link {{$routename=='table'?'active':''}}"><i class='fas fa-database'></i></i>
                     Projects</a>
             @endif
-            @if (Auth::user()->POSITION == 'Manager')
+            @if (Auth::user()->Privilege->PRI_NAME == 'Manager')
                 <a href="{{ route('approve') }}" class="nav-item nav-link"><i class="fa fa-check "
                         aria-hidden="true"></i>
                     Approve Project</a>
@@ -65,7 +65,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-cog"></i>Seting</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    @if (Auth::user()->POSITION == 'Admin')
+                    @if (Auth::user()->Privilege->PRI_NAME == 'Admin')
                         <a href="{{ route('dateholyday.Index') }}" class="dropdown-item ms-4  {{ $routename=='dateholyday.Index'?'active':'' }}"><i
                                 class="fa fa-calendar me-2"></i>Date Holiday</a>
                         <a href="{{ route('category') }}" class="dropdown-item ms-4 {{ $routename=='category'?'active':'' }}"><i class="fa fa-list-alt me-2"

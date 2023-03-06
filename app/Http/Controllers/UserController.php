@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Traits\LastProjectTrait;
-
 use App\Models\Login;
-use App\Models\ProjectDetial;
+
+use App\Models\Profile;
 use Flowframe\Trend\Trend;
 use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
+use App\Models\ProjectDetial;
+use App\Traits\LastProjectTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -55,21 +56,39 @@ class UserController extends Controller
 
     public function Save(request $request)
     {
+        // User
         $userCounter = User::count();
         $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + 1));
         $counterId4 = 1;
         while (User::where('LOGIN_ID', $user_id)->first()) {
-            $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
+            $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
+        }
+
+        // Profile
+        $PROFCounter = Profile::count();
+        $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + 1));
+        $counterIdPROF = 1;
+        while (Profile::where('LOGIN_ID', $PROF_id)->first()) {
+            $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + ++$counterIdPROF));
         }
 
         $user = new User();
         $user->LOGIN_ID = $user_id;
         $user->NAME = $request->name;
         $user->EMAIL = $request->email;
-        $user->POSITION = 'Employee';
+        $user->POSITION = 0;
+        $user->PRIV_ID  = "04";
         $user->password = Hash::make($request->password);
 
         if ($user->save()) {
+
+            $profile = new Profile();
+            $profile->PROF_ID = $PROF_id;
+            $profile->LOGIN_ID = $user_id;
+            $profile->NAME = $request->name;
+            $profile->POS_ID = "02";
+            $profile->save();
+
             return redirect()->back();
         }
     }
@@ -105,8 +124,7 @@ class UserController extends Controller
 
     public function UpdatePosition(Request $request, $id)
     {
-
-        if (Auth::user()->POSITION != 'Admin')
+        if (Auth::user()->Privilege->PRI_NAME != 'Admin')
             return redirect()->back()->with("error", "Dont Have Access");
 
         $user = User::where('LOGIN_ID', $id)->first();
@@ -150,4 +168,5 @@ class UserController extends Controller
 
         return $data;
     }
+    
 }

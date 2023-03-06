@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Login;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -81,6 +82,13 @@ class RegisterController extends Controller
             $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
         }
 
+        // Profile
+        $PROFCounter = Profile::count();
+        $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + 1));
+        $counterIdPROF = 1;
+        while (Profile::where('LOGIN_ID', $PROF_id)->first()) {
+            $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + ++$counterIdPROF));
+        }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:prj_project_login'],
@@ -90,22 +98,29 @@ class RegisterController extends Controller
             // 'Position' => ['required'],
         ]);
 
-
         $user = new User();
         $user->LOGIN_ID = $user_id;
         $user->NAME = $request->name;
         $user->EMAIL = $request->email;
         $user->POSITION = 0;
+        $user->PRIV_ID  = "04";
         $user->password = Hash::make($request->password);
         $user->AGENCY = $request->Agency;
-        $user->POSITION = $request->Position;
 
         if ($user->save()) {
+            $profile = new Profile();
+            $profile->PROF_ID = $PROF_id;
+            $profile->LOGIN_ID = $user_id;
+            $profile->NAME = $request->name;
+            $profile->POS_ID = "02";
+            $profile->save();
 
             return redirect('login');
         } else {
-            dd("ffsfsfs");
+
             return redirect()->back()->with('error', 'Failed to register');
         }
     }
+
+    
 }

@@ -33,7 +33,7 @@ class ProjectController extends Controller
 
     public function Table()
     {
-        if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager') {
+        if (Auth::user()->Privilege->PRI_NAME == 'Employee' || Auth::user()->Privilege->PRI_NAME == 'Project Manager') {
             $user = User::where('LOGIN_ID', Auth::user()->LOGIN_ID)->with('projects', function ($q) {
                 $q->where('IS_APPROVE', 1)->with('Approver')->get();
             })->first();
@@ -242,7 +242,7 @@ class ProjectController extends Controller
     {
         $ProjectDetail = ProjectDetial::where('DETAIL_ID', $id)->first();
 
-        if (Auth::user()->POSITION != "Manager" || $ProjectDetail->STATUS == 4) {
+        if (Auth::user()->Privilege->PRI_NAME != "Manager" || $ProjectDetail->STATUS == 4) {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }
@@ -276,7 +276,7 @@ class ProjectController extends Controller
 
     public function Cancel($id)
     {
-        if (Auth::user()->POSITION != "Manager" && Auth::user()->POSITION != "Admin") {
+        if (Auth::user()->Privilege->PRI_NAME != "Manager" && Auth::user()->Privilege->PRI_NAME != "Admin") {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }
@@ -425,5 +425,5 @@ class ProjectController extends Controller
     public function CancelAction($ProjectDetail)
     {
     }
-    
+
 }

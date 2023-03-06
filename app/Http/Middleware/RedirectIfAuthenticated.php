@@ -25,13 +25,13 @@ class RedirectIfAuthenticated
             // if (Auth::guard($guard)->check()) {
             //     return redirect(RouteServiceProvider::HOME);
             // }
-            if (Auth::guard($guard)->check() && Auth::user()->POSITION == 'Admin') {
+            if (Auth::guard($guard)->check() && Auth::user()->Privilege->PRI_NAME == 'Admin') {
                 return redirect()->route('admin.dashboard');
-            } elseif (Auth::guard($guard)->check() && Auth::user()->POSITION == 'Employee') {
+            } elseif (Auth::guard($guard)->check() && Auth::user()->Privilege->PRI_NAME == 'Employee') {
                 return redirect()->route('employee.dashboard');
-            } elseif (Auth::guard($guard)->check() && Auth::user()->POSITION == 'Manager') {
+            } elseif (Auth::guard($guard)->check() && Auth::user()->Privilege->PRI_NAME == 'Manager') {
                 return redirect()->route('manager.dashboard');
-            } elseif (Auth::guard($guard)->check() && Auth::user()->POSITION == 'Project Manager') {
+            } elseif (Auth::guard($guard)->check() && Auth::user()->Privilege->PRI_NAME == 'Project Manager') {
                 return redirect()->route('projectManager.dashboard');
             }
         }

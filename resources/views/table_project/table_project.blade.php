@@ -48,7 +48,7 @@
                                 <i class="bi bi-alarm" style="font-size: 25;"></i>
                             </a>
                         @endif
-                        @if (($project_detail->IS_APPROVE == 0 || Auth::user()->POSITION == 'Admin') && $project_detail->STATUS != 4)
+                        @if (($project_detail->IS_APPROVE == 0 || Auth::user()->Privilege->PRI_NAME == 'Admin') && $project_detail->STATUS != 4)
                             <a class="btn btn-warning btn-sm2" data-toggle="tooltip" title="edit project"
                                 href="{{ route('update.project', $project_detail->DETAIL_ID) }}">
                                 <i class="fas fa-pencil-alt" style="font-size: 25;">

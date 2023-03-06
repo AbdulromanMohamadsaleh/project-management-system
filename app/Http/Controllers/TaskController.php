@@ -186,7 +186,7 @@ class TaskController extends Controller
 
     public function Payment($id)
     {
-        if (Auth::user()->POSITION !== "Employee" && Auth::user()->POSITION !== "Project Manager") {
+        if (Auth::user()->Privilege->PRI_NAME !== "Employee" && Auth::user()->Privilege->PRI_NAME !== "Project Manager") {
             return redirect()->back()->withErrors("You Dont Have The Permissiont To Make This Action");
             die();
         }

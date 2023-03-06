@@ -349,9 +349,9 @@
                                     <td>
 
                                         @if (
-                                            (Auth::user()->POSITION == 'Employee' ||
-                                                Auth::user()->POSITION == 'Project Manager' ||
-                                                Auth::user()->POSITION == 'Admin') &&
+                                            (Auth::user()->Privilege->PRI_NAME == 'Employee' ||
+                                                Auth::user()->Privilege->PRI_NAME == 'Project Manager' ||
+                                                Auth::user()->Privilege->PRI_NAME == 'Admin') &&
                                                 ($project_detail->STATUS != 4 && $project_detail->STATUS != 3))
                                             @include('modal_budget_note.modal_budget')
                                             @include('modal_budget_note.modal_note')

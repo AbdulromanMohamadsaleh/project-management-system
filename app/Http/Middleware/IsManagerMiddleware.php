@@ -22,7 +22,7 @@ class IsManagerMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->POSITION == 'Manager') {
+        if (Auth::check() && Auth::user()->Privilege->PRI_NAME == 'Manager') {
             return $next($request);
         } else {
             return redirect()->route('login');

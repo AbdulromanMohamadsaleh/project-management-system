@@ -16,7 +16,7 @@ trait LastProjectTrait
     public function getLastProject()
     {
 
-        if (Auth::user()->POSITION == 'Project Manager') {
+        if (Auth::user()->Privilege->PRI_NAME == 'Project Manager') {
             return ProjectDetial::where('IS_APPROVE', 1)->with('Approver')->where('PROJECT_MANAGER', Auth::user()->LOGIN_ID)->latest('DETAIL_ID')->limit(5)->get();
         } else {
 

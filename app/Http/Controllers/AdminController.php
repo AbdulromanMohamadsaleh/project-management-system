@@ -45,7 +45,7 @@ class AdminController extends Controller
 
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->POSITION == 'Admin') {
+        if (Auth::check() && Auth::user()->Privilege->PRI_NAME == 'Admin') {
             return $next($request);
         } else {
             return redirect()->route('login');

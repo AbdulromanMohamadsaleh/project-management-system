@@ -30,7 +30,8 @@ class User extends Authenticatable
         'TELEPHONE',
         'AGENCY',
         'POSITION',
-        'password'
+        'password',
+        'PRIV_ID',
     ];
     // protected $fillable = [
     //     'name',

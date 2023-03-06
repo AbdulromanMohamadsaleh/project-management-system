@@ -12,7 +12,12 @@ class Profile extends Model
     protected $table = 'prj_profile';
     protected $primaryKey = 'PROF_ID';
     protected $keyType = 'string';
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
+    public $timestapms = false;
 
     public function Position()
     {
