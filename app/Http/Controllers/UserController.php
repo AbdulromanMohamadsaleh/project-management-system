@@ -103,22 +103,36 @@ class UserController extends Controller
             'img' => 'mimes:png,jpg,jpeg|max:2048'
         ]);
 
+        $profile = Profile::where('LOGIN_ID', $id)->first();
+
         $user = User::where('LOGIN_ID', $id)->first();
+
         // Getting values from the blade template form
+
+        $profile->NAME = $request->name;
+        $profile->NICKNAME = $request->nickname;
+        $profile->CARD_ID = $request->Card_Id;
+        $profile->TELEPHONE = $request->phone;
+        $profile->DEPARTMENT = $request->Department;
+
         $user->NAME = $request->name;
         $user->NICKNAME = $request->nickname;
         $user->CARD_ID = $request->Card_Id;
         $user->TELEPHONE = $request->phone;
         $user->DEPARTMENT = $request->Department;
+
         if ($request->img) {
             $imageName = time() . '.' . $request->img->extension();
-            $file_path = app_path() . '/images' . $user->IMG;
+            $file_path = app_path() . '/images' . $profile->IMG;
             $request->img->move(public_path('images'), $imageName);
-            $user->IMG = $imageName;
+            $profile->IMG = $imageName;
         }
 
         $user->timestamps = false;
+        $profile->timestamps = false;
+
         $user->update();
+        $profile->update();
         return redirect()->back()->with("success", "Update Successfully");
     }
 
@@ -168,5 +182,4 @@ class UserController extends Controller
 
         return $data;
     }
-    
 }
