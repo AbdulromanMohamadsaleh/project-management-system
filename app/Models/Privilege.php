@@ -12,4 +12,9 @@ class Privilege extends Model
     protected $table = 'prj_privilege';
     protected $primaryKey = 'PRIV_ID';
     protected $keyType = 'string';
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+    public $timestapm = false;
 }

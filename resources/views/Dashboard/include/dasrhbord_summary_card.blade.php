@@ -1,4 +1,4 @@
-@switch(Auth::user()->POSITION)
+@switch(Auth::user()->Privilege->PRI_NAME)
     @case('Admin')
         <div class="col-md-4 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">

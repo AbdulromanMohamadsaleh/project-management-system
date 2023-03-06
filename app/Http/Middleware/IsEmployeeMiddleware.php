@@ -17,7 +17,7 @@ class IsEmployeeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->POSITION == 'Employee') {
+        if (Auth::check() && Auth::user()->Privilege->PRI_NAME == 'Employee') {
             return $next($request);
         } else {
             return redirect()->route('login');

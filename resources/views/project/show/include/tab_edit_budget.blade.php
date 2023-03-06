@@ -58,7 +58,7 @@
             </div><br>
 
         </form>
-        @if ($task->STATUS_PAYMENT == 0 && (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager'))
+        @if ($task->STATUS_PAYMENT == 0 && (Auth::user()->Privilege->PRI_NAME == 'Employee' || Auth::user()->Privilege->PRI_NAME == 'Project Manager'))
             <div class="row">
                 <div class="col-4">
                     <label class="label-left fw-bold mb-2" for="projectName">Confirm Payment</label>

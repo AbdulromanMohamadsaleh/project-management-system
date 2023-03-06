@@ -22,18 +22,22 @@
                         <div class="col-md-6 mb-sm-5 ">
                             <label class="label-left fw-bold mb-2" for="holyday_name">POSITION</label>
                             <select class="form-select" name="position" aria-label="Default select example">
+                                @foreach ($positions as $position)
+                                    <option {{ $position->POS_ID == $logins->Profile->POS_ID ? 'selected' : '' }}
+                                        value="{{ $position->POS_ID }}">{{ $position->POS_NAME }}</option>
+                                @endforeach
+                            </select>
 
-                                <option {{ $logins->POSITION == 'Employee' ? 'selected' : '' }} value="Employee">
-                                    Employee
-                                </option>
-                                <option {{ $logins->POSITION == 'Admin' ? 'selected' : '' }} value="Admin">Admin
-                                </option>
-                                <option {{ $logins->POSITION == 'Project Manager' ? 'selected' : '' }}
-                                    value="Project Manager">
-                                    Project
-                                    Manager</option>
-                                <option {{ $logins->POSITION == 'Manager' ? 'selected' : '' }} value="Manager">Manager
-                                </option>
+                        </div>
+                        <div class="col-md-6 mb-sm-5 ">
+                            <label class="label-left fw-bold mb-2" for="holyday_name">Privilages</label>
+                            <select class="form-select" name="privilege" aria-label="Default select example">
+                                @foreach ($privileges as $privilege)
+                                    <option {{ $privilege->PRIV_ID == $logins->PRIV_ID ? 'selected' : '' }}
+                                        value="{{ $privilege->PRIV_ID }}">{{ $privilege->PRI_NAME }}
+                                        {{ $privilege->PRI_DESCRIPTION ? ' (' . $privilege->PRI_DESCRIPTION . ')' : '' }}
+                                    </option>
+                                @endforeach
                             </select>
 
                         </div>

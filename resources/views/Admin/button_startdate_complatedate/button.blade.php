@@ -1,4 +1,4 @@
-@if (Auth::user()->POSITION == 'Employee' || Auth::user()->POSITION == 'Project Manager')
+@if (Auth::user()->Privilege->PRI_NAME == 'Employee' || Auth::user()->Privilege->PRI_NAME == 'Project Manager')
                             @if ($project_detail->IS_APPROVE == 1)
                                 @if ($task->STATUS == 0)
                                     @if ($task->START_DATE)

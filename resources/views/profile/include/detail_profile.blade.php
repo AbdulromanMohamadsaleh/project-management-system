@@ -11,7 +11,7 @@
         <b class="mb-0">NickName:</b>
     </div>
     <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Auth::user()->NICKNAME }}</p>
+        <p class="text-muted mb-0">{{ Auth::user()->Profile->NICKNAME }}</p>
     </div>
 </div>
 <hr>
@@ -20,7 +20,7 @@
         <b class="mb-0">ID Card:</b>
     </div>
     <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Auth::user()->CARD_ID }}</p>
+        <p class="text-muted mb-0">{{ Auth::user()->Profile->CARD_ID }}</p>
     </div>
 </div>
 <hr>
@@ -38,7 +38,7 @@
         <b class="mb-0">Phone:</b>
     </div>
     <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Auth::user()->TELEPHONE }}</p>
+        <p class="text-muted mb-0">{{ Auth::user()->Profile->TELEPHONE }}</p>
     </div>
 </div>
 <hr>

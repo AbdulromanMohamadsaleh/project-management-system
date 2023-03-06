@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Traits\LastProjectTrait;
-
 use App\Models\Login;
-use App\Models\ProjectDetial;
+use App\Models\Profile;
+use App\Models\Position;
+use App\Models\Privilege;
 use Flowframe\Trend\Trend;
 use App\Models\ProjectTeam;
 use Illuminate\Http\Request;
+use App\Models\ProjectDetial;
+use App\Traits\LastProjectTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -41,11 +43,17 @@ class UserController extends Controller
 
     public function Create()
     {
-        $User = User::all();
+        $User = User::with(['Profile' => function ($q) {
+            $q->with("Position")->get();
+        }])->with("Privilege")->get();
+
         $data['last']  = $this->getLastProject();
         $routeName = $this->getRouteName();
 
-        return view('Admin.createuser', ['login' => $User, 'data' => $data, 'routename' => $routeName]);
+        $Position = Position::all();
+        $privilege = Privilege::all();
+
+        return view('Admin.createuser', ['login' => $User, 'positions' => $Position, 'privileges' => $privilege, 'data' => $data, 'routename' => $routeName]);
     }
 
     public function Login()
@@ -55,21 +63,39 @@ class UserController extends Controller
 
     public function Save(request $request)
     {
+        // User
         $userCounter = User::count();
         $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + 1));
         $counterId4 = 1;
         while (User::where('LOGIN_ID', $user_id)->first()) {
-            $user_id = "USER" . sprintf("%04d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
+            $user_id = "USER" . sprintf("%05d", ($userCounter == 0 || $userCounter == '' ? 1 : $userCounter + ++$counterId4));
+        }
+
+        // Profile
+        $PROFCounter = Profile::count();
+        $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + 1));
+        $counterIdPROF = 1;
+        while (Profile::where('LOGIN_ID', $PROF_id)->first()) {
+            $PROF_id = "PROF" . sprintf("%05d", ($PROFCounter == 0 || $PROFCounter == '' ? 1 : $PROFCounter + ++$counterIdPROF));
         }
 
         $user = new User();
         $user->LOGIN_ID = $user_id;
-        $user->NAME = $request->name;
         $user->EMAIL = $request->email;
-        $user->POSITION = 'Employee';
+        $user->POSITION = 0;
+        $user->PRIV_ID  = "04";
+        $user->IS_ACTIVE = 0;
+        $user->NAME = $request->name;
         $user->password = Hash::make($request->password);
 
         if ($user->save()) {
+
+            $profile = new Profile();
+            $profile->PROF_ID = $PROF_id;
+            $profile->LOGIN_ID = $user_id;
+            $profile->POS_ID = "02";
+            $profile->save();
+
             return redirect()->back();
         }
     }
@@ -84,35 +110,40 @@ class UserController extends Controller
             'img' => 'mimes:png,jpg,jpeg|max:2048'
         ]);
 
+        $profile = Profile::where('LOGIN_ID', $id)->first();
+
         $user = User::where('LOGIN_ID', $id)->first();
+
         // Getting values from the blade template form
         $user->NAME = $request->name;
-        $user->NICKNAME = $request->nickname;
-        $user->CARD_ID = $request->Card_Id;
-        $user->TELEPHONE = $request->phone;
-        $user->DEPARTMENT = $request->Department;
+        $profile->NICKNAME = $request->nickname;
+        $profile->CARD_ID = $request->Card_Id;
+        $profile->TELEPHONE = $request->phone;
+        $profile->DEPARTMENT = $request->Department;
+
         if ($request->img) {
             $imageName = time() . '.' . $request->img->extension();
-            $file_path = app_path() . '/images' . $user->IMG;
+            $file_path = app_path() . '/images' . $profile->IMG;
             $request->img->move(public_path('images'), $imageName);
-            $user->IMG = $imageName;
+            $profile->IMG = $imageName;
         }
 
-        $user->timestamps = false;
+        $profile->timestamps = false;
         $user->update();
+        $profile->update();
         return redirect()->back()->with("success", "Update Successfully");
     }
 
     public function UpdatePosition(Request $request, $id)
     {
-
-        if (Auth::user()->POSITION != 'Admin')
+        if (Auth::user()->Privilege->PRI_NAME != 'Admin')
             return redirect()->back()->with("error", "Dont Have Access");
 
-        $user = User::where('LOGIN_ID', $id)->first();
+        $user = User::where('LOGIN_ID', $id)->with("Profile")->first();
         // Getting values from the blade template form
-        $user->POSITION = $request->position;
-
+        $user->Profile->POS_ID = $request->position;
+        $user->PRIV_ID = $request->privilege;
+        $user->Profile->save();
         $user->timestamps = false;
         $user->update();
         return redirect()->back()->with("success", "Update Successfully");
@@ -150,4 +181,12 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function Delete($id)
+    {
+       User::where('LOGIN_ID', $id)->delete();
+
+        return redirect()->back()->with("success", "User Deleted Successfully");
+    }
+
 }

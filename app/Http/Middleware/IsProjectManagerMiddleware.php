@@ -22,7 +22,7 @@ class IsProjectManagerMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->POSITION == 'Project Manager') {
+        if (Auth::check() && Auth::user()->Privilege->PRI_NAME == 'Project Manager') {
             return $next($request);
         } else {
             return redirect()->route('login');

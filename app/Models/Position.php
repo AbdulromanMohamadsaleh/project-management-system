@@ -12,4 +12,5 @@ class Position extends Model
     protected $table = 'prj_position';
     protected $primaryKey = 'POS_ID';
     protected $keyType = 'string';
+    public $timestapm = false;
 }

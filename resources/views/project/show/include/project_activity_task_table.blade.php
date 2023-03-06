@@ -196,7 +196,7 @@
 
 
     <div class="mt-4 row refresher " style="overflow: auto">
-        <table class="tasklists" style="width: -webkit-fill-available;" class="mt-3 nestedTable">
+        <table  class="tasklists text-center" style="width: -webkit-fill-available;" class="mt-3 nestedTable">
             <thead>
                 <tr>
                     <th class="spacer ">
@@ -213,7 +213,7 @@
                     <th>Action</th>
 
                     <th class="">Status</th>
-                    <th>Quality Work</th>
+                    <th >Quality Work</th>
                 </tr>
             </thead>
             <tr>
@@ -269,7 +269,7 @@
                                         <b>-</b>
                                     @endif
                                 </td>
-                                <td>Bad</td>
+                                <td class="text-center">-</td>
                             </tr>
                         </div>
                         {{-- End Act Info --}}
@@ -349,9 +349,9 @@
                                     <td>
 
                                         @if (
-                                            (Auth::user()->POSITION == 'Employee' ||
-                                                Auth::user()->POSITION == 'Project Manager' ||
-                                                Auth::user()->POSITION == 'Admin') &&
+                                            (Auth::user()->Privilege->PRI_NAME == 'Employee' ||
+                                                Auth::user()->Privilege->PRI_NAME == 'Project Manager' ||
+                                                Auth::user()->Privilege->PRI_NAME == 'Admin') &&
                                                 ($project_detail->STATUS != 4 && $project_detail->STATUS != 3))
                                             @include('modal_budget_note.modal_budget')
                                             @include('modal_budget_note.modal_note')

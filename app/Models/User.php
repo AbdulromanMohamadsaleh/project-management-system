@@ -30,7 +30,8 @@ class User extends Authenticatable
         'TELEPHONE',
         'AGENCY',
         'POSITION',
-        'password'
+        'password',
+        'PRIV_ID',
     ];
     // protected $fillable = [
     //     'name',
@@ -57,6 +58,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function Profile()
+    {
+        return $this->hasOne(Profile::class, 'LOGIN_ID', 'LOGIN_ID');
+    }
 
     public function projects()
     {
@@ -66,6 +71,11 @@ class User extends Authenticatable
             'LOGIN_ID',
             'DETAIL_ID'
         );
+    }
+
+    public function Privilege()
+    {
+        return $this->belongsto(Privilege::class, 'PRIV_ID', 'PRIV_ID');
     }
 
 

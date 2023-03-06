@@ -9,7 +9,7 @@
                 @php
                     $project_details = $data['totalInProggressProjectData'];
                 @endphp
-                <div style="overflow: scroll" class="table-responsive">
+                <div style="overflow: scroll" class="p-3 table-responsive">
                     @include('table_project.table_dashbord')
                 </div>
             </div>

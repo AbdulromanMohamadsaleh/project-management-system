@@ -72,13 +72,13 @@
         <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img class="rounded-circle me-lg-2"
-                    src="{{ Auth::user()->IMG ? asset('images/') . '/' . Auth::user()->IMG : asset('images/') . '/' . 'profile/no_img.png' }}"
+                    src="{{ Auth::user()->Profile->IMG ? asset('images/') . '/' . Auth::user()->Profile->IMG : asset('images/') . '/' . 'profile/no_img.png' }}"
                     alt="" style="width: 40px; height: 40px;">
                 <span class="d-none d-lg-inline-flex">{{ Auth::user()->NAME }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                <a href="#" class="dropdown-item">My Profile</a>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="{{ route('profile') }}" class="dropdown-item">My Profile</a>
+                {{-- <a href="#" class="dropdown-item">Settings</a> --}}
                 <a href="{{ route('logout') }}" class="dropdown-item">Log Out</a>
             </div>
         </div>

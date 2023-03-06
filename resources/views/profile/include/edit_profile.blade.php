@@ -20,24 +20,24 @@
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">NickName:</label>
-                            <input type="text" name="nickname" value="{{ Auth::user()->NICKNAME }}"
+                            <input type="text" name="nickname" value="{{ Auth::user()->Profile->NICKNAME }}"
                                 class="form-control" id="projectName">
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">ID Card:</label>
                             <input type="number" minlength="13" maxlength="13" name="Card_Id"
-                                value="{{ Auth::user()->CARD_ID }}" class="form-control" id="projectName">
+                                value="{{ Auth::user()->Profile->CARD_ID }}" class="form-control" id="projectName">
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">Phone</label>
                             <input type="number" name="phone" minlength="9" maxlength="10"
-                                value="{{ Auth::user()->TELEPHONE }}" class="form-control" id="projectName">
+                                value="{{ Auth::user()->Profile->TELEPHONE }}" class="form-control" id="projectName">
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label class="label-left fw-bold mb-2" for="projectName">Department:</label>
                             <input type="text" name="Department"
                             {{-- minlength="9" maxlength="10" --}}
-                                value="{{ Auth::user()->DEPARTMENT }}" class="form-control" id="projectName">
+                                value="{{ Auth::user()->Profile->DEPARTMENT }}" class="form-control" id="projectName">
                         </div>
                         <div class="col-md-6 mb-sm-5">
                             <label for="img" class="label-left fw-bold mb-2">Select image:</label>

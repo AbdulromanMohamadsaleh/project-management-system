@@ -18,22 +18,19 @@
                 <td>{{ $logins->LOGIN_ID }}</td>
                 <td>{{ $logins->EMAIL }}</td>
                 <td>{{ $logins->NAME }}</td>
-                <td>{{ $logins->NICKNAME }}</td>
-                <td>{{ $logins->CARD_ID }}</td>
-                <td>{{ $logins->TELEPHONE }}</td>
-                <td>{{ $logins->AGENCY }}</td>
-                <td>{{ $logins->POSITION }}
+                <td>{{ $logins->Profile->NICKNAME }}</td>
+                <td>{{ $logins->Profile->CARD_ID }}</td>
+                <td>{{ $logins->Profile->TELEPHONE }}</td>
+                <td>{{ $logins->Profile->AGENCY }}</td>
+                <td>{{ $logins->Profile->Position->POS_NAME }}
 
                 <td>
-                    @include('profile.include.editUser')
+                    @if ($routename == 'createuser')
+                        @include('profile.include.editUser')
+                        @include('profile.include.delete_user')
+                    @endif
                     @if ($logins->IS_ACTIVE == 0)
-                        <form style="display: inline-block" method="POST"
-                            action="{{ route('activeuser', $logins->LOGIN_ID) }}">
-                            @csrf
-                            <input name="_method" type="hidden" value="POST">
-                            <button type="submit" class="btn  btn-success  show-alert-delete-box "
-                                data-toggle="tooltip" title='ACTIVE'><i class='fas fa-check-circle'></i></button>
-                        </form>
+                        @include('profile.include.active_user')
                     @else
                         <span class="badge bg-success">Active</span>
                     @endif

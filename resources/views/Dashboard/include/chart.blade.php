@@ -1,4 +1,4 @@
-@switch(Auth::user()->POSITION)
+@switch(Auth::user()->Privilege->PRI_NAME)
     @case('Admin')
         <script>
             (async function() {

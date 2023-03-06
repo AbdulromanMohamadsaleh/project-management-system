@@ -6,7 +6,6 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
-
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProjectController;
@@ -51,9 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
 ###########################  Admin  ###########################
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'PreventBackHistory']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    // Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::post('/saveuser', [AdminController::class, 'Saveuser'])->name('admin.saveuser');
+    Route::delete('/deleteuser/{id}', [UserController::class, 'Delete'])->name('user.delete');
 });
 
 Route::post('/activeuser/{id}', [AdminController::class, 'Approve'])->name('activeuser')->middleware('isAdmin');
