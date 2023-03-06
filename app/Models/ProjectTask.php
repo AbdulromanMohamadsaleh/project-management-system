@@ -39,4 +39,9 @@ class ProjectTask extends Model
     {
         return $this->belongsto(User::class, 'COMPLETED_BY', 'LOGIN_ID');
     }
+
+    public function assignedUser()
+    {
+        return $this->hasMany(AssignedTask::class, 'TASK_ID', 'TASK_ID');
+    }
 }

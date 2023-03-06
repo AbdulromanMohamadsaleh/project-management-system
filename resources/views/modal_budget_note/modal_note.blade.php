@@ -4,7 +4,7 @@
 </button>
 
 <!-- The Modal -->
-<div class="modal" id="myModal2-{{ $task->TASK_ID }}">
+<div class="modal " id="myModal2-{{ $task->TASK_ID }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 

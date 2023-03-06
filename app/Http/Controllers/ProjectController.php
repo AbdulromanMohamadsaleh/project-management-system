@@ -106,7 +106,6 @@ class ProjectController extends Controller
         $project_detail->TotalBudget = $totalBudget;
         $Holydays = Holyday::all()->toJson();
         $data['last']  = $this->getLastProject();
-
         $routeName = $this->getRouteName();
         return view('Admin.show', [
             'project_detail' => $project_detail,

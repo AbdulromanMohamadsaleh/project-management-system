@@ -10,15 +10,17 @@
     @endphp
 @endif
 <!-- Modal -->
-<div class="modal fade" id="modaltask-{{ $task->TASK_ID }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade myModal2-{{ $counter }}" id="modaltask-{{ $task->TASK_ID }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Task</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
                 <form id="signUpForm" method="post" action="{{ route('task.edit', $task->TASK_ID) }}">
                     @csrf
                     <div class="row mb-5 mb-sm-0">
@@ -52,9 +54,30 @@
 
                         </div>
 
-                        <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
+
                     </div>
+                    <div class="col ">
+                        {{-- <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label> --}}
+                        <select required style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
+                            class="form-select multi-task multi-task-team" id="projectTeam-{{ $counter }}"
+                            name="projectTeam[]" multiple="multiple">
+                            @if (count($TeamsName) > 0)
+                                @foreach ($TeamsName as $staff)
+                                    <option {{-- {{ in_array($staff->LOGIN_ID, $TeamsName) ? 'selected' : '' }} --}} value="{{ $staff->LOGIN_ID }}">
+                                        {{ $staff->NAME }}
+                                    </option>
+                                @endforeach
+                            @else
+                                <option value="0">NO Team</option>
+                            @endif
+
+                        </select>
+                    </div>
+
+                    <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
                 </form>
+
+
             </div>
         </div>
     </div>

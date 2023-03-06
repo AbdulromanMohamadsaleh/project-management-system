@@ -34,6 +34,7 @@
                 <div class=" mb-sm-5">
                     <label class="label-left fw-bold mb-2" for="projectName">Show note</label>
                     <p>{{ $task->TASK_NOTE }}</p>
+                    
                 </div>
             </div>
 
