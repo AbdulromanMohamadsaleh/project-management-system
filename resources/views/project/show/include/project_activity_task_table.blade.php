@@ -222,8 +222,8 @@
                         $i = 1;
                     @endphp
                     @php
-                                $counter = 0;
-                            @endphp
+                        $counter = 0;
+                    @endphp
                     @foreach ($project_detail->activity as $act)
                         @php
                             $sum = 0;
@@ -369,7 +369,8 @@
                                     </td>
                                     <td>
                                         @if ($task->STATUS == 1)
-                                            <div class="me-3">
+                                            <div class=" text-center">
+                                                <div> <b class="text-success"> Completed By</b></div>
                                                 <div>
                                                     {{ $task->CompleteBy->NAME }}
                                                 </div>

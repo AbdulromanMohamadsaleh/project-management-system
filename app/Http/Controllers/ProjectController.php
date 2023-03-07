@@ -68,9 +68,12 @@ class ProjectController extends Controller
     {
         $project_detail = ProjectDetial::where('DETAIL_ID', $id)->with('activity', function ($q) {
             $q->orderBy('ACTIVITY_ORDER')->with('tasks', function ($q) {
-                $q->orderBy('TASK_ORDER')->orderBy('created_at', 'ASC')->get();
+                $q->with("assignedUser", function ($q) {
+                    $q->select('prj_assigned_task.LOGIN_ID');
+                })->orderBy('TASK_ORDER')->orderBy('created_at', 'ASC')->get();
             })->orderBy('created_at', 'ASC')->get();
         })->first();
+
 
         $sum = 0;
         $totalBudget = 0;
@@ -89,6 +92,7 @@ class ProjectController extends Controller
             }
 
             foreach ($act->tasks as $task) {
+                $task->assignedUser = array_column($task->assignedUser->toArray(), 'LOGIN_ID');
                 $totalBudget += $task->TASK_BUDGET;
                 $sum += intval($task->DAY);
                 if ($task->STATUS_PAYMENT == 1) {
@@ -99,6 +103,8 @@ class ProjectController extends Controller
                 }
             }
         }
+
+
 
         $project_detail->BudgetActivityNotPaid = $BudgetActivityNotPaid;
         $project_detail->paidBudget = $paidBudget;
@@ -307,6 +313,7 @@ class ProjectController extends Controller
         $team = User::all();
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
         $routeName = $this->getRouteName();
+
 
         $data['last']  = $this->getLastProject();
         return view('Admin.edit', [

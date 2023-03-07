@@ -123,7 +123,12 @@ class TaskController extends Controller
 
     public function EditTask(Request $request, $id)
     {
-        $Task = ProjectTask::where('TASK_ID', $id)->first();
+
+        $Task = ProjectTask::where('TASK_ID', $id)->with("assignedUser")->first();
+
+        if ($Task->STATUS == 1)
+            return redirect()->back()->with("error", "Cant Edit Completed Task!");
+
         $request->validate([
             'task' => 'required',
             'day' => 'required',
@@ -133,6 +138,10 @@ class TaskController extends Controller
         $Task->TASK_NAME = $request->task;
         $Task->DAY = $request->day;
         $Task->START_DATE = $request->edit_satart_date;
+
+
+        $Task->assignedUser()->sync($request->taskTeam);
+
 
         $Project = ProjectDetial::where('DETAIL_ID', $Task->activity->DETAIL_ID)->first();
 
@@ -156,7 +165,7 @@ class TaskController extends Controller
 
         $Task->save();
 
-        return redirect()->back()->with("success", "Edit Task and Day Successfully");
+        return redirect()->back()->with("success", "Edit Task Successfully");
     }
 
     public function DelateTask($id)
