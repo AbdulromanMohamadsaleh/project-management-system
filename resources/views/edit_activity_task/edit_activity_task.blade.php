@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="col ">
-                        {{-- <label for="projectTeam" class="label-left fw-bold mb-2">Project Team</label> --}}
+                        <label for="projectTeam" class="mb-2 label-left fw-bold ">Assign Task to Users</label><br>
                         <select style="width: 100%;padding: 9px 14px;border-color: rgb(33, 37, 41);"
                             class="form-select multi-task multi-task-team" id="projectTeam-{{ $counter }}"
                             name="taskTeam[]" multiple="multiple">
@@ -75,7 +75,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
+                    <button type="submit" name="submit" onclick="success()" class="mt-4 btn btn-success">SAVE</button>
                 </form>
 
 
