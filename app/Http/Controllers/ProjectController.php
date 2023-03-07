@@ -229,7 +229,7 @@ class ProjectController extends Controller
         $sMessage .= "ProjectStart: " . "$request->projectStart" . "\n";
         $sMessage .= "ProjectEnd:" . " $request->projectEnd" . "\n";
         $sMessage .= "Status: " . "New Release" . "\n";
-        // Line::send('' . '' . $sMessage);
+        Line::send('' . '' . $sMessage);
         return redirect()->route('table')->with("success", "Project Added Successfully");
     }
 
@@ -292,7 +292,7 @@ class ProjectController extends Controller
         $sMessage .= "ID_Project:" . "$id" . "\n";
         $sMessage .= "NameProject: " . " $nameProject" . "\n";
         $sMessage .= "Status: " . "Canceled" . "\n";
-        // Line::send('' . '' . $sMessage);
+        Line::send('' . '' . $sMessage);
 
         return redirect()->back()->with("success", "Project Canceled Successfully");;
     }
