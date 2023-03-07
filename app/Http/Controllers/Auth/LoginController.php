@@ -65,7 +65,7 @@ class LoginController extends Controller
 
         if (auth()->attempt(array('EMAIL' => $input['email'], 'password' => $input['password']))) {
 
-            if (Auth::user()->IS_ACTIVE == 1) {
+            if (Auth::user()->STATUS == 1) {
                 if (auth()->user()->POSITION == 'Admin') {
                     return redirect()->route('admin.dashboard');
                 } elseif (auth()->user()->POSITION == 'Project Manager') {

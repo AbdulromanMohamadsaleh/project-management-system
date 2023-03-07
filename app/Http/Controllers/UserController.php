@@ -84,7 +84,7 @@ class UserController extends Controller
         $user->EMAIL = $request->email;
         $user->POSITION = 0;
         $user->PRIV_ID  = "04";
-        $user->IS_ACTIVE = 0;
+        $user->STATUS = 0;
         $user->NAME = $request->name;
         $user->password = Hash::make($request->password);
 
@@ -143,6 +143,7 @@ class UserController extends Controller
         // Getting values from the blade template form
         $user->Profile->POS_ID = $request->position;
         $user->PRIV_ID = $request->privilege;
+        $user->STATUS = $request->status;
         $user->Profile->save();
         $user->timestamps = false;
         $user->update();
@@ -184,9 +185,8 @@ class UserController extends Controller
 
     public function Delete($id)
     {
-       User::where('LOGIN_ID', $id)->delete();
+        User::where('LOGIN_ID', $id)->delete();
 
         return redirect()->back()->with("success", "User Deleted Successfully");
     }
-
 }

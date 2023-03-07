@@ -101,7 +101,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->LOGIN_ID = $user_id;
         $user->EMAIL = $request->email;
-        $user->IS_ACTIVE = 0;
+        $user->STATUS = 0;
         $user->PRIV_ID  = "04";
         $user->password = Hash::make($request->password);
         $user->NAME = $request->name;

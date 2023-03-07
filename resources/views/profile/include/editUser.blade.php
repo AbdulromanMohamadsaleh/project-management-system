@@ -41,6 +41,19 @@
                             </select>
 
                         </div>
+
+                        <div class="col-md-6 mb-sm-5 ">
+                            <label class="label-left fw-bold mb-2" for="holyday_name">Status</label>
+                            <select class="form-select" name="status" aria-label="Default select example">
+                                <option {{ 0 == $logins->STATUS ? 'selected' : '' }} value="0">Not Active
+                                </option>
+                                <option {{ 1 == $logins->STATUS ? 'selected' : '' }} value="1">Active
+                                </option>
+                                <option {{ 2 == $logins->STATUS ? 'selected' : '' }} value="2">Leave
+                                </option>
+                            </select>
+
+                        </div>
                         <button id="submitCreateHolyDay" type="buttom" name="submit"
                             class="btn btn-success">SAVE</button>
                     </div>

@@ -55,7 +55,8 @@ class AdminController extends Controller
 
     public function Approve($id)
     {
-        $Login = User::where('LOGIN_ID', $id)->update(['IS_ACTIVE' => 1]);
+        $Login = User::where('LOGIN_ID', $id)->update(['STATUS' => 1]);
+
         return redirect()->back()->with("success", "Active Successfully");
     }
 
@@ -87,7 +88,7 @@ class AdminController extends Controller
         $user = new User();
         $user->LOGIN_ID = $user_id;
         $user->EMAIL = $request->email;
-        $user->IS_ACTIVE = 0;
+        $user->STATUS = 0;
         $user->password = Hash::make($request->password);
         $user->PRIV_ID = "04";
         $user->NAME = $request->name;

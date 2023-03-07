@@ -354,3 +354,9 @@ function updateEndDateForRadiosIsIncludeWeekEnd(e) {
 
     updateEndDateGeneral(amount);
 }
+
+
+projectStart.addEventListener("change",(e)=>{
+    amount = document.querySelector('#Duration').value;
+    updateEndDateGeneral(amount);
+})

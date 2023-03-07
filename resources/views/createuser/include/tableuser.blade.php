@@ -27,10 +27,12 @@
                 <td>
                     @if ($routename == 'createuser')
                         @include('profile.include.editUser')
-                        @include('profile.include.delete_user')
                     @endif
-                    @if ($logins->IS_ACTIVE == 0)
+                    @if ($logins->STATUS == 0)
+                        @include('profile.include.delete_user')
                         @include('profile.include.active_user')
+                    @elseif ($logins->STATUS == 2)
+                        <span class="badge bg-secondary">Leave</span>
                     @else
                         <span class="badge bg-success">Active</span>
                     @endif

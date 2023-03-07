@@ -50,10 +50,10 @@ class ProjectController extends Controller
     {
         $Holydays = Holyday::all()->toJson();
         $Categories = Category::all();
-        $projectManagers = User::where("IS_ACTIVE", 1)->with("Profile")->whereRelation('Profile', 'POS_ID', '=', '03')->get();
+        $projectManagers = User::where("STATUS", 1)->with("Profile")->whereRelation('Profile', 'POS_ID', '=', '03')->get();
 
         $routeName = $this->getRouteName();
-        $team = User::all();
+        $team = User::where("STATUS", 1)->get();
         $data['last']  = $this->getLastProject();
         return view('Admin.create', [
             'projectManagers' => $projectManagers,
@@ -309,8 +309,8 @@ class ProjectController extends Controller
 
         $Categories = Category::all();
         $Holydays = Holyday::all()->toJson();
-        $projectManagers = User::where("IS_ACTIVE", 1)->with("Profile")->whereRelation('Profile', 'POS_ID', '=', '03')->get();
-        $team = User::all();
+        $projectManagers = User::where("STATUS", 1)->with("Profile")->whereRelation('Profile', 'POS_ID', '=', '03')->get();
+        $team = User::where("STATUS", 1)->get;
         $projectTeams = $ProjectDetial->projectTeam->pluck('LOGIN_ID')->toArray();
         $routeName = $this->getRouteName();
 

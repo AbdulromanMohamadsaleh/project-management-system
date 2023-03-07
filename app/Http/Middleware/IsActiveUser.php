@@ -17,7 +17,7 @@ class IsActiveUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->IS_ACTIVE == 1) {
+        if (Auth::check() && Auth::user()->STATUS == 1) {
             return $next($request);
         } else {
             return redirect()->route('login');
