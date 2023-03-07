@@ -171,8 +171,8 @@
         }
         return $result;
     }
+    
 @endphp
-
 @extends('layouts.master')
 
 @section('content')
@@ -256,6 +256,24 @@
             });
         });
     </script>
+
+    <!-- Multi-select boxes (pillbox) Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.multi-task').each(function(i, obj) {
+                console.log($('#projectTeam-' + i))
+                $('#projectTeam-' + i).select2({
+
+                    dropdownParent: $('.myModal2-' + i)
+                });
+
+            });
+        });
+    </script>
+
+
 
     <script src="{{ asset('js/script.js') }}" type="module" defer></script>
 
