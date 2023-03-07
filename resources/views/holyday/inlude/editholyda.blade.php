@@ -10,7 +10,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Edit Category</h4>
+                <h4 class="modal-title">Edit Holiday</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -25,7 +25,7 @@
                                 value="{{ $Holyday->HOLYDAY_NAME }}">
                         </div>
                         <div class="col-md-6 mb-sm-5">
-                            <label class="label-left fw-bold mb-2" for="target">Date Holiday</label>
+                            <label class="label-left fw-bold mb-2" for="target">Holiday Date</label>
                             <input type="date" name="edit_create_date_holyday" value="{{ $Holyday->HOLYDAY_DATE }}"
                                 class="form-control" id="target">
                         </div>
