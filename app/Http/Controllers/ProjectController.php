@@ -391,6 +391,11 @@ class ProjectController extends Controller
                 })->orderBy('ACTIVITY_ORDER')->get();
         })->first();
 
+        if (!$project_detail2) {
+            abort(404);
+        }
+
+
         $tasks = $project_detail2->tasks->toArray();
         $project_detail2 = json_encode($project_detail2->toArray());
         $tasks = json_encode($tasks);

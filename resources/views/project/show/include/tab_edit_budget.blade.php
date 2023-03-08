@@ -52,14 +52,15 @@
                 @else
                     <input value="{{ $task->TASK_BUDGET }}" type="number" name="budget" class="form-control mb-2"
                         id="projectName">
-                    <button type="submit" name="submit" onclick="success()" class="btn btn-success">SAVE</button>
                 @endif
 
             </div><br>
 
         </form>
-        @if ($task->STATUS_PAYMENT == 0 && (Auth::user()->Privilege->PRI_NAME == 'Employee' || Auth::user()->Privilege->PRI_NAME == 'Project Manager'))
-            <div class="row">
+        @if (
+            $task->STATUS_PAYMENT == 0 &&
+                (Auth::user()->Privilege->PRI_NAME == 'Employee' || Auth::user()->Privilege->PRI_NAME == 'Project Manager'))
+            <div class="row mb-5">
                 <div class="col-4">
                     <label class="label-left fw-bold mb-2" for="projectName">Confirm Payment</label>
                 </div>
