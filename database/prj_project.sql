@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 04:06 AM
+-- Generation Time: Mar 08, 2023 at 03:39 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -160,11 +160,10 @@ INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `
 ('TASK0042', 'Michael Mcguire', 'ACT0016', 8, 0, 0, NULL, NULL, NULL, 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0043', 'Maggie Blair', 'ACT0017', 4, 0, 0, NULL, NULL, NULL, 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0044', 'Raya Fowler', 'ACT0017', 2, 0, 0, NULL, NULL, NULL, 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', NULL, '', 0, NULL, NULL, NULL),
-('TASK0045', 'Georgia Sargent', 'ACT0018', 75, 0, 0, NULL, NULL, NULL, 0, '2023-02-19 09:10:35', '2023-02-19 09:10:35', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0046', 'Erich Norton', 'ACT0019', 3, 1, 0, NULL, '2023-03-07 02:52:29', '2023-02-26 17:00:00', 0, '2023-02-23 19:55:15', '2023-03-06 19:52:29', NULL, '', 0, 'USER00004', NULL, '2023-03-02 17:00:00'),
 ('TASK0047', 'Elmo Combs', 'ACT0019', 4, 1, 0, NULL, '2023-03-02 20:31:37', '2023-02-26 17:00:00', 0, '2023-02-23 19:55:15', '2023-02-26 23:37:18', NULL, '', 0, 'USER00004', NULL, '2023-02-26 17:00:00'),
 ('TASK0048', 'Otto Estrada', 'ACT0019', 6, 1, 0, NULL, '2023-03-02 20:31:46', '2023-02-23 17:00:00', 0, '2023-02-23 19:55:15', '2023-02-26 23:40:35', NULL, '', 0, 'USER00004', NULL, '2023-03-06 17:00:00'),
-('TASK0049', 'Melinda Coleman', 'ACT0020', 5, 0, 0, NULL, '2023-03-02 20:31:51', '2023-02-28 17:00:00', 0, '2023-02-23 19:55:15', '2023-03-02 11:39:30', NULL, '', 0, NULL, NULL, '2023-03-04 17:00:00'),
+('TASK0049', 'Melinda Coleman', 'ACT0020', 5, 0, 0, NULL, '2023-03-07 03:10:22', '2023-02-28 17:00:00', 0, '2023-02-23 19:55:15', '2023-03-06 20:10:22', NULL, '', 0, NULL, NULL, '2023-03-06 17:00:00'),
 ('TASK0050', 'Fritz Sharp', 'ACT0020', 2, 1, 0, NULL, '2023-03-01 17:00:00', '2023-03-02 17:00:00', 0, '2023-02-23 19:55:15', '2023-03-02 13:46:04', NULL, '', 0, 'USER00004', NULL, '2023-03-03 17:00:00'),
 ('TASK0051', 'Riley Buck', 'ACT0021', 6, 0, 0, NULL, '2023-03-02 20:35:07', '2023-02-28 17:00:00', 0, '2023-02-23 19:55:15', '2023-03-02 13:35:07', NULL, '', 0, NULL, NULL, '2023-03-05 17:00:00'),
 ('TASK0052', 'Herman Cherry', 'ACT0022', 2, 0, 0, NULL, '2023-03-02 20:31:57', '2027-10-27 17:00:00', 0, '2023-02-26 23:45:35', '2023-02-27 00:55:49', NULL, '', 0, NULL, NULL, '2023-02-27 07:55:49'),
@@ -200,12 +199,26 @@ INSERT INTO `prj_activity_task` (`TASK_ID`, `TASK_NAME`, `ACTIVITY_ID`, `DAY`, `
 ('TASK0082', 'Solomon Boyle', 'ACT0029', 3, 0, 0, NULL, NULL, NULL, 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0083', 'Mallory Rodriquez', 'ACT0030', 2, 0, 0, NULL, NULL, NULL, 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0084', 'Caryn Ortiz', 'ACT0030', 2, 0, 0, NULL, NULL, NULL, 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', NULL, '', 0, NULL, NULL, NULL),
-('TASK0085', 'Myra Langley', 'ACT0031', 4, 0, 0, NULL, '2023-03-02 20:32:21', '2023-03-01 17:00:00', 0, '2023-03-01 11:13:02', '2023-03-02 11:29:50', NULL, '', 0, NULL, NULL, '2023-03-06 17:00:00'),
+('TASK0085', 'Myra Langley', 'ACT0031', 4, 0, 4, 'sgagsgr', '2023-03-07 18:48:03', '2023-03-07 17:00:00', 0, '2023-03-01 11:13:02', '2023-03-07 11:48:03', NULL, '', 0, NULL, NULL, '2023-03-12 17:00:00'),
 ('TASK0086', 'Thomas Patterson', 'ACT0031', 2, 0, 0, NULL, NULL, NULL, 0, '2023-03-01 11:13:02', '2023-03-01 11:13:02', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0087', 'Gillian Fitzpatrick', 'ACT0032', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-01 11:13:02', '2023-03-01 11:13:02', NULL, '', 0, NULL, NULL, NULL),
 ('TASK0088', 'Wynne Hendrix', 'ACT0033', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-01 12:08:28', '2023-03-01 12:08:28', NULL, '', 0, NULL, NULL, NULL),
-('TASK0089', 'Jescie Jackson', 'ACT0034', 60, 0, 0, NULL, NULL, NULL, 0, '2023-03-01 12:04:29', '2023-03-01 12:04:29', NULL, '', 0, NULL, NULL, NULL),
-('TASK0090', 'Joan Dorsey', 'ACT0035', 19, 0, 0, NULL, NULL, NULL, 0, '2023-03-01 12:08:45', '2023-03-01 12:08:45', NULL, '', 0, NULL, NULL, NULL);
+('TASK0089', 'Imani Le', 'ACT0034', 3, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0090', 'Elizabeth Murphy', 'ACT0034', 14, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0091', 'Orli Miles', 'ACT0034', 6, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0092', 'Kadeem Farmer', 'ACT0034', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0093', 'Zelenia Nielsen', 'ACT0035', 7, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0094', 'Edan Bartlett', 'ACT0035', 6, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0095', 'Harrison Lawrence', 'ACT0035', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0096', 'Tucker Wallace', 'ACT0036', 2, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0097', 'Yetta Bolton', 'ACT0036', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0098', 'Stacy Leach', 'ACT0037', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0099', 'Shelby Anderson', 'ACT0037', 6, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0100', 'Keiko Bowers', 'ACT0038', 7, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0101', 'Kerry Pollard', 'ACT0040', 4, 0, 0, NULL, NULL, NULL, 0, '2023-03-07 11:48:21', '2023-03-07 11:48:21', NULL, '', 0, NULL, NULL, NULL),
+('TASK0102', 'Haviva Woodward', 'ACT0039', 6, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0103', 'Jackson Hopper', 'ACT0039', 5, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL),
+('TASK0104', 'Devin Snyder', 'ACT0041', 3, 0, 0, NULL, NULL, NULL, 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', NULL, '', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -225,7 +238,8 @@ CREATE TABLE `prj_assigned_task` (
 
 INSERT INTO `prj_assigned_task` (`ASSIGNED_ID`, `LOGIN_ID`, `TASK_ID`) VALUES
 ('', 'USER00004', 'TASK0033'),
-('', 'USER00004', 'TASK0046');
+('', 'USER00004', 'TASK0046'),
+('', 'USER00003', 'TASK0049');
 
 -- --------------------------------------------------------
 
@@ -245,7 +259,8 @@ CREATE TABLE `prj_category` (
 INSERT INTO `prj_category` (`CATEGORY_ID`, `NAME_CATEGORY`) VALUES
 ('CTY0001', 'Hospital'),
 ('CTY0002', 'Bank'),
-('CTY0003', 'School');
+('CTY0003', 'School'),
+('CTY0004', 'Sport');
 
 -- --------------------------------------------------------
 
@@ -290,13 +305,11 @@ INSERT INTO `prj_detail` (`DETAIL_ID`, `NAME_PROJECT`, `REASONS`, `OBJECTIVE`, `
 ('230002', 'School Website', '1-Help School\r\n2-Easy to Use\r\n3-Fast', '1-Help School\r\n2-Easy to Use\r\n3-Fast', 'Yala', 'Some School', '50000', '1-Help School\r\n2-Easy to Use\r\n3-Fast', '2023-01-02', '2023-05-12', '2023-01-18 09:10:14', 'USER00004', 'USER00005', '2023-02-23 20:51:50', 7, 1, 3, 'CTY0001', 0, 0, 1, 'USER00004', '2023-01-17 17:00:00', 100, NULL, '2023-02-23 17:00:00'),
 ('230003', 'TimeLine Test', 'Possimus adipisci d', 'Sed quidem officia e', 'HatYai', 'Beatae mollit possim', '10000', 'Voluptates voluptate', '2022-11-20', '2023-09-08', '2023-02-17 20:35:37', 'USER00004', 'USER0004', '2023-02-28 08:40:29', 30, 1, 2, 'CTY0002', 0, 0, 1, 'USER0004', '2023-02-17 17:00:00', 41, NULL, NULL),
 ('230004', 'Lillith Dillard', 'Voluptas animi et m', 'Nihil iste placeat', 'Similique laborum ex', 'Eligendi aute debiti', '58', 'Iure possimus qui e', '2023-03-08', '2023-10-03', '2023-02-19 08:06:13', 'USER00004', 'USER00005', '2023-02-26 20:49:50', 45, 1, 1, 'CTY0003', 0, 0, 0, 'USER0004', '2023-02-22 17:00:00', 11, NULL, NULL),
-('230005', 'Nehru Wilcox', 'Consequatur perfere', 'Doloribus rerum atqu', 'Aute tempore blandi', 'Aspernatur commodi s', '85', 'Vero ea ut sunt ex c', '2023-02-19', '2023-06-23', '2023-02-19 09:10:35', 'USER00004', 'USER0004', '2023-02-19 09:23:16', 90, 0, 0, 'CTY0001', 0, 0, 0, '', NULL, 0, NULL, NULL),
 ('230006', 'Ishmael Pate', 'Tenetur ea quisquam', 'Corrupti cupidatat', 'Vel quia autem dolor', 'Amet eos quis plac', '50000', 'Magna magnam volupta', '2023-02-24', '2023-03-30', '2023-02-23 19:55:15', 'USER00003', 'USER00005', '2023-03-02 13:46:04', 34, 1, 2, 'CTY0001', 1, 1, 0, 'USER0004', '2023-02-26 17:00:00', 66, NULL, NULL),
 ('230007', 'Samantha Mayo3', 'Et dolorem error rer', 'Deserunt ex duis ess', 'Sunt quis natus qui', 'Eius sunt est atqu', '50000', 'Sed ducimus ab hic', '2023-02-27', '2023-09-25', '2023-02-26 23:45:35', 'USER00004', 'USER0004', '2023-03-04 23:34:23', 150, 0, 4, 'CTY0001', 0, 0, 0, '', NULL, 0, NULL, NULL),
 ('230008', 'Quincy Shaffer', 'Illo inventore volup', 'Incidunt harum qui', 'Non perferendis plac', 'Nemo architecto eius', '51', 'Dolore nihil volupta', '2023-03-02', '2023-03-31', '2023-03-01 11:13:02', 'USER00007', 'USER00007', '2023-03-01 15:56:30', 3, 1, 2, 'CTY0002', 1, 0, 1, 'USER0004', '2023-02-28 17:00:00', 0, NULL, NULL),
-('230009', 'Paloma Obrien', 'Dolorem voluptate at', 'Ipsum earum saepe fa', 'Accusantium unde ut', 'Amet aut sunt esse', '41', 'Vel explicabo Nostr', '1994-11-14', '1994-12-13', '2023-03-01 12:08:28', 'USER00004', 'USER00007', '2023-03-01 12:09:05', 3, 1, 1, 'CTY0003', 0, 0, 1, 'USER0004', '2023-02-28 17:00:00', 0, NULL, NULL),
-('230010', 'Octavius Ward', 'Aut sed qui veritati', 'Eum consectetur vol', 'Et dolore consectetu', 'Aliquid voluptate si', '71', 'A facilis nulla opti', '1984-01-25', '1984-03-31', '2023-03-01 12:04:29', 'USER00007', 'USER00007', '2023-03-01 12:04:51', 66, 1, 1, 'CTY0002', 0, 1, 0, 'USER0004', '2023-02-28 17:00:00', 0, NULL, NULL),
-('230011', 'Deborah Rich', 'Minima dolore eum od', 'Laboris Nam dolores', 'Consequatur Quisqua', 'Culpa exercitatione', '25', 'Magnam reprehenderit', '1989-10-23', '2023-03-01', '2023-03-01 12:08:45', 'USER00004', 'USER00005', '2023-03-01 12:09:01', 7629654, 1, 1, 'CTY0002', 0, 1, 0, 'USER0004', '2023-02-28 17:00:00', 0, NULL, NULL);
+('230009', 'Paloma Obrien', 'Dolorem voluptate at', 'Ipsum earum saepe fa', 'Accusantium unde ut', 'Amet aut sunt esse', '41', 'Vel explicabo Nostr', '1994-11-14', '1994-12-13', '2023-03-01 12:08:28', 'USER00004', 'USER00007', '2023-03-08 07:12:00', 3, 1, 4, 'CTY0003', 0, 0, 1, 'USER0004', '2023-02-28 17:00:00', 0, NULL, NULL),
+('230010', 'New Test', 'Aliquip facere nulla', 'Dolor sed recusandae', 'Quis velit cillum m', 'Fugiat qui esse mol', '46', 'Eveniet dolores exp', '2023-03-08', '2023-07-26', '2023-03-08 07:38:41', 'USER00003', 'USER00005', '2023-03-08 07:38:41', 20, 0, 0, 'CTY0003', 0, 1, 1, '', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,8 +338,7 @@ INSERT INTO `prj_holyday_date` (`HOLYDAY_ID`, `HOLYDAY_NAME`, `HOLYDAY_DATE`) VA
 ('08', 'Passing of His Majesty the Late King', '2023-10-13'),
 ('09', 'Chulalongkorn Memorial Day', '2023-10-23'),
 ('10', 'His Majesty the Late King\'s Birthday', '2023-12-05'),
-('11', 'Constitution Day Holiday', '2023-10-11'),
-('HDAY0012', 'Test 2024', '2024-06-27');
+('11', 'Constitution Day Holiday', '2023-10-11');
 
 -- --------------------------------------------------------
 
@@ -397,16 +409,16 @@ CREATE TABLE `prj_profile` (
 --
 
 INSERT INTO `prj_profile` (`PROF_ID`, `LOGIN_ID`, `IMG`, `NICKNAME`, `CARD_ID`, `TELEPHONE`, `DEPARTMENT`, `POS_ID`, `AGENCY`, `created_at`, `updated_at`) VALUES
-('PROF00001', '88', NULL, 'Hadi', NULL, '03243243', '32423fdg', '04', NULL, '2023-03-06 05:00:41', '2023-03-06 07:22:07'),
-('PROF00003', 'USER00003', '1678079588.jpg', 'dhrah', '24563642462', '624426426', 'IT', '01', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
-('PROF00004', 'USER00004', 'Ahmed', 'Ahmed', NULL, NULL, NULL, '02', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
-('PROF00005', 'USER00005', NULL, NULL, NULL, NULL, NULL, '03', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
-('PROF00006', 'USER00006', NULL, NULL, NULL, NULL, NULL, '01', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
-('PROF00007', 'USER00007', NULL, NULL, NULL, NULL, NULL, '03', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
-('PROF00008', 'USER00008', NULL, NULL, NULL, NULL, NULL, '02', 'Test', '2023-03-06 01:50:48', '2023-03-06 01:50:48'),
-('PROF00009', 'USER00009', NULL, NULL, NULL, NULL, NULL, '03', 'gw43g34', '2023-03-06 07:49:51', '2023-03-06 07:49:51'),
-('PROF00010', 'USER00010', NULL, NULL, NULL, NULL, NULL, '01', 'gregae', '2023-03-06 07:52:53', '2023-03-06 07:52:53'),
-('PROF0004', 'USER0004', NULL, NULL, NULL, NULL, NULL, '04', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41');
+('PROF00001', '88', '1678284601.png', 'Hadi', NULL, '03243243', '32423fdg', '04', NULL, '2023-03-06 05:00:41', '2023-03-06 07:22:07'),
+('PROF00003', 'USER00003', '1678284601.png', 'dhrah', '24563642462', '624426426', 'IT', '01', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
+('PROF00004', 'USER00004', '1678284601.png', 'Ahmed', NULL, NULL, NULL, '02', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
+('PROF00005', 'USER00005', '1678284601.png', NULL, NULL, NULL, NULL, '03', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
+('PROF00006', 'USER00006', '1678284601.png', NULL, NULL, NULL, NULL, '01', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
+('PROF00007', 'USER00007', '1678284601.png', NULL, NULL, NULL, NULL, '03', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41'),
+('PROF00008', 'USER00008', '1678284601.png', NULL, NULL, NULL, NULL, '02', 'Test', '2023-03-06 01:50:48', '2023-03-06 01:50:48'),
+('PROF00009', 'USER00009', '1678284601.png', NULL, NULL, NULL, NULL, '03', 'gw43g34', '2023-03-06 07:49:51', '2023-03-06 07:49:51'),
+('PROF00010', 'USER00010', '1678284601.png', NULL, NULL, NULL, NULL, '01', 'gregae', '2023-03-06 07:52:53', '2023-03-06 07:52:53'),
+('PROF0004', 'USER0004', '1678284601.png', NULL, NULL, NULL, NULL, '04', NULL, '2023-03-06 05:00:41', '2023-03-06 05:00:41');
 
 -- --------------------------------------------------------
 
@@ -446,7 +458,6 @@ INSERT INTO `prj_project_activity` (`ACTIVITY_ID`, `ACTIVITY_NAME`, `DETAIL_ID`,
 ('ACT0015', 'Quamar Doyle', '230004', 'day', 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', 2, NULL, NULL),
 ('ACT0016', 'Lane Hubbard', '230004', 'day', 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', 3, NULL, NULL),
 ('ACT0017', 'Lucas Black', '230004', 'day', 0, '2023-02-19 08:06:13', '2023-02-19 08:06:13', 4, NULL, NULL),
-('ACT0018', 'Tyrone Dotson', '230005', 'day', 0, '2023-02-19 09:10:35', '2023-02-19 09:10:35', 1, NULL, NULL),
 ('ACT0019', 'Signe Chang', '230006', 'day', 1, '2023-02-23 19:55:15', '2023-02-26 23:37:51', 1, '2023-02-26 17:00:00', '2023-02-26 17:00:00'),
 ('ACT0020', 'Maya Santiago', '230006', 'day', 0, '2023-02-23 19:55:15', '2023-03-02 13:46:04', 2, '2023-03-01 17:00:00', NULL),
 ('ACT0021', 'Allegra Curry', '230006', 'day', 0, '2023-02-23 19:55:15', '2023-03-02 13:35:07', 3, '2023-03-01 17:00:00', NULL),
@@ -459,11 +470,17 @@ INSERT INTO `prj_project_activity` (`ACTIVITY_ID`, `ACTIVITY_NAME`, `DETAIL_ID`,
 ('ACT0028', 'Lisandra West', '230007', 'day', 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', 7, NULL, NULL),
 ('ACT0029', 'Wanda Holden', '230007', 'day', 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', 8, NULL, NULL),
 ('ACT0030', 'Aphrodite Kelley', '230007', 'day', 0, '2023-02-26 23:45:35', '2023-02-26 23:45:35', 9, NULL, NULL),
-('ACT0031', 'Donna Hays', '230008', 'week', 0, '2023-03-01 11:13:02', '2023-03-02 11:29:50', 1, '2023-03-01 17:00:00', NULL),
+('ACT0031', 'Donna Hays', '230008', 'week', 0, '2023-03-01 11:13:02', '2023-03-07 11:48:03', 1, '2023-03-06 17:00:00', NULL),
 ('ACT0032', 'Ora Guzman', '230008', 'week', 0, '2023-03-01 11:13:02', '2023-03-01 11:13:02', 2, NULL, NULL),
 ('ACT0033', 'Jacob Horn', '230009', 'week', 0, '2023-03-01 12:08:28', '2023-03-01 12:08:28', 1, NULL, NULL),
-('ACT0034', 'Eleanor Vang', '230010', 'day', 0, '2023-03-01 12:04:29', '2023-03-01 12:04:29', 1, NULL, NULL),
-('ACT0035', 'Burton Ortiz', '230011', 'day', 0, '2023-03-01 12:08:45', '2023-03-01 12:08:45', 1, NULL, NULL);
+('ACT0034', 'Erasmus Duran', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 1, NULL, NULL),
+('ACT0035', 'Fuller Aguirre', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 2, NULL, NULL),
+('ACT0036', 'Cadman Stark', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 3, NULL, NULL),
+('ACT0037', 'Bradley Wooten', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 4, NULL, NULL),
+('ACT0038', 'Dean Hinton', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 5, NULL, NULL),
+('ACT0039', 'Maris Cain', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 6, NULL, NULL),
+('ACT0040', 'Allen Floyd', '230008', NULL, 0, '2023-03-07 11:48:21', '2023-03-07 11:48:21', 3, NULL, NULL),
+('ACT0041', 'Lance Weiss', '230010', 'week', 0, '2023-03-08 07:38:41', '2023-03-08 07:38:41', 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -476,7 +493,7 @@ CREATE TABLE `prj_project_login` (
   `NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `EMAIL` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `IS_ACTIVE` tinyint(4) NOT NULL DEFAULT 0,
+  `STATUS` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=>NOT active, 1=>active, 2=> leave the company',
   `PRIV_ID` varchar(4) CHARACTER SET utf8mb4 NOT NULL,
   `LAST_LOGIN_AT` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `LAST_LOGIN_IP` timestamp NULL DEFAULT NULL,
@@ -488,7 +505,7 @@ CREATE TABLE `prj_project_login` (
 -- Dumping data for table `prj_project_login`
 --
 
-INSERT INTO `prj_project_login` (`LOGIN_ID`, `NAME`, `EMAIL`, `password`, `IS_ACTIVE`, `PRIV_ID`, `LAST_LOGIN_AT`, `LAST_LOGIN_IP`, `updated_at`, `created_at`) VALUES
+INSERT INTO `prj_project_login` (`LOGIN_ID`, `NAME`, `EMAIL`, `password`, `STATUS`, `PRIV_ID`, `LAST_LOGIN_AT`, `LAST_LOGIN_IP`, `updated_at`, `created_at`) VALUES
 ('88', 'Hadi', 'caca@gmail.com', '02222', 1, '02', '2023-03-06 14:19:47', NULL, '2023-01-03 13:06:56', '2023-01-03 13:06:56'),
 ('USER00003', 'Fin A', 'admin@admin.com', '$2y$10$JgYfYRKhh5AqzWiadRiN3OhuTB.3HWLa2UoERUBJNCXj1gqmMTw.K', 1, '01', '2023-03-06 08:59:06', NULL, '2023-01-04 02:06:30', '2023-01-04 02:06:30'),
 ('USER00004', 'Ahmed', 'user@gmail.com', '$2y$10$/I2TrHrQm1gg4SaesI7Bc.0HqmrncOYHzmeWA/gFZXtjhjyUVDji2', 1, '04', '2023-03-06 08:59:12', NULL, '2023-01-08 19:54:17', '2023-01-08 19:54:17'),
@@ -497,7 +514,7 @@ INSERT INTO `prj_project_login` (`LOGIN_ID`, `NAME`, `EMAIL`, `password`, `IS_AC
 ('USER00007', 'Boody', 'projectmanager@projectmanager.com', '$2y$10$xQLxytGj0U9gKH6tfsm2WeCS0LRyl2MxYLD.y0B2VSd.i37FMccom', 1, '03', '2023-03-06 08:59:24', NULL, '2023-03-01 11:09:59', '2023-03-01 11:09:07'),
 ('USER00008', 'Test', 'Test@gmail.com', '$2y$10$8x1jbPTAVgzZ0sE2b10HHu6g.8puupryhrrD1wgY98EUTuI16Jt5i', 1, '04', '2023-03-06 09:00:58', NULL, '2023-03-06 02:00:58', '2023-03-06 01:50:48'),
 ('USER00009', 'ewgfwwt4', 'ussddsdser@gmail.com', '$2y$10$C1mEmAUijtZ4kUYOjX1TjulrkEcTb9KsbmKGAUv.Xchyry07bpBIO', 1, '04', '2023-03-06 14:49:54', NULL, '2023-03-06 07:49:54', '2023-03-06 07:49:51'),
-('USER00010', 'egewgewgew', 'admidsgdgsgdsn@admin.com', '$2y$10$H2Hm0OY2JU731an22DAX2.R6BeVwxNOkUZQ5Kg1tBvE4DKCW7H0Qu', 1, '04', '2023-03-06 14:52:57', NULL, '2023-03-06 07:52:57', '2023-03-06 07:52:53'),
+('USER00010', 'egewgewgew', 'admidsgdgsgdsn@admin.com', '$2y$10$H2Hm0OY2JU731an22DAX2.R6BeVwxNOkUZQ5Kg1tBvE4DKCW7H0Qu', 2, '04', '2023-03-07 18:32:51', NULL, '2023-03-06 07:52:57', '2023-03-06 07:52:53'),
 ('USER0004', 'Rashad Haney', 'manager@manager.com', '$2y$10$esEQBnFowrpG5c4216sYS.sGupwNS8T5BPqmwcSerEQYGJaaFrQbS', 1, '02', '2023-03-06 08:59:31', NULL, '2023-01-06 00:52:05', '2023-01-06 00:52:05');
 
 -- --------------------------------------------------------
@@ -527,30 +544,19 @@ INSERT INTO `prj_project_team` (`TEAM_ID`, `LOGIN_ID`, `DETAIL_ID`) VALUES
 (575, 'USER00005', '230004'),
 (590, 'USER00003', '230006'),
 (591, 'USER00004', '230006'),
-(592, 'USER00005', '230005'),
-(593, 'USER00003', '230005'),
-(594, 'USER00004', '230005'),
-(595, 'USER0004', '230005'),
 (596, 'USER00003', '230007'),
 (597, 'USER00005', '230007'),
 (598, 'USER0004', '230007'),
 (600, 'USER00003', '230008'),
 (601, 'USER00007', '230008'),
-(604, 'USER00003', '230010'),
-(605, 'USER00004', '230010'),
-(606, 'USER00005', '230010'),
-(607, 'USER0004', '230010'),
-(608, 'USER00007', '230010'),
 (609, 'USER00004', '230009'),
 (610, 'USER00005', '230009'),
 (611, 'USER00007', '230009'),
-(612, 'USER00003', '230011'),
-(613, 'USER00004', '230011'),
-(614, 'USER00005', '230011'),
-(615, 'USER00006', '230011'),
-(616, 'USER00007', '230011'),
-(617, 'USER0004', '230011'),
-(618, 'USER00004', '230008');
+(618, 'USER00004', '230008'),
+(636, '88', '230010'),
+(637, 'USER00003', '230010'),
+(638, 'USER00004', '230010'),
+(639, 'USER00005', '230010');
 
 -- --------------------------------------------------------
 
@@ -612,7 +618,7 @@ ALTER TABLE `prj_activity_task`
 --
 ALTER TABLE `prj_assigned_task`
   ADD KEY `LOGIN_ID` (`LOGIN_ID`),
-  ADD KEY `TASK_ID` (`TASK_ID`);
+  ADD KEY `prj_assigned_task_ibfk_2` (`TASK_ID`);
 
 --
 -- Indexes for table `prj_category`
@@ -710,7 +716,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `prj_project_team`
 --
 ALTER TABLE `prj_project_team`
-  MODIFY `TEAM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=619;
+  MODIFY `TEAM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=640;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -733,7 +739,7 @@ ALTER TABLE `prj_activity_task`
 --
 ALTER TABLE `prj_assigned_task`
   ADD CONSTRAINT `prj_assigned_task_ibfk_1` FOREIGN KEY (`LOGIN_ID`) REFERENCES `prj_project_login` (`LOGIN_ID`),
-  ADD CONSTRAINT `prj_assigned_task_ibfk_2` FOREIGN KEY (`TASK_ID`) REFERENCES `prj_activity_task` (`TASK_ID`);
+  ADD CONSTRAINT `prj_assigned_task_ibfk_2` FOREIGN KEY (`TASK_ID`) REFERENCES `prj_activity_task` (`TASK_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prj_detail`
