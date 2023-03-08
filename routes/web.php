@@ -80,7 +80,7 @@ Route::get('/admin', [ProjectController::class, 'Index'])->name('dashboard');
 
 ###########################  Project  ###########################
 Route::group(
-    ['middleware' => ['auth', 'IsActiveUser']],
+    ['middleware' => ['auth', 'IsActiveUser', 'RemoveSession']],
     function () {
 
         Route::get('/table', [ProjectController::class, 'Table'])->name('table');

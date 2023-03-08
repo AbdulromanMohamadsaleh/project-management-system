@@ -1,4 +1,4 @@
-<div id="refresher">
+<div id="refresher" class="refresher">
     <table class="table" id="filterTable">
 
         <thead>
@@ -9,7 +9,7 @@
 
             </tr>
         </thead>
-        <tbody id="download-forms-table-tbody">
+        <tbody id="download-forms-table-tbody ">
             @foreach ($holydays as $Holyday)
                 <tr class="all serviceEleven">
                     <td style="text-align:left">{{ $Holyday->HOLYDAY_NAME }}</td>

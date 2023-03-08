@@ -84,7 +84,9 @@
                     document.querySelector('#create_date_holyday').value = ""
 
                     $('#myModal').modal('hide')
-
+                    setTimeout(() => {
+                       location.reload();
+                    }, 2000);
                 },
 
                 error: function(error) {
