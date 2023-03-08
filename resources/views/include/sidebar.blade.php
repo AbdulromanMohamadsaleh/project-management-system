@@ -1,4 +1,4 @@
-<div class="sidebar pe-4 pb-3">
+<div class="sidebar  pb-3">
     <nav class="navbar bg-light navbar-light">
         <a  class="navbar-brand mx-4 mb-3">
             <b style="text-align: " class="text-primary">
@@ -60,7 +60,7 @@
                         aria-hidden="true"></i>
                     Approve Project</a>
             @endif
-            <a href="{{ route('report.report') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Report</a>
+            <a href="{{ route('report.report') }}" class="{{ $routename=='report.report'?'active':'' }} nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Report</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-cog"></i>Seting</a>
