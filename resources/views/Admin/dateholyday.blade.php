@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
-           <h1 class="fw-bold text-center fs-4">Holiday</h1>
+        <h1 class="fw-bold text-center fs-4">Holiday</h1>
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <div class="category-filter">
@@ -25,6 +25,8 @@
 @endsection
 
 @section('script')
+
+
     @include('include.scrip');
     <!-- Template Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -85,7 +87,7 @@
 
                     $('#myModal').modal('hide')
                     setTimeout(() => {
-                       location.reload();
+                        location.reload();
                     }, 2000);
                 },
 

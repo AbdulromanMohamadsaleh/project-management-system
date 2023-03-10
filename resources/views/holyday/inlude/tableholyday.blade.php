@@ -1,4 +1,4 @@
-<div id="refresher" class="refresher">
+<div id="refresher" >
     <table class="table" id="filterTable">
 
         <thead>
@@ -25,6 +25,7 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
 <script>
     $("document").ready(function() {
 
@@ -44,7 +45,8 @@
         //It's important that the text used here (Category) is the same for used in the header of the column to filter
         var categoryIndex = 0;
         $("#filterTable th").each(function(i) {
-            if ($($(this)).html() == "Date Holyday") {
+            console.log($($(this)).html())
+            if ($($(this)).html() == "Date Holiday") {
                 categoryIndex = i;
                 return false;
             }
